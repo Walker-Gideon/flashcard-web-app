@@ -1,12 +1,15 @@
 import { useNavigate } from "react-router-dom";
 import { motion } from "motion/react";
+import { useLoader } from "../context/LoaderContext";
 
 export default function Button({ children, to, disabled, color, btnPaddX }) {
+  const { setLoading } = useLoader();
+
   const navigate = useNavigate();
   const startLoadingAndNavigate = (to) => {
-    // setLoading(true);
+    setLoading(true);
     setTimeout(() => {
-      //   setLoading(false);
+      setLoading(false);
       navigate(to);
     }, 500);
   };
