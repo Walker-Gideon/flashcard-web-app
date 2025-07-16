@@ -22,6 +22,10 @@ body {
     @apply rounded-sm border border-stone-300 px-1.5 py-1.5 text-sm text-black transition-all duration-300 placeholder:text-xs hover:border-stone-500 focus:ring-2 focus:ring-stone-400 focus:outline-hidden;
   }
 
+  .button {
+    @apply medium:text-[0.74rem] cursor-pointer rounded-sm border text-[0.7rem] font-semibold transition-colors duration-300;
+  }
+
   .progress {
     width: 100%;
     height: 3px;

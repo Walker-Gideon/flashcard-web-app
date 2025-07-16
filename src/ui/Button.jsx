@@ -11,6 +11,7 @@ export default function Button({
   variant,
   className,
   onClick,
+  type,
 }) {
   const { setLoading } = useLoader();
 
@@ -34,12 +35,26 @@ export default function Button({
       </button>
     );
 
+  if (variant === "primary")
+    return (
+      <button
+        disabled={disabled}
+        type={type}
+        whileTap={{ y: 1 }}
+        onClick={onClick}
+        // py-1.5
+        className={`button focus:ring-2 focus:ring-slate-950 focus:outline-hidden ${color ? `` : `bg-slate-950 py-1.5 text-white hover:bg-slate-900`} ${btnPaddX ? `${btnPaddX}` : `medium:px-6 px-4`} ${className}`}
+      >
+        {children}
+      </button>
+    );
+
   return (
     <motion.button
       disabled={disabled}
       onClick={() => startLoadingAndNavigate(to)}
       whileTap={{ y: 1 }}
-      className={`medium:text-[0.74rem] cursor-pointer rounded-sm border text-[0.7rem] font-semibold transition-colors duration-300 ${color ? `bg-stone-950 py-1.5 text-white hover:bg-slate-900` : `border-gray-600 py-[5px] font-bold`} ${btnPaddX ? `${btnPaddX}` : `medium:px-6 px-4`}`}
+      className={`button ${color ? `bg-stone-950 py-1.5 text-white hover:bg-slate-900` : `border-gray-600 py-[5px] font-bold`} ${btnPaddX ? `${btnPaddX}` : `medium:px-6 px-4`}`}
     >
       {children}
     </motion.button>

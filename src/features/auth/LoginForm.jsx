@@ -47,6 +47,10 @@ export default function LoginForm() {
             )}
           </Button>
         </div>
+
+        <Button type="submit" variant="primary" className="w-full py-2">
+          Log in
+        </Button>
       </Form>
     </div>
   );
