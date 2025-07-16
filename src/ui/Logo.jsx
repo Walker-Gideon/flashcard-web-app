@@ -1,6 +1,17 @@
 import { Link } from "react-scroll";
 
-export default function Logo({ to }) {
+export default function Logo({ to, logo }) {
+  const className = {
+    logo: "flex h-8 w-8 items-center justify-center rounded-full bg-slate-950 text-white",
+  };
+
+  if (logo)
+    return (
+      <div>
+        <h1 className={className.logo}>w</h1>
+      </div>
+    );
+
   return (
     <Link
       to={to}
@@ -10,9 +21,7 @@ export default function Logo({ to }) {
       offset={-100}
       className="flex cursor-pointer items-center gap-1 font-bold text-slate-950 uppercase"
     >
-      <span className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-950 text-white">
-        w
-      </span>
+      <span className={className.logo}>w</span>
       <span className={`hidden font-bold md:block`}>walkwise</span>
     </Link>
   );

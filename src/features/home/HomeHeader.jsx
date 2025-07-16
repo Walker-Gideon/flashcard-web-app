@@ -25,6 +25,3 @@ export default function HomeHeader() {
     </div>
   );
 }
-
-/*
-medium:py-2 medium:text-[0.74rem] cursor-pointer rounded-sm border border-slate-950 bg-transparent py-1.5 text-[0.7rem] font-semibold ${btnPaddX ? `${btnPaddX}` : `medium:px-10 px-8`}*/
