@@ -1,1 +1,10 @@
 @import "tailwindcss";
+
+/* eslint-disable-next-line */
+
+@theme {
+}
+
+body {
+  font-family: "Quicksand", sans-serif;
+}
