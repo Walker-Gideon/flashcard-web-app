@@ -3,6 +3,7 @@ import LandingPage from "./features/home/LandingPage";
 import AuthLayout from "./features/auth/AuthLayout";
 import Login from "./features/auth/Login";
 import Singup from "./features/auth/Singup";
+import { LoaderProvider } from "./context/LoaderContext";
 
 const router = createBrowserRouter([
   {
@@ -26,5 +27,9 @@ const router = createBrowserRouter([
 ]);
 
 export default function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <LoaderProvider>
+      <RouterProvider router={router} />;
+    </LoaderProvider>
+  );
 }
