@@ -2,7 +2,15 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "motion/react";
 import { useLoader } from "../context/LoaderContext";
 
-export default function Button({ children, to, disabled, color, btnPaddX }) {
+export default function Button({
+  children,
+  to,
+  disabled,
+  color,
+  btnPaddX,
+  variant,
+  className,
+}) {
   const { setLoading } = useLoader();
 
   const navigate = useNavigate();
@@ -13,6 +21,17 @@ export default function Button({ children, to, disabled, color, btnPaddX }) {
       navigate(to);
     }, 500);
   };
+
+  if (variant === "outline")
+    return (
+      <button
+        onClick={() => startLoadingAndNavigate("/")}
+        //   text-slate-950
+        className={`cursor-pointer transition-colors duration-300 ${className}`}
+      >
+        {children}
+      </button>
+    );
 
   return (
     <motion.button
