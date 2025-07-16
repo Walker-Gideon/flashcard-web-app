@@ -14,7 +14,7 @@ export default function Button({ children, to, disabled, color, btnPaddX }) {
   return (
     <motion.button
       disabled={disabled}
-      onClick={startLoadingAndNavigate(to)}
+      onClick={() => startLoadingAndNavigate(to)}
       whileTap={{ y: 1 }}
       className={`medium:text-[0.74rem] cursor-pointer rounded-sm border text-[0.7rem] font-semibold transition-colors duration-300 ${color ? `bg-stone-950 py-1.5 text-white hover:bg-slate-900` : `border-gray-600 py-[5px] font-bold`} ${btnPaddX ? `${btnPaddX}` : `medium:px-6 px-4`}`}
     >

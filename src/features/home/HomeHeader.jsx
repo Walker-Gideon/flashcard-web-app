@@ -10,8 +10,10 @@ export default function HomeHeader() {
         <div>
           <div className="medium:block hidden">
             <div className="flex items-center gap-2 whitespace-nowrap">
-              <Button>Log In</Button>
-              <Button color={true}>Sign Up</Button>
+              <Button to={"/accounts/login"}>Log In</Button>
+              <Button color={true} to={"/accounts/signup"}>
+                Sign Up
+              </Button>
             </div>
           </div>
 
