@@ -1,9 +1,16 @@
 import { Form } from "react-router-dom";
 import Input from "../../ui/Input";
+import Button from "../../ui/Button";
+import { FiEyeOff } from "react-icons/fi";
+import { FiEye } from "react-icons/fi";
+import { useState } from "react";
 
 export default function LoginForm() {
+  const [showPassword, setShowPassword] = useState(true);
+
   const className = {
     input: "w-full",
+    icon: "text-sm",
   };
 
   return (
@@ -25,6 +32,20 @@ export default function LoginForm() {
             required={true}
             className={className.input}
           />
+          <Button
+            variant="outline"
+            className="absolute top-2.5 right-2"
+            onClick={(e) => {
+              e.preventDefault();
+              setShowPassword(!showPassword);
+            }}
+          >
+            {showPassword ? (
+              <FiEye className={className.icon} />
+            ) : (
+              <FiEyeOff className={className.icon} />
+            )}
+          </Button>
         </div>
       </Form>
     </div>

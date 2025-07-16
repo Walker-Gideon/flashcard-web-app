@@ -10,6 +10,7 @@ export default function Button({
   btnPaddX,
   variant,
   className,
+  onClick,
 }) {
   const { setLoading } = useLoader();
 
@@ -25,7 +26,7 @@ export default function Button({
   if (variant === "outline")
     return (
       <button
-        onClick={() => startLoadingAndNavigate("/")}
+        onClick={onClick}
         //   text-slate-950
         className={`cursor-pointer transition-colors duration-300 ${className}`}
       >
