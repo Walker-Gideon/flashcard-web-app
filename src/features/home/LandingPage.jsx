@@ -1,3 +1,9 @@
+import HomeHeader from "./HomeHeader";
+
 export default function LandingPage() {
-  return <div>LandingPage</div>;
+  return (
+    <div>
+      <HomeHeader />
+    </div>
+  );
 }

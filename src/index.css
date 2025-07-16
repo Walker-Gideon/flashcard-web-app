@@ -3,6 +3,13 @@
 /* eslint-disable-next-line */
 
 @theme {
+  --breakpoint-smallest: 300px;
+  --breakpoint-sm: 325px;
+  --breakpoint-medium: 650px;
+  --breakpoint-md: 768px;
+  --breakpoint-middle: 850px;
+  --breakpoint-maxmid: 900px;
+  --breakpoint-lg: 1024px;
 }
 
 body {
