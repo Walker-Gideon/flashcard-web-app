@@ -2,7 +2,6 @@ import { Form, useNavigate } from "react-router-dom";
 import { useRef, useState } from "react";
 import { useLoader } from "../../context/LoaderContext";
 import Loader from "../../ui/Loader";
-import Input from "../../ui/Input";
 import Button from "../../ui/Button";
 import Toast from "../../ui/Toast";
 
