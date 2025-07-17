@@ -36,10 +36,7 @@ export default function Login() {
             <Button
               variant="outline"
               className={clascName}
-              onClick={() => {
-                // startLoadingAndNavigate()
-                console.log("forget password");
-              }}
+              onClick={() => startLoadingAndNavigate("/accounts/forgotten")}
             >
               Forget Password?
             </Button>
