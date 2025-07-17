@@ -1,20 +1,31 @@
 import { Form, useNavigate } from "react-router-dom";
+import { useRef, useState } from "react";
+import { useLoader } from "../../context/LoaderContext";
 import Loader from "../../ui/Loader";
 import Input from "../../ui/Input";
 import Button from "../../ui/Button";
-import { useLoader } from "../../context/LoaderContext";
 import Toast from "../../ui/Toast";
 
 export default function ForgetAuthPassword() {
   const { setLoading } = useLoader();
+  const [toast, setToast] = useState(false);
+  const emailRef = useRef(null);
 
   const navigate = useNavigate();
   const startLoadingAndNavigate = (to) => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      navigate(to);
-    }, 500);
+    const email = emailRef.current.value;
+    if (email.trim() !== "") {
+      setLoading(true);
+      setTimeout(() => {
+        setLoading(false);
+        setToast(true);
+
+        setTimeout(() => {
+          setToast(false);
+          navigate(to);
+        }, 1500);
+      }, 1000);
+    }
   };
 
   return (
@@ -40,11 +51,13 @@ export default function ForgetAuthPassword() {
           <Form>
             <div className="mb-3 flex flex-col">
               <label className="medium:text-sm mb-1 text-xs">Email</label>
-              <Input
+              <input
                 type="email"
                 name="email"
                 placeholder="user@email.com"
                 required={true}
+                ref={emailRef}
+                className="input w-full"
               />
             </div>
 
@@ -62,7 +75,7 @@ export default function ForgetAuthPassword() {
         </div>
       </div>
 
-      <Toast className="bg-green-600">Link sent successful!</Toast>
+      {toast && <Toast className="bg-green-600">Link sent successful!</Toast>}
     </div>
   );
 }
