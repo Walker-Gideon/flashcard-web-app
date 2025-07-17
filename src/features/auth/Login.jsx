@@ -18,9 +18,7 @@ export default function Login() {
     }, 500);
   };
 
-  const clascName = {
-    button: "text-[0.8rem] font-semibold",
-  };
+  const clascName = "text-[0.8rem] font-semibold";
 
   return (
     <div clacsName="relative">
@@ -30,14 +28,14 @@ export default function Login() {
       <AuthClose />
 
       <div className="flex min-h-[95vh] items-center justify-center">
-        <div className="rounded-xl border border-stone-300 px-6 py-4 shadow-lg">
+        <div className="rounded-xl border border-stone-300 px-6 py-8 shadow-lg">
           <AuthHeader />
           <LoginForm />
 
           <div className="mt-2 flex items-center justify-between">
             <Button
               variant="outline"
-              className={clascName.button}
+              className={clascName}
               onClick={() => {
                 // startLoadingAndNavigate()
                 console.log("forget password");
@@ -47,16 +45,16 @@ export default function Login() {
             </Button>
             <Button
               variant="outline"
-              className={clascName.button}
+              className={clascName}
               onClick={() => startLoadingAndNavigate("/accounts/signup")}
             >
               Sign Up
             </Button>
           </div>
 
-          <div className="mt-2 w-full">
+          <div>
             <div className="flex items-center justify-center py-4">
-              <p className="text-sm text-stone-400">or you can Log in with</p>
+              <p className="text-sm text-stone-400">or you can Log In with</p>
             </div>
 
             <Button className="w-full">Continue with Google</Button>
