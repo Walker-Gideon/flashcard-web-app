@@ -45,6 +45,14 @@ export default function Singup() {
               Log in
             </Button>
           </div>
+
+          <div>
+            <div className="flex items-center justify-center py-4">
+              <p className="text-sm text-stone-400">or you can Sign up with</p>
+            </div>
+
+            <Button className="w-full">Continue with Google</Button>
+          </div>
         </div>
       </div>
     </div>
