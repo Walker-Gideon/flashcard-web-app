@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useLoader } from "../../context/LoaderContext";
 import Button from "../../ui/Button";
 import Loader from "../../ui/Loader";
+import Toast from "../../ui/Toast";
 
 export default function AuthPicture() {
   const { setLoading, image, setImage, spinner, setSpinner, toast, setToast } =
@@ -141,6 +142,10 @@ export default function AuthPicture() {
           </div>
         </div>
       </div>
+
+      {toast && (
+        <Toast className="bg-green-600">Account created successful!</Toast>
+      )}
     </div>
   );
 }
