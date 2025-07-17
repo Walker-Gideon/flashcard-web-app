@@ -3,6 +3,7 @@ import Loader from "../../ui/Loader";
 import Input from "../../ui/Input";
 import Button from "../../ui/Button";
 import { useLoader } from "../../context/LoaderContext";
+import Toast from "../../ui/Toast";
 
 export default function ForgetAuthPassword() {
   const { setLoading } = useLoader();
@@ -60,6 +61,8 @@ export default function ForgetAuthPassword() {
           </Form>
         </div>
       </div>
+
+      <Toast className="bg-green-600">Link sent successful!</Toast>
     </div>
   );
 }
