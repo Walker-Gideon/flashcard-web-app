@@ -5,12 +5,13 @@ import { useLoader } from "../context/LoaderContext";
 export default function Loader({ spin }) {
   const { loading, spinner } = useLoader();
 
+  //  <div className="mb-4 rounded-full border border-gray-400 bg-white p-2 shadow-lg shadow-gray-500">
+  // I did this to the add picture section if i will reuse it then go and fix that
+
   return (
     <>
       {spin
-        ? spinner && (
-            <div className="spinner medium:w-8 medium:p-2 w-7 bg-black p-1.5 text-black" />
-          )
+        ? spinner && <div className="spinner w-5 bg-black p-1 text-black" />
         : loading && <div className="progress bg-black text-black" />}
     </>
   );

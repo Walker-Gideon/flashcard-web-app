@@ -27,6 +27,7 @@ export default function Button({
   if (variant === "outline")
     return (
       <button
+        disabled={disabled}
         onClick={onClick}
         //   text-slate-950
         className={`cursor-pointer transition-colors duration-300 ${className}`}
