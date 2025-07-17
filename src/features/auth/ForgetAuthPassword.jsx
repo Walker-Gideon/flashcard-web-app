@@ -1,4 +1,7 @@
+import { Form } from "react-router-dom";
 import Loader from "../../ui/Loader";
+import Input from "../../ui/Input";
+import Button from "../../ui/Button";
 
 export default function ForgetAuthPassword() {
   return (
@@ -20,6 +23,24 @@ export default function ForgetAuthPassword() {
               email, we’ll send them a link.
             </p>
           </div>
+
+          <Form>
+            <div className="mb-3 flex flex-col">
+              <label className="medium:text-sm mb-1 text-xs">Email</label>
+              <Input
+                type="email"
+                name="email"
+                placeholder="user@email.com"
+                required={true}
+              />
+            </div>
+
+            <div className="medium:flex medium:items-end medium:justify-end">
+              <Button type="submit" variant="primary" className="w-full py-2">
+                Send Link
+              </Button>
+            </div>
+          </Form>
         </div>
       </div>
     </div>
