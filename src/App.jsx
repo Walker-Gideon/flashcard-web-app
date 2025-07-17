@@ -4,6 +4,7 @@ import AuthLayout from "./features/auth/AuthLayout";
 import Login from "./features/auth/Login";
 import Singup from "./features/auth/Singup";
 import { LoaderProvider } from "./context/LoaderContext";
+import ForgetAuthPassword from "./features/auth/ForgetAuthPassword";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
       {
         path: "signup",
         element: <Singup />,
+      },
+      {
+        path: "forgotten",
+        element: <ForgetAuthPassword />,
       },
     ],
   },
