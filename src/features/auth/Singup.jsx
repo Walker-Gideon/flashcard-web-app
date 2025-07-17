@@ -40,7 +40,7 @@ export default function Singup() {
             <Button
               variant="outline"
               className={clascName}
-              onClick={() => startLoadingAndNavigate("/accounts/signup")}
+              onClick={() => startLoadingAndNavigate("/accounts/login")}
             >
               Log in
             </Button>
