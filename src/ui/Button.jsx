@@ -54,7 +54,7 @@ export default function Button({
       disabled={disabled}
       onClick={() => startLoadingAndNavigate(to)}
       whileTap={{ y: 1 }}
-      className={`button ${color ? `bg-stone-950 py-1.5 text-white hover:bg-slate-900` : `border-gray-600 py-[5px] font-bold`} ${btnPaddX ? `${btnPaddX}` : `medium:px-6 px-4`}`}
+      className={`button ${color ? `bg-stone-950 py-1.5 text-white hover:bg-slate-900` : `border-gray-600 py-[5px] font-bold`} ${btnPaddX ? `${btnPaddX}` : `medium:px-6 px-4`} ${className}`}
     >
       {children}
     </motion.button>

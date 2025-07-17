@@ -52,6 +52,14 @@ export default function Login() {
               Sign Up
             </Button>
           </div>
+
+          <div className="mt-2 w-full">
+            <div className="flex items-center justify-center py-4">
+              <p className="text-sm text-stone-400">or you can Log in with</p>
+            </div>
+
+            <Button className="w-full">Continue with Google</Button>
+          </div>
         </div>
       </div>
     </div>
