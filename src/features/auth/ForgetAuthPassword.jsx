@@ -1,9 +1,21 @@
-import { Form } from "react-router-dom";
+import { Form, useNavigate } from "react-router-dom";
 import Loader from "../../ui/Loader";
 import Input from "../../ui/Input";
 import Button from "../../ui/Button";
+import { useLoader } from "../../context/LoaderContext";
 
 export default function ForgetAuthPassword() {
+  const { setLoading } = useLoader();
+
+  const navigate = useNavigate();
+  const startLoadingAndNavigate = (to) => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      navigate(to);
+    }, 500);
+  };
+
   return (
     <div className="relative">
       <div className="h-0.5">
@@ -36,7 +48,12 @@ export default function ForgetAuthPassword() {
             </div>
 
             <div className="medium:flex medium:items-end medium:justify-end">
-              <Button type="submit" variant="primary" className="w-full py-2">
+              <Button
+                type="submit"
+                variant="primary"
+                className="w-full py-2"
+                onClick={() => startLoadingAndNavigate("/accounts/login")}
+              >
                 Send Link
               </Button>
             </div>
