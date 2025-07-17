@@ -60,7 +60,7 @@ export default function SignupForm() {
           </Button>
         </div>
 
-        <div className="relative">
+        <div className="relative pb-2">
           <Input
             type={showConfirmPassword ? "text" : "password"}
             name="confirmpassword"
@@ -83,6 +83,10 @@ export default function SignupForm() {
             )}
           </Button>
         </div>
+
+        <Button type="submit" variant="primary" className="w-full py-2">
+          Sign up
+        </Button>
       </Form>
     </div>
   );
