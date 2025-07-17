@@ -1,10 +1,11 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { LoaderProvider } from "./context/LoaderContext";
 import LandingPage from "./features/home/LandingPage";
 import AuthLayout from "./features/auth/AuthLayout";
 import Login from "./features/auth/Login";
 import Singup from "./features/auth/Singup";
-import { LoaderProvider } from "./context/LoaderContext";
 import ForgetAuthPassword from "./features/auth/ForgetAuthPassword";
+import AuthPicture from "./features/auth/AuthPicture";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: "forgotten",
         element: <ForgetAuthPassword />,
+      },
+      {
+        path: "user",
+        element: <AuthPicture />,
       },
     ],
   },
