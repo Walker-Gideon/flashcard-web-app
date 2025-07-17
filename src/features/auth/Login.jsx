@@ -39,6 +39,7 @@ export default function Login() {
               variant="outline"
               className={clascName.button}
               onClick={() => {
+                // startLoadingAndNavigate()
                 console.log("forget password");
               }}
             >
