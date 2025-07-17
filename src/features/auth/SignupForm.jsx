@@ -3,6 +3,7 @@ import { Form } from "react-router-dom";
 import { FiEyeOff } from "react-icons/fi";
 import { FiEye } from "react-icons/fi";
 import Input from "../../ui/Input";
+import Button from "../../ui/Button";
 
 export default function SignupForm() {
   const [showPassword, setShowPassword] = useState(true);
@@ -11,6 +12,7 @@ export default function SignupForm() {
   const className = {
     input: "w-full",
     icon: "text-sm",
+    button: "absolute top-2.5 right-2",
   };
 
   return (
@@ -42,6 +44,20 @@ export default function SignupForm() {
             required={true}
             className={className.input}
           />
+          <Button
+            variant="outline"
+            className={className.button}
+            onClick={(e) => {
+              e.preventDefault();
+              setShowPassword(!showPassword);
+            }}
+          >
+            {showPassword ? (
+              <FiEye className={className.icon} />
+            ) : (
+              <FiEyeOff className={className.icon} />
+            )}
+          </Button>
         </div>
 
         <div className="relative">
@@ -52,6 +68,20 @@ export default function SignupForm() {
             required={true}
             className={className.input}
           />
+          <Button
+            variant="outline"
+            className={className.button}
+            onClick={(e) => {
+              e.preventDefault();
+              setShowConfirmPassword(!showConfirmPassword);
+            }}
+          >
+            {showConfirmPassword ? (
+              <FiEye className={className.icon} />
+            ) : (
+              <FiEyeOff className={className.icon} />
+            )}
+          </Button>
         </div>
       </Form>
     </div>
