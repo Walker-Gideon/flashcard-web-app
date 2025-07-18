@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useActionData, useNavigate, useNavigation } from "react-router-dom";
 import { useLoader } from "../../context/LoaderContext";
 import Loader from "../../ui/Loader";
 import AuthClose from "./AuthClose";
@@ -9,7 +9,13 @@ import Button from "../../ui/Button";
 export default function Singup() {
   const { setLoading } = useLoader();
 
+  const actionData = useActionData();
   const navigate = useNavigate();
+  const navigation = useNavigation();
+
+  const isSubmitting = navigation.state === "submitting";
+  const showSpinner = isSubmitting && !actionData?.error;
+
   const startLoadingAndNavigate = (to) => {
     setLoading(true);
     setTimeout(() => {
@@ -28,6 +34,12 @@ export default function Singup() {
       <AuthClose />
 
       <div className="flex min-h-[95vh] items-center justify-center">
+        {showSpinner ? (
+          <div className="absolute top-10 rounded-full border border-gray-300 bg-white p-2 shadow-lg shadow-gray-500">
+            <div className="spinner w-5 bg-black p-1 text-black" />
+          </div>
+        ) : null}
+
         <div className="rounded-xl border border-stone-300 px-6 py-8 shadow-lg">
           <AuthHeader />
           <SignupForm />

@@ -37,18 +37,19 @@ export async function signUpAction({ request }) {
 
     await new Promise((r) => setTimeout(r, 100));
 
-    await setDoc(doc(db, "users", user.uid), {
-      uid: user.uid,
-      email,
-      username,
-      photoURL: null,
-      isGoogleSignIn: false,
-      createdAt: serverTimestamp(),
-    });
+    // await setDoc(doc(db, "users", user.uid), {
+    //   uid: user.uid,
+    //   email,
+    //   username,
+    //   photoURL: null,
+    //   isGoogleSignIn: false,
+    //   createdAt: serverTimestamp(),
+    // });
 
     await new Promise((r) => setTimeout(r, 100));
 
     console.log("successful");
+    // return { success: true };
     return redirect("/accounts/user");
   } catch (err) {
     let errorMessage = "Signup failed. Please try again.";
