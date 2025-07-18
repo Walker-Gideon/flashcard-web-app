@@ -27,13 +27,21 @@ export default function AuthPicture() {
     };
   }, [navigate]);
 
-  const startLoadingAndNavigate = (to) => {
+  const handleSkip = () => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-      navigate(to);
+      navigate("/dashboard");
     }, 2000);
   };
+
+  // const startLoadingAndNavigate = (to) => {
+  //   setLoading(true);
+  //   setTimeout(() => {
+  //     setLoading(false);
+  //     navigate(to);
+  //   }, 2000);
+  // };
 
   const handleUpload = async () => {
     if (!image) return;
@@ -111,10 +119,7 @@ export default function AuthPicture() {
             </label>
 
             <div className="mt-10 flex w-full items-center justify-between gap-8 px-4">
-              <Button
-                className={clascName}
-                onClick={startLoadingAndNavigate("/dashboard")}
-              >
+              <Button className={clascName} onClick={handleSkip}>
                 Skip for Now
               </Button>
 

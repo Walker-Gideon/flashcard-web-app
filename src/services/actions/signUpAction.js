@@ -50,7 +50,7 @@ export async function signUpAction({ request }) {
 
     console.log("successful");
     // return redirect("/accounts/user");
-    return Response.redirect("/accounts/user", 303);
+    window.location.replace("/accounts/user");
   } catch (err) {
     let errorMessage = "Signup failed. Please try again.";
     switch (err.code) {
