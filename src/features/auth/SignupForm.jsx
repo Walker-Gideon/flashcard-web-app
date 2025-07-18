@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Form } from "react-router-dom";
+import { Form, useNavigate } from "react-router-dom";
 import { FiEyeOff } from "react-icons/fi";
 import { FiEye } from "react-icons/fi";
 import Input from "../../ui/Input";
@@ -8,6 +8,8 @@ import Button from "../../ui/Button";
 export default function SignupForm() {
   const [showPassword, setShowPassword] = useState(true);
   const [showConfirmPassword, setShowConfirmPassword] = useState(true);
+
+  const navigate = useNavigate();
 
   const className = {
     input: "w-full",
@@ -84,7 +86,15 @@ export default function SignupForm() {
           </Button>
         </div>
 
-        <Button type="submit" variant="primary" className="w-full py-2">
+        <Button
+          type="submit"
+          variant="primary"
+          className="w-full py-2"
+          onClick={() => {
+            navigate("/accounts/user");
+            console.log("submit");
+          }}
+        >
           Sign up
         </Button>
       </Form>

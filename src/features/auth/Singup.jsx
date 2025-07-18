@@ -6,6 +6,8 @@ import AuthHeader from "./AuthHeader";
 import SignupForm from "./SignupForm";
 import Button from "../../ui/Button";
 
+// export async function action() {}
+
 export default function Singup() {
   const { setLoading } = useLoader();
 
