@@ -49,8 +49,8 @@ export async function signUpAction({ request }) {
     await new Promise((r) => setTimeout(r, 100));
 
     console.log("successful");
-    // return { success: true };
-    return redirect("/accounts/user");
+    // return redirect("/accounts/user");
+    return Response.redirect("/accounts/user", 303);
   } catch (err) {
     let errorMessage = "Signup failed. Please try again.";
     switch (err.code) {

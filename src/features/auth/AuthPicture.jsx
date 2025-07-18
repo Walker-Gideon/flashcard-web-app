@@ -47,7 +47,7 @@ export default function AuthPicture() {
 
       setTimeout(() => {
         setToast(false);
-        // navigate("/dashboard");
+        navigate("/dashboard");
       }, 1500);
     }, 2000);
   };
@@ -113,10 +113,7 @@ export default function AuthPicture() {
             <div className="mt-10 flex w-full items-center justify-between gap-8 px-4">
               <Button
                 className={clascName}
-                onClick={() => {
-                  // skip logic (e.g. redirect to dashboard)
-                  // startLoadingAndNavigate("/dashboard");
-                }}
+                onClick={startLoadingAndNavigate("/dashboard")}
               >
                 Skip for Now
               </Button>

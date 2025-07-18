@@ -7,6 +7,8 @@ import Singup from "./features/auth/Singup";
 import { signUpAction } from "./services/actions/signUpAction";
 import ForgetAuthPassword from "./features/auth/ForgetAuthPassword";
 import AuthPicture from "./features/auth/AuthPicture";
+import AppLayout from "./AppLayout";
+import DashboardLayout from "./features/dashboard/DashboardLayout";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +35,16 @@ const router = createBrowserRouter([
       {
         path: "user",
         element: <AuthPicture />,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: <AppLayout />,
+    children: [
+      {
+        index: true,
+        element: <DashboardLayout />,
       },
     ],
   },
