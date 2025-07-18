@@ -2,6 +2,11 @@
 
 /* eslint-disable-next-line */
 
+/* 
+border-color
+border-stone-300
+ */
+
 @theme {
   /* default */
   --font-sans: "Quicksand", sans-serif;
