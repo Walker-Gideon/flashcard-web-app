@@ -1,4 +1,5 @@
-import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useActionData, useNavigate } from "react-router-dom";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -30,10 +31,52 @@ export async function action({ request }) {
   if (password.length < 6) {
     return { error: "Password should be at least 6 characters" };
   }
+
+  try {
+    const userCredential = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password,
+    );
+
+    const user = userCredential.user;
+    await updateProfile(user, { displayName: username, photoURL: null });
+
+    await new Promise((r) => setTimeout(r, 100));
+
+    await setDoc(doc(db, "users", user.uid), {
+      uid: user.uid,
+      email,
+      username,
+      photoURL: null,
+      isGoogleSignIn: false,
+      createdAt: serverTimestamp(),
+    });
+
+    await new Promise((r) => setTimeout(r, 100));
+
+    console.log("successful");
+    return { success: true };
+  } catch (err) {
+    let errorMessage = "Signup failed. Please try again.";
+    switch (err.code) {
+      case "auth/email-already-in-use":
+        errorMessage = "Email already in use";
+        break;
+      case "auth/invalid-email":
+        errorMessage = "Invalid email address";
+        break;
+      case "auth/weak-password":
+        errorMessage = "Password is too weak";
+        break;
+    }
+    return { error: errorMessage };
+  }
 }
 
 export default function Singup() {
   const { setLoading } = useLoader();
+  const actionData = useActionData();
 
   const navigate = useNavigate();
   const startLoadingAndNavigate = (to) => {
@@ -43,6 +86,17 @@ export default function Singup() {
       navigate(to);
     }, 500);
   };
+
+  useEffect(() => {
+    // setSpinner(true);
+    if (actionData?.success) {
+      setTimeout(() => {
+        // setSpinner(false);
+        // , { replace: true }
+        navigate("/accounts/user");
+      }, 500);
+    }
+  }, [actionData, navigate]);
 
   const clascName = "text-[0.8rem] font-semibold";
 
