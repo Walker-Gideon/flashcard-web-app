@@ -1,10 +1,11 @@
-import Button from "../../ui/Button";
+import NavigateLScreen from "./NavigateLScreen";
 import NavigateSmallScreen from "./NavigateSmallScreen";
 
 export default function NavigationLayout() {
   return (
-    <div className="">
+    <div className="medium:w-auto h-screen border-r border-stone-300">
       <NavigateSmallScreen />
+      <NavigateLScreen />
     </div>
   );
 }
