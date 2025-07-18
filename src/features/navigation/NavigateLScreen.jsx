@@ -6,6 +6,7 @@ import { LuLightbulb } from "react-icons/lu";
 import { LuMessageCircle } from "react-icons/lu";
 import { LuSettings2 } from "react-icons/lu";
 import Logo from "../../ui/Logo";
+import NavButton from "./NavButton";
 
 const buttonsData = [
   {
@@ -40,8 +41,51 @@ const nextButtonsData = [
 
 export default function NavigateLScreen() {
   return (
-    <div className="medium:block hidden px-2 py-1.5">
-      <Logo logo={true} />
+    <div className="medium:block hidden h-screen w-auto border-r border-stone-300 px-2 py-1.5">
+      <div className="flex flex-col items-center gap-4">
+        <Logo logo={true} />
+
+        {/* h-[88vh] */}
+        <div className="flex h-[90dvh] flex-col justify-between">
+          <div className="">
+            <div className="flex flex-col items-center">
+              {buttonsData.map((data, index) => (
+                <NavButton
+                  key={index}
+                  text={data.text}
+                  to={data.to}
+                  icon={data.icon}
+                />
+              ))}
+            </div>
+
+            {/* Ai button here */}
+
+            <div className="flex flex-col items-center">
+              {nextButtonsData.map((data, index) => (
+                <NavButton
+                  key={index}
+                  text={data.text}
+                  to={data.to}
+                  icon={data.icon}
+                />
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <div className="flex flex-col items-center">
+              <NavButton text="Settings" to="settings" icon={<LuSettings2 />} />
+            </div>
+
+            {/* user image */}
+            <div
+              // ${lighMode ? `bg-slate-950` : `bg-white`}
+              className={`h-9 w-9 rounded-full bg-slate-950`}
+            ></div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

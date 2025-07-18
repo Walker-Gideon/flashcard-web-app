@@ -3,7 +3,7 @@ import NavigateSmallScreen from "./NavigateSmallScreen";
 
 export default function NavigationLayout() {
   return (
-    <div className="medium:w-auto h-screen border-r border-stone-300">
+    <div className="">
       <NavigateSmallScreen />
       <NavigateLScreen />
     </div>
