@@ -1,0 +1,28 @@
+import { NavLink } from "react-router-dom";
+import ButtonNav from "../../ui/ButtonNav";
+
+export default function NavButton({ to, text, icon, onClick }) {
+  return (
+    <ButtonNav navLarge={true} text={text}>
+      <NavLink
+        to={to}
+        end
+        onClick={onClick}
+        className={({ isActive }) =>
+          `mb-2 flex cursor-pointer items-center justify-center gap-2.5 rounded-sm px-3 py-1.5 text-center text-sm font-semibold transition-colors duration-500 hover:rounded-sm ${
+            isActive ? "bg-slate-200 text-slate-950" : "text-slate-200"
+          }`
+        }
+      >
+        {icon}
+      </NavLink>
+    </ButtonNav>
+  );
+}
+
+/*
+${
+            lighMode
+              ? `${isActive ? "bg-slate-900 text-slate-200" : "text-slate-950"}`
+              : `${isActive ? "bg-slate-200 text-slate-950" : "text-slate-200"}`
+          }*/
