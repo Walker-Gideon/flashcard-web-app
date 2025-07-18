@@ -17,7 +17,7 @@ export default function AuthPicture() {
     const handlePopState = (e) => {
       e.preventDefault();
 
-      //   navigate("/accounts/user", { replace: true });
+      navigate("/dashboard", { replace: true });
     };
 
     window.addEventListener("popstate", handlePopState);

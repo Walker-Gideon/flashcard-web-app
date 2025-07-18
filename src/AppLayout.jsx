@@ -1,5 +1,11 @@
 import { Outlet } from "react-router-dom";
+import NavigationLayout from "./features/navigation/NavigationLayout";
 
 export default function AppLayout() {
-  return <div>{<Outlet />}</div>;
+  return (
+    <div>
+      <NavigationLayout />
+      <Outlet />
+    </div>
+  );
 }
