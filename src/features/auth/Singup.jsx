@@ -1,6 +1,4 @@
-import { useEffect } from "react";
-import { useActionData, useNavigate } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 import { useLoader } from "../../context/LoaderContext";
 import Loader from "../../ui/Loader";
 import AuthClose from "./AuthClose";
@@ -10,7 +8,6 @@ import Button from "../../ui/Button";
 
 export default function Singup() {
   const { setLoading } = useLoader();
-  const actionData = useActionData();
 
   const navigate = useNavigate();
   const startLoadingAndNavigate = (to) => {
@@ -20,17 +17,6 @@ export default function Singup() {
       navigate(to);
     }, 500);
   };
-
-  useEffect(() => {
-    // setSpinner(true);
-    if (actionData?.success) {
-      setTimeout(() => {
-        // setSpinner(false);
-        // , { replace: true }
-        navigate("/accounts/user");
-      }, 500);
-    }
-  }, [actionData, navigate]);
 
   const clascName = "text-[0.8rem] font-semibold";
 

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Form } from "react-router-dom";
+import { Form, useActionData } from "react-router-dom";
 import { FiEyeOff } from "react-icons/fi";
 import { FiEye } from "react-icons/fi";
 import Input from "../../ui/Input";
@@ -9,6 +9,8 @@ export default function SignupForm() {
   const [showPassword, setShowPassword] = useState(true);
   const [showConfirmPassword, setShowConfirmPassword] = useState(true);
 
+  const actionData = useActionData();
+
   const className = {
     input: "w-full",
     icon: "text-sm",
@@ -17,7 +19,11 @@ export default function SignupForm() {
 
   return (
     <div className="medium:w-80 mt-6 w-70">
-      <Form>
+      <Form method="post">
+        {actionData?.error && (
+          <p className="mb-2 text-sm text-red-600">{actionData.error}</p>
+        )}
+
         <div className="flex flex-col">
           <Input
             type="email"

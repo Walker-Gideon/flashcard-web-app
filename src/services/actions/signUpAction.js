@@ -11,11 +11,11 @@ export async function signUpAction({ request }) {
   const auth = getAuth(app);
   const db = getFirestore(app);
 
-  const signupFormData = await request.signupFormData();
-  const email = signupFormData.get("email");
-  const username = signupFormData.get("username");
-  const password = signupFormData.get("password");
-  const confirmPassword = signupFormData.get("confirmPassword");
+  const formData = await request.formData();
+  const email = formData.get("email");
+  const username = formData.get("username");
+  const password = formData.get("password");
+  const confirmPassword = formData.get("confirmPassword");
 
   if (password !== confirmPassword) {
     return { error: "Passwords do not match" };
@@ -49,7 +49,6 @@ export async function signUpAction({ request }) {
     await new Promise((r) => setTimeout(r, 100));
 
     console.log("successful");
-    // return { success: true };
     return redirect("/accounts/user");
   } catch (err) {
     let errorMessage = "Signup failed. Please try again.";
