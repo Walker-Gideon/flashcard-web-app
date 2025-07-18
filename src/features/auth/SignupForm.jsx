@@ -65,7 +65,7 @@ export default function SignupForm() {
         <div className="relative pb-2">
           <Input
             type={showConfirmPassword ? "text" : "password"}
-            name="confirmpassword"
+            name="confirmPassword"
             placeholder="Confirm Password"
             required={true}
             className={className.input}
