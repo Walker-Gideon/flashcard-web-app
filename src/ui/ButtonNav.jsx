@@ -1,7 +1,7 @@
 export default function ButtonNav({ children, text, navLarge }) {
   if (navLarge)
     return (
-      <div className="group relative inline-flex items-center justify-center">
+      <div className="group medium:items-center medium:justify-center relative inline-flex">
         {children}
         <div
           // ${mode ? `bg-slate-900 text-slate-200` : `bg-slate-200 text-black`}
