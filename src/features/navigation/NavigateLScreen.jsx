@@ -43,11 +43,11 @@ const nextButtonsData = [
 ];
 
 export default function NavigateLScreen() {
-  const { showNav, showSidebar } = useNav();
+  const { showSidebar } = useNav();
 
   return (
     <div
-      className={`h-screen w-auto border-r border-stone-300 px-2 py-1.5 ${showNav ? `` : `medium:block hidden`}`}
+      className={`medium:w-auto h-screen w-65 transform border-r border-stone-300 px-2 py-1.5 transition-transform duration-500 ease-in-out ${showSidebar ? `translate-x-0` : `medium:block medium:translate-0 -translate-x-90`}`}
     >
       <div className="flex flex-col items-center gap-4">
         <Logo logo={true} />
