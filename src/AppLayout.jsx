@@ -11,7 +11,7 @@ export default function AppLayout() {
       <NavigationLayout />
       <Outlet />
 
-      <div className="medium:hidden block">
+      <div className="medium:hidden block transition-all duration-500 ease-in-out">
         {navShowOverLay && <Overlay index="z-30" btn={true} />}
       </div>
     </div>
