@@ -9,12 +9,13 @@ export default function NavButton({ to, text, icon, onClick }) {
         end
         onClick={onClick}
         className={({ isActive }) =>
-          `medium:items-center medium:justify-center mb-2 flex cursor-pointer gap-2.5 rounded-sm px-2 py-1.5 text-center text-sm font-semibold transition-colors duration-500 hover:rounded-sm ${
+          `medium:justify-center mb-2 flex cursor-pointer items-center gap-2.5 rounded-sm px-2 py-1.5 text-center text-sm font-semibold transition-colors duration-500 hover:rounded-sm ${
             isActive ? "bg-slate-950 text-white" : "text-slate-950"
           }`
         }
       >
         {icon}
+        <span className="medium:hidden block text-xs">{text}</span>
       </NavLink>
     </ButtonNav>
   );
