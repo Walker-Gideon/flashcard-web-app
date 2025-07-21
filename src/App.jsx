@@ -11,6 +11,7 @@ import AppLayout from "./AppLayout";
 import DashboardLayout from "./features/dashboard/DashboardLayout";
 import NoteLayout from "./features/note/NoteLayout";
 import FlashcardLayout from "./features/flashcard/FlashcardLayout";
+import SchedulesLayout from "./features/schedules/SchedulesLayout";
 
 const router = createBrowserRouter([
   {
@@ -55,6 +56,10 @@ const router = createBrowserRouter([
       {
         path: "flashcards",
         element: <FlashcardLayout />,
+      },
+      {
+        path: "schedules",
+        element: <SchedulesLayout />,
       },
     ],
   },
