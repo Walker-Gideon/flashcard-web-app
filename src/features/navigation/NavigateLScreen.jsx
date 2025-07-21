@@ -1,3 +1,4 @@
+import { useNav } from "../../context/NavigateContext";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { LuBookOpen } from "react-icons/lu";
 import { LuFile } from "react-icons/lu";
@@ -42,8 +43,12 @@ const nextButtonsData = [
 ];
 
 export default function NavigateLScreen() {
+  const { showNav } = useNav();
+
   return (
-    <div className="medium:block hidden h-screen w-auto border-r border-stone-300 px-2 py-1.5">
+    <div
+      className={`h-screen w-auto border-r border-stone-300 px-2 py-1.5 ${showNav ? `` : `medium:block hidden`}`}
+    >
       <div className="flex flex-col items-center gap-4">
         <Logo logo={true} />
 

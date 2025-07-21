@@ -4,10 +4,11 @@ const NavigateContext = createContext();
 
 function NavigateProvider({ children }) {
   const [navShowOverLay, setNavShowOverLay] = useState(false);
+  const [showNav, setShowNav] = useState(false);
 
   const value = useMemo(
-    () => ({ navShowOverLay, setNavShowOverLay }),
-    [navShowOverLay],
+    () => ({ navShowOverLay, setNavShowOverLay, showNav, setShowNav }),
+    [navShowOverLay, showNav],
   );
 
   return (
