@@ -10,6 +10,7 @@ import AuthPicture from "./features/auth/AuthPicture";
 import AppLayout from "./AppLayout";
 import DashboardLayout from "./features/dashboard/DashboardLayout";
 import NoteLayout from "./features/note/NoteLayout";
+import FlashcardLayout from "./features/flashcard/FlashcardLayout";
 
 const router = createBrowserRouter([
   {
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
       {
         path: "notes",
         element: <NoteLayout />,
+      },
+      {
+        path: "flashcards",
+        element: <FlashcardLayout />,
       },
     ],
   },
