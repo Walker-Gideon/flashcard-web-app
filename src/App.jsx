@@ -9,6 +9,7 @@ import ForgetAuthPassword from "./features/auth/ForgetAuthPassword";
 import AuthPicture from "./features/auth/AuthPicture";
 import AppLayout from "./AppLayout";
 import DashboardLayout from "./features/dashboard/DashboardLayout";
+import NoteLayout from "./features/note/NoteLayout";
 
 const router = createBrowserRouter([
   {
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <DashboardLayout />,
+      },
+      {
+        path: "notes",
+        element: <NoteLayout />,
       },
     ],
   },
