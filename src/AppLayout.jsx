@@ -11,7 +11,9 @@ export default function AppLayout() {
       <NavigationLayout />
       <Outlet />
 
-      {/* <div className="medium:hidden block">{navShowOverLay && <Overlay />}</div> */}
+      <div className="medium:hidden block">
+        {navShowOverLay && <Overlay zIndex="z-30" />}
+      </div>
     </div>
   );
 }
