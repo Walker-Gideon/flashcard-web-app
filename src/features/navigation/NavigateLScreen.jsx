@@ -47,7 +47,7 @@ export default function NavigateLScreen() {
 
   return (
     <div
-      className={`medium:w-auto z-50 h-screen w-65 transform border-r border-stone-300 px-2 py-1.5 transition-transform duration-500 ease-in-out ${showSidebar ? `translate-x-0` : `medium:block medium:translate-0 -translate-x-90`}`}
+      className={`medium:w-auto z-50 h-screen w-65 transform border-r border-stone-300 px-2 py-1.5 transition-transform duration-500 ease-in-out ${showSidebar ? `medium:top-0 relative -top-13 translate-x-0` : `medium:block medium:translate-0 -translate-x-90`}`}
     >
       <div className="flex flex-col items-center gap-4">
         <Logo logo={true} />

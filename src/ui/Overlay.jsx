@@ -1,8 +1,8 @@
-export default function Overlay({ zIndex }) {
+export default function Overlay({ index }) {
   return (
     <div
       //absolute flex items-center justify-center
-      className={`fixed inset-0 bg-slate-200/20 backdrop-blur-sm ${zIndex}`}
+      className={`fixed inset-0 bg-slate-200/20 backdrop-blur-sm ${index}`}
     />
   );
 }
