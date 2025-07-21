@@ -43,7 +43,7 @@ const nextButtonsData = [
 ];
 
 export default function NavigateLScreen() {
-  const { showNav } = useNav();
+  const { showNav, showSidebar } = useNav();
 
   return (
     <div

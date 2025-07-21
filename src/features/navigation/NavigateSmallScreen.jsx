@@ -2,11 +2,12 @@ import { useNav } from "../../context/NavigateContext";
 import Button from "../../ui/Button";
 
 export default function NavigateSmallScreen() {
-  const { setNavShowOverLay, setShowNav } = useNav();
+  const { setNavShowOverLay, setShowNav, setShowSidebar } = useNav();
 
   function handleClick() {
     setNavShowOverLay(true);
     setShowNav(true);
+    setShowSidebar(true);
   }
 
   return (
