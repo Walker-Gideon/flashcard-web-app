@@ -13,6 +13,7 @@ import NoteLayout from "./features/note/NoteLayout";
 import FlashcardLayout from "./features/flashcard/FlashcardLayout";
 import SchedulesLayout from "./features/schedules/SchedulesLayout";
 import InspireLayout from "./features/inspire/InspireLayout";
+import SettingsLayout from "./features/settings/SettingsLayout";
 
 const router = createBrowserRouter([
   {
@@ -65,6 +66,10 @@ const router = createBrowserRouter([
       {
         path: "inspire",
         element: <InspireLayout />,
+      },
+      {
+        path: "settings",
+        element: <SettingsLayout />,
       },
     ],
   },
