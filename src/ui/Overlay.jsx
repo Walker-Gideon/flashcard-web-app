@@ -1,8 +1,25 @@
-export default function Overlay({ index }) {
+import { useNav } from "../context/NavigateContext";
+
+export default function Overlay({ index, btn }) {
+  const { setNavShowOverLay, setShowSidebar } = useNav();
+
+  function handleClick() {
+    setNavShowOverLay((show) => !show);
+    setShowSidebar((show) => !show);
+  }
+
+  if (btn)
+    return (
+      <div
+        role="button"
+        onClick={handleClick}
+        className={`fixed inset-0 cursor-pointer bg-slate-200/20 backdrop-blur-sm ${index}`}
+      />
+    );
+
   return (
     <div
-      //absolute flex items-center justify-center
-      className={`fixed inset-0 bg-slate-200/20 backdrop-blur-sm ${index}`}
+      className={`absolute inset-0 flex items-center justify-center bg-slate-200/20 backdrop-blur-sm ${index}`}
     />
   );
 }

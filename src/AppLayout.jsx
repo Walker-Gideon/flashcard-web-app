@@ -12,7 +12,7 @@ export default function AppLayout() {
       <Outlet />
 
       <div className="medium:hidden block">
-        {/* {navShowOverLay && <Overlay index="z-30" />} */}
+        {navShowOverLay && <Overlay index="z-30" btn={true} />}
       </div>
     </div>
   );
