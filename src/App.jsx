@@ -14,6 +14,7 @@ import FlashcardLayout from "./features/flashcard/FlashcardLayout";
 import SchedulesLayout from "./features/schedules/SchedulesLayout";
 import InspireLayout from "./features/inspire/InspireLayout";
 import SettingsLayout from "./features/settings/SettingsLayout";
+import { NavigateProvider } from "./context/NavigateContext";
 
 const router = createBrowserRouter([
   {
@@ -77,8 +78,10 @@ const router = createBrowserRouter([
 
 export default function App() {
   return (
-    <LoaderProvider>
-      <RouterProvider router={router} />
-    </LoaderProvider>
+    <NavigateProvider>
+      <LoaderProvider>
+        <RouterProvider router={router} />
+      </LoaderProvider>
+    </NavigateProvider>
   );
 }

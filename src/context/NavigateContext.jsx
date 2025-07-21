@@ -1,0 +1,29 @@
+import { createContext, useContext, useMemo, useState } from "react";
+
+const NavigateContext = createContext();
+
+function NavigateProvider({ children }) {
+  const [navShowOverLay, setNavShowOverLay] = useState(false);
+
+  const value = useMemo(
+    () => ({ navShowOverLay, setNavShowOverLay }),
+    [navShowOverLay],
+  );
+
+  return (
+    <NavigateContext.Provider value={value}>
+      {children}
+    </NavigateContext.Provider>
+  );
+}
+
+function useNav() {
+  const context = useContext(NavigateContext);
+
+  if (context === undefined)
+    throw new Error("NavigateContext was used outside of the NavigateProvider");
+
+  return context;
+}
+
+export { NavigateProvider, useNav };
