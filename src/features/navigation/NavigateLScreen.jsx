@@ -7,6 +7,8 @@ import { LuMessageCircle } from "react-icons/lu";
 import { LuSettings2 } from "react-icons/lu";
 import Logo from "../../ui/Logo";
 import NavButton from "./NavButton";
+import ButtonNav from "../../ui/ButtonNav";
+import Button from "../../ui/Button";
 
 const buttonsData = [
   {
@@ -60,6 +62,16 @@ export default function NavigateLScreen() {
             </div>
 
             {/* Ai button here */}
+            <div className="flex items-center justify-center">
+              <ButtonNav navLarge={true} text="Chat">
+                <Button
+                  variant="outline"
+                  className={`mb-2 flex cursor-pointer items-center justify-center gap-2.5 rounded-sm px-2 py-1.5 text-center text-sm font-semibold text-slate-950 transition-colors duration-500 hover:rounded-sm`}
+                >
+                  <LuMessageCircle />
+                </Button>
+              </ButtonNav>
+            </div>
 
             <div className="flex flex-col items-center">
               {nextButtonsData.map((data, index) => (
