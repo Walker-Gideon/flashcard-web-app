@@ -83,11 +83,12 @@ export default function NavigateLScreen() {
             </div>
 
             {/* Ai button here */}
-            <div className="medium:items-center medium:justify-center flex">
+            <div className="medium:items-center medium:justify-center flex w-full">
               <ButtonNav navLarge={true} text="Chat">
                 <Button
                   variant="outline"
-                  className={`mb-2 flex cursor-pointer items-center justify-center gap-2.5 rounded-sm px-2 py-1.5 text-center text-sm font-semibold text-slate-950 transition-colors duration-500 hover:rounded-sm`}
+                  //   justify-center
+                  className={`mb-2 flex w-full cursor-pointer items-center gap-2.5 rounded-sm px-2 py-1.5 text-center text-sm font-semibold text-slate-950 transition-colors duration-500 hover:rounded-sm hover:bg-slate-950 hover:text-white`}
                 >
                   <LuMessageCircle />
                   <span className="medium:hidden block text-xs">Chat</span>
