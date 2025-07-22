@@ -1,4 +1,5 @@
 import { useNav } from "../../context/NavigateContext";
+import { LuX } from "react-icons/lu";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { LuBookOpen } from "react-icons/lu";
 import { LuFile } from "react-icons/lu";
@@ -43,14 +44,29 @@ const nextButtonsData = [
 ];
 
 export default function NavigateLScreen() {
-  const { showSidebar } = useNav();
+  const { showSidebar, setNavShowOverLay, setShowSidebar } = useNav();
+
+  function handleClick() {
+    setNavShowOverLay((show) => !show);
+    setShowSidebar((show) => !show);
+  }
 
   return (
     <div
       className={`medium:w-auto medium:top-0 relative -top-13 z-50 h-screen w-65 transform border-r border-stone-300 px-2 py-1.5 transition-transform duration-500 ease-in-out ${showSidebar ? `translate-x-0` : `medium:block medium:translate-0 -translate-x-90`}`}
     >
       <div className="medium:items-center flex flex-col gap-4">
-        <Logo logo={true} />
+        <div className="flex items-center justify-between">
+          <Logo logo={true} />
+
+          <Button
+            variant="outline"
+            onClick={handleClick}
+            className={`medium:hidden block cursor-pointer text-xl text-slate-950`}
+          >
+            <LuX />
+          </Button>
+        </div>
 
         {/* h-[88vh] */}
         <div className="flex h-[90dvh] flex-col justify-between">
