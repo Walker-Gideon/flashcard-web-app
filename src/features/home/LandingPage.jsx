@@ -3,7 +3,7 @@ import Loader from "../../ui/Loader";
 import Hero from "./hero/Hero";
 import HomeHeader from "./HomeHeader";
 import MainOverview from "./mainoverview/MainOverview";
-import MoreInfo from "./MoreInfo";
+import MoreInfo from "./info/MoreInfo";
 import Testimonial from "./Testimonial";
 
 export default function LandingPage() {
