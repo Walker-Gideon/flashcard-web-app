@@ -1,10 +1,14 @@
+import HeroText from "./HeroText";
+
 export default function Hero() {
   return (
     <div
       id="home"
       className="medium:px-10 flex h-screen items-center justify-center px-8 md:px-16"
     >
-      <div className="flex flex-col items-center"></div>
+      <div className="flex flex-col items-center">
+        <HeroText />
+      </div>
     </div>
   );
 }
