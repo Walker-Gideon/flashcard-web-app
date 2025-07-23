@@ -12,7 +12,7 @@ export default function HeroButtons() {
       <Link to="features" smooth={true} spy={true} duration={500} offset={-100}>
         <Button
           variant="outline"
-          className="button border-gray-600 py-[5px] font-bold"
+          className="button medium:px-6 border-gray-600 px-4 py-[7px] font-bold"
         >
           Explore Features
         </Button>
