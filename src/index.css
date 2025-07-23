@@ -35,7 +35,7 @@ border-stone-300
   }
 
   .button {
-    @apply medium:text-[0.74rem] cursor-pointer rounded-sm border text-[0.7rem] font-semibold transition-colors duration-300;
+    @apply medium:text-[0.74rem] cursor-pointer rounded-sm border text-[0.7rem] transition-colors duration-300;
   }
 
   .navButton {
