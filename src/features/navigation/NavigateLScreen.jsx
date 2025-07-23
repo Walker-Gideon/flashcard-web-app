@@ -78,6 +78,7 @@ export default function NavigateLScreen() {
                   text={data.text}
                   to={data.to}
                   icon={data.icon}
+                  onClick={handleClick}
                 />
               ))}
             </div>
@@ -87,6 +88,7 @@ export default function NavigateLScreen() {
               <ButtonNav navLarge={true} text="Chat">
                 <Button
                   variant="outline"
+                  onClick={handleClick}
                   //   justify-center
                   className={`navButton hover:bg-slate-950 hover:text-white`}
                 >
@@ -103,6 +105,7 @@ export default function NavigateLScreen() {
                   text={data.text}
                   to={data.to}
                   icon={data.icon}
+                  onClick={handleClick}
                 />
               ))}
             </div>
@@ -110,7 +113,12 @@ export default function NavigateLScreen() {
 
           <div>
             <div className="medium:items-center flex flex-col">
-              <NavButton text="Settings" to="settings" icon={<LuSettings2 />} />
+              <NavButton
+                onClick={handleClick}
+                text="Settings"
+                to="settings"
+                icon={<LuSettings2 />}
+              />
             </div>
 
             {/* user image */}
