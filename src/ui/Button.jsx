@@ -38,7 +38,7 @@ export default function Button({
 
   if (variant === "primary")
     return (
-      <button
+      <motion.button
         disabled={disabled}
         type={type}
         whileTap={{ y: 1 }}
@@ -47,7 +47,7 @@ export default function Button({
         className={`button focus:ring-2 focus:ring-slate-950 focus:outline-hidden ${color ? `` : `bg-slate-950 py-1.5 text-white hover:bg-slate-900`} ${btnPaddX ? `${btnPaddX}` : `medium:px-6 px-4`} ${className}`}
       >
         {children}
-      </button>
+      </motion.button>
     );
 
   return (

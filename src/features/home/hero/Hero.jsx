@@ -1,3 +1,4 @@
+import HeroButtons from "./HeroButtons";
 import HeroText from "./HeroText";
 
 export default function Hero() {
@@ -8,6 +9,7 @@ export default function Hero() {
     >
       <div className="flex flex-col items-center">
         <HeroText />
+        <HeroButtons />
       </div>
     </div>
   );
