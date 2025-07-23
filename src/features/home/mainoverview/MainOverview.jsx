@@ -2,6 +2,7 @@ import { BsArrowRepeat } from "react-icons/bs";
 import { BsGraphUpArrow } from "react-icons/bs";
 import { BsChatLeft } from "react-icons/bs";
 import { BsChatRightText } from "react-icons/bs";
+import MainContent from "./MainContent";
 
 const overViewData = [
   {
@@ -52,5 +53,23 @@ const overViewData = [
 ];
 
 export default function MainOverview() {
-  return <div>MainOverview</div>;
+  return (
+    <div id="features" className="mx-3 md:mx-6 lg:mx-20">
+      {overViewData.map((data, index) => (
+        <div
+          key={index}
+          className={`mb-20 ${index === 0 ? `w-full rounded-4xl bg-stone-200/30` : ``} ${index === 2 ? `w-full rounded-4xl bg-stone-200/30` : ``}`}
+        >
+          <MainContent
+            index={index}
+            icon={data.icon}
+            title={data.title}
+            subtitle={data.subtitle}
+            points={data.points}
+            image={data.image}
+          />
+        </div>
+      ))}
+    </div>
+  );
 }
