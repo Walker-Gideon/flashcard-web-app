@@ -1,6 +1,6 @@
 import { useNav } from "../context/NavigateContext";
 
-export default function Overlay({ index, btn }) {
+export default function Overlay({ index, btn, children }) {
   const { setNavShowOverLay, setShowSidebar } = useNav();
 
   function handleClick() {
@@ -13,13 +13,15 @@ export default function Overlay({ index, btn }) {
       <div
         role="button"
         onClick={handleClick}
-        className={`fixed inset-0 cursor-pointer bg-slate-200/20 backdrop-blur-sm ${index}`}
+        className={`fixed inset-0 cursor-pointer bg-gray-500/20 backdrop-blur-sm ${index}`}
       />
     );
 
   return (
     <div
       className={`absolute inset-0 flex items-center justify-center bg-slate-200/20 backdrop-blur-sm ${index}`}
-    />
+    >
+      {children}
+    </div>
   );
 }

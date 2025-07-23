@@ -3,7 +3,7 @@ import NavigateSmallScreen from "./NavigateSmallScreen";
 
 export default function NavigationLayout() {
   return (
-    <div className="">
+    <div className="bg-red-400">
       <NavigateSmallScreen />
       <NavigateLScreen />
     </div>

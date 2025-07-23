@@ -53,7 +53,7 @@ export default function NavigateLScreen() {
 
   return (
     <div
-      className={`medium:w-auto medium:top-0 relative -top-13 z-50 h-screen w-65 transform border-r border-stone-300 px-2 py-1.5 transition-transform duration-500 ease-in-out ${showSidebar ? `translate-x-0` : `medium:block medium:translate-0 -translate-x-90`}`}
+      className={`medium:w-auto medium:top-0 relative -top-13 z-50 h-screen w-65 transform border-r border-stone-300 bg-white px-2 py-1.5 transition-transform duration-500 ease-in-out ${showSidebar ? `translate-x-0` : `medium:block medium:translate-0 -translate-x-90`}`}
     >
       <div className="medium:items-center flex flex-col gap-4">
         <div className="flex items-center justify-between">
@@ -69,7 +69,9 @@ export default function NavigateLScreen() {
         </div>
 
         {/* h-[88vh] */}
-        <div className="flex h-[90dvh] flex-col justify-between">
+        <div
+          className={`medium:h-[90dvh] flex h-screen flex-col justify-between`}
+        >
           <div className="">
             <div className="medium:items-center flex flex-col">
               {buttonsData.map((data, index) => (
