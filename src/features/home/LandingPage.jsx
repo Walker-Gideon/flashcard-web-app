@@ -1,6 +1,6 @@
 import Footer from "../../ui/Footer";
 import Loader from "../../ui/Loader";
-import Hero from "./Hero";
+import Hero from "./hero/Hero";
 import HomeHeader from "./HomeHeader";
 import MainOverview from "./MainOverview";
 import MoreInfo from "./MoreInfo";
