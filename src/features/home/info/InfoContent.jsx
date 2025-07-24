@@ -1,4 +1,4 @@
-import { BsCheck } from "react-icons/bs";
+import { LuCheck } from "react-icons/lu";
 
 const info = [
   {
@@ -21,7 +21,7 @@ export default function InfoContent() {
       {info.map((data, index) => (
         <div key={index} className="mb-2 flex gap-2">
           <div className="mt-1 flex h-3 w-3 items-center justify-center rounded-full bg-stone-400">
-            <BsCheck />
+            <LuCheck />
           </div>
 
           <div className="middle:text-[0.8rem] text-xs text-slate-800">
