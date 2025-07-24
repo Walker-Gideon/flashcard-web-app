@@ -12,7 +12,7 @@ export default function NavButton({ to, text, icon, onClick }) {
         end
         onClick={onClick}
         className={({ isActive }) =>
-          `navButton medium:w-full hover:bg-slate-950 hover:text-white ${isActive ? "bg-slate-950 text-white" : "text-slate-950"}`
+          `navButton medium:w-full hover:bg-slate-950 hover:text-white ${isActive ? "bg-slate-950 text-white" : "text-slate-950"} ${resize ? `flex items-start justify-start` : ``}`
         }
       >
         {icon}

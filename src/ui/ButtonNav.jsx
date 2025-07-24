@@ -6,8 +6,8 @@ export default function ButtonNav({ children, text, navLarge }) {
   if (navLarge)
     return (
       <div
-        // medium:items-start medium:justify-start medium:w-full  inline-flex
-        className={`group relative ${resize ? `` : `medium:items-center medium:justify-center`}`}
+        // medium:items-center medium:justify-center
+        className={`group relative inline-flex ${resize ? `` : ``}`}
       >
         {children}
         <div

@@ -102,10 +102,10 @@ export default function NavigateLScreen() {
         <div
           className={`medium:h-[83dvh] flex h-screen flex-col justify-between`}
         >
-          <div className="">
+          <div className="w-full">
             <div
-              // medium:items-start medium:justify-items-start medium:w-full
-              className={`flex flex-col ${resize ? `` : `medium:items-center`}`}
+              // medium:items-start medium:justify-items-start medium:w-full ${resize ? `` : `medium:items-center`}
+              className={`flex flex-col`}
             >
               {buttonsData.map((data, index) => (
                 <NavButton
@@ -125,10 +125,14 @@ export default function NavigateLScreen() {
                   variant="outline"
                   onClick={handleClick}
                   //   justify-center
-                  classname={`navButton hover:bg-slate-950 hover:text-white`}
+                  classname={`navButton hover:bg-slate-950 hover:text-white ${resize ? `flex items-start justify-start` : ``}`}
                 >
                   <LuMessageCircle />
-                  <span className="medium:hidden block text-xs">Chat</span>
+                  <span
+                    className={`block text-xs ${resize ? `block` : `medium:hidden`}`}
+                  >
+                    Chat
+                  </span>
                 </Button>
               </ButtonNav>
             </div>
