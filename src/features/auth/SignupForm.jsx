@@ -13,7 +13,7 @@ export default function SignupForm() {
 
   const actionData = useActionData();
 
-  const className = {
+  const stylings = {
     input: "w-full",
     icon: "text-sm",
     button: "absolute top-2.5 right-2",
@@ -32,7 +32,7 @@ export default function SignupForm() {
             name="email"
             placeholder="Email"
             required={true}
-            className={className.input}
+            classname={stylings.input}
           />
 
           <Input
@@ -40,7 +40,7 @@ export default function SignupForm() {
             name="username"
             placeholder="Username"
             required={true}
-            className={`mt-2 ${className.input}`}
+            classname={`mt-2 ${stylings.input}`}
           />
         </div>
 
@@ -50,21 +50,21 @@ export default function SignupForm() {
             name="password"
             placeholder="Password"
             required={true}
-            className={className.input}
+            classname={stylings.input}
           />
           <Button
             variant="outline"
             disabled={loading}
-            className={className.button}
+            classname={stylings.button}
             onClick={(e) => {
               e.preventDefault();
               setShowPassword(!showPassword);
             }}
           >
             {showPassword ? (
-              <FiEye className={className.icon} />
+              <FiEye className={stylings.icon} />
             ) : (
-              <FiEyeOff className={className.icon} />
+              <FiEyeOff className={stylings.icon} />
             )}
           </Button>
         </div>
@@ -75,21 +75,21 @@ export default function SignupForm() {
             name="confirmPassword"
             placeholder="Confirm Password"
             required={true}
-            className={className.input}
+            classname={stylings.input}
           />
           <Button
             variant="outline"
             disabled={loading}
-            className={className.button}
+            classname={stylings.button}
             onClick={(e) => {
               e.preventDefault();
               setShowConfirmPassword(!showConfirmPassword);
             }}
           >
             {showConfirmPassword ? (
-              <FiEye className={className.icon} />
+              <FiEye className={stylings.icon} />
             ) : (
-              <FiEyeOff className={className.icon} />
+              <FiEyeOff className={stylings.icon} />
             )}
           </Button>
         </div>
@@ -98,7 +98,7 @@ export default function SignupForm() {
           disabled={loading}
           type="submit"
           variant="primary"
-          className="w-full py-2"
+          classname="w-full py-2"
         >
           Sign up
         </Button>

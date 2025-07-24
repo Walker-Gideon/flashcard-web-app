@@ -1,5 +1,5 @@
 export default function Input({
-  className,
+  classname,
   required,
   type,
   name,
@@ -10,7 +10,7 @@ export default function Input({
       type={type}
       name={name}
       placeholder={placeholder}
-      className={`input ${className}`}
+      className={`input ${classname}`}
       required={required ? required : false}
     />
   );

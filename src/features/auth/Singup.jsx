@@ -24,8 +24,6 @@ export default function Singup() {
     }, 500);
   };
 
-  const clascName = "text-[0.8rem] font-semibold";
-
   return (
     <div className="relative">
       <div className="h-1">
@@ -51,7 +49,7 @@ export default function Singup() {
 
             <Button
               variant="outline"
-              className={clascName}
+              classname="text-[0.8rem] font-semibold"
               disabled={loading}
               onClick={() => startLoadingAndNavigate("/accounts/login")}
             >
@@ -64,7 +62,7 @@ export default function Singup() {
               <p className="text-sm text-stone-400">or you can Sign up with</p>
             </div>
 
-            <Button disabled={loading} className="w-full">
+            <Button disabled={loading} classname="w-full">
               Continue with Google
             </Button>
           </div>
