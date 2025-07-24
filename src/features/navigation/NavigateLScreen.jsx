@@ -63,12 +63,18 @@ export default function NavigateLScreen() {
 
   return (
     <div
-      className={`medium:top-0 medium:h-screen relative -top-14 z-50 w-55 transform border-r border-stone-300 bg-white px-2 py-2 transition-all duration-500 ease-in-out ${showSidebar ? `translate-x-0` : `medium:block medium:translate-0 -translate-x-90`} ${resize ? `medium:w-55` : `medium:w-12`}`}
+      className={`medium:top-0 medium:h-screen transitioning relative -top-14 z-50 w-55 transform border-r border-stone-300 bg-white px-2 py-2 ${showSidebar ? `translate-x-0` : `medium:block medium:translate-0 -translate-x-90`} ${resize ? `medium:w-55` : `medium:w-12`}`}
     >
-      {/* ${resize ? `medium:items-left` : `medium:items-center`} */}
       <div className={`flex flex-col gap-4`}>
         <div className={`flex items-center justify-between`}>
-          <Logo logo={true} />
+          <div className="flex items-center gap-1 font-bold text-slate-950 uppercase">
+            <Logo logo={true} />
+            <span
+              className={`medium:text-base transitioning text-sm font-bold ${resize ? "translate-x-0 delay-75" : "-translate-x-[150px]"} inline-block`}
+            >
+              walkwise
+            </span>
+          </div>
 
           <Button
             variant="outline"
@@ -80,7 +86,7 @@ export default function NavigateLScreen() {
         </div>
 
         <div
-          className={`flex items-center transition-all duration-500 ease-in-out ${resize ? `justify-end` : `justify-center`}`}
+          className={`transitioning flex items-center ${resize ? `justify-end` : `justify-center`}`}
         >
           <Button
             variant="outline"
@@ -88,12 +94,11 @@ export default function NavigateLScreen() {
             classname={`medium:block hidden ${styling.iconsButton}`}
           >
             <LuChevronRight
-              className={`transform transition-transform duration-500 ease-in-out ${resize ? `rotate-180` : `rotate-0`}`}
+              className={`transform transition-transform duration-1000 ease-in-out ${resize ? `rotate-180` : `rotate-0`}`}
             />
           </Button>
         </div>
 
-        {/* h-[88vh] */}
         <div
           className={`medium:h-[83dvh] flex h-screen flex-col justify-between`}
         >
