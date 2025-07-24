@@ -64,7 +64,7 @@ export default function ForgetAuthPassword() {
               <Button
                 type="submit"
                 variant="primary"
-                className="w-full py-2"
+                classname="w-full py-2"
                 onClick={() => startLoadingAndNavigate("/accounts/login")}
               >
                 Send Link
@@ -74,7 +74,7 @@ export default function ForgetAuthPassword() {
         </div>
       </div>
 
-      {toast && <Toast className="bg-green-600">Link sent successful!</Toast>}
+      {toast && <Toast classname="bg-green-600">Link sent successful!</Toast>}
     </div>
   );
 }

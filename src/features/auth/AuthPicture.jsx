@@ -76,7 +76,7 @@ export default function AuthPicture() {
     setPreview(URL.createObjectURL(file));
   };
 
-  const clascName = "w-full whitespace-nowrap";
+  const stylings = "w-full whitespace-nowrap";
 
   return (
     <div>
@@ -119,14 +119,14 @@ export default function AuthPicture() {
             </label>
 
             <div className="mt-10 flex w-full items-center justify-between gap-8 px-4">
-              <Button className={clascName} onClick={handleSkip}>
+              <Button classname={stylings} onClick={handleSkip}>
                 Skip for Now
               </Button>
 
               {!image && !preview ? (
                 <Button
                   variant="primary"
-                  className={clascName}
+                  classname={stylings}
                   onClick={handleButtonClick}
                 >
                   Add image
@@ -134,7 +134,7 @@ export default function AuthPicture() {
               ) : (
                 <Button
                   variant="primary"
-                  className={clascName}
+                  classname={stylings}
                   onClick={handleUpload}
                 >
                   Save and Continue
@@ -146,7 +146,7 @@ export default function AuthPicture() {
       </div>
 
       {toast && (
-        <Toast className="bg-green-600">Account created successful!</Toast>
+        <Toast classname="bg-green-600">Account created successful!</Toast>
       )}
     </div>
   );
