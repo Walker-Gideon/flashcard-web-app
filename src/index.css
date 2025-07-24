@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* eslint-disable-next-line */
+@custom-variant dark (&:where(.dark, .dark *));
 
 /* 
 border-color
