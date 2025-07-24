@@ -1,4 +1,4 @@
-import Footer from "../../ui/Footer";
+import Footer from "../../ui/footer/Footer";
 import Loader from "../../ui/Loader";
 import Hero from "./hero/Hero";
 import HomeHeader from "./HomeHeader";
