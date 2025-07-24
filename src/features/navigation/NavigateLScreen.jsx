@@ -62,7 +62,7 @@ export default function NavigateLScreen() {
           <Button
             variant="outline"
             onClick={handleClick}
-            className={`medium:hidden block cursor-pointer text-xl text-slate-950`}
+            classname={`medium:hidden block cursor-pointer text-xl text-slate-950`}
           >
             <LuX />
           </Button>
@@ -92,7 +92,7 @@ export default function NavigateLScreen() {
                   variant="outline"
                   onClick={handleClick}
                   //   justify-center
-                  className={`navButton hover:bg-slate-950 hover:text-white`}
+                  classname={`navButton hover:bg-slate-950 hover:text-white`}
                 >
                   <LuMessageCircle />
                   <span className="medium:hidden block text-xs">Chat</span>
