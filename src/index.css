@@ -3,8 +3,14 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* 
-border-color
-border-stone-300
+border-color 
+border-stone-300 dark:border-slate-700
+dark:bg-slate-700/50
+
+MainText : text-slate-900 dark:text-white
+subText : text-slate-500 dark:text-slate-400
+
+px-6 py-4
  */
 
 @theme {

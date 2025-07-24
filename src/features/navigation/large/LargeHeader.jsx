@@ -17,8 +17,7 @@ export default function LargeHeader() {
   }
 
   const styling = {
-    iconsButton:
-      "cursor-pointer text-xl text-slate-950 transitioningColors dark:text-white",
+    iconsButton: "cursor-pointer text-xl text-slate-900 dark:text-white",
   };
 
   return (
@@ -37,7 +36,7 @@ export default function LargeHeader() {
                 visualDuration: 0.2,
                 bounce: 0.2,
               }}
-              className={`medium:text-base transitioningtext-sm z-30 font-bold dark:text-slate-50 ${resize ? "translate-x-0 delay-75" : "-translate-x-[150px]"} inline-block`}
+              className={`medium:text-base transitioning z-30 text-sm font-bold text-slate-900 dark:text-white ${resize ? "translate-x-0 delay-75" : "-translate-x-[150px]"} inline-block`}
             >
               walkwise
             </motion.span>

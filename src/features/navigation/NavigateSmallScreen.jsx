@@ -10,7 +10,7 @@ export default function NavigateSmallScreen() {
   }
 
   return (
-    <header className="medium:hidden block border-b border-stone-300 px-4 py-5 shadow-sm">
+    <header className="medium:hidden sticky top-0 z-40 block border-b border-stone-300 bg-white/30 px-4 py-5 shadow-sm backdrop-blur-sm dark:border-slate-700 dark:bg-slate-800/80">
       <Button
         variant="outline"
         classname={`flex cursor-pointer flex-col gap-1.5 rounded text-2xl`}

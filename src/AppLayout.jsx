@@ -7,7 +7,9 @@ export default function AppLayout() {
   const { navShowOverLay } = useNav();
 
   return (
-    <div className={`medium:grid medium:grid-cols-[auto_1fr] relative`}>
+    <div
+      className={`medium:grid medium:grid-cols-[auto_1fr] defaultColor relative`}
+    >
       <NavigationLayout />
       <Outlet />
 
