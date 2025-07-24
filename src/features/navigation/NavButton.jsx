@@ -1,7 +1,10 @@
 import { NavLink } from "react-router-dom";
 import ButtonNav from "../../ui/ButtonNav";
+import { useNav } from "../../context/NavigateContext";
 
 export default function NavButton({ to, text, icon, onClick }) {
+  const { resize } = useNav();
+
   return (
     <ButtonNav navLarge={true} text={text}>
       <NavLink
@@ -9,11 +12,13 @@ export default function NavButton({ to, text, icon, onClick }) {
         end
         onClick={onClick}
         className={({ isActive }) =>
-          `navButton hover:bg-slate-950 hover:text-white ${isActive ? "bg-slate-950 text-white" : "text-slate-950"}`
+          `navButton medium:w-full hover:bg-slate-950 hover:text-white ${isActive ? "bg-slate-950 text-white" : "text-slate-950"}`
         }
       >
         {icon}
-        <span className="medium:hidden block text-xs">{text}</span>
+        <span className={`block text-xs ${resize ? `block` : `medium:hidden`}`}>
+          {text}
+        </span>
       </NavLink>
     </ButtonNav>
   );

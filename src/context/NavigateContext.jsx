@@ -5,6 +5,7 @@ const NavigateContext = createContext();
 function NavigateProvider({ children }) {
   const [navShowOverLay, setNavShowOverLay] = useState(false);
   const [showSidebar, setShowSidebar] = useState(false);
+  const [resize, setResize] = useState(false);
 
   const value = useMemo(
     () => ({
@@ -12,8 +13,10 @@ function NavigateProvider({ children }) {
       setNavShowOverLay,
       showSidebar,
       setShowSidebar,
+      resize,
+      setResize,
     }),
-    [navShowOverLay, showSidebar],
+    [navShowOverLay, showSidebar, resize],
   );
 
   return (
