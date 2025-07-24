@@ -20,12 +20,13 @@ export default function LargeHeader() {
   };
 
   return (
-    <header className={`flex flex-col gap-4 px-2`}>
+    <header
+      className={`flex flex-col gap-4 border-b border-stone-300 px-2 py-2 dark:border-slate-700`}
+    >
       <div className={`flex items-center justify-between`}>
         <div className="flex items-center gap-1 font-bold text-slate-950 uppercase">
-          <div className="z-50">
-            <Logo logo={true} />
-          </div>
+          <div />
+          <Logo logo={true} classname="z-50" />
           <span
             className={`medium:text-base transitioning z-30 text-sm font-bold ${resize ? "translate-x-0 delay-75" : "-translate-x-[150px]"} inline-block`}
           >

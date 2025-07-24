@@ -1,6 +1,6 @@
 import { Link } from "react-scroll";
 
-export default function Logo({ to, logo }) {
+export default function Logo({ to, logo, classname }) {
   const className = {
     logo: "flex h-8 w-8 items-center justify-center rounded-full bg-slate-950 text-white",
   };
@@ -8,7 +8,7 @@ export default function Logo({ to, logo }) {
   if (logo)
     return (
       <div>
-        <h1 className={className.logo}>w</h1>
+        <h1 className={`${classname} ${className.logo}`}>w</h1>
       </div>
     );
 
