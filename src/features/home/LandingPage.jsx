@@ -4,7 +4,7 @@ import Hero from "./hero/Hero";
 import HomeHeader from "./HomeHeader";
 import MainOverview from "./mainoverview/MainOverview";
 import MoreInfo from "./info/MoreInfo";
-import Testimonial from "./Testimonial";
+import Testimonial from "./testimonial/Testimonial";
 
 export default function LandingPage() {
   return (
