@@ -18,7 +18,7 @@ export default function Login() {
     }, 500);
   };
 
-  const clascName = "text-[0.8rem] font-semibold";
+  const stylings = "text-[0.8rem] font-semibold";
 
   return (
     <div clacsName="relative">
@@ -35,14 +35,14 @@ export default function Login() {
           <div className="mt-2 flex items-center justify-between">
             <Button
               variant="outline"
-              className={clascName}
+              classname={stylings}
               onClick={() => startLoadingAndNavigate("/accounts/forgotten")}
             >
               Forget Password?
             </Button>
             <Button
               variant="outline"
-              className={clascName}
+              classname={stylings}
               onClick={() => startLoadingAndNavigate("/accounts/signup")}
             >
               Sign Up
@@ -54,7 +54,7 @@ export default function Login() {
               <p className="text-sm text-stone-400">or you can Log In with</p>
             </div>
 
-            <Button className="w-full">Continue with Google</Button>
+            <Button classname="w-full">Continue with Google</Button>
           </div>
         </div>
       </div>

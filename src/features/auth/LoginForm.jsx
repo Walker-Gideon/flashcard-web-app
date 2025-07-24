@@ -8,7 +8,7 @@ import Button from "../../ui/Button";
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(true);
 
-  const className = {
+  const stylings = {
     input: "w-full",
     icon: "text-sm",
   };
@@ -21,7 +21,7 @@ export default function LoginForm() {
           name="email"
           placeholder="Email"
           required={true}
-          className={className.input}
+          classname={stylings.input}
         />
 
         <div className="relative my-2">
@@ -30,25 +30,25 @@ export default function LoginForm() {
             name="password"
             placeholder="Password"
             required={true}
-            className={className.input}
+            classname={stylings.input}
           />
           <Button
             variant="outline"
-            className="absolute top-2.5 right-2"
+            classname="absolute top-2.5 right-2"
             onClick={(e) => {
               e.preventDefault();
               setShowPassword(!showPassword);
             }}
           >
             {showPassword ? (
-              <FiEye className={className.icon} />
+              <FiEye className={stylings.icon} />
             ) : (
-              <FiEyeOff className={className.icon} />
+              <FiEyeOff className={stylings.icon} />
             )}
           </Button>
         </div>
 
-        <Button type="submit" variant="primary" className="w-full py-2">
+        <Button type="submit" variant="primary" classname="w-full py-2">
           Log in
         </Button>
       </Form>
