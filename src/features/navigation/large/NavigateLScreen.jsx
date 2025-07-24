@@ -64,7 +64,7 @@ export default function NavigateLScreen() {
         <LargeHeader />
 
         <div
-          className={`medium:h-[81dvh] flex h-screen flex-col justify-between`}
+          className={`medium:h-[80.5dvh] flex h-screen flex-col justify-between`}
         >
           <div className="w-full px-3">
             <div
@@ -89,11 +89,11 @@ export default function NavigateLScreen() {
                   variant="outline"
                   onClick={handleClick}
                   //   justify-center
-                  classname={`navButton hover:bg-slate-950 hover:text-white ${resize ? `flex items-start justify-start` : ``}`}
+                  classname={`navButton hover:bg-slate-950 hover:text-white dark:text-white hover:dark:bg-slate-700/50 ${resize ? `flex items-start justify-start` : ``}`}
                 >
                   <LuMessageCircle />
                   <span
-                    className={`block text-xs ${resize ? `block` : `medium:hidden`}`}
+                    className={`block text-xs ${resize ? `block translate-x-0 delay-75` : `medium:-translate-x-[150px]`} medium:inline-block`}
                   >
                     Chat
                   </span>

@@ -12,7 +12,7 @@ export default function NavButton({ to, text, icon, onClick }) {
         end
         onClick={onClick}
         className={({ isActive }) =>
-          `navButton medium:w-full hover:bg-slate-950 hover:text-white ${isActive ? "bg-slate-950 text-white" : "text-slate-950"} ${resize ? `flex items-start justify-start` : ``}`
+          `navButton medium:w-full flex hover:bg-slate-950 hover:text-white hover:dark:bg-slate-700/50 ${isActive ? "bg-slate-950 text-white dark:bg-slate-700/50" : "dark:text-white"} ${resize ? `items-start justify-start` : ``}`
         }
       >
         {icon}
@@ -23,10 +23,3 @@ export default function NavButton({ to, text, icon, onClick }) {
     </ButtonNav>
   );
 }
-
-/*
-${
-            lighMode
-              ? `${isActive ? "bg-slate-900 text-slate-200" : "text-slate-950"}`
-              : `${isActive ? "bg-slate-200 text-slate-950" : "text-slate-200"}`
-          }*/
