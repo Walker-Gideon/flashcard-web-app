@@ -1,5 +1,7 @@
 import { useNav } from "../../context/NavigateContext";
 import Button from "../../ui/Button";
+import UserWelcome from "../user/UserWelcome";
+import { LuMenu } from "react-icons/lu";
 
 export default function NavigateSmallScreen() {
   const { setNavShowOverLay, setShowSidebar } = useNav();
@@ -10,15 +12,18 @@ export default function NavigateSmallScreen() {
   }
 
   return (
-    <header className="medium:hidden sticky top-0 z-40 block border-b border-stone-300 bg-white/30 px-4 py-5 shadow-sm backdrop-blur-sm dark:border-slate-700 dark:bg-slate-800/80">
-      <Button
-        variant="outline"
-        classname={`flex cursor-pointer flex-col gap-1.5 rounded text-2xl`}
-        onClick={handleClick}
-      >
-        <div className={`h-[3px] w-6 rounded-lg bg-slate-950`}></div>
-        <div className={`h-[2.5px] w-4 rounded-lg bg-slate-950`}></div>
-      </Button>
+    <header className="medium:hidden sticky top-0 z-40 block border-b border-stone-300 bg-white/30 p-4 shadow-sm backdrop-blur-sm dark:border-slate-700 dark:bg-slate-800/80">
+      <div className="flex items-center gap-6">
+        <Button
+          variant="outline"
+          classname={`cursor-pointer rounded-sm transition-colors text-2xl p-1 hover:bg-slate-200 dark:hover:bg-slate-700`}
+          onClick={handleClick}
+        >
+          <LuMenu className="text-slate-900 dark:text-slate-300" />
+        </Button>
+
+        <UserWelcome />
+      </div>
     </header>
   );
 }

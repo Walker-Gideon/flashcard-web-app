@@ -10,6 +10,9 @@ dark:bg-slate-700/50
 MainText : text-slate-900 dark:text-white
 subText : text-slate-500 dark:text-slate-400
 
+hover on navigation button: hover:bg-slate-200 dark:hover:bg-slate-700
+text and icons colors : text-slate-900 dark:text-slate-300
+
 px-6 py-4
  */
 
