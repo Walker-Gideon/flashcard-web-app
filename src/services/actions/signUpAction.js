@@ -49,8 +49,7 @@ export async function signUpAction({ request }) {
     await new Promise((r) => setTimeout(r, 100));
 
     console.log("successful");
-    return redirect("/accounts/user");
-    // window.location.replace("/accounts/user");
+    return redirect("/user");
   } catch (err) {
     let errorMessage = "Signup failed. Please try again.";
     switch (err.code) {

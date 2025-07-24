@@ -40,47 +40,44 @@ const router = createBrowserRouter([
         path: "forgotten",
         element: <ForgetAuthPassword />,
       },
-      {
-        path: "user",
-        element: (
-          <ProtectedRoute>
-            <AuthPicture />
-          </ProtectedRoute>
-        ),
-      },
     ],
   },
   {
-    path: "/dashboard",
-    element: (
-      <ProtectedRoute>
-        <AppLayout />
-      </ProtectedRoute>
-    ),
+    element: <ProtectedRoute />,
     children: [
       {
-        index: true,
-        element: <DashboardLayout />,
+        path: "user",
+        element: <AuthPicture />,
       },
       {
-        path: "notes",
-        element: <NoteLayout />,
-      },
-      {
-        path: "flashcards",
-        element: <FlashcardLayout />,
-      },
-      {
-        path: "schedules",
-        element: <SchedulesLayout />,
-      },
-      {
-        path: "inspire",
-        element: <InspireLayout />,
-      },
-      {
-        path: "settings",
-        element: <SettingsLayout />,
+        path: "dashboard",
+        element: <AppLayout />,
+        children: [
+          {
+            index: true,
+            element: <DashboardLayout />,
+          },
+          {
+            path: "notes",
+            element: <NoteLayout />,
+          },
+          {
+            path: "flashcards",
+            element: <FlashcardLayout />,
+          },
+          {
+            path: "schedules",
+            element: <SchedulesLayout />,
+          },
+          {
+            path: "inspire",
+            element: <InspireLayout />,
+          },
+          {
+            path: "settings",
+            element: <SettingsLayout />,
+          },
+        ],
       },
     ],
   },
