@@ -1,12 +1,12 @@
-import { BsArrowRepeat } from "react-icons/bs";
-import { BsGraphUpArrow } from "react-icons/bs";
-import { BsChatLeft } from "react-icons/bs";
-import { BsChatRightText } from "react-icons/bs";
+import { LuRepeat } from "react-icons/lu";
+import { LuChartLine } from "react-icons/lu";
+import { LuMessageSquare } from "react-icons/lu";
+import { LuMessageSquareText } from "react-icons/lu";
 import MainContent from "./MainContent";
 
 const overViewData = [
   {
-    icon: <BsArrowRepeat />,
+    icon: <LuRepeat />,
     title: "Review with Spaced-Repetition Flashcards",
     subtitle: "Strengthen memory through proven recall techniques.",
     points: [
@@ -17,7 +17,7 @@ const overViewData = [
     image: "",
   },
   {
-    icon: <BsGraphUpArrow />,
+    icon: <LuChartLine />,
     title: " Track Your Consistency & Daily Progress",
     subtitle: "Stay motivated and organized with visual progress insights.",
     points: [
@@ -28,7 +28,7 @@ const overViewData = [
     image: "",
   },
   {
-    icon: <BsChatLeft />,
+    icon: <LuMessageSquare />,
     title: "Get Motivation, Tips, and Reminders",
     subtitle: "Keep going with study hacks, encouragement, and nudges.",
     points: [
@@ -39,7 +39,7 @@ const overViewData = [
     image: "",
   },
   {
-    icon: <BsChatRightText />,
+    icon: <LuMessageSquareText />,
     title: " AI Support When You’re Stuck",
     subtitle:
       "Get help instantly with answers and explanations tailored to you.",

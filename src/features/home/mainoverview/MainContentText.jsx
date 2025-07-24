@@ -1,4 +1,4 @@
-import { BsCheck } from "react-icons/bs";
+import { LuCheck } from "react-icons/lu";
 
 export default function MainContentText({
   index,
@@ -31,7 +31,7 @@ export default function MainContentText({
             className="flex gap-2 py-0.5 text-sm md:text-[0.9rem]"
           >
             <li>
-              <BsCheck className="mt-1 h-3 w-3 rounded-full bg-stone-300" />
+              <LuCheck className="mt-1 h-3 w-3 rounded-full bg-stone-300" />
             </li>
             <li>{data}</li>
           </ul>
