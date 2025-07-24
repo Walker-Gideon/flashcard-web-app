@@ -7,7 +7,7 @@ import SignupForm from "./SignupForm";
 import Button from "../../ui/Button";
 
 export default function Singup() {
-  const { setLoading } = useLoader();
+  const { setLoading, loading } = useLoader();
 
   const actionData = useActionData();
   const navigate = useNavigate();
@@ -52,6 +52,7 @@ export default function Singup() {
             <Button
               variant="outline"
               className={clascName}
+              disabled={loading}
               onClick={() => startLoadingAndNavigate("/accounts/login")}
             >
               Log in
@@ -63,7 +64,9 @@ export default function Singup() {
               <p className="text-sm text-stone-400">or you can Sign up with</p>
             </div>
 
-            <Button className="w-full">Continue with Google</Button>
+            <Button disabled={loading} className="w-full">
+              Continue with Google
+            </Button>
           </div>
         </div>
       </div>

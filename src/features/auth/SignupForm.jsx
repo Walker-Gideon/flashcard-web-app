@@ -4,8 +4,10 @@ import { FiEyeOff } from "react-icons/fi";
 import { FiEye } from "react-icons/fi";
 import Input from "../../ui/Input";
 import Button from "../../ui/Button";
+import { useLoader } from "../../context/LoaderContext";
 
 export default function SignupForm() {
+  const { loading } = useLoader();
   const [showPassword, setShowPassword] = useState(true);
   const [showConfirmPassword, setShowConfirmPassword] = useState(true);
 
@@ -52,6 +54,7 @@ export default function SignupForm() {
           />
           <Button
             variant="outline"
+            disabled={loading}
             className={className.button}
             onClick={(e) => {
               e.preventDefault();
@@ -76,6 +79,7 @@ export default function SignupForm() {
           />
           <Button
             variant="outline"
+            disabled={loading}
             className={className.button}
             onClick={(e) => {
               e.preventDefault();
@@ -90,7 +94,12 @@ export default function SignupForm() {
           </Button>
         </div>
 
-        <Button type="submit" variant="primary" className="w-full py-2">
+        <Button
+          disabled={loading}
+          type="submit"
+          variant="primary"
+          className="w-full py-2"
+        >
           Sign up
         </Button>
       </Form>
