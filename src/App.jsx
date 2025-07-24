@@ -15,6 +15,7 @@ import SchedulesLayout from "./features/schedules/SchedulesLayout";
 import InspireLayout from "./features/inspire/InspireLayout";
 import SettingsLayout from "./features/settings/SettingsLayout";
 import { NavigateProvider } from "./context/NavigateContext";
+import ProtectedRoute from "./utils/ProtectedRoute";
 
 const router = createBrowserRouter([
   {
@@ -40,13 +41,21 @@ const router = createBrowserRouter([
       },
       {
         path: "user",
-        element: <AuthPicture />,
+        element: (
+          <ProtectedRoute>
+            <AuthPicture />
+          </ProtectedRoute>
+        ),
       },
     ],
   },
   {
     path: "/dashboard",
-    element: <AppLayout />,
+    element: (
+      <ProtectedRoute>
+        <AppLayout />
+      </ProtectedRoute>
+    ),
     children: [
       {
         index: true,
