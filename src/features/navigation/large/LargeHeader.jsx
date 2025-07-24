@@ -20,12 +20,14 @@ export default function LargeHeader() {
   };
 
   return (
-    <header className={`flex flex-col gap-4`}>
+    <header className={`flex flex-col gap-4 px-2`}>
       <div className={`flex items-center justify-between`}>
         <div className="flex items-center gap-1 font-bold text-slate-950 uppercase">
-          <Logo logo={true} />
+          <div className="z-50">
+            <Logo logo={true} />
+          </div>
           <span
-            className={`medium:text-base transitioning text-sm font-bold ${resize ? "translate-x-0 delay-75" : "-translate-x-[150px]"} inline-block`}
+            className={`medium:text-base transitioning z-30 text-sm font-bold ${resize ? "translate-x-0 delay-75" : "-translate-x-[150px]"} inline-block`}
           >
             walkwise
           </span>
