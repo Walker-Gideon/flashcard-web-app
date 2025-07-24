@@ -16,6 +16,15 @@
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      if (
+        localStorage.getItem("darkMode") === "true" ||
+        (!("darkMode" in localStorage) &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches)
+      ) {
+        document.documentElement.classList.add("dark");
+      }
+    </script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

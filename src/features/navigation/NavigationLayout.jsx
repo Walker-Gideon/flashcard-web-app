@@ -1,4 +1,4 @@
-import NavigateLScreen from "./NavigateLScreen";
+import NavigateLScreen from "./large/NavigateLScreen";
 import NavigateSmallScreen from "./NavigateSmallScreen";
 
 export default function NavigationLayout() {
