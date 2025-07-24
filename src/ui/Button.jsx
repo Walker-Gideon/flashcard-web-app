@@ -9,7 +9,7 @@ export default function Button({
   color,
   btnPaddX,
   variant,
-  className,
+  classname,
   onClick,
   type,
 }) {
@@ -30,7 +30,7 @@ export default function Button({
         disabled={disabled}
         onClick={onClick}
         //   text-slate-950
-        className={`cursor-pointer transition-colors duration-300 ${className}`}
+        className={`cursor-pointer transition-colors duration-300 ${classname}`}
       >
         {children}
       </button>
@@ -44,7 +44,7 @@ export default function Button({
         whileTap={{ y: 1 }}
         onClick={onClick}
         // py-1.5
-        className={`button font-semibold focus:ring-2 focus:ring-slate-950 focus:outline-hidden ${color ? `` : `bg-slate-950 py-2 text-white hover:bg-slate-900`} ${btnPaddX ? `${btnPaddX}` : `medium:px-6 px-4`} ${className}`}
+        className={`button font-semibold focus:ring-2 focus:ring-slate-950 focus:outline-hidden ${color ? `` : `bg-slate-950 py-2 text-white hover:bg-slate-900`} ${btnPaddX ? `${btnPaddX}` : `medium:px-6 px-4`} ${classname}`}
       >
         {children}
       </motion.button>
@@ -56,7 +56,7 @@ export default function Button({
       disabled={disabled}
       onClick={() => startLoadingAndNavigate(to)}
       whileTap={{ y: 1 }}
-      className={`button ${color ? `bg-stone-950 py-2 font-semibold text-white hover:bg-slate-900` : `border-gray-600 py-[7px] font-bold`} ${btnPaddX ? `${btnPaddX}` : `medium:px-6 px-4`} ${className}`}
+      className={`button ${color ? `bg-stone-950 py-2 font-semibold text-white hover:bg-slate-900` : `border-gray-600 py-[7px] font-bold`} ${btnPaddX ? `${btnPaddX}` : `medium:px-6 px-4`} ${classname}`}
     >
       {children}
     </motion.button>
