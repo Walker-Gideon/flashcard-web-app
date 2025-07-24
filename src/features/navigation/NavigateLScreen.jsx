@@ -53,7 +53,7 @@ export default function NavigateLScreen() {
 
   return (
     <div
-      className={`medium:w-auto medium:top-0 relative -top-13 z-50 h-screen w-65 transform border-r border-stone-300 bg-white px-2 py-1.5 transition-transform duration-500 ease-in-out ${showSidebar ? `translate-x-0` : `medium:block medium:translate-0 -translate-x-90`}`}
+      className={`medium:w-auto medium:top-0 medium:h-screen relative -top-14 z-50 w-65 transform border-r border-stone-300 bg-white px-2 py-2 transition-transform duration-500 ease-in-out ${showSidebar ? `translate-x-0` : `medium:block medium:translate-0 -translate-x-90`}`}
     >
       <div className="medium:items-center flex flex-col gap-4">
         <div className="flex items-center justify-between">
