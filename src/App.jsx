@@ -16,6 +16,7 @@ import InspireLayout from "./features/inspire/InspireLayout";
 import SettingsLayout from "./features/settings/SettingsLayout";
 import { NavigateProvider } from "./context/NavigateContext";
 import ProtectedRoute from "./utils/ProtectedRoute";
+import { AuthProvider } from "./context/AuthContext";
 
 const router = createBrowserRouter([
   {
@@ -88,9 +89,11 @@ const router = createBrowserRouter([
 export default function App() {
   return (
     <NavigateProvider>
-      <LoaderProvider>
-        <RouterProvider router={router} />
-      </LoaderProvider>
+      <AuthProvider>
+        <LoaderProvider>
+          <RouterProvider router={router} />
+        </LoaderProvider>
+      </AuthProvider>
     </NavigateProvider>
   );
 }
