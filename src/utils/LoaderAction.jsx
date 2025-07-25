@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import { useLoader } from "../../context/LoaderContext";
+import { useLoader } from "../context/LoaderContext";
 
-export default function LoaderAction(delay = 500) {
+export default function useLoaderAction(delay = 500) {
   const navigate = useNavigate();
   const { setLoading } = useLoader();
 

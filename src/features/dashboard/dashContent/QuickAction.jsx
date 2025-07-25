@@ -3,6 +3,7 @@ import { LuPlus } from "react-icons/lu";
 import { LuPlay } from "react-icons/lu";
 import { LuZap } from "react-icons/lu";
 import { LuCalendar } from "react-icons/lu";
+import useLoaderAction from "../../../utils/LoaderAction";
 
 const actionsData = [
   {
@@ -29,6 +30,8 @@ const actionsData = [
 ];
 
 export default function QuickAction() {
+  const navigate = useLoaderAction(1000);
+
   return (
     <CardOverview>
       <h3 className="mb-4 text-lg font-semibold text-slate-900 dark:text-white">
@@ -39,6 +42,7 @@ export default function QuickAction() {
         {actionsData.map((data, index) => (
           <button
             key={index}
+            onClick={() => navigate(data.to)}
             className="group flex cursor-pointer flex-col items-center space-y-3 rounded-xl bg-slate-100 p-6 transition-all duration-300 hover:scale-105 hover:shadow-md dark:bg-slate-700"
           >
             <div className="rounded-xl bg-slate-300 p-3 transition-colors group-hover:bg-slate-200 dark:bg-slate-500">
