@@ -2,7 +2,7 @@ import { useNav } from "../../../context/NavigateContext";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { LuBookOpen } from "react-icons/lu";
 import { LuFile } from "react-icons/lu";
-import { LuCalendarCheck2 } from "react-icons/lu";
+import { LuCalendar } from "react-icons/lu";
 import { LuLightbulb } from "react-icons/lu";
 import { LuMessageCircle } from "react-icons/lu";
 import { LuSettings2 } from "react-icons/lu";
@@ -34,7 +34,7 @@ const nextButtonsData = [
   {
     text: "Schedules",
     to: "schedules",
-    icon: <LuCalendarCheck2 />,
+    icon: <LuCalendar />,
   },
   {
     text: "Inspire",
