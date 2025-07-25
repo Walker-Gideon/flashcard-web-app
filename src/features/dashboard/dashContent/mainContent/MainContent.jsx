@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { mockData } from "../../../data/mockData";
+import { mockData } from "../../../../data/mockData";
 import { LuBookOpen } from "react-icons/lu";
 import { LuChevronRight } from "react-icons/lu";
 import { LuStar } from "react-icons/lu";
 import { LuFlame } from "react-icons/lu";
-import CardOverview from "../../../ui/CardOverview";
-import MiniCalendar from "./MiniCalendar";
+import CardOverview from "../../../../ui/CardOverview";
+import MiniCalendar from "../MiniCalendar";
 
 export default function MainContent() {
   const [showReviewModal, setShowReviewModal] = useState(false);

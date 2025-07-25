@@ -1,5 +1,5 @@
 import CardStatus from "./dashContent/CardStatus";
-import MainContent from "./dashContent/MainContent";
+import MainContent from "./dashContent/mainContent/MainContent";
 import QuickAction from "./dashContent/QuickAction";
 import RecentActivity from "./dashContent/RecentActivity";
 import DashHeader from "./DashHeader";
