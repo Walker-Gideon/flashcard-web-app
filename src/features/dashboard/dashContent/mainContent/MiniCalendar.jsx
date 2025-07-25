@@ -1,5 +1,5 @@
 import { LuCalendar } from "react-icons/lu";
-import CardOverview from "../../../ui/CardOverview";
+import CardOverview from "../../../../ui/CardOverview";
 
 export default function MiniCalendar({ studyDates }) {
   const currentDate = new Date();
