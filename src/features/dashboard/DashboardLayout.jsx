@@ -24,7 +24,12 @@ export default function DashboardLayout() {
         <RecentActivity />
       </main>
 
-      <ModelCard setShowReviewModal={setShowReviewModal} />
+      {showReviewModal && selectedFlashcard && (
+        <ModelCard
+          setShowReviewModal={setShowReviewModal}
+          selectedFlashcard={selectedFlashcard}
+        />
+      )}
     </div>
   );
 }
