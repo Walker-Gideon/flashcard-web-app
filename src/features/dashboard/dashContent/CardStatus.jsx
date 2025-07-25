@@ -38,7 +38,7 @@ const cardData = [
 
 export default function CardStatus() {
   return (
-    <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+    <div className="medium:h-auto medium:overflow-hidden medium:grid-cols-2 grid h-[100%] grid-cols-1 gap-6 overflow-y-scroll bg-red-500 lg:grid-cols-4">
       {cardData.map((data, index) => (
         <div key={index}>
           <CardOverview showShadow={true}>

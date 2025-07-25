@@ -58,6 +58,7 @@ export default function NavigateLScreen() {
 
   return (
     <div
+      // medium:fixed medium:left-0
       className={`medium:top-0 medium:h-screen transitioning defaultColor relative -top-21 z-50 w-65 transform border-r border-stone-300 transition-transform dark:border-slate-700 ${showSidebar ? `translate-x-0` : `medium:block medium:translate-0 -translate-x-90`} ${resize ? `medium:w-55` : `medium:w-15`}`}
     >
       <div className={`flex flex-col gap-4`}>

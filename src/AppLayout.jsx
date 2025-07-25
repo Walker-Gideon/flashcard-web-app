@@ -8,13 +8,16 @@ export default function AppLayout() {
 
   return (
     <div
-      className={`medium:grid medium:grid-cols-[auto_1fr] defaultColor relative`}
+      className={`defaultColor medium:grid medium:grid-cols-[auto_1fr] relative h-screen overflow-hidden`}
     >
       <NavigationLayout />
-      <Outlet />
 
-      <div className="medium:hidden block transition-all duration-500 ease-in-out">
-        {navShowOverLay && <Overlay index="z-30" btn={true} />}
+      <div className={`h-screen w-full`}>
+        <Outlet />
+
+        <div className="medium:hidden block transition-all duration-500 ease-in-out">
+          {navShowOverLay && <Overlay index="z-30" btn={true} />}
+        </div>
       </div>
     </div>
   );
