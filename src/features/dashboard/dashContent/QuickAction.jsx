@@ -4,6 +4,30 @@ import { LuPlay } from "react-icons/lu";
 import { LuZap } from "react-icons/lu";
 import { LuCalendar } from "react-icons/lu";
 
+const actionsData = [
+  {
+    icon: LuPlus,
+    text: "New Card",
+    to: "flashcards",
+  },
+  {
+    icon: LuPlay,
+    text: "Study Now",
+    // will chnage this later in the course of time
+    to: "notes",
+  },
+  {
+    icon: LuZap,
+    text: "AI Help",
+    to: "",
+  },
+  {
+    icon: LuCalendar,
+    text: "Schedule",
+    to: "schedules",
+  },
+];
+
 export default function QuickAction() {
   return (
     <CardOverview>
@@ -11,47 +35,20 @@ export default function QuickAction() {
         Quick Actions
       </h3>
 
-      {/* Grid */}
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-        {/* button 1 */}
-        <button className="group flex flex-col items-center space-y-3 rounded-xl bg-gradient-to-br from-emerald-50 to-teal-50 p-6 transition-all duration-300 hover:scale-105 hover:shadow-md dark:from-emerald-900/20 dark:to-teal-900/20">
-          <div className="rounded-xl bg-emerald-500 p-3 transition-colors group-hover:bg-emerald-600">
-            <LuPlus className="h-6 w-6 text-white" />
-          </div>
-          <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
-            New Card
-          </span>
-        </button>
-
-        {/* button 2 */}
-        <button className="group flex flex-col items-center space-y-3 rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50 p-6 transition-all duration-300 hover:scale-105 hover:shadow-md dark:from-blue-900/20 dark:to-indigo-900/20">
-          <div className="rounded-xl bg-blue-500 p-3 transition-colors group-hover:bg-blue-600">
-            <LuPlay className="h-6 w-6 text-white" />
-          </div>
-          <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
-            Study Now
-          </span>
-        </button>
-
-        {/* button 3 */}
-        <button className="group flex flex-col items-center space-y-3 rounded-xl bg-gradient-to-br from-purple-50 to-pink-50 p-6 transition-all duration-300 hover:scale-105 hover:shadow-md dark:from-purple-900/20 dark:to-pink-900/20">
-          <div className="rounded-xl bg-purple-500 p-3 transition-colors group-hover:bg-purple-600">
-            <LuZap className="h-6 w-6 text-white" />
-          </div>
-          <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
-            AI Help
-          </span>
-        </button>
-
-        {/* button 4 */}
-        <button className="group flex flex-col items-center space-y-3 rounded-xl bg-gradient-to-br from-orange-50 to-red-50 p-6 transition-all duration-300 hover:scale-105 hover:shadow-md dark:from-orange-900/20 dark:to-red-900/20">
-          <div className="rounded-xl bg-orange-500 p-3 transition-colors group-hover:bg-orange-600">
-            <LuCalendar className="h-6 w-6 text-white" />
-          </div>
-          <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
-            Schedule
-          </span>
-        </button>
+        {actionsData.map((data, index) => (
+          <button
+            key={index}
+            className="group flex cursor-pointer flex-col items-center space-y-3 rounded-xl bg-slate-100 p-6 transition-all duration-300 hover:scale-105 hover:shadow-md dark:bg-slate-700"
+          >
+            <div className="rounded-xl bg-slate-300 p-3 transition-colors group-hover:bg-slate-200 dark:bg-slate-500">
+              <data.icon className="h-5 w-5 text-slate-600 dark:text-slate-400" />
+            </div>
+            <span className="medium:text-sm text-xs font-medium text-slate-700 dark:text-slate-300">
+              {data.text}
+            </span>
+          </button>
+        ))}
       </div>
     </CardOverview>
   );
