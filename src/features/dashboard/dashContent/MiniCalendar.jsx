@@ -1,4 +1,4 @@
-import { Calendar } from "lucide-react";
+import { LuCalendar } from "react-icons/lu";
 import CardOverview from "../../../ui/CardOverview";
 
 export default function MiniCalendar({ studyDates }) {
@@ -27,12 +27,10 @@ export default function MiniCalendar({ studyDates }) {
 
   const days = [];
 
-  // Empty cells for days before the first day of the month
   for (let i = 0; i < firstDayOfMonth; i++) {
     days.push(<div key={`empty-${i}`} className="h-8 w-8"></div>);
   }
 
-  // Days of the month
   for (let day = 1; day <= daysInMonth; day++) {
     const isToday = day === today;
     const hasStudySession = studyDates.includes(day);
@@ -42,9 +40,9 @@ export default function MiniCalendar({ studyDates }) {
         key={day}
         className={`flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg text-sm transition-all duration-200 ${
           isToday
-            ? "bg-emerald-500 text-white shadow-md"
+            ? "bg-slate-500 text-white shadow-md"
             : hasStudySession
-              ? "bg-emerald-100 text-emerald-700 hover:bg-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-300 dark:hover:bg-emerald-900/50"
+              ? "bg-slate-200 text-slate-900 hover:bg-slate-300 dark:bg-slate-900/30 dark:text-slate-100 dark:hover:bg-slate-900/50"
               : "text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-700"
         }`}
       >
@@ -53,10 +51,16 @@ export default function MiniCalendar({ studyDates }) {
     );
   }
 
+  const styling = {
+    daysOverview: "flex items-center space-x-2",
+    cycle: "h-3 w-3 rounded-full",
+    text: "text-slate-600 dark:text-slate-400",
+  };
+
   return (
     <CardOverview>
       <h3 className="mb-4 flex items-center space-x-2 font-semibold text-slate-900 dark:text-white">
-        <Calendar className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
+        <LuCalendar className="h-5 w-5 text-slate-600 dark:text-slate-400" />
         <span>
           {monthNames[currentMonth]} {currentYear}
         </span>
@@ -71,13 +75,15 @@ export default function MiniCalendar({ studyDates }) {
       </div>
       <div className="grid grid-cols-7 gap-1">{days}</div>
       <div className="mt-4 flex items-center space-x-4 text-xs">
-        <div className="flex items-center space-x-2">
-          <div className="h-3 w-3 rounded-full bg-emerald-500"></div>
-          <span className="text-slate-600 dark:text-slate-400">Today</span>
+        <div className={styling.daysOverview}>
+          <div className={`bg-slate-500 ${styling.cycle}`}></div>
+          <span className={styling.text}>Today</span>
         </div>
-        <div className="flex items-center space-x-2">
-          <div className="h-3 w-3 rounded-full bg-emerald-100 dark:bg-emerald-900/30"></div>
-          <span className="text-slate-600 dark:text-slate-400">Study day</span>
+        <div className={styling.daysOverview}>
+          <div
+            className={`bg-slate-200 dark:bg-slate-900/30 ${styling.cycle}`}
+          ></div>
+          <span className={styling.text}>Study day</span>
         </div>
       </div>
     </CardOverview>
