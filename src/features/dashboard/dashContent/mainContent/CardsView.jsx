@@ -1,12 +1,12 @@
-import { useState } from "react";
 import { LuBookOpen } from "react-icons/lu";
 import { LuChevronRight } from "react-icons/lu";
 import CardOverview from "../../../../ui/CardOverview";
 
-export default function CardsView({ mockData }) {
-  const [showReviewModal, setShowReviewModal] = useState(false);
-  const [selectedFlashcard, setSelectedFlashcard] = useState(null);
-
+export default function CardsView({
+  mockData,
+  setShowReviewModal,
+  setSelectedFlashcard,
+}) {
   const handleFlashcardClick = (flashcard) => {
     setSelectedFlashcard(flashcard);
     setShowReviewModal(true);
