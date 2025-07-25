@@ -3,18 +3,20 @@ import { LuFlame } from "react-icons/lu";
 import CardOverview from "../../../../ui/CardOverview";
 
 export default function Motivation({ mockData }) {
+  const styling = "text-slate-900 dark:text-white";
+
   return (
     <CardOverview>
       <div className="mb-3 flex items-center space-x-2">
-        <LuStar className="h-5 w-5 text-emerald-200" />
-        <h3 className="font-semibold">Daily Inspiration</h3>
+        <LuStar className="h-5 w-5 text-slate-600 dark:text-slate-300" />
+        <h3 className={`font-semibold ${styling}`}>Daily Inspiration</h3>
       </div>
-      <blockquote className="mb-4 text-sm text-emerald-50 italic">
+      <blockquote className="mb-4 text-sm text-slate-500 italic dark:text-slate-400">
         "{mockData.quote}"
       </blockquote>
       <div className="flex items-center space-x-2">
-        <LuFlame className="h-4 w-4 text-orange-300" />
-        <span className="text-sm font-medium">
+        <LuFlame className="h-4 w-4 text-slate-600 dark:text-slate-300" />
+        <span className={`text-sm font-medium ${styling}`}>
           Keep your {mockData.stats.streakDays}-day streak alive!
         </span>
       </div>
