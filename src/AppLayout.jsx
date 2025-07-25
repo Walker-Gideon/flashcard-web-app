@@ -8,13 +8,13 @@ export default function AppLayout() {
   const { navShowOverLay } = useNav();
 
   return (
-    <div>
-      <div className="h-1">
+    <div className="defaultColor relative h-screen overflow-hidden">
+      <div className="medium:h-[0.5px] h-0">
         <Loader />
       </div>
 
       <div
-        className={`defaultColor medium:grid medium:grid-cols-[auto_1fr] relative h-screen overflow-hidden`}
+        className={`medium:grid medium:grid-cols-[auto_1fr] overflow-hidden`}
       >
         <NavigationLayout />
 

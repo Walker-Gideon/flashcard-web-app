@@ -64,9 +64,7 @@ export default function NavigateLScreen() {
       <div className={`flex flex-col gap-4`}>
         <LargeHeader />
 
-        <div
-          className={`medium:h-[80.5dvh] flex h-screen flex-col justify-between`}
-        >
+        <div className={`medium:h-[80.5dvh] h- flex flex-col justify-between`}>
           <div className="w-full px-3">
             <div
               // medium:items-start medium:justify-items-start medium:w-full ${resize ? `` : `medium:items-center`}

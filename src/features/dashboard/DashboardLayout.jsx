@@ -6,7 +6,7 @@ import DashHeader from "./DashHeader";
 
 export default function DashboardLayout() {
   return (
-    <div className="defaultColor h-screen">
+    <div className="defaultColor h-screen overflow-hidden">
       <DashHeader />
 
       <main className="medium:mt-0 mt-6 h-screen space-y-6 overflow-scroll p-6">
