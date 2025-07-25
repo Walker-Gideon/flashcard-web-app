@@ -8,20 +8,22 @@ import { LuPlus } from "react-icons/lu";
 import { LuAward } from "react-icons/lu";
 
 export default function RecentActivity() {
+  const styling = "h-4 w-4 text-slate-600 dark:text-slate-300";
+
   const getActivityIcon = (type) => {
     switch (type) {
       case "edit":
-        return <LuPenLine className="h-4 w-4" />;
+        return <LuPenLine className={styling} />;
       case "review":
-        return <LuBrain className="h-4 w-4" />;
+        return <LuBrain className={styling} />;
       case "create":
-        return <LuPlus className="h-4 w-4" />;
+        return <LuPlus className={styling} />;
       case "achievement":
-        return <LuAward className="h-4 w-4" />;
+        return <LuAward className={styling} />;
       case "schedule":
-        return <LuCalendarPlus className="h-4 w-4" />;
+        return <LuCalendarPlus className={styling} />;
       default:
-        return <LuBookOpen className="h-4 w-4" />;
+        return <LuBookOpen className={styling} />;
     }
   };
 
@@ -36,7 +38,7 @@ export default function RecentActivity() {
             key={activity.id}
             className="flex items-center space-x-3 rounded-xl bg-slate-50 p-4 dark:bg-slate-700/50"
           >
-            <div className="flex-shrink-0 rounded-lg bg-slate-200 p-2 dark:bg-slate-600">
+            <div className="flex-shrink-0 rounded-lg bg-gradient-to-r from-slate-200 to-slate-300 p-2 dark:from-slate-600 dark:to-slate-700">
               {getActivityIcon(activity.type)}
             </div>
             <div className="min-w-0 flex-1">
