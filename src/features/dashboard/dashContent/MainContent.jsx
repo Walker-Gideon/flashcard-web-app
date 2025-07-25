@@ -3,6 +3,7 @@ import { mockData } from "../../../data/mockData";
 import CardOverview from "../../../ui/CardOverview";
 import { LuBookOpen } from "react-icons/lu";
 import { LuChevronRight } from "react-icons/lu";
+import MiniCalendar from "./MiniCalendar";
 
 export default function MainContent() {
   const [showReviewModal, setShowReviewModal] = useState(false);
@@ -77,9 +78,7 @@ export default function MainContent() {
         </CardOverview>
 
         <div className="space-y-6">
-          <CardOverview>
-            <MiniCalendar studyDates={mockData.studyDates} />
-          </CardOverview>
+          <MiniCalendar studyDates={mockData.studyDates} />
         </div>
       </div>
     </CardOverview>
