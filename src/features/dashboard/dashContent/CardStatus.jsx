@@ -46,10 +46,10 @@ export default function CardStatus() {
               classname={`flex items-center justify-between mb-4 ${data.styling}`}
             >
               <CardBadge
-                classname={`rounded-xl p-3 bg-slate-100 dark:bg-slate-700`}
+                classname={`rounded-xl p-3 bg-gradient-to-r from-slate-200 to-slate-300 dark:from-slate-600 dark:to-slate-700`}
               >
                 <data.icon
-                  className={`h-5 w-5 text-slate-600 dark:text-slate-400`}
+                  className={`h-5 w-5 text-slate-600 dark:text-slate-300`}
                 />
               </CardBadge>
 
