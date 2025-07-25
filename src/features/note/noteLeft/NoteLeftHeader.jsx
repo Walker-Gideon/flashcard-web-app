@@ -26,8 +26,16 @@ export default function NoteLeftHeader() {
         <LuSearch className="absolute top-2.5 left-2 text-sm text-slate-600 dark:text-slate-300" />
       </form>
 
-      <Button>
-        <LuPlus /> New Note
+      <Button
+        variant="primary"
+        classname={
+          "flex items-center gap-2 w-full justify-center py-2 border-0"
+        }
+        color={
+          "bg-slate-500 text-white hover:bg-slate-600 focus:ring-slate-300"
+        }
+      >
+        <LuPlus className="text-base" /> New Note
       </Button>
     </header>
   );

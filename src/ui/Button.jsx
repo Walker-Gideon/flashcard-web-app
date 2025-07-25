@@ -44,7 +44,7 @@ export default function Button({
         whileTap={{ y: 1 }}
         onClick={onClick}
         // py-1.5
-        className={`button font-semibold focus:ring-2 focus:ring-slate-950 focus:outline-hidden ${color ? `` : `bg-slate-950 py-2 text-white hover:bg-slate-900`} ${btnPaddX ? `${btnPaddX}` : `medium:px-6 px-4`} ${classname}`}
+        className={`button font-semibold transition-colors focus:ring-2 focus:outline-hidden ${color ? `${color}` : `bg-slate-950 py-2 text-white hover:bg-slate-900 focus:ring-slate-950`} ${btnPaddX ? `${btnPaddX}` : `medium:px-6 px-4`} ${classname}`}
       >
         {children}
       </motion.button>
