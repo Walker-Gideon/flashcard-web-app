@@ -15,7 +15,7 @@ export default function WeakAreas({ mockData }) {
             <span className="font-medium text-slate-700 dark:text-slate-300">
               {area.topic}
             </span>
-            <span className="rounded-full bg-rose-100 px-2 py-1 text-xs font-medium text-rose-700 dark:bg-rose-900/30 dark:text-rose-300">
+            <span className="rounded-full bg-slate-200 px-2 py-1 text-xs font-medium text-slate-700 dark:bg-slate-900/30 dark:text-slate-300">
               {area.count}
             </span>
           </div>
