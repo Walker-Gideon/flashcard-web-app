@@ -8,7 +8,7 @@ import { useNote } from "../../../context/NoteContext";
 import useLazyLoading from "../../../ui/LazyLoading";
 
 export default function NoteLeftHeader() {
-  const { setCreateNote } = useNote();
+  const { setCreateNote, createNote } = useNote();
   const [query, setQuery] = useState("");
 
   const lazyTaggle = useLazyLoading(setCreateNote, 1000);
@@ -41,8 +41,9 @@ export default function NoteLeftHeader() {
           "flex items-center gap-2 w-full justify-center py-2 border-0"
         }
         color={
-          "bg-slate-500 text-white hover:bg-slate-600 focus:ring-slate-300"
+          "bg-slate-500 text-white hover:bg-slate-600 focus:ring-slate-300 disabled:bg-gray-400 disabled:cursor-not-allowed"
         }
+        disabled={createNote}
         onClick={handleCreateNote}
       >
         <LuPlus className="text-base" /> New Note

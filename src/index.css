@@ -3,6 +3,8 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* 
+disable: disabled:bg-gray-400 disabled:cursor-not-allowed
+
 border-color 
 border-stone-300 dark:border-slate-700
 dark:bg-slate-700/50
