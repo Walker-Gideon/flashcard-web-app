@@ -36,7 +36,7 @@ export default function CreateNoteLayoout() {
         </main>
 
         {actionData?.error && (
-          <div className="absolute inset-0 flex items-center text-sm text-red-600 dark:text-red-400">
+          <div className="absolute inset-0 flex items-center justify-center text-sm text-red-600 dark:text-red-400">
             <LuX className="mr-1 h-4 w-4" />
             <span>{actionData.error}</span>
           </div>

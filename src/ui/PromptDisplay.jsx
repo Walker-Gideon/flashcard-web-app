@@ -18,12 +18,12 @@ export default function PromptDisplay({
         </div>
 
         <p
-          className={`${textSec ? `text-lg font-semibold dark:text-slate-50` : `${styling}`}`}
+          className={`${textSec ? `text-lg font-semibold dark:text-slate-50` : `${styling.colors}`}`}
         >
           {textPrim}
         </p>
 
-        <p className={styling}>{textSec}</p>
+        <p className={styling.colors}>{textSec}</p>
       </div>
 
       {children}
