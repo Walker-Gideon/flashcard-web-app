@@ -24,9 +24,7 @@ export default function NoteMainPrompt() {
       >
         <Button
           variant="primary"
-          classname={
-            "flex items-center gap-2 mt-2 justify-center py-2 border-0"
-          }
+          classname={"mt-2 py-2 border-0"}
           color={
             "bg-slate-500 text-white hover:bg-slate-600 focus:ring-slate-300"
           }
