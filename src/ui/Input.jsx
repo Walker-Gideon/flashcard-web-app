@@ -6,7 +6,23 @@ export default function Input({
   placeholder,
   value,
   onChange,
+  id,
+  disabled,
 }) {
+  if (id)
+    return (
+      <input
+        id={id}
+        name={name}
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+        className={classname}
+        required={required ? required : false}
+        disabled={disabled}
+      />
+    );
+
   return (
     <input
       type={type}
@@ -16,6 +32,7 @@ export default function Input({
       placeholder={placeholder}
       className={`input ${classname}`}
       required={required ? required : false}
+      disabled={disabled}
     />
   );
 }
