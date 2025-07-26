@@ -17,6 +17,7 @@ import SettingsLayout from "./features/settings/SettingsLayout";
 import { NavigateProvider } from "./context/NavigateContext";
 import ProtectedRoute from "./utils/ProtectedRoute";
 import { AuthProvider } from "./context/AuthContext";
+import { NoteProvider } from "./context/NoteContext";
 
 const router = createBrowserRouter([
   {
@@ -85,13 +86,15 @@ const router = createBrowserRouter([
 
 export default function App() {
   return (
-    <NavigateProvider>
-      <AuthProvider>
-        <LoaderProvider>
-          <RouterProvider router={router} />
-        </LoaderProvider>
-      </AuthProvider>
-    </NavigateProvider>
+    <NoteProvider>
+      <NavigateProvider>
+        <AuthProvider>
+          <LoaderProvider>
+            <RouterProvider router={router} />
+          </LoaderProvider>
+        </AuthProvider>
+      </NavigateProvider>
+    </NoteProvider>
   );
 }
 
