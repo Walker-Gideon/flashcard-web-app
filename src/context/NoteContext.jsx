@@ -3,7 +3,7 @@ import { createContext, useContext, useState } from "react";
 const NoteContext = createContext();
 
 function NoteProvider({ children }) {
-  const [createNote, setCreateNote] = useState();
+  const [createNote, setCreateNote] = useState(false);
 
   const value = { createNote, setCreateNote };
 

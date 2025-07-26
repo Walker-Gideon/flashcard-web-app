@@ -1,8 +1,21 @@
 import { LuNotebookText } from "react-icons/lu";
 import PromptDisplay from "../../../ui/PromptDisplay";
 import Button from "../../../ui/Button";
+import { useNote } from "../../../context/NoteContext";
+import { useLoader } from "../../../context/LoaderContext";
 
 export default function NoteMainPrompt() {
+  const { setCreateNote } = useNote();
+  const { setLoading } = useLoader();
+
+  function handleCreateNote() {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      setCreateNote((show) => !show);
+    }, 1000);
+  }
+
   return (
     <div className="h-full">
       <PromptDisplay
@@ -21,6 +34,7 @@ export default function NoteMainPrompt() {
           color={
             "bg-slate-500 text-white hover:bg-slate-600 focus:ring-slate-300"
           }
+          onClick={handleCreateNote}
         >
           Create Note
         </Button>
