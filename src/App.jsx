@@ -42,44 +42,44 @@ const router = createBrowserRouter([
       },
     ],
   },
+  // {
+  //   element: <ProtectedRoute />,
+  //   children: [
+  // {
+  //   path: "user",
+  //   element: <AuthPicture />,
+  // },
   {
-    element: <ProtectedRoute />,
+    path: "dashboard",
+    element: <AppLayout />,
     children: [
-      // {
-      //   path: "user",
-      //   element: <AuthPicture />,
-      // },
       {
-        path: "dashboard",
-        element: <AppLayout />,
-        children: [
-          {
-            index: true,
-            element: <DashboardLayout />,
-          },
-          {
-            path: "notes",
-            element: <NoteLayout />,
-          },
-          {
-            path: "flashcards",
-            element: <FlashcardLayout />,
-          },
-          {
-            path: "schedules",
-            element: <SchedulesLayout />,
-          },
-          {
-            path: "inspire",
-            element: <InspireLayout />,
-          },
-          {
-            path: "settings",
-            element: <SettingsLayout />,
-          },
-        ],
+        index: true,
+        element: <DashboardLayout />,
+      },
+      {
+        path: "notes",
+        element: <NoteLayout />,
+      },
+      {
+        path: "flashcards",
+        element: <FlashcardLayout />,
+      },
+      {
+        path: "schedules",
+        element: <SchedulesLayout />,
+      },
+      {
+        path: "inspire",
+        element: <InspireLayout />,
+      },
+      {
+        path: "settings",
+        element: <SettingsLayout />,
       },
     ],
+    //   },
+    // ],
   },
 ]);
 
