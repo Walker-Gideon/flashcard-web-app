@@ -4,9 +4,13 @@ import PromptDisplay from "../../../ui/PromptDisplay";
 export default function NoteDisplay() {
   return (
     <main className="h-full">
-      <PromptDisplay hight={"h-[70vh]"} textPrim="No notes found">
-        <LuNotebookText className="h-5 w-5 text-slate-600 dark:text-slate-300" />
-      </PromptDisplay>
+      <PromptDisplay
+        hight={"h-[70vh]"}
+        textPrim="No notes found"
+        icon={
+          <LuNotebookText className="h-5 w-5 text-slate-600 dark:text-slate-300" />
+        }
+      ></PromptDisplay>
     </main>
   );
 }
