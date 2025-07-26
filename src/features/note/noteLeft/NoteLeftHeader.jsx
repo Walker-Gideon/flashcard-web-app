@@ -4,9 +4,18 @@ import Input from "../../../ui/Input";
 import { LuPlus } from "react-icons/lu";
 import { LuSearch } from "react-icons/lu";
 import HeaderText from "../../../ui/HeaderText";
+import { useNote } from "../../../context/NoteContext";
+import useLazyLoading from "../../../ui/LazyLoading";
 
 export default function NoteLeftHeader() {
+  const { setCreateNote } = useNote();
   const [query, setQuery] = useState("");
+
+  const lazyTaggle = useLazyLoading(setCreateNote, 1000);
+
+  function handleCreateNote() {
+    lazyTaggle(true);
+  }
 
   return (
     <header className="medium:py-3 border-b border-stone-300 px-4 dark:border-slate-700">
@@ -34,6 +43,7 @@ export default function NoteLeftHeader() {
         color={
           "bg-slate-500 text-white hover:bg-slate-600 focus:ring-slate-300"
         }
+        onClick={handleCreateNote}
       >
         <LuPlus className="text-base" /> New Note
       </Button>
