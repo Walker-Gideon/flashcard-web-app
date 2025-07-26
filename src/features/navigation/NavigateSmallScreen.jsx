@@ -12,18 +12,20 @@ export default function NavigateSmallScreen() {
   }
 
   return (
-    <header className="medium:hidden sticky top-0 z-40 block border-b border-stone-300 bg-white/30 p-4 shadow-sm backdrop-blur-sm dark:border-slate-700 dark:bg-slate-800/80">
-      <div className="flex items-center gap-6">
-        <Button
-          variant="outline"
-          classname={`cursor-pointer rounded-sm transition-colors text-2xl p-1 hover:bg-slate-200 dark:hover:bg-slate-700`}
-          onClick={handleClick}
-        >
-          <LuMenu className="text-slate-900 dark:text-slate-300" />
-        </Button>
+    <div className="medium:hidden sticky top-0 z-40 block h-15">
+      <header className="border-b border-stone-300 bg-white/30 p-4 shadow-sm backdrop-blur-sm dark:border-slate-700 dark:bg-slate-800/80">
+        <div className="flex items-center gap-6">
+          <Button
+            variant="outline"
+            classname={`cursor-pointer rounded-sm transition-colors text-2xl p-1 hover:bg-slate-200 dark:hover:bg-slate-700`}
+            onClick={handleClick}
+          >
+            <LuMenu className="text-slate-900 dark:text-slate-300" />
+          </Button>
 
-        <UserWelcome />
-      </div>
-    </header>
+          <UserWelcome />
+        </div>
+      </header>
+    </div>
   );
 }

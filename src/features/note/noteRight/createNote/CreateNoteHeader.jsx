@@ -2,7 +2,7 @@ import Button from "../../../../ui/Button";
 
 export default function CreateNoteHeader() {
   return (
-    <div className="flex h-14 items-center justify-between border-b border-stone-300 px-4 dark:border-slate-700">
+    <header className="flex h-14 items-center justify-between border-b border-stone-300 px-4 dark:border-slate-700">
       <h1 className="text-sm font-semibold text-slate-500 dark:text-slate-400">
         Untitled Note
       </h1>
@@ -17,6 +17,6 @@ export default function CreateNoteHeader() {
       >
         Save document
       </Button>
-    </div>
+    </header>
   );
 }

@@ -8,7 +8,8 @@ export default function CreateNote({
   disabled,
 }) {
   return (
-    <div className="medium:h-[78vh] medium:overflow-y-hidden scroll-container mx-4 my-2 h-full overflow-y-scroll bg-red-50 py-2">
+    // medium:h-[78vh] medium:overflow-y-hidden scroll-container   overflow-y-scroll bg-red-50
+    <div className="smallest:bg-pink-400 mx-4 my-2 h-full py-2 sm:bg-yellow-200">
       <Input
         type="text"
         id="note-title"
@@ -20,22 +21,16 @@ export default function CreateNote({
         disabled={disabled}
       />
 
-      {/* <textarea
-        id=""
-        className="medium:text-sm h-[77vh] w-full resize-none text-xs placeholder:text-[1.2rem] placeholder:font-medium focus:outline-none"
-      >
-        Title
-      </textarea> */}
-
-      <div className="mt-4 flex-grow">
-        {" "}
+      {/* medium:h-98 h-80 */}
+      <div className="mt-4 h-full flex-grow">
         <textarea
           id="note-content"
-          name="content" // Important for form submission
+          name="content"
           placeholder="Start writing your note here..."
           value={content}
           onChange={onContentChange}
-          className="h-screen w-full resize-none bg-transparent text-sm text-gray-900 placeholder:text-gray-500 focus:outline-none md:text-base dark:text-white dark:placeholder:text-gray-400"
+          //   scroll-container medium:h-100 bg-transparent
+          className="scroll-container h-full w-full resize-none bg-green-200 text-sm text-gray-900 placeholder:text-gray-500 focus:outline-none md:text-base dark:text-white dark:placeholder:text-gray-400"
           disabled={disabled}
         />
       </div>
