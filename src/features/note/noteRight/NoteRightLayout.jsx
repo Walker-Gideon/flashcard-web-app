@@ -5,7 +5,7 @@ export default function NoteRightLayout() {
   return (
     <div>
       <NoteMainPrompt />
-      <CreateNoteLayoout />
+      {/* <CreateNoteLayoout /> */}
     </div>
   );
 }
