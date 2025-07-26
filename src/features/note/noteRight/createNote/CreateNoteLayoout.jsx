@@ -4,11 +4,10 @@ import CreateNoteSubHeader from "./CreateNoteSubHeader";
 
 export default function CreateNoteLayoout() {
   return (
-    //  medium:overflow-hidden h-screen h-screen overflow-scroll overflow-y-scroll
-    <div className="medium:mt-0 scroll-container medium:overflow-hidden mt-7 h-screen overflow-scroll bg-red-200">
+    <div className="medium:mt-0 medium:overflow-hidden mt-7 h-screen">
       <CreateNoteHeader />
 
-      <main className="h-screen">
+      <main className="medium:h-[90vh] scroll-container h-[74vh] overflow-y-scroll">
         <CreateNoteSubHeader />
         <CreateNote />
       </main>
