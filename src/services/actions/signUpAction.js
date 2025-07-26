@@ -12,10 +12,19 @@ export async function signUpAction({ request }) {
   const db = getFirestore(app);
 
   const formData = await request.formData();
-  const email = formData.get("email");
-  const username = formData.get("username");
+  const email = formData.get("email")?.trim();
+  const username = formData.get("username")?.trim();
   const password = formData.get("password");
   const confirmPassword = formData.get("confirmPassword");
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    return { error: "Please enter a valid email address" };
+  }
+
+  if (!username || username.trim().length < 2) {
+    return { error: "Username must be at least 2 characters" };
+  }
 
   if (password !== confirmPassword) {
     return { error: "Passwords do not match" };
@@ -35,8 +44,6 @@ export async function signUpAction({ request }) {
     const user = userCredential.user;
     await updateProfile(user, { displayName: username, photoURL: null });
 
-    await new Promise((r) => setTimeout(r, 100));
-
     // await setDoc(doc(db, "users", user.uid), {
     //   uid: user.uid,
     //   email,
@@ -46,10 +53,8 @@ export async function signUpAction({ request }) {
     //   createdAt: serverTimestamp(),
     // });
 
-    await new Promise((r) => setTimeout(r, 100));
-
     console.log("successful");
-    return redirect("/user");
+    return redirect("/dashboard", { replace: true });
   } catch (err) {
     let errorMessage = "Signup failed. Please try again.";
     switch (err.code) {

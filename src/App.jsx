@@ -45,10 +45,10 @@ const router = createBrowserRouter([
   {
     element: <ProtectedRoute />,
     children: [
-      {
-        path: "user",
-        element: <AuthPicture />,
-      },
+      // {
+      //   path: "user",
+      //   element: <AuthPicture />,
+      // },
       {
         path: "dashboard",
         element: <AppLayout />,
@@ -94,3 +94,10 @@ export default function App() {
     </NavigateProvider>
   );
 }
+
+/*
+In your user display components
+Will use this later
+const displayName = user.displayName || user.email.split('@')[0];
+const avatarUrl = user.photoURL || '/default-avatar.png'; // or use initials
+*/

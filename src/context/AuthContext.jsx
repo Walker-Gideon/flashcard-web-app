@@ -12,11 +12,9 @@ function AuthProvider({ children }) {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       setLoading(false);
-      console.log(user);
     });
-
     return () => unsubscribe();
-  }, [user]);
+  }, []);
 
   const logoutUser = async () => {
     try {
@@ -27,15 +25,12 @@ function AuthProvider({ children }) {
     }
   };
 
-  const profileComplete = !!user?.photoURL;
-
   const value = {
     user,
     setUser,
     loading,
     setLoading,
     logoutUser,
-    profileComplete,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

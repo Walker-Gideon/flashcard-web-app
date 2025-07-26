@@ -9,6 +9,12 @@ import LoginForm from "./LoginForm";
 export default function Login() {
   const { setLoading } = useLoader();
 
+  // After successful login
+  // This is from teh Protected route to redirect the use back to where they where
+  // const location = useLocation();
+  // const from = location.state?.from || "/dashboard";
+  // navigate(from, { replace: true });
+
   const navigate = useNavigate();
   const startLoadingAndNavigate = (to) => {
     setLoading(true);
