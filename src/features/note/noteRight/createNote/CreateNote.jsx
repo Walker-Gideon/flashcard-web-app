@@ -1,12 +1,12 @@
+import { useNote } from "../../../../context/NoteContext";
 import Input from "../../../../ui/Input";
 
 export default function CreateNote({
-  title,
-  content,
   onTitleChange,
   onContentChange,
   disabled,
 }) {
+  const { title, content } = useNote();
   return (
     <div className="mx-4 my-2 h-full py-2">
       <Input

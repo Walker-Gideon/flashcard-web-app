@@ -1,7 +1,18 @@
+import { useActionData } from "react-router-dom";
+import { useNote } from "../../../../context/NoteContext";
 import Button from "../../../../ui/Button";
 
-export default function CreateNoteHeader({ isSubmitting, title, content }) {
-  function handleSubmit() {}
+export default function CreateNoteHeader({ isSubmitting }) {
+  const { title, content, setTitle, setContent } = useNote();
+  const actionData = useActionData();
+
+  function handleSubmit() {
+    // e.preventDefault();
+    if (actionData && !actionData.error && !isSubmitting) {
+      setTitle("");
+      setContent("");
+    }
+  }
 
   return (
     <header className="flex h-14 items-center justify-between border-b border-stone-300 px-4 dark:border-slate-700">

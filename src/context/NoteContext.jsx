@@ -4,8 +4,17 @@ const NoteContext = createContext();
 
 function NoteProvider({ children }) {
   const [createNote, setCreateNote] = useState(false);
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
 
-  const value = { createNote, setCreateNote };
+  const value = {
+    createNote,
+    setCreateNote,
+    title,
+    setTitle,
+    content,
+    setContent,
+  };
 
   return <NoteContext.Provider value={value}>{children}</NoteContext.Provider>;
 }

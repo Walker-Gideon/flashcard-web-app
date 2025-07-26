@@ -10,6 +10,7 @@ import AuthPicture from "./features/auth/AuthPicture";
 import AppLayout from "./AppLayout";
 import DashboardLayout from "./features/dashboard/DashboardLayout";
 import NoteLayout from "./features/note/NoteLayout";
+import { noteAction } from "./services/actions/noteAction";
 import FlashcardLayout from "./features/flashcard/FlashcardLayout";
 import SchedulesLayout from "./features/schedules/SchedulesLayout";
 import InspireLayout from "./features/inspire/InspireLayout";
@@ -61,6 +62,7 @@ const router = createBrowserRouter([
       {
         path: "notes",
         element: <NoteLayout />,
+        action: noteAction,
       },
       {
         path: "flashcards",
