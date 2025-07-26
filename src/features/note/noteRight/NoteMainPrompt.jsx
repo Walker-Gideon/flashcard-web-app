@@ -2,18 +2,14 @@ import { LuNotebookText } from "react-icons/lu";
 import PromptDisplay from "../../../ui/PromptDisplay";
 import Button from "../../../ui/Button";
 import { useNote } from "../../../context/NoteContext";
-import { useLoader } from "../../../context/LoaderContext";
+import useLazyLoading from "../../../ui/LazyLoading";
 
 export default function NoteMainPrompt() {
   const { setCreateNote } = useNote();
-  const { setLoading } = useLoader();
+  const lazyTaggle = useLazyLoading(setCreateNote, 1000);
 
   function handleCreateNote() {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      setCreateNote((show) => !show);
-    }, 1000);
+    lazyTaggle(true);
   }
 
   return (
