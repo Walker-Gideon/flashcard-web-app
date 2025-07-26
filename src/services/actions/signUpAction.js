@@ -37,14 +37,14 @@ export async function signUpAction({ request }) {
 
     await new Promise((r) => setTimeout(r, 100));
 
-    await setDoc(doc(db, "users", user.uid), {
-      uid: user.uid,
-      email,
-      username,
-      photoURL: null,
-      isGoogleSignIn: false,
-      createdAt: serverTimestamp(),
-    });
+    // await setDoc(doc(db, "users", user.uid), {
+    //   uid: user.uid,
+    //   email,
+    //   username,
+    //   photoURL: null,
+    //   isGoogleSignIn: false,
+    //   createdAt: serverTimestamp(),
+    // });
 
     await new Promise((r) => setTimeout(r, 100));
 

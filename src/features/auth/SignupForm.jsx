@@ -4,10 +4,10 @@ import { FiEyeOff } from "react-icons/fi";
 import { FiEye } from "react-icons/fi";
 import Input from "../../ui/Input";
 import Button from "../../ui/Button";
-import { useLoader } from "../../context/LoaderContext";
+import { useAuth } from "../../context/AuthContext";
 
 export default function SignupForm() {
-  const { loading } = useLoader();
+  const { loading } = useAuth();
   const [showPassword, setShowPassword] = useState(true);
   const [showConfirmPassword, setShowConfirmPassword] = useState(true);
 
