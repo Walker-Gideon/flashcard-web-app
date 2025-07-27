@@ -58,7 +58,6 @@ export default function NavigateLScreen() {
 
   return (
     <div
-      // medium:fixed medium:left-0
       className={`medium:top-0 medium:h-screen transitioning defaultColor relative -top-21 z-50 w-65 transform border-r border-stone-300 transition-transform dark:border-slate-700 ${showSidebar ? `translate-x-0` : `medium:block medium:translate-0 -translate-x-90`} ${resize ? `medium:w-55` : `medium:w-15`}`}
     >
       <div className={`flex flex-col gap-4`}>
@@ -66,10 +65,7 @@ export default function NavigateLScreen() {
 
         <div className={`medium:h-[80.5dvh] h- flex flex-col justify-between`}>
           <div className="w-full px-3">
-            <div
-              // medium:items-start medium:justify-items-start medium:w-full ${resize ? `` : `medium:items-center`}
-              className={`flex flex-col`}
-            >
+            <div className={`flex flex-col`}>
               {buttonsData.map((data, index) => (
                 <NavButton
                   key={index}
@@ -81,18 +77,17 @@ export default function NavigateLScreen() {
               ))}
             </div>
 
-            {/* Ai button here  medium:items-center medium:justify-center */}
+            {/* Ai button here   */}
             <div className="flex w-full px-0.5">
-              <ButtonNav navLarge={true} text="Chat">
+              <ButtonNav navLarge={true} text="Chat" classname="w-full">
                 <Button
                   variant="outline"
                   onClick={handleClick}
-                  //   justify-center
-                  classname={`navButton hover:bg-slate-950 hover:text-white dark:text-white hover:dark:bg-slate-700/50 ${resize ? `flex items-start justify-start` : ``}`}
+                  classname={`navButton hover:bg-slate-600 hover:text-white dark:text-white  ${resize ? `flex items-start justify-start` : ``}`}
                 >
                   <LuMessageCircle />
                   <span
-                    className={`block text-xs ${resize ? `block translate-x-0 delay-75` : `medium:-translate-x-[150px]`} medium:inline-block`}
+                    className={`block text-xs ${resize ? `block` : `medium:hidden`}`}
                   >
                     Chat
                   </span>
@@ -100,7 +95,6 @@ export default function NavigateLScreen() {
               </ButtonNav>
             </div>
 
-            {/* medium:items-center */}
             <div className="flex flex-col">
               {nextButtonsData.map((data, index) => (
                 <NavButton
