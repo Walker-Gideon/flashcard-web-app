@@ -58,12 +58,14 @@ export default function NavigateLScreen() {
 
   return (
     <div
-      className={`medium:top-0 medium:h-screen transitioning defaultColor relative -top-21 z-50 w-65 transform border-r border-stone-300 transition-transform dark:border-slate-700 ${showSidebar ? `translate-x-0` : `medium:block medium:translate-0 -translate-x-90`} ${resize ? `medium:w-55` : `medium:w-15`}`}
+      className={`medium:top-0 transitioning defaultColor relative -top-15 z-50 h-screen w-65 transform border-r border-stone-300 transition-transform dark:border-slate-700 ${showSidebar ? `translate-x-0` : `medium:block medium:translate-0 -translate-x-90`} ${resize ? `medium:w-55` : `medium:w-15`}`}
     >
       <div className={`flex flex-col gap-4`}>
         <LargeHeader />
 
-        <div className={`medium:h-[80.5dvh] h- flex flex-col justify-between`}>
+        <div
+          className={`medium:h-[80.5dvh] flex h-[86dvh] flex-col justify-between`}
+        >
           <div className="w-full px-3">
             <div className={`flex flex-col`}>
               {buttonsData.map((data, index) => (
