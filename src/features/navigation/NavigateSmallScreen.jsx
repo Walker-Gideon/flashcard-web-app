@@ -1,5 +1,6 @@
 import { useNav } from "../../context/NavigateContext";
 import Button from "../../ui/Button";
+import User from "../user/User";
 import UserWelcome from "../user/UserWelcome";
 import { LuMenu } from "react-icons/lu";
 
@@ -23,7 +24,10 @@ export default function NavigateSmallScreen() {
             <LuMenu className="text-slate-900 dark:text-slate-300" />
           </Button>
 
-          <UserWelcome />
+          <div className="flex w-full items-center justify-between pr-4">
+            <UserWelcome />
+            <User classname={"w-10 h-10"} />
+          </div>
         </div>
       </header>
     </div>
