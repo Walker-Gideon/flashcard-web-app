@@ -48,7 +48,7 @@ const router = createBrowserRouter([
     element: <ProtectedRoute />,
     children: [
       {
-        path: "v  erify",
+        path: "verify",
         element: <Verify />,
       },
       {

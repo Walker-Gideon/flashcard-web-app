@@ -1,23 +1,41 @@
+import useLoaderAction from "../utils/LoaderAction";
 import Button from "./Button";
-import CardOverview from "./CardOverview";
 import { LuCheck } from "react-icons/lu";
+import Loader from "./Loader";
 
 export default function Verify() {
+  const handelDashboard = useLoaderAction(1000);
+
   return (
-    <div className="w-full max-w-md rounded-sm border border-slate-300 bg-white p-6 shadow-2xl">
-      <CardOverview>
-        <div className="">
-          <LuCheck />
+    <div>
+      <div className="h-1">
+        <Loader />
+      </div>
+
+      <div className="flex h-[98vh] items-center justify-center">
+        <div className="w-full max-w-sm rounded-xl border border-stone-300 px-6 py-8 shadow-lg">
+          <div className="flex flex-col items-center justify-center text-center">
+            <div className="rounded-full bg-slate-600/10 p-3">
+              <LuCheck className="h-6 w-6 text-slate-900" />
+            </div>
+            <h1 className="medium:text-base middle:text-lg my-4 text-sm font-bold">
+              Verification Succeeded
+            </h1>
+            <p className="text-sm font-medium text-slate-500">
+              Your account has been successfully verified. You can now access
+              all features of WalkWise.
+            </p>
+          </div>
+
+          <Button
+            variant="primary"
+            classname={"w-full mt-8"}
+            onClick={() => handelDashboard("/dashboard", { replace: true })}
+          >
+            Continue to WalkWise
+          </Button>
         </div>
-
-        <h1>Verification Succeeded</h1>
-        <p>
-          Your account has been successfully verified. You can now access all
-          features of WalkWise.
-        </p>
-
-        <Button>Continue to WalkWise</Button>
-      </CardOverview>
+      </div>
     </div>
   );
 }
