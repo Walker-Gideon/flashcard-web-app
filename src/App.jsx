@@ -3,6 +3,7 @@ import { LoaderProvider } from "./context/LoaderContext";
 import LandingPage from "./features/home/LandingPage";
 import AuthLayout from "./features/auth/AuthLayout";
 import Login from "./features/auth/Login";
+import { loginAction } from "./services/actions/loginAction";
 import Singup from "./features/auth/Singup";
 import { signUpAction } from "./services/actions/signUpAction";
 import ForgetAuthPassword from "./features/auth/ForgetAuthPassword";
@@ -32,6 +33,7 @@ const router = createBrowserRouter([
       {
         path: "login",
         element: <Login />,
+        action: loginAction,
       },
       {
         path: "signup",

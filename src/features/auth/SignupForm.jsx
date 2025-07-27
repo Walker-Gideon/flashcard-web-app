@@ -46,7 +46,7 @@ export default function SignupForm() {
 
         <div className="relative my-2">
           <Input
-            type={showPassword ? "text" : "password"}
+            type={!showPassword ? "text" : "password"}
             name="password"
             placeholder="Password"
             required={true}
@@ -71,7 +71,7 @@ export default function SignupForm() {
 
         <div className="relative pb-2">
           <Input
-            type={showConfirmPassword ? "text" : "password"}
+            type={!showConfirmPassword ? "text" : "password"}
             name="confirmPassword"
             placeholder="Confirm Password"
             required={true}

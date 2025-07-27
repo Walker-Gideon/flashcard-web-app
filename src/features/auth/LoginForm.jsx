@@ -26,7 +26,7 @@ export default function LoginForm() {
 
         <div className="relative my-2">
           <Input
-            type="password"
+            type={!showPassword ? "text" : "password"}
             name="password"
             placeholder="Password"
             required={true}
