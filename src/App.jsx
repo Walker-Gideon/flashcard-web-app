@@ -6,7 +6,6 @@ import Login from "./features/auth/Login";
 import Singup from "./features/auth/Singup";
 import { signUpAction } from "./services/actions/signUpAction";
 import ForgetAuthPassword from "./features/auth/ForgetAuthPassword";
-import AuthPicture from "./features/auth/AuthPicture";
 import AppLayout from "./AppLayout";
 import DashboardLayout from "./features/dashboard/DashboardLayout";
 import NoteLayout from "./features/note/NoteLayout";
@@ -19,6 +18,7 @@ import { NavigateProvider } from "./context/NavigateContext";
 import ProtectedRoute from "./utils/ProtectedRoute";
 import { AuthProvider } from "./context/AuthContext";
 import { NoteProvider } from "./context/NoteContext";
+import Verify from "./ui/Verify";
 
 const router = createBrowserRouter([
   {
@@ -44,45 +44,45 @@ const router = createBrowserRouter([
       },
     ],
   },
-  // {
-  //   element: <ProtectedRoute />,
-  //   children: [
-  // {
-  //   path: "user",
-  //   element: <AuthPicture />,
-  // },
   {
-    path: "dashboard",
-    element: <AppLayout />,
+    element: <ProtectedRoute />,
     children: [
       {
-        index: true,
-        element: <DashboardLayout />,
+        path: "v  erify",
+        element: <Verify />,
       },
       {
-        path: "notes",
-        element: <NoteLayout />,
-        action: noteAction,
-      },
-      {
-        path: "flashcards",
-        element: <FlashcardLayout />,
-      },
-      {
-        path: "schedules",
-        element: <SchedulesLayout />,
-      },
-      {
-        path: "inspire",
-        element: <InspireLayout />,
-      },
-      {
-        path: "settings",
-        element: <SettingsLayout />,
+        path: "dashboard",
+        element: <AppLayout />,
+        children: [
+          {
+            index: true,
+            element: <DashboardLayout />,
+          },
+          {
+            path: "notes",
+            element: <NoteLayout />,
+            action: noteAction,
+          },
+          {
+            path: "flashcards",
+            element: <FlashcardLayout />,
+          },
+          {
+            path: "schedules",
+            element: <SchedulesLayout />,
+          },
+          {
+            path: "inspire",
+            element: <InspireLayout />,
+          },
+          {
+            path: "settings",
+            element: <SettingsLayout />,
+          },
+        ],
       },
     ],
-    //   },
-    // ],
   },
 ]);
 

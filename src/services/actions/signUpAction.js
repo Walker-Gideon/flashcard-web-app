@@ -54,7 +54,9 @@ export async function signUpAction({ request }) {
     // });
 
     console.log("successful");
-    return redirect("/dashboard", { replace: true });
+    // return redirect("/dashboard", { replace: true });
+    // Inside your signUpAction
+    return { success: true };
   } catch (err) {
     let errorMessage = "Signup failed. Please try again.";
     switch (err.code) {

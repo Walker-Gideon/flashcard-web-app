@@ -45,15 +45,17 @@ export default function Singup() {
       <AuthClose />
 
       <div className="flex min-h-[95vh] items-center justify-center">
-        {showSuccessNotification && (
-          <div className="mb-4 rounded-lg bg-green-100 p-3 text-center text-green-800 dark:bg-green-900/30 dark:text-green-300">
-            Account created successfully! Welcome aboard!
-          </div>
-        )}
-
         {showSpinner ? (
-          <div className="rounded-full border border-gray-300 bg-white p-2 shadow-lg shadow-gray-500">
-            <div className="spinner w-5 bg-black p-1 text-black" />
+          <div className="">
+            <div className="rounded-full border border-gray-300 bg-white p-2 shadow-lg shadow-gray-500">
+              <div className="spinner w-5 bg-black p-1 text-black" />
+            </div>
+
+            {showSuccessNotification && (
+              <div className="mb-4 rounded-lg bg-green-100 p-3 text-center text-green-800 dark:bg-green-900/30 dark:text-green-300">
+                Account created successfully! Welcome aboard!
+              </div>
+            )}
           </div>
         ) : (
           <div className="rounded-xl border border-stone-300 px-6 py-8 shadow-lg">
