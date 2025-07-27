@@ -1,5 +1,6 @@
 import { useNav } from "../../context/NavigateContext";
 import Button from "../../ui/Button";
+import HeaderText from "../../ui/HeaderText";
 import User from "../user/User";
 import UserWelcome from "../user/UserWelcome";
 import { LuMenu } from "react-icons/lu";
@@ -28,7 +29,7 @@ export default function NavigateSmallScreen() {
             {navigateTitle === "Dashboard" ? (
               <UserWelcome />
             ) : (
-              <p>{navigateTitle}</p>
+              <HeaderText>{navigateTitle}</HeaderText>
             )}
             <User classname={"w-10 h-10"} />
           </div>
