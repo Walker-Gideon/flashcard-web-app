@@ -5,7 +5,7 @@ import UserWelcome from "../user/UserWelcome";
 import { LuMenu } from "react-icons/lu";
 
 export default function NavigateSmallScreen() {
-  const { setNavShowOverLay, setShowSidebar } = useNav();
+  const { setNavShowOverLay, setShowSidebar, navigateTitle } = useNav();
 
   function handleClick() {
     setNavShowOverLay((show) => !show);
@@ -25,7 +25,11 @@ export default function NavigateSmallScreen() {
           </Button>
 
           <div className="flex w-full items-center justify-between pr-4">
-            <UserWelcome />
+            {navigateTitle === "Dashboard" ? (
+              <UserWelcome />
+            ) : (
+              <p>{navigateTitle}</p>
+            )}
             <User classname={"w-10 h-10"} />
           </div>
         </div>

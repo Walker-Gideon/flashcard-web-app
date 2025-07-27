@@ -49,11 +49,18 @@ const nextButtonsData = [
 ];
 
 export default function NavigateLScreen() {
-  const { showSidebar, setNavShowOverLay, setShowSidebar, resize } = useNav();
+  const {
+    showSidebar,
+    setNavShowOverLay,
+    setShowSidebar,
+    resize,
+    setNavigateTitle,
+  } = useNav();
 
-  function handleClick() {
+  function handleClick(title) {
     setNavShowOverLay((show) => !show);
     setShowSidebar((show) => !show);
+    setNavigateTitle(title);
   }
 
   return (
@@ -74,7 +81,7 @@ export default function NavigateLScreen() {
                   text={data.text}
                   to={data.to}
                   icon={data.icon}
-                  onClick={handleClick}
+                  onClick={() => handleClick(data.text)}
                 />
               ))}
             </div>
@@ -84,7 +91,7 @@ export default function NavigateLScreen() {
               <ButtonNav navLarge={true} text="Chat" classname="w-full">
                 <Button
                   variant="outline"
-                  onClick={handleClick}
+                  onClick={() => handleClick("Chat")}
                   classname={`navButton hover:bg-slate-600 hover:text-white dark:text-white  ${resize ? `flex items-start justify-start` : ``}`}
                 >
                   <LuMessageCircle />
@@ -104,7 +111,7 @@ export default function NavigateLScreen() {
                   text={data.text}
                   to={data.to}
                   icon={data.icon}
-                  onClick={handleClick}
+                  onClick={() => handleClick(data.text)}
                 />
               ))}
             </div>

@@ -6,6 +6,7 @@ function NavigateProvider({ children }) {
   const [navShowOverLay, setNavShowOverLay] = useState(false);
   const [showSidebar, setShowSidebar] = useState(false);
   const [resize, setResize] = useState(false);
+  const [navigateTitle, setNavigateTitle] = useState("Dashboard");
 
   const value = useMemo(
     () => ({
@@ -15,8 +16,10 @@ function NavigateProvider({ children }) {
       setShowSidebar,
       resize,
       setResize,
+      navigateTitle,
+      setNavigateTitle,
     }),
-    [navShowOverLay, showSidebar, resize],
+    [navShowOverLay, showSidebar, resize, navigateTitle],
   );
 
   return (
