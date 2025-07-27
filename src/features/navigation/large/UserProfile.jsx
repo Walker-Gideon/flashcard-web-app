@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNav } from "../../../context/NavigateContext";
 import Button from "../../../ui/Button";
-import { LuUser } from "react-icons/lu";
 import { LuMoon } from "react-icons/lu";
 import { LuSun } from "react-icons/lu";
+import User from "../../user/User";
 
 export default function UserProfile() {
   const { resize } = useNav();
@@ -30,11 +30,7 @@ export default function UserProfile() {
     <div className="transitioningColors border-t border-stone-300 px-2 py-2 dark:border-slate-700">
       <div className="transitioningColors flex w-full items-center justify-between rounded-sm bg-slate-50 px-2 py-3 dark:bg-slate-700">
         <div className="flex items-center gap-2">
-          <div
-            className={`transitioningColors z-50 flex h-8 w-8 items-center justify-center rounded-full bg-slate-500 dark:text-slate-50`}
-          >
-            <LuUser className="text-white" />
-          </div>
+          <User />
 
           <p
             className={`transitioning z-30 text-sm font-medium whitespace-nowrap text-slate-900 dark:text-white ${resize ? `translate-x-0 delay-75` : `medium:-translate-x-[150px]`} inline-block`}
