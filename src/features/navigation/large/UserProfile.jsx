@@ -28,10 +28,10 @@ export default function UserProfile() {
 
   return (
     <div className="transitioningColors border-t border-stone-300 px-2 py-2 dark:border-slate-700">
-      <div className="transitioningColors flex w-full items-center justify-between rounded-sm bg-slate-100 px-2 py-3 dark:bg-slate-700/50">
+      <div className="transitioningColors flex w-full items-center justify-between rounded-sm bg-slate-50 px-2 py-3 dark:bg-slate-700">
         <div className="flex items-center gap-2">
           <div
-            className={`transitioningColors z-50 flex h-8 w-8 items-center justify-center rounded-full bg-slate-950 dark:bg-slate-600 dark:text-slate-50`}
+            className={`transitioningColors z-50 flex h-8 w-8 items-center justify-center rounded-full bg-slate-500 dark:text-slate-50`}
           >
             <LuUser className="text-white" />
           </div>
@@ -49,7 +49,7 @@ export default function UserProfile() {
           <Button
             onClick={toggleDarkMode}
             variant="outline"
-            classname="p-2 rounded-sm bg-slate-950 dark:bg-slate-600 text-sm text-white hover:bg-slate-900 dark:hover:bg-slate-500 transition-colors"
+            classname="p-2 rounded-sm bg-slate-500 text-sm text-white hover:bg-slate-600 transition-colors"
           >
             {isDarkMode ? <LuSun /> : <LuMoon />}
           </Button>

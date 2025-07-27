@@ -24,7 +24,7 @@ export default function LargeHeader() {
     <header
       className={`transitioningColors border-b border-stone-300 px-2 py-2 dark:border-slate-700`}
     >
-      <div className="transitioningColors medium:mt-0 medium:h-auto mt-0.5 flex h-13 flex-col gap-4 rounded-sm bg-slate-100 px-1 py-2 dark:bg-slate-700/50">
+      <div className="transitioningColors medium:mt-0 medium:h-auto mt-0.5 flex h-13 flex-col gap-4 rounded-sm bg-slate-50 px-1 py-2 dark:bg-slate-700">
         <div className={`flex items-center justify-between`}>
           <div className="flex items-center gap-1 font-bold text-slate-950 uppercase">
             <div />
@@ -36,7 +36,7 @@ export default function LargeHeader() {
                 visualDuration: 0.2,
                 bounce: 0.2,
               }}
-              className={`medium:text-base transitioning z-30 text-sm font-bold text-slate-900 dark:text-white ${resize ? "translate-x-0 delay-75" : "-translate-x-[150px]"} inline-block`}
+              className={`medium:text-base transitioning z-30 text-sm font-bold text-slate-500 dark:text-white ${resize ? "translate-x-0 delay-75" : "-translate-x-[150px]"} inline-block`}
             >
               walkwise
             </motion.span>
