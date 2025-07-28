@@ -17,7 +17,12 @@ export default function NoteMainPrompt() {
       <PromptDisplay
         hight={"h-screen"}
         textPrim="Select a note to view"
-        textSec='Or tap "Create Note" to make one.'
+        textSec={
+          <span className="flex min-w-sm flex-col items-center">
+            <span>Choose a note from the sidebar or tap "Create </span>{" "}
+            <span>Note" to make one.</span>{" "}
+          </span>
+        }
         icon={
           <LuNotebookText className="h-6 w-6 text-slate-600 dark:text-slate-300" />
         }
