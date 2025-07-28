@@ -1,22 +1,14 @@
-import { useNavigate } from "react-router-dom";
 import { useLoader } from "../../context/LoaderContext";
 import Button from "../../ui/Button";
 import Loader from "../../ui/Loader";
 import AuthClose from "./AuthClose";
 import AuthHeader from "./AuthHeader";
 import LoginForm from "./LoginForm";
+import useLoaderAction from "../../utils/LoaderAction";
 
 export default function Login() {
   const { setLoading } = useLoader();
-
-  const navigate = useNavigate();
-  const startLoadingAndNavigate = (to) => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      navigate(to);
-    }, 500);
-  };
+  const navigateLoader = useLoaderAction();
 
   const stylings = "text-[0.8rem] font-semibold";
 
@@ -36,14 +28,14 @@ export default function Login() {
             <Button
               variant="outline"
               classname={stylings}
-              onClick={() => startLoadingAndNavigate("/accounts/forgotten")}
+              onClick={() => navigateLoader("/accounts/forgotten")}
             >
               Forget Password?
             </Button>
             <Button
               variant="outline"
               classname={stylings}
-              onClick={() => startLoadingAndNavigate("/accounts/signup")}
+              onClick={() => navigateLoader("/accounts/signup")}
             >
               Sign Up
             </Button>
