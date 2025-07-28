@@ -7,10 +7,10 @@ import LoginForm from "./LoginForm";
 import useLoaderAction from "../../utils/LoaderAction";
 
 export default function Login() {
-  const { setLoading } = useLoader();
+  const { loading } = useLoader();
   const navigateLoader = useLoaderAction();
 
-  const stylings = "text-[0.8rem] font-semibold";
+  const stylings = "text-[0.8rem] font-semibold disabled:cursor-not-allowed";
 
   return (
     <div clacsName="relative">
@@ -27,6 +27,7 @@ export default function Login() {
           <div className="mt-2 flex items-center justify-between">
             <Button
               variant="outline"
+              disabled={loading}
               classname={stylings}
               onClick={() => navigateLoader("/accounts/forgotten")}
             >
@@ -34,6 +35,7 @@ export default function Login() {
             </Button>
             <Button
               variant="outline"
+              disabled={loading}
               classname={stylings}
               onClick={() => navigateLoader("/accounts/signup")}
             >
@@ -46,7 +48,12 @@ export default function Login() {
               <p className="text-sm text-stone-400">or you can Log In with</p>
             </div>
 
-            <Button classname="w-full">Continue with Google</Button>
+            <Button
+              disabled={loading}
+              classname="w-full disabled:bg-gray-400 disabled:cursor-not-allowed"
+            >
+              Continue with Google
+            </Button>
           </div>
         </div>
       </div>

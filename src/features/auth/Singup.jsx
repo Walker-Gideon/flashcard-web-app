@@ -1,28 +1,21 @@
-import { useActionData, useNavigate, useNavigation } from "react-router-dom";
+import { useActionData, useNavigation } from "react-router-dom";
 import { useLoader } from "../../context/LoaderContext";
 import Loader from "../../ui/Loader";
 import AuthClose from "./AuthClose";
 import AuthHeader from "./AuthHeader";
 import SignupForm from "./SignupForm";
 import Button from "../../ui/Button";
+import useLoaderAction from "../../utils/LoaderAction";
 
 export default function Singup() {
-  const { setLoading, loading } = useLoader();
+  const { loading } = useLoader();
+  const navigateLoader = useLoaderAction();
 
   const actionData = useActionData();
-  const navigate = useNavigate();
   const navigation = useNavigation();
 
   const isSubmitting = navigation.state === "submitting";
   const showSpinner = isSubmitting && !actionData?.error;
-
-  const startLoadingAndNavigate = (to) => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      navigate(to);
-    }, 500);
-  };
 
   return (
     <div className="relative">
@@ -48,9 +41,9 @@ export default function Singup() {
 
               <Button
                 variant="outline"
-                classname="text-[0.8rem] font-semibold  disabled:bg-gray-400 disabled:cursor-not-allowed"
+                classname="text-[0.8rem] font-semibold  disabled:cursor-not-allowed"
                 disabled={loading}
-                onClick={() => startLoadingAndNavigate("/accounts/login")}
+                onClick={() => navigateLoader("/accounts/login")}
               >
                 Log in
               </Button>
@@ -65,7 +58,7 @@ export default function Singup() {
 
               <Button
                 disabled={loading}
-                classname="w-full  disabled:bg-gray-400 disabled:cursor-not-allowed"
+                classname="w-full disabled:bg-gray-400 disabled:cursor-not-allowed"
               >
                 Continue with Google
               </Button>
