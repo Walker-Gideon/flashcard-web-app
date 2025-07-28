@@ -16,7 +16,7 @@ export default function SignupForm() {
   const stylings = {
     input: "w-full",
     icon: "text-sm",
-    button: "absolute top-2.5 right-2",
+    button: "absolute top-2.5 right-2 disabled:cursor-not-allowed",
   };
 
   return (
@@ -98,7 +98,8 @@ export default function SignupForm() {
           disabled={loading}
           type="submit"
           variant="primary"
-          classname="w-full py-2"
+          classname="w-full py-2 disabled:bg-gray-400 disabled:cursor-not-allowed
+"
         >
           Sign up
         </Button>

@@ -1,12 +1,16 @@
 import { useState } from "react";
-import { Form } from "react-router-dom";
+import { Form, useActionData } from "react-router-dom";
 import { FiEyeOff } from "react-icons/fi";
 import { FiEye } from "react-icons/fi";
 import Input from "../../ui/Input";
 import Button from "../../ui/Button";
+import { useAuth } from "../../context/AuthContext";
 
 export default function LoginForm() {
+  const { loading } = useAuth();
   const [showPassword, setShowPassword] = useState(true);
+
+  const actionData = useActionData();
 
   const stylings = {
     input: "w-full",
@@ -15,7 +19,11 @@ export default function LoginForm() {
 
   return (
     <div className="medium:w-80 mt-6 w-70">
-      <Form>
+      <Form method="post">
+        {actionData?.error && (
+          <p className="mb-2 text-sm text-red-600">{actionData.error}</p>
+        )}
+
         <Input
           type="email"
           name="email"
@@ -34,7 +42,9 @@ export default function LoginForm() {
           />
           <Button
             variant="outline"
-            classname="absolute top-2.5 right-2"
+            disabled={loading}
+            classname="absolute top-2.5 right-2  disabled:cursor-not-allowed
+"
             onClick={(e) => {
               e.preventDefault();
               setShowPassword(!showPassword);
@@ -48,7 +58,13 @@ export default function LoginForm() {
           </Button>
         </div>
 
-        <Button type="submit" variant="primary" classname="w-full py-2">
+        <Button
+          disabled={loading}
+          type="submit"
+          variant="primary"
+          classname="w-full py-2 disabled:bg-gray-400 disabled:cursor-not-allowed
+"
+        >
           Log in
         </Button>
       </Form>

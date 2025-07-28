@@ -16,7 +16,6 @@ export async function loginAction({ request }) {
   try {
     await signInWithEmailAndPassword(auth, email, password);
 
-    console.log("Login successful");
     return redirect("/verify", { replace: true });
   } catch (err) {
     let errorMessage = "Login failed. Please check your credentials.";

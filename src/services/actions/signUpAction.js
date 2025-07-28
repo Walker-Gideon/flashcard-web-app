@@ -53,9 +53,7 @@ export async function signUpAction({ request }) {
     //   createdAt: serverTimestamp(),
     // });
 
-    console.log("successful");
     return redirect("/verify", { replace: true });
-    // return { success: true, redirectTo: "/verify" };
   } catch (err) {
     let errorMessage = "Signup failed. Please try again.";
     switch (err.code) {
