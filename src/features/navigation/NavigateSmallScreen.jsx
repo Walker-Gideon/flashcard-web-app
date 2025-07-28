@@ -29,7 +29,9 @@ export default function NavigateSmallScreen() {
             {navigateTitle === "Dashboard" ? (
               <UserWelcome />
             ) : (
-              <HeaderText>{navigateTitle}</HeaderText>
+              <HeaderText>
+                {navigateTitle === "Notes" ? "My Notes" : navigateTitle}
+              </HeaderText>
             )}
             <User classname={"w-10 h-10"} />
           </div>
