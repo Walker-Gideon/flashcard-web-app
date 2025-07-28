@@ -1,17 +1,15 @@
-import { useActionData } from "react-router-dom";
 import { useNote } from "../../../../context/NoteContext";
 import Button from "../../../../ui/Button";
 
 export default function CreateNoteHeader({ isSubmitting }) {
-  const { title, content, setTitle, setContent } = useNote();
-  const actionData = useActionData();
+  const { title, content, setTitle, setContent, setCreateNote } = useNote();
 
   function handleSubmit() {
-    // e.preventDefault();
-    if (actionData && !actionData.error && !isSubmitting) {
+    setTimeout(() => {
+      setCreateNote(false);
       setTitle("");
       setContent("");
-    }
+    }, 1000);
   }
 
   return (
