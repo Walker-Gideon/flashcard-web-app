@@ -6,6 +6,7 @@ import AuthHeader from "./AuthHeader";
 import SignupForm from "./SignupForm";
 import Button from "../../ui/Button";
 import useLoaderAction from "../../utils/LoaderAction";
+import Spinner from "../../ui/Spinner";
 
 export default function Singup() {
   const { loading } = useLoader();
@@ -26,9 +27,7 @@ export default function Singup() {
 
       <div className="flex min-h-[95vh] items-center justify-center">
         {showSpinner ? (
-          <div className="rounded-full border border-gray-300 bg-white p-2 shadow-lg shadow-gray-500">
-            <div className="spinner w-5 bg-black p-1 text-black" />
-          </div>
+          <Spinner />
         ) : (
           <div className="rounded-xl border border-stone-300 px-6 py-8 shadow-lg">
             <AuthHeader />
