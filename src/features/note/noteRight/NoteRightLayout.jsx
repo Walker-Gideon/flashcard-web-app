@@ -5,5 +5,15 @@ import NoteMainPrompt from "./NoteMainPrompt";
 export default function NoteRightLayout() {
   const { createNote } = useNote();
 
-  return <div>{!createNote ? <NoteMainPrompt /> : <CreateNoteLayoout />}</div>;
+  return (
+    <div>
+      {!createNote ? (
+        <div className="medium:block hidden">
+          <NoteMainPrompt />
+        </div>
+      ) : (
+        <CreateNoteLayoout />
+      )}
+    </div>
+  );
 }

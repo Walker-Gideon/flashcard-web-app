@@ -18,8 +18,8 @@ export default function NoteLeftHeader() {
   }
 
   return (
-    <header className="medium:py-3 border-b border-stone-300 px-4 dark:border-slate-700">
-      <HeaderText classname={"mb-2"}>My Note</HeaderText>
+    <header className="medium:py-3 border-b border-stone-300 px-4 py-5 dark:border-slate-700">
+      <HeaderText classname={"mb-2 medium:block hidden"}>My Note</HeaderText>
 
       <form action="" className="relative mb-2">
         <Input
