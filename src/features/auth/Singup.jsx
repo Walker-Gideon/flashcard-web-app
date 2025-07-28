@@ -48,7 +48,7 @@ export default function Singup() {
 
               <Button
                 variant="outline"
-                classname="text-[0.8rem] font-semibold"
+                classname="text-[0.8rem] font-semibold  disabled:bg-gray-400 disabled:cursor-not-allowed"
                 disabled={loading}
                 onClick={() => startLoadingAndNavigate("/accounts/login")}
               >
@@ -63,7 +63,10 @@ export default function Singup() {
                 </p>
               </div>
 
-              <Button disabled={loading} classname="w-full">
+              <Button
+                disabled={loading}
+                classname="w-full  disabled:bg-gray-400 disabled:cursor-not-allowed"
+              >
                 Continue with Google
               </Button>
             </div>

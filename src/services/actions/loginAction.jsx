@@ -7,7 +7,7 @@ export async function loginAction({ request }) {
 
   const formData = await request.formData();
   const email = formData.get("email")?.trim();
-  const password = formData.get("password");
+  const password = formData.get("password")?.trim();
 
   if (!email || !password) {
     return { error: "Email and password are required." };
