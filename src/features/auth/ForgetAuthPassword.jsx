@@ -1,5 +1,10 @@
-import { Form, useNavigate } from "react-router-dom";
-import { useRef, useState } from "react";
+import {
+  Form,
+  useActionData,
+  useNavigate,
+  useNavigation,
+} from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
 import { useLoader } from "../../context/LoaderContext";
 import Loader from "../../ui/Loader";
 import Button from "../../ui/Button";
@@ -8,24 +13,45 @@ import Toast from "../../ui/Toast";
 export default function ForgetAuthPassword() {
   const { setLoading } = useLoader();
   const [toast, setToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState("");
+  const [toastType, setToastType] = useState("success");
   const emailRef = useRef(null);
 
+  const actionData = useActionData();
   const navigate = useNavigate();
-  const startLoadingAndNavigate = (to) => {
-    const email = emailRef.current.value;
-    if (email.trim() !== "") {
-      setLoading(true);
-      setTimeout(() => {
-        setLoading(false);
+  const navigation = useNavigation();
+
+  const isSubmitting = navigation.state === "submitting";
+
+  useEffect(() => {
+    if (actionData) {
+      if (actionData.success) {
+        setToastMessage(actionData.message);
+        setToastType("success");
         setToast(true);
 
         setTimeout(() => {
           setToast(false);
-          navigate(to);
-        }, 1500);
-      }, 1000);
+          navigate("/accounts/login");
+        }, 3000);
+      } else if (actionData.error) {
+        // Show error toast
+        setToastMessage(actionData.error);
+        setToastType("error");
+        setToast(true);
+
+        // Hide error toast after 3 seconds
+        setTimeout(() => {
+          setToast(false);
+        }, 3000);
+      }
     }
-  };
+  }, [actionData, navigate]);
+
+  // Handle loading state
+  useEffect(() => {
+    setLoading(isSubmitting);
+  }, [isSubmitting, setLoading]);
 
   return (
     <div className="relative">
@@ -47,7 +73,7 @@ export default function ForgetAuthPassword() {
             </p>
           </div>
 
-          <Form>
+          <Form method="post">
             <div className="mb-3 flex flex-col">
               <label className="medium:text-sm mb-1 text-xs">Email</label>
               <input
@@ -56,25 +82,33 @@ export default function ForgetAuthPassword() {
                 placeholder="user@email.com"
                 required={true}
                 ref={emailRef}
-                className="input w-full"
+                disabled={isSubmitting}
+                className="input w-full disabled:opacity-50"
               />
             </div>
 
             <div className="medium:flex medium:items-end medium:justify-end">
               <Button
                 type="submit"
+                disabled={isSubmitting}
                 variant="primary"
-                classname="w-full py-2"
-                onClick={() => startLoadingAndNavigate("/accounts/login")}
+                classname="w-full py-2 disabled:bg-gray-400 disabled:cursor-not-allowed"
+                // onClick={() => startLoadingAndNavigate("/accounts/login")}
               >
-                Send Link
+                {isSubmitting ? "Sending..." : "Send Link"}
               </Button>
             </div>
           </Form>
         </div>
       </div>
 
-      {toast && <Toast classname="bg-green-600">Link sent successful!</Toast>}
+      {toast && (
+        <Toast
+          classname={toastType === "success" ? "bg-green-600" : "bg-red-600"}
+        >
+          {toastMessage}
+        </Toast>
+      )}
     </div>
   );
 }

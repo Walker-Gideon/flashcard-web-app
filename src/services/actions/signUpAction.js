@@ -44,14 +44,14 @@ export async function signUpAction({ request }) {
     const user = userCredential.user;
     await updateProfile(user, { displayName: username, photoURL: null });
 
-    // await setDoc(doc(db, "users", user.uid), {
-    //   uid: user.uid,
-    //   email,
-    //   username,
-    //   photoURL: null,
-    //   isGoogleSignIn: false,
-    //   createdAt: serverTimestamp(),
-    // });
+    await setDoc(doc(db, "users", user.uid), {
+      uid: user.uid,
+      email,
+      username,
+      photoURL: null,
+      isGoogleSignIn: false,
+      createdAt: serverTimestamp(),
+    });
 
     return redirect("/verify", { replace: true });
   } catch (err) {
