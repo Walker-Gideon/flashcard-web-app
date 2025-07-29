@@ -30,7 +30,11 @@ export default function NavigateSmallScreen() {
               <UserWelcome />
             ) : (
               <HeaderText>
-                {navigateTitle === "Notes" ? "My Notes" : navigateTitle}
+                {navigateTitle === "Notes"
+                  ? "My Notes"
+                  : navigateTitle === "Flashcards"
+                    ? "My Flashcards"
+                    : navigateTitle}
               </HeaderText>
             )}
             <User classname={"w-10 h-10"} />
