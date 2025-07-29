@@ -46,46 +46,46 @@ const router = createBrowserRouter([
       },
     ],
   },
-  // {
-  //   element: <ProtectedRoute />,
-  //   children: [
   {
-    path: "verify",
-    element: <Verify />,
-  },
-  {
-    path: "dashboard",
-    element: <AppLayout />,
+    element: <ProtectedRoute />,
     children: [
       {
-        index: true,
-        element: <DashboardLayout />,
+        path: "verify",
+        element: <Verify />,
       },
       {
-        path: "notes",
-        element: <NoteLayout />,
-        action: noteAction,
-      },
-      {
-        path: "flashcards",
-        element: <FlashcardLayout />,
-      },
-      {
-        path: "schedules",
-        element: <SchedulesLayout />,
-      },
-      {
-        path: "inspire",
-        element: <InspireLayout />,
-      },
-      {
-        path: "settings",
-        element: <SettingsLayout />,
+        path: "dashboard",
+        element: <AppLayout />,
+        children: [
+          {
+            index: true,
+            element: <DashboardLayout />,
+          },
+          {
+            path: "notes",
+            element: <NoteLayout />,
+            action: noteAction,
+          },
+          {
+            path: "flashcards",
+            element: <FlashcardLayout />,
+          },
+          {
+            path: "schedules",
+            element: <SchedulesLayout />,
+          },
+          {
+            path: "inspire",
+            element: <InspireLayout />,
+          },
+          {
+            path: "settings",
+            element: <SettingsLayout />,
+          },
+        ],
       },
     ],
   },
-  //   ],
-  // },
 ]);
 
 export default function App() {
