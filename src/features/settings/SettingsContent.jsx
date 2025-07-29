@@ -27,13 +27,13 @@ export default function SettingsContent() {
       if (docSnap.exists()) {
         const data = docSnap.data();
         if (data.username) {
-          setPlaceholder(data.username); // Set as placeholder
+          setPlaceholder(data.username);
         }
       }
     };
 
     fetchUsername();
-  }, []);
+  }, [auth.currentUser, db]);
 
   useEffect(() => {
     if (message) {
