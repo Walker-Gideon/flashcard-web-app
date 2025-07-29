@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getFirestore, doc, getDoc, updateDoc } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
 import Button from "../../ui/Button";
 import CardOverview from "../../ui/CardOverview";
 import Input from "../../ui/Input";
@@ -6,9 +8,55 @@ import User from "../user/User";
 import SettlingsFormHeader from "./SettlingsFormHeader";
 
 export default function SettingsContent() {
-  const [name, setName] = useState("");
+  const [placeholder, setPlaceholder] = useState("Enter username");
+  const [message, setMessage] = useState("");
+  const [newUsername, setNewUsername] = useState("");
+  const db = getFirestore();
+  const auth = getAuth();
 
-  function handleSaveChanges() {}
+  console.log(newUsername);
+
+  useEffect(() => {
+    const fetchUsername = async () => {
+      const user = auth.currentUser;
+      if (!user) return;
+
+      const docRef = doc(db, "users", user.uid);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        if (data.username) {
+          setPlaceholder(data.username); // Set as placeholder
+        }
+      }
+    };
+
+    fetchUsername();
+  }, []);
+
+  useEffect(() => {
+    if (message) {
+      const timer = setTimeout(() => setMessage(""), 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [message]);
+
+  const handleUpdate = async () => {
+    const user = auth.currentUser;
+    if (!user || newUsername.trim() === "") return;
+
+    try {
+      const userRef = doc(db, "users", user.uid);
+      await updateDoc(userRef, { username: newUsername });
+      setMessage("Username updated successfully!");
+      setPlaceholder(newUsername);
+      setNewUsername("");
+    } catch (error) {
+      console.error("Error updating username:", error);
+      setMessage("Error updating username");
+    }
+  };
 
   const styling = {
     label: `flex flex-col gap-1 text-xs font-medium text-slate-900 dark:text-white`,
@@ -28,14 +76,16 @@ export default function SettingsContent() {
         </div>
 
         <div className="">
+          {message && <p className="mb-2 text-green-600">{message}</p>}
+
           <div className={`mb-4 ${styling.label}`}>
             <label htmlFor="name">Display Name</label>
             <Input
               type="text"
               name="username"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="User Name"
+              value={newUsername}
+              onChange={(e) => setNewUsername(e.target.value)}
+              placeholder={placeholder}
               classname={styling.input}
             />
           </div>
@@ -61,7 +111,7 @@ export default function SettingsContent() {
             color={
               "bg-slate-500 text-white hover:bg-slate-600 focus:ring-slate-300 disabled:bg-gray-400 disabled:cursor-not-allowed"
             }
-            onClick={handleSaveChanges}
+            onClick={handleUpdate}
           >
             Save Changes
           </Button>
