@@ -1,20 +1,25 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getFirestore, doc, getDoc, updateDoc } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
+
 import Button from "../../ui/Button";
 import CardOverview from "../../ui/CardOverview";
 import Input from "../../ui/Input";
 import User from "../user/User";
 import SettlingsFormHeader from "./SettlingsFormHeader";
+import { useLoader } from "../../context/LoaderContext";
 
 export default function SettingsContent() {
+  const { image, setImage } = useLoader();
   const [placeholder, setPlaceholder] = useState("Enter username");
   const [message, setMessage] = useState("");
   const [newUsername, setNewUsername] = useState("");
+  const [preview, setPreview] = useState(null);
+
+  const fileInputRef = useRef();
+
   const db = getFirestore();
   const auth = getAuth();
-
-  console.log(newUsername);
 
   useEffect(() => {
     const fetchUsername = async () => {
@@ -58,6 +63,13 @@ export default function SettingsContent() {
     }
   };
 
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    setImage(file);
+    setPreview(URL.createObjectURL(file));
+  };
+
   const styling = {
     label: `flex flex-col gap-1 text-xs font-medium text-slate-900 dark:text-white`,
     input: "w-full text-slate-900 dark:text-white",
@@ -68,16 +80,33 @@ export default function SettingsContent() {
       <CardOverview>
         <SettlingsFormHeader />
 
+        {message && <p className="mb-2 text-green-600">{message}</p>}
+
         <div className="medium:my-10 my-8 flex w-full items-center justify-center">
-          <User
-            classname={"w-20 h-20 medium:w-30 medium:h-30"}
-            icon={"w-10 h-10"}
-          />
+          <label className="cursor-pointer">
+            {preview ? (
+              <img
+                src={preview}
+                alt="preview"
+                className={`medium:w-30 medium:h-30 h-20 w-20 rounded-full object-cover`}
+              />
+            ) : (
+              <User
+                classname={"w-20 h-20 medium:w-30 medium:h-30"}
+                icon={"w-10 h-10"}
+              />
+            )}
+            <input
+              type="file"
+              ref={fileInputRef}
+              accept="image/*"
+              className="hidden"
+              onChange={handleImageChange}
+            />
+          </label>
         </div>
 
-        <div className="">
-          {message && <p className="mb-2 text-green-600">{message}</p>}
-
+        <div>
           <div className={`mb-4 ${styling.label}`}>
             <label htmlFor="name">Display Name</label>
             <Input
