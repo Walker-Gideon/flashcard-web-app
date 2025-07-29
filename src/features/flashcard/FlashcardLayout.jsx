@@ -1,9 +1,9 @@
-import FlashcardHeader from "./FlashcardHeader";
+import FlashcardInit from "./FlashcardInit";
 
 export default function FlashcardLayout() {
   return (
     <div>
-      <FlashcardHeader />
+      <FlashcardInit />
     </div>
   );
 }
