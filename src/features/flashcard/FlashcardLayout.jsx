@@ -1,3 +1,9 @@
+import FlashcardHeader from "./FlashcardHeader";
+
 export default function FlashcardLayout() {
-  return <div></div>;
+  return (
+    <div>
+      <FlashcardHeader />
+    </div>
+  );
 }
