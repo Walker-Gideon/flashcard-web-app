@@ -17,12 +17,13 @@ export default function ForgetAuthPassword() {
   const [toastType, setToastType] = useState("success");
   const emailRef = useRef(null);
 
-  const actionData = useActionData();
-  const navigate = useNavigate();
-  const navigation = useNavigation();
+  // const actionData = useActionData();
+  // const navigate = useNavigate();
+  // const navigation = useNavigation();
 
-  const isSubmitting = navigation.state === "submitting";
+  // const isSubmitting = navigation.state === "submitting";
 
+  /*
   useEffect(() => {
     if (actionData) {
       if (actionData.success) {
@@ -47,11 +48,14 @@ export default function ForgetAuthPassword() {
       }
     }
   }, [actionData, navigate]);
+  */
 
   // Handle loading state
-  useEffect(() => {
-    setLoading(isSubmitting);
-  }, [isSubmitting, setLoading]);
+  // useEffect(() => {
+  //   setLoading(isSubmitting);
+  // }, [isSubmitting, setLoading]);
+
+  function handleSubmit() {}
 
   return (
     <div className="relative">
@@ -73,7 +77,8 @@ export default function ForgetAuthPassword() {
             </p>
           </div>
 
-          <Form method="post">
+          <form onSubmit={handleSubmit}>
+            {/* <Form method="post"> */}
             <div className="mb-3 flex flex-col">
               <label className="medium:text-sm mb-1 text-xs">Email</label>
               <input
@@ -82,7 +87,7 @@ export default function ForgetAuthPassword() {
                 placeholder="user@email.com"
                 required={true}
                 ref={emailRef}
-                disabled={isSubmitting}
+                // disabled={isSubmitting}
                 className="input w-full disabled:opacity-50"
               />
             </div>
@@ -90,15 +95,16 @@ export default function ForgetAuthPassword() {
             <div className="medium:flex medium:items-end medium:justify-end">
               <Button
                 type="submit"
-                disabled={isSubmitting}
+                // disabled={isSubmitting}
                 variant="primary"
                 classname="w-full py-2 disabled:bg-gray-400 disabled:cursor-not-allowed"
                 // onClick={() => startLoadingAndNavigate("/accounts/login")}
               >
-                {isSubmitting ? "Sending..." : "Send Link"}
+                Send Link
+                {/* {isSubmitting ? "Sending..." : "Send Link"} */}
               </Button>
             </div>
-          </Form>
+          </form>
         </div>
       </div>
 

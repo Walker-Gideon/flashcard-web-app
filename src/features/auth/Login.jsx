@@ -10,7 +10,7 @@ import Spinner from "../../ui/Spinner";
 
 export default function Login() {
   // const { loading } = useLoader();
-  // const navigateLoader = useLoaderAction();
+  const navigateLoader = useLoaderAction();
 
   // const actionData = useActionData();
   // const navigation = useNavigation();
@@ -40,7 +40,7 @@ export default function Login() {
               variant="outline"
               // disabled={loading}
               classname={stylings}
-              // onClick={() => navigateLoader("/accounts/forgotten")}
+              onClick={() => navigateLoader("/accounts/forgotten")}
             >
               Forget Password?
             </Button>
@@ -48,7 +48,7 @@ export default function Login() {
               variant="outline"
               // disabled={loading}
               classname={stylings}
-              // onClick={() => navigateLoader("/accounts/signup")}
+              onClick={() => navigateLoader("/accounts/signup")}
             >
               Sign Up
             </Button>

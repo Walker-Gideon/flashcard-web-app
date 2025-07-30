@@ -10,7 +10,7 @@ import Spinner from "../../ui/Spinner";
 
 export default function Singup() {
   // const { loading } = useLoader();
-  // const navigateLoader = useLoaderAction();
+  const navigateLoader = useLoaderAction();
 
   // const actionData = useActionData();
   // const navigation = useNavigation();
@@ -42,7 +42,7 @@ export default function Singup() {
               variant="outline"
               classname="text-[0.8rem] font-semibold  disabled:cursor-not-allowed"
               // disabled={loading}
-              // onClick={() => navigateLoader("/accounts/login")}
+              onClick={() => navigateLoader("/accounts/login")}
             >
               Log in
             </Button>

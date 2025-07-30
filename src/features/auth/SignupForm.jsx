@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Form, useActionData } from "react-router-dom";
 import { FiEyeOff } from "react-icons/fi";
 import { FiEye } from "react-icons/fi";
 import Input from "../../ui/Input";
@@ -11,7 +10,10 @@ export default function SignupForm() {
   const [showPassword, setShowPassword] = useState(true);
   const [showConfirmPassword, setShowConfirmPassword] = useState(true);
 
-  // const actionData = useActionData();
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log("sign up");
+  }
 
   const stylings = {
     input: "w-full",
@@ -21,7 +23,7 @@ export default function SignupForm() {
 
   return (
     <div className="medium:w-80 mt-6 w-70">
-      <form>
+      <form onSubmit={handleSubmit}>
         {/* <Form method="post"> */}
         {/* {actionData?.error && (
           <p className="mb-2 text-sm text-red-600">{actionData.error}</p>
@@ -96,7 +98,6 @@ export default function SignupForm() {
         </div>
 
         <Button
-          // disabled={loading}
           type="submit"
           variant="primary"
           classname="w-full py-2 disabled:bg-gray-400 disabled:cursor-not-allowed
