@@ -6,6 +6,7 @@ const AuthContext = createContext();
 
 function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
+  const [isAuhenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -20,6 +21,7 @@ function AuthProvider({ children }) {
     try {
       await signOut(auth);
       setUser(null);
+      setIsAuthenticated(false);
     } catch (error) {
       console.error("Logout failed:", error);
     }
@@ -31,6 +33,8 @@ function AuthProvider({ children }) {
     loading,
     setLoading,
     logoutUser,
+    isAuhenticated,
+    setIsAuthenticated,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

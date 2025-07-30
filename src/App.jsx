@@ -21,6 +21,7 @@ import { AuthProvider } from "./context/AuthContext";
 import { NoteProvider } from "./context/NoteContext";
 import Verify from "./ui/Verify";
 import { forgetPasswordAction } from "./services/actions/forgetPasswordAction";
+import AuthRedirectRoute from "./utils/AuthRedirectRoute";
 
 const router = createBrowserRouter([
   {
@@ -28,28 +29,34 @@ const router = createBrowserRouter([
     element: <LandingPage />,
   },
   {
-    path: "/accounts",
-    element: <AuthLayout />,
+    element: <AuthRedirectRoute />,
     children: [
       {
-        path: "login",
-        element: <Login />,
-        action: loginAction,
-      },
-      {
-        path: "signup",
-        element: <Singup />,
-        action: signUpAction,
-      },
-      {
-        path: "forgotten",
-        element: <ForgetAuthPassword />,
-        action: forgetPasswordAction,
+        path: "/accounts",
+        element: <AuthLayout />,
+        children: [
+          {
+            path: "login",
+            element: <Login />,
+            action: loginAction,
+          },
+          {
+            path: "signup",
+            element: <Singup />,
+            action: signUpAction,
+          },
+          {
+            path: "forgotten",
+            element: <ForgetAuthPassword />,
+            action: forgetPasswordAction,
+          },
+        ],
       },
     ],
   },
   {
-    element: <ProtectedRoute />,
+    // ProtectedRoute
+    element: <AuthRedirectRoute />,
     children: [
       {
         path: "verify",
@@ -57,7 +64,13 @@ const router = createBrowserRouter([
       },
       {
         path: "dashboard",
-        element: <AppLayout />,
+        //(
+        element: (
+          // <AuthRedirectRoute>
+          <AppLayout />
+        ),
+        // </AuthRedirectRoute>
+        // ),
         children: [
           {
             index: true,
