@@ -6,7 +6,7 @@ const AuthContext = createContext();
 
 function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
-  const [isAuhenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
 
   function loginAndSignup() {
@@ -33,7 +33,7 @@ function AuthProvider({ children }) {
     loading,
     setLoading,
     logoutUser,
-    isAuhenticated,
+    isAuthenticated,
     setIsAuthenticated,
     loginAndSignup,
   };

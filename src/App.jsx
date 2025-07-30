@@ -22,7 +22,7 @@ import InspireLayout from "./features/inspire/InspireLayout";
 import SettingsLayout from "./features/settings/SettingsLayout";
 import { NavigateProvider } from "./context/NavigateContext";
 import ProtectedRoute from "./utils/ProtectedRoute";
-import { AuthProvider } from "./context/AuthContext";
+import { AuthProvider, useAuth } from "./context/AuthContext";
 import { NoteProvider } from "./context/NoteContext";
 import Verify from "./ui/Verify";
 import { forgetPasswordAction } from "./services/actions/forgetPasswordAction";
@@ -111,7 +111,8 @@ const router = createBrowserRouter([
 */
 
 export default function App() {
-  let isAuthenticated = false;
+  // let isAuthenticated = false;
+  const { isAuthenticated } = useAuth();
 
   return (
     /*
