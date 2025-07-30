@@ -7,6 +7,10 @@ import { useAuth } from "../../context/AuthContext";
 
 export default function SignupForm() {
   const { loading } = useAuth();
+  const [mail, setMail] = useState("");
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(true);
   const [showConfirmPassword, setShowConfirmPassword] = useState(true);
 
@@ -33,6 +37,8 @@ export default function SignupForm() {
           <Input
             type="email"
             name="email"
+            value={mail}
+            onChange={(e) => setMail(e.target.value)}
             placeholder="Email"
             required={true}
             classname={stylings.input}
@@ -41,6 +47,8 @@ export default function SignupForm() {
           <Input
             type="text"
             name="username"
+            value={userName}
+            onChange={(e) => setUserName(e.target.value)}
             placeholder="Username"
             required={true}
             classname={`mt-2 ${stylings.input}`}
@@ -51,6 +59,8 @@ export default function SignupForm() {
           <Input
             type={!showPassword ? "text" : "password"}
             name="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
             required={true}
             classname={stylings.input}
@@ -76,6 +86,8 @@ export default function SignupForm() {
           <Input
             type={!showConfirmPassword ? "text" : "password"}
             name="confirmPassword"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
             placeholder="Confirm Password"
             required={true}
             classname={stylings.input}
