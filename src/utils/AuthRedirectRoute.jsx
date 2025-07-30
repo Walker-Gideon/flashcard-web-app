@@ -1,10 +1,10 @@
+/* eslint-disable no-unused-vars */
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
-export default function AuthRedirectRoute() {
+export default function AuthRedirectRoute({ isAuthenticated, children }) {
   const location = useLocation();
   const pathname = location.pathname;
-  const { isAuthenticated } = useAuth();
 
   if (
     !isAuthenticated &&
@@ -13,13 +13,12 @@ export default function AuthRedirectRoute() {
     return <Navigate to="/accounts/login" />;
   }
 
-  // if (
-  //   isAuthenticated &&
-  //   (pathname.includes("/login") || pathname.includes("/signup"))
-  // ) {
-  //   return <Navigate to="/accounts/login" />;
-  //   return 0;
-  // }
+  if (
+    isAuthenticated &&
+    (pathname.includes("/login") || pathname.includes("/signup"))
+  ) {
+    return <Navigate to="/dashboard" />;
+  }
 
-  return <Outlet />;
+  return <div>{children}</div>;
 }

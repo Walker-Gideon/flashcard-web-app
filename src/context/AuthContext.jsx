@@ -12,8 +12,6 @@ function AuthProvider({ children }) {
   function loginAndSignup() {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      setIsAuthenticated(true);
-      console.log(isAuhenticated);
       setLoading(false);
     });
     return () => unsubscribe();

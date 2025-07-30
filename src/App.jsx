@@ -111,6 +111,8 @@ const router = createBrowserRouter([
 */
 
 export default function App() {
+  let isAuthenticated = false;
+
   return (
     /*
     <NoteProvider>
@@ -126,7 +128,14 @@ export default function App() {
     <Routes>
       <Route path="/" element={<LandingPage />} />
 
-      <Route path="/accounts" element={<AuthLayout />}>
+      <Route
+        path="/accounts"
+        element={
+          <AuthRedirectRoute isAuthenticated={isAuthenticated}>
+            <AuthLayout />
+          </AuthRedirectRoute>
+        }
+      >
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Singup />} />
         <Route path="forgotten" element={<ForgetAuthPassword />} />
@@ -136,7 +145,14 @@ export default function App() {
       <Route path="/verify" element={<Verify />} />
 
       {/* Dashboard routes */}
-      <Route path="/dashboard" element={<AppLayout />}>
+      <Route
+        path="/dashboard"
+        element={
+          <AuthRedirectRoute isAuthenticated={isAuthenticated}>
+            <AppLayout />
+          </AuthRedirectRoute>
+        }
+      >
         <Route index="true" element={<DashboardLayout />} />
         <Route path="notes" element={<NoteLayout />} />
         <Route path="flashcards" element={<FlashcardLayout />} />
