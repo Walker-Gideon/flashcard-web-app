@@ -1,4 +1,9 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Routes,
+  Route,
+} from "react-router-dom";
 import { LoaderProvider } from "./context/LoaderContext";
 import LandingPage from "./features/home/LandingPage";
 import AuthLayout from "./features/auth/AuthLayout";
@@ -23,6 +28,7 @@ import Verify from "./ui/Verify";
 import { forgetPasswordAction } from "./services/actions/forgetPasswordAction";
 import AuthRedirectRoute from "./utils/AuthRedirectRoute";
 
+/*
 const router = createBrowserRouter([
   {
     path: "/",
@@ -102,9 +108,11 @@ const router = createBrowserRouter([
     ],
   },
 ]);
+*/
 
 export default function App() {
   return (
+    /*
     <NoteProvider>
       <NavigateProvider>
         <AuthProvider>
@@ -114,6 +122,16 @@ export default function App() {
         </AuthProvider>
       </NavigateProvider>
     </NoteProvider>
+    */
+    <Routes>
+      <Route path="/" element={<LandingPage />} />
+
+      <Route path="/accounts" element={<AuthLayout />}>
+        <Route path="login" element={<Login />} />
+        <Route path="signup" element={<Singup />} />
+        <Route path="forgotten" element={<ForgetAuthPassword />} />
+      </Route>
+    </Routes>
   );
 }
 

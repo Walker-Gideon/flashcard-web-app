@@ -12,5 +12,14 @@ export default function AuthRedirectRoute() {
   ) {
     return <Navigate to="/accounts/login" />;
   }
+
+  // if (
+  //   isAuthenticated &&
+  //   (pathname.includes("/login") || pathname.includes("/signup"))
+  // ) {
+  //   return <Navigate to="/accounts/login" />;
+  //   return 0;
+  // }
+
   return <Outlet />;
 }

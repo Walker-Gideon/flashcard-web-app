@@ -11,7 +11,7 @@ export default function SignupForm() {
   const [showPassword, setShowPassword] = useState(true);
   const [showConfirmPassword, setShowConfirmPassword] = useState(true);
 
-  const actionData = useActionData();
+  // const actionData = useActionData();
 
   const stylings = {
     input: "w-full",
@@ -21,10 +21,11 @@ export default function SignupForm() {
 
   return (
     <div className="medium:w-80 mt-6 w-70">
-      <Form method="post">
-        {actionData?.error && (
+      <form>
+        {/* <Form method="post"> */}
+        {/* {actionData?.error && (
           <p className="mb-2 text-sm text-red-600">{actionData.error}</p>
-        )}
+        )} */}
 
         <div className="flex flex-col">
           <Input
@@ -95,7 +96,7 @@ export default function SignupForm() {
         </div>
 
         <Button
-          disabled={loading}
+          // disabled={loading}
           type="submit"
           variant="primary"
           classname="w-full py-2 disabled:bg-gray-400 disabled:cursor-not-allowed
@@ -103,7 +104,7 @@ export default function SignupForm() {
         >
           Sign up
         </Button>
-      </Form>
+      </form>
     </div>
   );
 }

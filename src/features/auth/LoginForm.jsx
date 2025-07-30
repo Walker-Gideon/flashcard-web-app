@@ -7,10 +7,10 @@ import Button from "../../ui/Button";
 import { useAuth } from "../../context/AuthContext";
 
 export default function LoginForm() {
-  const { loading } = useAuth();
+  const { loading, loginAndSignup } = useAuth();
   const [showPassword, setShowPassword] = useState(true);
 
-  const actionData = useActionData();
+  // const actionData = useActionData();
 
   const stylings = {
     input: "w-full",
@@ -19,10 +19,11 @@ export default function LoginForm() {
 
   return (
     <div className="medium:w-80 mt-6 w-70">
-      <Form method="post">
-        {actionData?.error && (
+      <Form>
+        {/* <Form method="post"> */}
+        {/* {actionData?.error && (
           <p className="mb-2 text-sm text-red-600">{actionData.error}</p>
-        )}
+        )} */}
 
         <Input
           type="email"
@@ -43,8 +44,7 @@ export default function LoginForm() {
           <Button
             variant="outline"
             disabled={loading}
-            classname="absolute top-2.5 right-2  disabled:cursor-not-allowed
-"
+            classname="absolute top-2.5 right-2  disabled:cursor-not-allowed"
             onClick={(e) => {
               e.preventDefault();
               setShowPassword(!showPassword);
@@ -59,11 +59,12 @@ export default function LoginForm() {
         </div>
 
         <Button
-          disabled={loading}
+          // disabled={loading}
           type="submit"
           variant="primary"
           classname="w-full py-2 disabled:bg-gray-400 disabled:cursor-not-allowed
 "
+          onClick={loginAndSignup}
         >
           Log in
         </Button>

@@ -9,13 +9,15 @@ function AuthProvider({ children }) {
   const [isAuhenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
+  function loginAndSignup() {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+      setIsAuthenticated(true);
+      console.log(isAuhenticated);
       setLoading(false);
     });
     return () => unsubscribe();
-  }, []);
+  }
 
   const logoutUser = async () => {
     try {
@@ -35,6 +37,7 @@ function AuthProvider({ children }) {
     logoutUser,
     isAuhenticated,
     setIsAuthenticated,
+    loginAndSignup,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
