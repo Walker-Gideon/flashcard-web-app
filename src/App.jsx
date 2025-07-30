@@ -131,6 +131,19 @@ export default function App() {
         <Route path="signup" element={<Singup />} />
         <Route path="forgotten" element={<ForgetAuthPassword />} />
       </Route>
+
+      {/* Protected Route */}
+      <Route path="/verify" element={<Verify />} />
+
+      {/* Dashboard routes */}
+      <Route path="/dashboard" element={<AppLayout />}>
+        <Route index="true" element={<DashboardLayout />} />
+        <Route path="notes" element={<NoteLayout />} />
+        <Route path="flashcards" element={<FlashcardLayout />} />
+        <Route path="schedules" element={<SchedulesLayout />} />
+        <Route path="inspire" element={<InspireLayout />} />
+        <Route path="settings" element={<SettingsLayout />} />
+      </Route>
     </Routes>
   );
 }
