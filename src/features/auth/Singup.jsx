@@ -34,7 +34,7 @@ export default function Singup() {
           <SignupForm />
 
           <div className="mt-2 flex items-center justify-center gap-2">
-            <p className="text-[0.8rem] whitespace-nowrap text-stone-400">
+            <p className="text-[0.8rem] whitespace-nowrap text-slate-400">
               Already have an account?
             </p>
 
@@ -50,7 +50,7 @@ export default function Singup() {
 
           <div>
             <div className="flex items-center justify-center py-4">
-              <p className="text-sm text-stone-400">or you can Sign up with</p>
+              <p className="text-sm text-slate-400">or you can Sign up with</p>
             </div>
 
             <Button

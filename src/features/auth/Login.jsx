@@ -56,7 +56,7 @@ export default function Login() {
 
           <div>
             <div className="flex items-center justify-center py-4">
-              <p className="text-sm text-stone-400">or you can Log In with</p>
+              <p className="text-sm text-slate-400">or you can Log In with</p>
             </div>
 
             <Button

@@ -5,7 +5,7 @@ export default function AuthHeader() {
     <div className="flex flex-col items-center justify-center">
       <Logo logo={true} />
 
-      <p className="medium:text-base middle:text-lg mt-2 text-sm font-bold">
+      <p className="medium:text-base middle:text-lg mt-2 text-sm font-bold text-slate-500">
         WalkWise
       </p>
     </div>
