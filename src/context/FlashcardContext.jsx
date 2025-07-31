@@ -3,7 +3,7 @@ import { createContext, useContext, useMemo, useState } from "react";
 const FlashcardContext = createContext();
 
 function FlashcardProvider({ children }) {
-  const [showCreateFlashcard, setShowCreateFlashcard] = useState();
+  const [showCreateFlashcard, setShowCreateFlashcard] = useState(false);
 
   const value = useMemo(
     () => ({ showCreateFlashcard, setShowCreateFlashcard }),

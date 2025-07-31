@@ -2,9 +2,16 @@ import { LuNotebookText } from "react-icons/lu";
 import Button from "../../ui/Button";
 import PromptDisplay from "../../ui/PromptDisplay";
 import FlashcardHeader from "./FlashcardHeader";
+import { useFlash } from "../../context/FlashcardContext";
+import useLazyLoading from "../../ui/LazyLoading";
 
 export default function FlashcardInit() {
-  function handleCreateFlashcard() {}
+  const { setShowCreateFlashcard } = useFlash();
+  const lazyLoading = useLazyLoading();
+
+  function handleCreateFlashcard() {
+    setShowCreateFlashcard((show) => !show);
+  }
 
   return (
     <div>
