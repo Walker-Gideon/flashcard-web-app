@@ -1,4 +1,5 @@
 import { LuCheck } from "react-icons/lu";
+import CardBadge from "../../../ui/CardBadge";
 
 const info = [
   {
@@ -20,16 +21,21 @@ export default function InfoContent() {
     <div className="text-left">
       {info.map((data, index) => (
         <div key={index} className="mb-2 flex gap-2">
-          <div className="mt-1 flex h-3 w-3 items-center justify-center rounded-full bg-stone-400">
-            <LuCheck />
-          </div>
-
-          <div className="middle:text-[0.8rem] text-xs text-slate-800">
-            <p className="middle:text-[0.9rem] text-sm text-slate-950">
-              {data.header}
-            </p>
-            <p>{data.text}</p>
-          </div>
+          <ul className="flex gap-2 py-0.5 text-sm md:text-[0.9rem]">
+            <li>
+              <CardBadge classname="rounded-full p-1 bg-gradient-to-r from-slate-200 to-slate-300">
+                <LuCheck className="h-3 w-3 text-slate-600" />
+              </CardBadge>
+            </li>
+            <li>
+              <div className="middle:text-[0.8rem] text-xs text-slate-800">
+                <p className="middle:text-[0.9rem] text-sm font-medium text-slate-900">
+                  {data.header}
+                </p>
+                <p className="text-slate-500">{data.text}</p>
+              </div>
+            </li>
+          </ul>
         </div>
       ))}
     </div>
