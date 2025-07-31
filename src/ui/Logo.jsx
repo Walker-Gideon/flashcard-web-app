@@ -19,7 +19,7 @@ export default function Logo({ to, logo, classname }) {
       spy={true}
       duration={500}
       offset={-100}
-      className="flex cursor-pointer items-center gap-1 font-bold text-slate-950 uppercase"
+      className="flex cursor-pointer items-center gap-1 font-bold text-slate-500 uppercase"
     >
       <span className={className.logo}>w</span>
       <span className={`hidden font-bold md:block`}>walkwise</span>

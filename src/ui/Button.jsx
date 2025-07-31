@@ -56,7 +56,7 @@ export default function Button({
       disabled={disabled}
       onClick={() => startLoadingAndNavigate(to)}
       whileTap={{ y: 1 }}
-      className={`button ${color ? `bg-stone-950 py-2 font-semibold text-white hover:bg-slate-900` : `border-gray-600 py-[7px] font-bold`} ${btnPaddX ? `${btnPaddX}` : `medium:px-6 px-4`} ${classname}`}
+      className={`button transition-colors ${color ? `bg-slate-500 py-2 font-semibold text-white hover:bg-slate-600` : `border-stone-300 py-[7px] font-bold text-slate-700 hover:border-slate-400`} ${btnPaddX ? `${btnPaddX}` : `medium:px-6 px-4`} ${classname}`}
     >
       {children}
     </motion.button>
@@ -64,4 +64,4 @@ export default function Button({
 }
 
 /*
-medium:py-2 medium:text-[0.74rem] cursor-pointer rounded-sm border border-slate-950 bg-transparent py-1.5 text-[0.7rem] font-semibold ${btnPaddX ? `${btnPaddX}` : `medium:px-10 px-8`}*/
+medium:py-2 medium:text-[0.74rem] cursor-pointer rounded-sm border border-slate-500 bg-transparent py-1.5 text-[0.7rem] font-semibold ${btnPaddX ? `${btnPaddX}` : `medium:px-10 px-8`}*/
