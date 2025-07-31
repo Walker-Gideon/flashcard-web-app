@@ -6,7 +6,7 @@ import MainContent from "./MainContent";
 
 const overViewData = [
   {
-    icon: <LuRepeat />,
+    icon: LuRepeat,
     title: "Review with Spaced-Repetition Flashcards",
     subtitle: "Strengthen memory through proven recall techniques.",
     points: [
@@ -17,7 +17,7 @@ const overViewData = [
     image: "",
   },
   {
-    icon: <LuChartLine />,
+    icon: LuChartLine,
     title: " Track Your Consistency & Daily Progress",
     subtitle: "Stay motivated and organized with visual progress insights.",
     points: [
@@ -28,7 +28,7 @@ const overViewData = [
     image: "",
   },
   {
-    icon: <LuMessageSquare />,
+    icon: LuMessageSquare,
     title: "Get Motivation, Tips, and Reminders",
     subtitle: "Keep going with study hacks, encouragement, and nudges.",
     points: [
@@ -39,7 +39,7 @@ const overViewData = [
     image: "",
   },
   {
-    icon: <LuMessageSquareText />,
+    icon: LuMessageSquareText,
     title: " AI Support When You’re Stuck",
     subtitle:
       "Get help instantly with answers and explanations tailored to you.",
@@ -58,11 +58,11 @@ export default function MainOverview() {
       {overViewData.map((data, index) => (
         <div
           key={index}
-          className={`mb-20 ${index === 0 ? `w-full rounded-4xl bg-stone-200/30` : ``} ${index === 2 ? `w-full rounded-4xl bg-stone-200/30` : ``}`}
+          className={`mb-20 ${index === 0 || index === 2 ? `w-full rounded-4xl bg-slate-50` : ``} `}
         >
           <MainContent
             index={index}
-            icon={data.icon}
+            icon={<data.icon className={`h-5 w-5 text-slate-600`} />}
             title={data.title}
             subtitle={data.subtitle}
             points={data.points}
