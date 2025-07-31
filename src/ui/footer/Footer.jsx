@@ -8,7 +8,9 @@ export default function Footer() {
       <div className="medium:flex-row medium:pb-10 medium:items-center flex flex-col justify-between gap-4 pb-2">
         <div className="flex items-center gap-1 font-bold text-slate-950 uppercase">
           <Logo logo={true} />
-          <span className={`medium:text-base text-sm font-bold`}>walkwise</span>
+          <span className={`medium:text-base text-sm font-bold text-slate-500`}>
+            walkwise
+          </span>
         </div>
         <FooterLinks />
       </div>
