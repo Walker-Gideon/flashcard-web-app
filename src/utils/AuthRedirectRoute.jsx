@@ -40,6 +40,8 @@ export default function AuthRedirectRoute({ children }) {
   }
     */
 
+  // I am using this one
+  /*
   // Scenario 1: Unauthenticated user trying to access protected routes
   if (
     !isAuthenticated &&
@@ -61,6 +63,7 @@ export default function AuthRedirectRoute({ children }) {
   if (isAuthenticated && isVerify && pathname === "/verify") {
     return <Navigate to="/dashboard" replace />;
   }
+    */
 
   return <>{children}</>;
 }

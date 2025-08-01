@@ -1,7 +1,8 @@
 import { useNote } from "../../../../context/NoteContext";
 import Button from "../../../../ui/Button";
 
-export default function CreateNoteHeader({ isSubmitting }) {
+export default function CreateNoteHeader() {
+  // export default function CreateNoteHeader({ isSubmitting }) {
   const { title, content, setTitle, setContent, setCreateNote } = useNote();
 
   function handleSubmit() {
@@ -25,10 +26,11 @@ export default function CreateNoteHeader({ isSubmitting }) {
         color={
           "bg-slate-500 text-white hover:bg-slate-600 focus:ring-slate-300 disabled:bg-gray-400 disabled:cursor-not-allowed"
         }
-        disabled={isSubmitting || !title || !content}
+        // disabled={isSubmitting || !title || !content}
         onClick={handleSubmit}
       >
-        {isSubmitting ? "Saving..." : "Save Note"}
+        {/* {isSubmitting ? "Saving..." : "Save Note"} */}
+        Save Note
       </Button>
     </header>
   );
