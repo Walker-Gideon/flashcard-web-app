@@ -1,5 +1,6 @@
 import { schedulesMockData } from "../../../data/schedulesMockData";
 import SchedulesToday from "./SchedulesToday";
+import ScheduleWeeks from "./ScheduleWeeks";
 
 export default function SchedulesLeftContentLayout({
   activeView,
@@ -14,6 +15,13 @@ export default function SchedulesLeftContentLayout({
         activeView={activeView}
         getStatusColor={getStatusColor}
         getStatusIcon={getStatusIcon}
+        getSubjectColor={getSubjectColor}
+      />
+
+      <ScheduleWeeks
+        schedulesMockData={schedulesMockData}
+        activeView={activeView}
+        getStatusColor={getStatusColor}
         getSubjectColor={getSubjectColor}
       />
     </div>
