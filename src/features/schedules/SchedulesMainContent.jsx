@@ -1,5 +1,5 @@
 import SchedulesLeftContentLayout from "./schedulesContent/SchedulesLeftContentLayout";
-import SchedulesRightContentLayout from "./schedulesContent/SchedulesRightContentLayout";
+import SchedulesRightContentLayout from "./schedulesContent/scheduleRight/SchedulesRightContentLayout";
 
 import { LuClock } from "react-icons/lu";
 import { LuCalendar } from "react-icons/lu";
