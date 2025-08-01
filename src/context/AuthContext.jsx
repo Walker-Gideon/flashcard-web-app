@@ -25,8 +25,15 @@ function AuthProvider({ children }) {
       setUser(null);
       setIsAuthenticated(false);
       setIsVerify(false);
+      // Reset all auth states to ensure clean logout
+      setLoading(false);
+      setIsSigningUp(false);
     } catch (error) {
       console.error("Logout failed:", error);
+      // Even if Firebase logout fails, reset local state
+      setUser(null);
+      setIsAuthenticated(false);
+      setIsVerify(false);
     }
   };
 
