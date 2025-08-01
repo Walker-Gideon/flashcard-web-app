@@ -1,6 +1,5 @@
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { app } from "../../firebase";
-
 import { useState } from "react";
 import { FiEyeOff } from "react-icons/fi";
 import { FiEye } from "react-icons/fi";
@@ -10,31 +9,36 @@ import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 export default function LoginForm() {
-  const { loading, loginAndSignup, setIsAuthenticated } = useAuth();
+  const { loading, loginAndSignup, setIsAuthenticated, setIsSigningUp } =
+    useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(true);
 
-  // const actionData = useActionData();
   const navigate = useNavigate();
   const auth = getAuth(app);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
+    setIsSigningUp(true);
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      return { error: "Please enter a valid email address" };
+      setError("Please enter a valid email address");
+      setIsSigningUp(false);
+      return;
     }
 
     if (!email || !password) {
-      return { error: "Email and password are required." };
+      setError("Email and password are required.");
+      setIsSigningUp(false);
+      return;
     }
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
-
       setIsAuthenticated(true);
       navigate("/verify", { replace: true });
     } catch (err) {
@@ -58,6 +62,8 @@ export default function LoginForm() {
           break;
       }
       setError(errorMessage);
+    } finally {
+      setIsSigningUp(false);
     }
   };
 

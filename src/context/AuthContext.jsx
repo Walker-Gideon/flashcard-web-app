@@ -9,6 +9,7 @@ function AuthProvider({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isVerify, setIsVerify] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [isSigningUp, setIsSigningUp] = useState(false);
 
   function loginAndSignup() {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -40,6 +41,8 @@ function AuthProvider({ children }) {
     loginAndSignup,
     isVerify,
     setIsVerify,
+    isSigningUp,
+    setIsSigningUp,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
