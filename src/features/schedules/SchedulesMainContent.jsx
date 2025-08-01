@@ -1,7 +1,7 @@
 import SchedulesLeftContentLayout from "./schedulesContent/SchedulesLeftContentLayout";
 import SchedulesRightContentLayout from "./schedulesContent/SchedulesRightContentLayout";
 
-export default function SchedulesMainContent() {
+export default function SchedulesMainContent({ activeView }) {
   const getStatusColor = (status) => {
     switch (status) {
       case "completed":
@@ -45,7 +45,12 @@ export default function SchedulesMainContent() {
 
   return (
     <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
-      <SchedulesLeftContentLayout />
+      <SchedulesLeftContentLayout
+        activeView={activeView}
+        getStatusColor={getStatusColor}
+        getStatusIcon={getStatusIcon}
+        getSubjectColor={getSubjectColor}
+      />
       <SchedulesRightContentLayout />
     </div>
   );
