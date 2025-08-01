@@ -2,8 +2,14 @@ import { useNote } from "../../../../context/NoteContext";
 import Button from "../../../../ui/Button";
 
 export default function CreateNoteHeader() {
-  // export default function CreateNoteHeader({ isSubmitting }) {
-  const { title, content, setTitle, setContent, setCreateNote } = useNote();
+  const {
+    title,
+    content,
+    setTitle,
+    setContent,
+    setCreateNote,
+    isSubmittingNote,
+  } = useNote();
 
   function handleSubmit() {
     setTimeout(() => {
@@ -21,16 +27,15 @@ export default function CreateNoteHeader() {
 
       <Button
         variant="primary"
-        type={"submit"}
+        type="submit"
         classname={"py-2 border-0"}
         color={
           "bg-slate-500 text-white hover:bg-slate-600 focus:ring-slate-300 disabled:bg-gray-400 disabled:cursor-not-allowed"
         }
-        // disabled={isSubmitting || !title || !content}
+        disabled={isSubmittingNote || !title || !content}
         onClick={handleSubmit}
       >
-        {/* {isSubmitting ? "Saving..." : "Save Note"} */}
-        Save Note
+        {isSubmittingNote ? "Saving..." : "Save Note"}
       </Button>
     </header>
   );
