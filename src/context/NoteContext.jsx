@@ -27,6 +27,7 @@ function NoteProvider({ children }) {
   const [createNote, setCreateNote] = useState(false);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [isSubmitingNote, setIsSubmitingNote] = useState(false);
 
   const value = {
     createNote,
@@ -37,6 +38,8 @@ function NoteProvider({ children }) {
     setContent,
     activeBtn,
     dispatch,
+    isSubmitingNote,
+    setIsSubmitingNote,
   };
 
   return <NoteContext.Provider value={value}>{children}</NoteContext.Provider>;
