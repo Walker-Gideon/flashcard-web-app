@@ -5,7 +5,6 @@ import {
 } from "firebase/auth";
 import { getFirestore, setDoc, doc, serverTimestamp } from "firebase/firestore";
 import { app } from "../../firebase";
-
 import { useState } from "react";
 import { FiEyeOff } from "react-icons/fi";
 import { FiEye } from "react-icons/fi";
@@ -14,8 +13,8 @@ import Button from "../../ui/Button";
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
-export default function SignupForm({ onSigningUp }) {
-  const { loading, setIsAuthenticated } = useAuth();
+export default function SignupForm() {
+  const { loading, setIsAuthenticated, setIsSigningUp } = useAuth();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -25,15 +24,40 @@ export default function SignupForm({ onSigningUp }) {
   const [showConfirmPassword, setShowConfirmPassword] = useState(true);
 
   const navigate = useNavigate();
-
-  console.log(onSigningUp);
-
   const auth = getAuth(app);
   const db = getFirestore(app);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
+    setIsSigningUp(true);
 
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setError("Please enter a valid email address");
+      setIsSigningUp(false);
+      return;
+    }
+
+    if (!username || username.trim().length < 2) {
+      setError("Username must be at least 2 characters");
+      setIsSigningUp(false);
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      setError("Passwords do not match");
+      setIsSigningUp(false);
+      return;
+    }
+
+    if (password.length < 6) {
+      setError("Password should be at least 6 characters");
+      setIsSigningUp(false);
+      return;
+    }
+
+    /*
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       return { error: "Please enter a valid email address" };
@@ -50,6 +74,7 @@ export default function SignupForm({ onSigningUp }) {
     if (password.length < 6) {
       return { error: "Password should be at least 6 characters" };
     }
+        */
 
     try {
       const userCredential = await createUserWithEmailAndPassword(
@@ -86,6 +111,8 @@ export default function SignupForm({ onSigningUp }) {
           break;
       }
       setError(errorMessage);
+    } finally {
+      setIsSigningUp(false);
     }
   };
 
@@ -134,7 +161,7 @@ export default function SignupForm({ onSigningUp }) {
           />
           <Button
             variant="outline"
-            disabled={!loading}
+            disabled={loading}
             classname={stylings.button}
             onClick={(e) => {
               e.preventDefault();
@@ -161,7 +188,7 @@ export default function SignupForm({ onSigningUp }) {
           />
           <Button
             variant="outline"
-            disabled={!loading}
+            disabled={loading}
             classname={stylings.button}
             onClick={(e) => {
               e.preventDefault();

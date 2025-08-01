@@ -6,11 +6,11 @@ import SignupForm from "./SignupForm";
 import Button from "../../ui/Button";
 import useLoaderAction from "../../utils/LoaderAction";
 import Spinner from "../../ui/Spinner";
-import { useState } from "react";
+import { useAuth } from "../../context/AuthContext";
 
 export default function Singup() {
   const { loading } = useLoader();
-  const [isSigningUp, setIsSigningUp] = useState(false);
+  const { isSigningUp } = useAuth();
   const navigateLoader = useLoaderAction();
 
   return (
@@ -26,7 +26,7 @@ export default function Singup() {
         ) : (
           <div className="rounded-xl border border-stone-300 px-6 py-8 shadow-lg">
             <AuthHeader />
-            <SignupForm onSigningUp={setIsSigningUp} />
+            <SignupForm />
 
             <div className="mt-2 flex items-center justify-center gap-2">
               <p className="text-[0.8rem] whitespace-nowrap text-slate-400">
