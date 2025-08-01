@@ -7,6 +7,7 @@ const AuthContext = createContext();
 function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isVerify, setIsVerify] = useState(false);
   const [loading, setLoading] = useState(true);
 
   function loginAndSignup() {
@@ -22,6 +23,7 @@ function AuthProvider({ children }) {
       await signOut(auth);
       setUser(null);
       setIsAuthenticated(false);
+      setIsVerify(false);
     } catch (error) {
       console.error("Logout failed:", error);
     }
@@ -36,6 +38,8 @@ function AuthProvider({ children }) {
     isAuthenticated,
     setIsAuthenticated,
     loginAndSignup,
+    isVerify,
+    setIsVerify,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

@@ -3,8 +3,10 @@ import Button from "./Button";
 import { LuCheck } from "react-icons/lu";
 import Loader from "./Loader";
 import CardBadge from "./CardBadge";
+import { useAuth } from "../context/AuthContext";
 
 export default function Verify() {
+  const { setIsVerify } = useAuth();
   const handelDashboard = useLoaderAction(1000);
 
   return (

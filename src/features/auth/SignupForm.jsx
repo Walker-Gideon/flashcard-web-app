@@ -26,10 +26,10 @@ export default function SignupForm({ onSigningUp }) {
 
   const navigate = useNavigate();
 
+  console.log(onSigningUp);
+
   const auth = getAuth(app);
   const db = getFirestore(app);
-
-  console.log(onSigningUp);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -70,8 +70,8 @@ export default function SignupForm({ onSigningUp }) {
         createdAt: serverTimestamp(),
       });
 
-      navigate("/verify");
       setIsAuthenticated(true);
+      navigate("/verify", { replace: true });
     } catch (err) {
       let errorMessage = "Signup failed. Please try again.";
       switch (err.code) {

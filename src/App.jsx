@@ -14,11 +14,8 @@ import SettingsLayout from "./features/settings/SettingsLayout";
 // import ProtectedRoute from "./utils/ProtectedRoute";
 import Verify from "./ui/Verify";
 import AuthRedirectRoute from "./utils/AuthRedirectRoute";
-import { useAuth } from "./context/AuthContext";
 
 export default function App() {
-  const { isAuthenticated } = useAuth();
-
   return (
     <Routes>
       <Route path="/" element={<LandingPage />} />
@@ -26,7 +23,7 @@ export default function App() {
       <Route
         path="/accounts"
         element={
-          <AuthRedirectRoute isAuthenticated={isAuthenticated}>
+          <AuthRedirectRoute>
             <AuthLayout />
           </AuthRedirectRoute>
         }
@@ -41,7 +38,7 @@ export default function App() {
       <Route
         path="/dashboard"
         element={
-          <AuthRedirectRoute isAuthenticated={isAuthenticated}>
+          <AuthRedirectRoute>
             <AppLayout />
           </AuthRedirectRoute>
         }
