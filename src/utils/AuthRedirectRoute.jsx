@@ -21,10 +21,8 @@ export default function AuthRedirectRoute({ children }) {
   // Define dashboard route
   const isDashboardRoute = pathname === "/dashboard";
 
-  // Scenario 1: Unauthenticated user trying to access protected routes
-  if (!isAuthenticated && !isPublicRoute) {
-    return <Navigate to="/" replace />;
-  }
+   const authRoutes = ["/login", "/signup"];
+  const isAuthRoute = authRoutes.some((route) => pathname === route);
 
   // Scenario 2: Authenticated user trying to access auth pages or landing page
   if (isAuthenticated && (isAuthRoute || pathname === "/")) {
@@ -41,6 +39,28 @@ export default function AuthRedirectRoute({ children }) {
     return <Navigate to="/verify" replace />;
   }
     */
+
+  // Scenario 1: Unauthenticated user trying to access protected routes
+  if (
+    !isAuthenticated &&
+    !(pathname.includes("/login") || pathname.includes("/signup"))
+  ) {
+    return <Navigate to="/accounts/login" replace />;
+  }
+
+  // Scenario 2: Authenticated user trying to access auth pages or landing page
+  if (
+    isAuthenticated &&
+    (pathname.includes("/accounts/login") ||
+      pathname.includes("/accounts/signup"))
+  ) {
+    return <Navigate to="/verify" replace />;
+  }
+
+  // Scenario 3: Verified user trying to access verify page
+  if (isAuthenticated && isVerify && pathname === "/verify") {
+    return <Navigate to="/dashboard" replace />;
+  }
 
   return <>{children}</>;
 }
