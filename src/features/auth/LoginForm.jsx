@@ -9,12 +9,11 @@ import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 export default function LoginForm() {
-  const { loading, loginAndSignup, setIsAuthenticated, setIsSigningUp } =
-    useAuth();
+  const { loading, setIsAuthenticated, setIsSigningUp } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [showPassword, setShowPassword] = useState(true);
+  const [hidePassword, setHidePassword] = useState(true);
 
   const navigate = useNavigate();
   const auth = getAuth(app);
@@ -24,7 +23,8 @@ export default function LoginForm() {
     setError("");
     setIsSigningUp(true);
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    // Email validation - more robust regex
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (!emailRegex.test(email)) {
       setError("Please enter a valid email address");
       setIsSigningUp(false);
@@ -43,24 +43,48 @@ export default function LoginForm() {
       navigate("/verify", { replace: true });
     } catch (err) {
       let errorMessage = "Login failed. Please check your credentials.";
-      switch (err.code) {
-        case "auth/invalid-email":
-          errorMessage = "Invalid email address.";
-          break;
-        case "auth/user-disabled":
-          errorMessage = "Your account has been disabled.";
-          break;
-        case "auth/user-not-found":
-        case "auth/wrong-password":
-          errorMessage = "Incorrect email or password.";
-          break;
-        case "auth/too-many-requests":
-          errorMessage = "Too many login attempts. Please try again later.";
-          break;
-        default:
-          console.error("Firebase login error:", err);
-          break;
+
+      // Handle Firebase Auth errors
+      if (err.code) {
+        switch (err.code) {
+          case "auth/invalid-email":
+            errorMessage =
+              "Invalid email address. Please check your email format.";
+            break;
+          case "auth/user-disabled":
+            errorMessage =
+              "Your account has been disabled. Please contact support.";
+            break;
+          case "auth/user-not-found":
+          case "auth/wrong-password":
+            errorMessage = "Incorrect email or password. Please try again.";
+            break;
+          case "auth/too-many-requests":
+            errorMessage = "Too many login attempts. Please try again later.";
+            break;
+          case "auth/network-request-failed":
+            errorMessage =
+              "Network error. Please check your internet connection.";
+            break;
+          case "auth/operation-not-allowed":
+            errorMessage =
+              "Email/password login is not enabled. Please contact support.";
+            break;
+          default:
+            console.error("Firebase Auth Error:", err.code, err.message);
+            errorMessage = "An unexpected error occurred. Please try again.";
+        }
+      } else {
+        // Handle non-Firebase errors (network, etc.)
+        console.error("Login Error:", err);
+        if (err.message?.includes("network")) {
+          errorMessage =
+            "Network error. Please check your internet connection.";
+        } else {
+          errorMessage = "Login failed. Please try again.";
+        }
       }
+
       setError(errorMessage);
     } finally {
       setIsSigningUp(false);
@@ -73,7 +97,7 @@ export default function LoginForm() {
   };
 
   return (
-    <div className="medium:w-80 mt-6 w-70">
+    <div className="medium:w-80 mt-4 w-70">
       <form onSubmit={handleSubmit}>
         {error && <p className="mb-2 text-sm text-red-600">{error}</p>}
 
@@ -89,7 +113,7 @@ export default function LoginForm() {
 
         <div className="relative my-2">
           <Input
-            type={!showPassword ? "text" : "password"}
+            type={!hidePassword ? "text" : "password"}
             name="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -100,13 +124,13 @@ export default function LoginForm() {
           <Button
             variant="outline"
             disabled={!loading}
-            classname="absolute top-2.5 right-2  disabled:cursor-not-allowed"
+            classname="absolute top-2.5 right-2 disabled:cursor-not-allowed"
             onClick={(e) => {
               e.preventDefault();
-              setShowPassword(!showPassword);
+              setHidePassword(!hidePassword);
             }}
           >
-            {showPassword ? (
+            {hidePassword ? (
               <FiEye className={stylings.icon} />
             ) : (
               <FiEyeOff className={stylings.icon} />
@@ -116,10 +140,9 @@ export default function LoginForm() {
 
         <Button
           type="submit"
+          disabled={!loading}
           variant="primary"
-          classname="w-full py-2 disabled:bg-gray-400 disabled:cursor-not-allowed
-"
-          onClick={loginAndSignup}
+          classname="w-full py-2 disabled:bg-slate-600 disabled:cursor-not-allowed"
         >
           Log in
         </Button>
