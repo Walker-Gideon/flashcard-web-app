@@ -22,7 +22,6 @@ export default function SignupForm() {
   const [error, setError] = useState("");
   const [hidePassword, setHidePassword] = useState(true);
   const [hideConfirmPassword, setHideConfirmPassword] = useState(true);
-  const [agreeToTerms, setAgreeToTerms] = useState(false);
 
   const navigate = useNavigate();
   const auth = getAuth(app);
@@ -33,7 +32,6 @@ export default function SignupForm() {
     setError("");
     setIsSigningUp(true);
 
-    // Email validation - more robust regex
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (!emailRegex.test(email)) {
       setError("Please enter a valid email address");
@@ -41,7 +39,6 @@ export default function SignupForm() {
       return;
     }
 
-    // Username validation - more comprehensive
     const trimmedUsername = username.trim();
     if (!trimmedUsername) {
       setError("Username is required");
@@ -61,7 +58,6 @@ export default function SignupForm() {
       return;
     }
 
-    // Check for valid username characters (alphanumeric, underscore, hyphen)
     const usernameRegex = /^[a-zA-Z0-9_-]+$/;
     if (!usernameRegex.test(trimmedUsername)) {
       setError(
@@ -71,7 +67,6 @@ export default function SignupForm() {
       return;
     }
 
-    // Password validation
     if (password !== confirmPassword) {
       setError("Passwords do not match");
       setIsSigningUp(false);
@@ -84,7 +79,6 @@ export default function SignupForm() {
       return;
     }
 
-    // Check for at least one uppercase letter, one lowercase letter, and one number
     const hasUpperCase = /[A-Z]/.test(password);
     const hasLowerCase = /[a-z]/.test(password);
     const hasNumbers = /\d/.test(password);
@@ -93,13 +87,6 @@ export default function SignupForm() {
       setError(
         "Password must contain at least one uppercase letter, one lowercase letter, and one number",
       );
-      setIsSigningUp(false);
-      return;
-    }
-
-    // Terms agreement validation
-    if (!agreeToTerms) {
-      setError("You must agree to the Terms of Service and Privacy Policy");
       setIsSigningUp(false);
       return;
     }
@@ -128,7 +115,6 @@ export default function SignupForm() {
     } catch (err) {
       let errorMessage = "Signup failed. Please try again.";
 
-      // Handle Firebase Auth errors
       if (err.code) {
         switch (err.code) {
           case "auth/email-already-in-use":
@@ -159,7 +145,6 @@ export default function SignupForm() {
             errorMessage = "An unexpected error occurred. Please try again.";
         }
       } else {
-        // Handle non-Firebase errors (network, etc.)
         console.error("Signup Error:", err);
         if (err.message?.includes("network")) {
           errorMessage =
@@ -260,33 +245,6 @@ export default function SignupForm() {
               <FiEyeOff className={stylings.icon} />
             )}
           </Button>
-        </div>
-
-        <div className="mb-4">
-          <label className="flex cursor-pointer items-start space-x-2">
-            <input
-              type="checkbox"
-              checked={agreeToTerms}
-              onChange={(e) => setAgreeToTerms(e.target.checked)}
-              className="mt-1 h-4 w-4 rounded border-gray-300 text-slate-600 focus:ring-slate-500"
-            />
-            <span className="text-sm text-gray-600">
-              I agree to the{" "}
-              <a
-                // href="/terms"
-                className="text-slate-600 underline hover:text-slate-800"
-              >
-                Terms of Service
-              </a>{" "}
-              and{" "}
-              <a
-                // href="/privacy"
-                className="text-slate-600 underline hover:text-slate-800"
-              >
-                Privacy Policy
-              </a>
-            </span>
-          </label>
         </div>
 
         <Button

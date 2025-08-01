@@ -33,7 +33,14 @@ export default function App() {
         <Route path="forgotten" element={<ForgetAuthPassword />} />
       </Route>
 
-      <Route path="/verify" element={<Verify />} />
+      <Route
+        path="/verify"
+        element={
+          <AuthRedirectRoute>
+            <Verify />
+          </AuthRedirectRoute>
+        }
+      />
 
       <Route
         path="/dashboard"

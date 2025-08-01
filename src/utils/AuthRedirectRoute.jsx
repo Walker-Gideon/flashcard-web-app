@@ -6,6 +6,7 @@ export default function AuthRedirectRoute({ children }) {
   const location = useLocation();
   const pathname = location.pathname;
 
+  /*
   // Define public routes (accessible without authentication)
   const publicRoutes = ["/", "/login", "/signup"];
   const isPublicRoute = publicRoutes.some((route) => pathname === route);
@@ -39,6 +40,7 @@ export default function AuthRedirectRoute({ children }) {
   if (isAuthenticated && !isVerify && isDashboardRoute) {
     return <Navigate to="/verify" replace />;
   }
+    */
 
   return <>{children}</>;
 }
