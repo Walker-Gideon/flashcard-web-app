@@ -20,8 +20,8 @@ export default function SignupForm() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
-  const [showPassword, setShowPassword] = useState(true);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(true);
+  const [hidePassword, setHidePassword] = useState(true);
+  const [hideConfirmPassword, setHideConfirmPassword] = useState(true);
 
   const navigate = useNavigate();
   const auth = getAuth(app);
@@ -99,17 +99,48 @@ export default function SignupForm() {
       navigate("/verify", { replace: true });
     } catch (err) {
       let errorMessage = "Signup failed. Please try again.";
-      switch (err.code) {
-        case "auth/email-already-in-use":
-          errorMessage = "Email already in use";
-          break;
-        case "auth/invalid-email":
-          errorMessage = "Invalid email address";
-          break;
-        case "auth/weak-password":
-          errorMessage = "Password is too weak";
-          break;
+
+      // Handle Firebase Auth errors
+      if (err.code) {
+        switch (err.code) {
+          case "auth/email-already-in-use":
+            errorMessage =
+              "Email already in use. Please try a different email or sign in.";
+            break;
+          case "auth/invalid-email":
+            errorMessage =
+              "Invalid email address. Please check your email format.";
+            break;
+          case "auth/weak-password":
+            errorMessage =
+              "Password is too weak. Please choose a stronger password.";
+            break;
+          case "auth/network-request-failed":
+            errorMessage =
+              "Network error. Please check your internet connection.";
+            break;
+          case "auth/too-many-requests":
+            errorMessage = "Too many attempts. Please try again later.";
+            break;
+          case "auth/operation-not-allowed":
+            errorMessage =
+              "Email/password signup is not enabled. Please contact support.";
+            break;
+          default:
+            console.error("Firebase Auth Error:", err.code, err.message);
+            errorMessage = "An unexpected error occurred. Please try again.";
+        }
+      } else {
+        // Handle non-Firebase errors (network, etc.)
+        console.error("Signup Error:", err);
+        if (err.message?.includes("network")) {
+          errorMessage =
+            "Network error. Please check your internet connection.";
+        } else {
+          errorMessage = "Signup failed. Please try again.";
+        }
       }
+
       setError(errorMessage);
     } finally {
       setIsSigningUp(false);
@@ -151,7 +182,7 @@ export default function SignupForm() {
 
         <div className="relative my-2">
           <Input
-            type={!showPassword ? "text" : "password"}
+            type={!hidePassword ? "text" : "password"}
             name="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -165,10 +196,10 @@ export default function SignupForm() {
             classname={stylings.button}
             onClick={(e) => {
               e.preventDefault();
-              setShowPassword(!showPassword);
+              setHidePassword(!hidePassword);
             }}
           >
-            {showPassword ? (
+            {hidePassword ? (
               <FiEye className={stylings.icon} />
             ) : (
               <FiEyeOff className={stylings.icon} />
@@ -178,7 +209,7 @@ export default function SignupForm() {
 
         <div className="relative pb-2">
           <Input
-            type={!showConfirmPassword ? "text" : "password"}
+            type={!hideConfirmPassword ? "text" : "password"}
             name="confirmPassword"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
@@ -192,10 +223,10 @@ export default function SignupForm() {
             classname={stylings.button}
             onClick={(e) => {
               e.preventDefault();
-              setShowConfirmPassword(!showConfirmPassword);
+              setHideConfirmPassword(!hideConfirmPassword);
             }}
           >
-            {showConfirmPassword ? (
+            {hideConfirmPassword ? (
               <FiEye className={stylings.icon} />
             ) : (
               <FiEyeOff className={stylings.icon} />
