@@ -1,3 +1,6 @@
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { app } from "../../firebase";
+
 import { useState } from "react";
 import { FiEyeOff } from "react-icons/fi";
 import { FiEye } from "react-icons/fi";
@@ -7,9 +10,15 @@ import { useAuth } from "../../context/AuthContext";
 
 export default function LoginForm() {
   const { loading, loginAndSignup } = useAuth();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(true);
 
   // const actionData = useActionData();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  };
 
   const stylings = {
     input: "w-full",
@@ -18,7 +27,7 @@ export default function LoginForm() {
 
   return (
     <div className="medium:w-80 mt-6 w-70">
-      <form>
+      <form onSubmit={handleSubmit}>
         {/* <Form method="post"> */}
         {/* {actionData?.error && (
           <p className="mb-2 text-sm text-red-600">{actionData.error}</p>
@@ -27,6 +36,8 @@ export default function LoginForm() {
         <Input
           type="email"
           name="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           placeholder="Email"
           required={true}
           classname={stylings.input}
@@ -36,6 +47,8 @@ export default function LoginForm() {
           <Input
             type={!showPassword ? "text" : "password"}
             name="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
             required={true}
             classname={stylings.input}
