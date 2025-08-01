@@ -56,8 +56,11 @@ export default function LoginForm() {
               "Your account has been disabled. Please contact support.";
             break;
           case "auth/user-not-found":
+            errorMessage =
+              "No account found with this email. Please check your email or sign up.";
+            break;
           case "auth/wrong-password":
-            errorMessage = "Incorrect email or password. Please try again.";
+            errorMessage = "Incorrect password. Please try again.";
             break;
           case "auth/too-many-requests":
             errorMessage = "Too many login attempts. Please try again later.";
