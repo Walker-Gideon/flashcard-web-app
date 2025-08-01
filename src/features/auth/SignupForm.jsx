@@ -22,6 +22,7 @@ export default function SignupForm() {
   const [error, setError] = useState("");
   const [hidePassword, setHidePassword] = useState(true);
   const [hideConfirmPassword, setHideConfirmPassword] = useState(true);
+  const [agreeToTerms, setAgreeToTerms] = useState(false);
 
   const navigate = useNavigate();
   const auth = getAuth(app);
@@ -92,6 +93,13 @@ export default function SignupForm() {
       setError(
         "Password must contain at least one uppercase letter, one lowercase letter, and one number",
       );
+      setIsSigningUp(false);
+      return;
+    }
+
+    // Terms agreement validation
+    if (!agreeToTerms) {
+      setError("You must agree to the Terms of Service and Privacy Policy");
       setIsSigningUp(false);
       return;
     }
@@ -233,7 +241,7 @@ export default function SignupForm() {
             name="confirmPassword"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
-            placeholder="Confirm Password"
+            placeholder="Confirm Your Password"
             required={true}
             classname={stylings.input}
           />
@@ -254,12 +262,38 @@ export default function SignupForm() {
           </Button>
         </div>
 
+        <div className="mb-4">
+          <label className="flex cursor-pointer items-start space-x-2">
+            <input
+              type="checkbox"
+              checked={agreeToTerms}
+              onChange={(e) => setAgreeToTerms(e.target.checked)}
+              className="mt-1 h-4 w-4 rounded border-gray-300 text-slate-600 focus:ring-slate-500"
+            />
+            <span className="text-sm text-gray-600">
+              I agree to the{" "}
+              <a
+                // href="/terms"
+                className="text-slate-600 underline hover:text-slate-800"
+              >
+                Terms of Service
+              </a>{" "}
+              and{" "}
+              <a
+                // href="/privacy"
+                className="text-slate-600 underline hover:text-slate-800"
+              >
+                Privacy Policy
+              </a>
+            </span>
+          </label>
+        </div>
+
         <Button
           type="submit"
           disabled={!loading}
           variant="primary"
-          classname="w-full py-2 disabled:bg-slate-600 disabled:cursor-not-allowed
-"
+          classname="w-full py-2 disabled:bg-slate-600 disabled:cursor-not-allowed"
         >
           Sign up
         </Button>

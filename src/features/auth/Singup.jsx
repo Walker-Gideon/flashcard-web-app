@@ -44,7 +44,7 @@ export default function Singup() {
             </div>
 
             <div>
-              <div className="flex items-center justify-center py-4">
+              <div className="mt-2 mb-4 flex items-center justify-center">
                 <p className="text-sm text-slate-400">
                   or you can Sign up with
                 </p>
