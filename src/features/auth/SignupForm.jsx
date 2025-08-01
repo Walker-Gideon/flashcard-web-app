@@ -182,7 +182,7 @@ export default function SignupForm() {
   };
 
   return (
-    <div className="medium:w-80 mt-6 w-70">
+    <div className="medium:w-80 mt-4 w-70">
       <form onSubmit={handleSubmit}>
         {error && <p className="mb-2 text-sm text-red-600">{error}</p>}
 

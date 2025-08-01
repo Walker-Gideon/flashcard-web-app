@@ -24,7 +24,7 @@ export default function Singup() {
         {isSigningUp ? (
           <Spinner />
         ) : (
-          <div className="rounded-xl border border-stone-300 px-6 py-8 shadow-lg">
+          <div className="rounded-xl border border-stone-300 p-6 shadow-lg">
             <AuthHeader />
             <SignupForm />
 
