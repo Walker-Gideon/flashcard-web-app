@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { motion } from "motion/react";
 import { useLoader } from "../context/LoaderContext";
-import useLazyLoading from "./LazyLoading";
+import useLoaderAction from "../utils/LoaderAction";
 
 export default function Button({
   children,
@@ -14,17 +14,17 @@ export default function Button({
   onClick,
   type,
 }) {
-  const { setLoading } = useLoader();
-  const Loader = useLazyLoading();
+  // const { setLoading } = useLoader();
+  const navigateLoader = useLoaderAction();
 
-  const navigate = useNavigate();
-  const startLoadingAndNavigate = (to) => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      navigate(to);
-    }, 500);
-  };
+  // const navigate = useNavigate();
+  // const startLoadingAndNavigate = (to) => {
+  //   setLoading(true);
+  //   setTimeout(() => {
+  //     setLoading(false);
+  //     navigate(to);
+  //   }, 500);
+  // };
 
   const base = "cursor-pointer transition-colors duration-300";
 
@@ -67,7 +67,7 @@ export default function Button({
   return (
     <motion.button
       disabled={disabled}
-      onClick={() => startLoadingAndNavigate(to)}
+      onClick={() => navigateLoader(to)}
       whileTap={{ y: 1 }}
       className={`button transition-colors ${color ? `border-0 bg-slate-500 py-2 font-semibold text-white hover:bg-slate-600` : `border-stone-300 py-[7px] font-bold text-slate-700 hover:border-slate-400`} ${btnPaddX ? `${btnPaddX}` : `medium:px-6 px-4`} ${classname}`}
     >

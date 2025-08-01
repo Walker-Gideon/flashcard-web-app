@@ -14,7 +14,7 @@ import Button from "../../ui/Button";
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
-export default function SignupForm() {
+export default function SignupForm({ onSigningUp }) {
   const { loading, setIsAuthenticated } = useAuth();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
@@ -28,6 +28,8 @@ export default function SignupForm() {
 
   const auth = getAuth(app);
   const db = getFirestore(app);
+
+  console.log(onSigningUp);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -68,8 +70,8 @@ export default function SignupForm() {
         createdAt: serverTimestamp(),
       });
 
+      navigate("/verify");
       setIsAuthenticated(true);
-      navigate("/verify", { replace: true });
     } catch (err) {
       let errorMessage = "Signup failed. Please try again.";
       switch (err.code) {
@@ -132,7 +134,7 @@ export default function SignupForm() {
           />
           <Button
             variant="outline"
-            disabled={loading}
+            disabled={!loading}
             classname={stylings.button}
             onClick={(e) => {
               e.preventDefault();
@@ -159,7 +161,7 @@ export default function SignupForm() {
           />
           <Button
             variant="outline"
-            disabled={loading}
+            disabled={!loading}
             classname={stylings.button}
             onClick={(e) => {
               e.preventDefault();

@@ -6,12 +6,12 @@ export default function AuthRedirectRoute({ isAuthenticated, children }) {
   const location = useLocation();
   const pathname = location.pathname;
 
-  // if (
-  //   !isAuthenticated &&
-  //   !(pathname.includes("/login") || pathname.includes("/signup"))
-  // ) {
-  //   return <Navigate to="/accounts/login" />;
-  // }
+  if (
+    !isAuthenticated &&
+    !(pathname.includes("/login") || pathname.includes("/signup"))
+  ) {
+    return <Navigate to="/accounts/login" />;
+  }
 
   if (
     isAuthenticated &&

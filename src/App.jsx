@@ -11,7 +11,7 @@ import FlashcardLayout from "./features/flashcard/FlashcardLayout";
 import SchedulesLayout from "./features/schedules/SchedulesLayout";
 import InspireLayout from "./features/inspire/InspireLayout";
 import SettingsLayout from "./features/settings/SettingsLayout";
-import ProtectedRoute from "./utils/ProtectedRoute";
+// import ProtectedRoute from "./utils/ProtectedRoute";
 import Verify from "./ui/Verify";
 import AuthRedirectRoute from "./utils/AuthRedirectRoute";
 import { useAuth } from "./context/AuthContext";
