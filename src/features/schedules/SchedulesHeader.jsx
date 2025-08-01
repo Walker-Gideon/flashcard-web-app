@@ -1,4 +1,3 @@
-import { LuSettings } from "react-icons/lu";
 import { LuSettings2 } from "react-icons/lu";
 
 export default function SchedulesHeader({ activeView, setActiveView }) {
@@ -33,7 +32,7 @@ export default function SchedulesHeader({ activeView, setActiveView }) {
           </div>
 
           <button className="rounded-xl border border-slate-200 bg-white p-2 shadow-sm transition-all duration-200 hover:shadow-md dark:border-slate-700 dark:bg-slate-800">
-            <LuSettings className="h-5 w-5 text-slate-600 dark:text-slate-400" />
+            <LuSettings2 className="h-5 w-5 text-slate-600 dark:text-slate-400" />
           </button>
         </div>
       </div>
