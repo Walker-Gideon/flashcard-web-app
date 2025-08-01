@@ -32,49 +32,69 @@ export default function SignupForm() {
     setError("");
     setIsSigningUp(true);
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    // Email validation - more robust regex
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (!emailRegex.test(email)) {
       setError("Please enter a valid email address");
       setIsSigningUp(false);
       return;
     }
 
-    if (!username || username.trim().length < 2) {
-      setError("Username must be at least 2 characters");
+    // Username validation - more comprehensive
+    const trimmedUsername = username.trim();
+    if (!trimmedUsername) {
+      setError("Username is required");
       setIsSigningUp(false);
       return;
     }
 
+    if (trimmedUsername.length < 3) {
+      setError("Username must be at least 3 characters");
+      setIsSigningUp(false);
+      return;
+    }
+
+    if (trimmedUsername.length > 20) {
+      setError("Username must be less than 20 characters");
+      setIsSigningUp(false);
+      return;
+    }
+
+    // Check for valid username characters (alphanumeric, underscore, hyphen)
+    const usernameRegex = /^[a-zA-Z0-9_-]+$/;
+    if (!usernameRegex.test(trimmedUsername)) {
+      setError(
+        "Username can only contain letters, numbers, underscores, and hyphens",
+      );
+      setIsSigningUp(false);
+      return;
+    }
+
+    // Password validation
     if (password !== confirmPassword) {
       setError("Passwords do not match");
       setIsSigningUp(false);
       return;
     }
 
-    if (password.length < 6) {
-      setError("Password should be at least 6 characters");
+    if (password.length < 8) {
+      setError("Password must be at least 8 characters long");
       setIsSigningUp(false);
       return;
     }
 
-    /*
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      return { error: "Please enter a valid email address" };
-    }
+    // Check for at least one uppercase letter, one lowercase letter, and one number
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasLowerCase = /[a-z]/.test(password);
+    const hasNumbers = /\d/.test(password);
 
-    if (!username || username.trim().length < 2) {
-      return { error: "Username must be at least 2 characters" };
+    if (!hasUpperCase || !hasLowerCase || !hasNumbers) {
+      setError(
+        "Password must contain at least one uppercase letter, one lowercase letter, and one number",
+      );
+      setIsSigningUp(false);
+      return;
     }
-
-    if (password !== confirmPassword) {
-      return { error: "Passwords do not match" };
-    }
-
-    if (password.length < 6) {
-      return { error: "Password should be at least 6 characters" };
-    }
-        */
 
     try {
       const userCredential = await createUserWithEmailAndPassword(
