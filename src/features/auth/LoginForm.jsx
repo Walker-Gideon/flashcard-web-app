@@ -7,17 +7,58 @@ import { FiEye } from "react-icons/fi";
 import Input from "../../ui/Input";
 import Button from "../../ui/Button";
 import { useAuth } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginForm() {
-  const { loading, loginAndSignup } = useAuth();
+  const { loading, loginAndSignup, setIsAuthenticated } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(true);
 
   // const actionData = useActionData();
+  const navigate = useNavigate();
+  const auth = getAuth(app);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return { error: "Please enter a valid email address" };
+    }
+
+    if (!email || !password) {
+      return { error: "Email and password are required." };
+    }
+
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+
+      setIsAuthenticated(true);
+      navigate("/verify", { replace: true });
+    } catch (err) {
+      let errorMessage = "Login failed. Please check your credentials.";
+      switch (err.code) {
+        case "auth/invalid-email":
+          errorMessage = "Invalid email address.";
+          break;
+        case "auth/user-disabled":
+          errorMessage = "Your account has been disabled.";
+          break;
+        case "auth/user-not-found":
+        case "auth/wrong-password":
+          errorMessage = "Incorrect email or password.";
+          break;
+        case "auth/too-many-requests":
+          errorMessage = "Too many login attempts. Please try again later.";
+          break;
+        default:
+          console.error("Firebase login error:", err);
+          break;
+      }
+      setError(errorMessage);
+    }
   };
 
   const stylings = {
@@ -28,10 +69,7 @@ export default function LoginForm() {
   return (
     <div className="medium:w-80 mt-6 w-70">
       <form onSubmit={handleSubmit}>
-        {/* <Form method="post"> */}
-        {/* {actionData?.error && (
-          <p className="mb-2 text-sm text-red-600">{actionData.error}</p>
-        )} */}
+        {error && <p className="mb-2 text-sm text-red-600">{error}</p>}
 
         <Input
           type="email"
@@ -55,7 +93,7 @@ export default function LoginForm() {
           />
           <Button
             variant="outline"
-            disabled={loading}
+            disabled={!loading}
             classname="absolute top-2.5 right-2  disabled:cursor-not-allowed"
             onClick={(e) => {
               e.preventDefault();
