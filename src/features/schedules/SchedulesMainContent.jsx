@@ -1,11 +1,10 @@
-import SchedulesLeftContentLayout from "./schedulesContent/SchedulesLeftContentLayout";
-import SchedulesRightContentLayout from "./schedulesContent/scheduleRight/SchedulesRightContentLayout";
-
 import { LuClock } from "react-icons/lu";
 import { LuCalendar } from "react-icons/lu";
 import { LuCircleCheck } from "react-icons/lu";
 import { LuCircleX } from "react-icons/lu";
 import { LuCircleAlert } from "react-icons/lu";
+import SchedulesLeftContentLayout from "./schedulesContent/scheduleLeft/SchedulesLeftContentLayout";
+import SchedulesRightContentLayout from "./schedulesContent/scheduleRight/SchedulesRightContentLayout";
 
 export default function SchedulesMainContent({ activeView }) {
   const getStatusColor = (status) => {

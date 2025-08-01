@@ -4,7 +4,7 @@ import SchedulesUpcomingReminder from "./SchedulesUpcomingReminder";
 
 export default function SchedulesRightContentLayout() {
   return (
-    <div>
+    <div className="space-y-6">
       <SchedulesQuickActions />
       <SchedulesStudyInsights />
       <SchedulesUpcomingReminder />

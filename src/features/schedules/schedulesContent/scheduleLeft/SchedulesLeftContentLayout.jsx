@@ -1,4 +1,4 @@
-import { schedulesMockData } from "../../../data/schedulesMockData";
+import { schedulesMockData } from "../../../../data/schedulesMockData";
 import SchedulesMonth from "./SchedulesMonth";
 import SchedulesToday from "./SchedulesToday";
 import ScheduleWeeks from "./ScheduleWeeks";
