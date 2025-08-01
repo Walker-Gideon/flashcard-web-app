@@ -1,6 +1,12 @@
 import SchedulesLeftContentLayout from "./schedulesContent/SchedulesLeftContentLayout";
 import SchedulesRightContentLayout from "./schedulesContent/SchedulesRightContentLayout";
 
+import { LuClock } from "react-icons/lu";
+import { LuCalendar } from "react-icons/lu";
+import { LuCircleCheck } from "react-icons/lu";
+import { LuCircleX } from "react-icons/lu";
+import { LuCircleAlert } from "react-icons/lu";
+
 export default function SchedulesMainContent({ activeView }) {
   const getStatusColor = (status) => {
     switch (status) {
@@ -20,15 +26,15 @@ export default function SchedulesMainContent({ activeView }) {
   const getStatusIcon = (status) => {
     switch (status) {
       case "completed":
-        return <CheckCircle className="h-4 w-4" />;
+        return <LuCircleCheck className="h-4 w-4" />;
       case "pending":
-        return <Clock className="h-4 w-4" />;
+        return <LuClock className="h-4 w-4" />;
       case "scheduled":
-        return <Calendar className="h-4 w-4" />;
+        return <LuCalendar className="h-4 w-4" />;
       case "skipped":
-        return <XCircle className="h-4 w-4" />;
+        return <LuCircleX className="h-4 w-4" />;
       default:
-        return <AlertCircle className="h-4 w-4" />;
+        return <LuCircleAlert className="h-4 w-4" />;
     }
   };
 
@@ -44,7 +50,7 @@ export default function SchedulesMainContent({ activeView }) {
   };
 
   return (
-    <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+    <main className="grid grid-cols-1 gap-8 lg:grid-cols-3">
       <SchedulesLeftContentLayout
         activeView={activeView}
         getStatusColor={getStatusColor}
@@ -52,6 +58,6 @@ export default function SchedulesMainContent({ activeView }) {
         getSubjectColor={getSubjectColor}
       />
       <SchedulesRightContentLayout />
-    </div>
+    </main>
   );
 }
