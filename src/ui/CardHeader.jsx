@@ -3,7 +3,7 @@ export default function CardHeader({ type, title, children }) {
 
   return (
     <header
-      className={`mb-6 flex items-center justify-between ${styling[type]}`}
+      className={`mb-4 flex items-center justify-between ${styling[type]}`}
     >
       <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
         {title}
