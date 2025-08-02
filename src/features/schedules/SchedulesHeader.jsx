@@ -1,5 +1,8 @@
 import { LuSettings2 } from "react-icons/lu";
 import UserWelcome from "../user/UserWelcome";
+import Button from "../../ui/Button";
+
+const schedules = ["today", "week", "month"];
 
 export default function SchedulesHeader({ activeView, setActiveView }) {
   return (
@@ -13,27 +16,100 @@ export default function SchedulesHeader({ activeView, setActiveView }) {
 
         <div className="flex items-center space-x-4">
           {/* View Toggle */}
-          <div className="rounded-xl border border-slate-200 bg-white p-1 shadow-sm dark:border-slate-700 dark:bg-slate-800">
-            {["today", "week", "month"].map((view) => (
-              <button
+          <div className="rounded-sm border border-slate-200 bg-white p-1 shadow-sm dark:border-slate-700 dark:bg-slate-800">
+            {schedules.map((view) => (
+              <Button
                 key={view}
                 onClick={() => setActiveView(view)}
-                className={`rounded-lg px-4 py-2 text-sm font-medium transition-all duration-200 ${
-                  activeView === view
-                    ? "bg-emerald-500 text-white shadow-sm"
-                    : "text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
-                }`}
+                variant="outline"
+                classname={`rounded-sm px-4 py-2 medium:text-[0.74rem] text-[0.7rem] font-medium transition-all duration-200 ${activeView === view ? `bg-slate-500 text-white shadow-sm` : `text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white`}`}
               >
                 {view.charAt(0).toUpperCase() + view.slice(1)}
-              </button>
+              </Button>
             ))}
           </div>
 
-          <button className="rounded-xl border border-slate-200 bg-white p-2 shadow-sm transition-all duration-200 hover:shadow-md dark:border-slate-700 dark:bg-slate-800">
-            <LuSettings2 className="h-5 w-5 text-slate-600 dark:text-slate-400" />
-          </button>
+          <Button
+            variant="outline"
+            classname="button border-slate-500 bg-slate-500  p-2 shadow-sm hover:shadow-md dark:border-slate-600 dark:bg-slate-600 focus:ring-slate-300"
+          >
+            <LuSettings2 className="h-5 w-5 text-white" />
+          </Button>
         </div>
       </div>
     </header>
   );
 }
+
+/*
+Again in the ScheduleLayout header there is a setting button what it is meant for?
+
+Great question! Looking at the code, the settings button is currently just a **placeholder** - it's rendered but doesn't have any actual functionality:
+
+## **🎯 What It's Intended For:**
+
+The settings button should open a **Schedule Settings Panel/Modal** where users can configure:
+
+### **📅 Schedule Preferences:**
+
+- **Study time preferences** (morning person vs night owl)
+- **Session duration** (15 min, 30 min, 45 min, 1 hour)
+- **Daily study goals** (number of cards, time spent)
+- **Break intervals** between sessions
+
+
+### **🔔 Notification Settings:**
+
+- **Reminder notifications** (15 min before, 1 hour before)
+- **Study streak reminders**
+- **Missed session alerts**
+- **Weekly progress summaries**
+
+
+### **🧠 Learning Algorithm:**
+
+- **Spaced repetition settings** (aggressive, normal, relaxed)
+- **Difficulty adjustment** sensitivity
+- **Review frequency** for different card types
+- **Retention targets** (80%, 90%, 95%)
+
+
+### **📊 Display Options:**
+
+- **Default view** (today, week, month)
+- **Calendar start day** (Sunday vs Monday)
+- **Time format** (12-hour vs 24-hour)
+- **Color themes** for different subjects
+
+
+### **⚡ Smart Features:**
+
+- **Auto-scheduling** preferences
+- **Workload balancing** settings
+- **Peak performance time** detection
+- **Adaptive scheduling** based on performance
+
+
+## **🔧 Current State:**
+
+Right now it's just a **visual element** with no functionality - clicking it does nothing.
+
+## **💡 Should We Implement It?**
+
+When we add Firebase integration, this settings button could:
+
+1. **Open a settings modal** with all the preferences above
+2. **Save settings to Firestore** under the user's profile
+3. **Apply settings** to influence scheduling algorithms
+4. **Sync across devices** for consistent experience
+
+
+Would you like me to:
+
+1. **Remove it** (since it's not functional yet)
+2. **Create the settings modal** with all the configuration options
+3. **Leave it as placeholder** for future implementation
+
+
+What's your preference? It's definitely something we should implement when we add Firebase, as user preferences are crucial for a personalized learning experience!
+*/
