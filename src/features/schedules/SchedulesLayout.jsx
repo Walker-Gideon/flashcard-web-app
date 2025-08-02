@@ -11,10 +11,10 @@ export default function SchedulesLayout() {
     <div className="defaultColor h-screen overflow-hidden">
       <SchedulesHeader activeView={activeView} setActiveView={setActiveView} />
 
-      <div className="medium:mt-0 mt-7 h-screen space-y-6 overflow-scroll p-6">
+      <main className="medium:mt-0 mt-7 h-screen space-y-6 overflow-scroll p-6">
         <SchedulesOverview />
         <SchedulesMainContent activeView={activeView} />
-      </div>
+      </main>
     </div>
   );
 }
