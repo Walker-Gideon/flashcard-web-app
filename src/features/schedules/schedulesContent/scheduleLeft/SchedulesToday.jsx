@@ -1,21 +1,20 @@
 import { LuPlay } from "react-icons/lu";
 import { LuPlus } from "react-icons/lu";
-import CardOverview from "../../../../ui/CardOverview";
 import Button from "../../../../ui/Button";
 import CardHeader from "../../../../ui/CardHeader";
 import CardContent from "../../../../ui/CardContent";
+import CardDiscription from "../../../../ui/CardDiscription";
 
 export default function SchedulesToday({
   schedulesMockData,
   activeView,
-  getSubjectColor,
   getStatusColor,
   getStatusIcon,
 }) {
   return (
     <div>
       {activeView === "today" && (
-        <CardOverview>
+        <>
           <CardHeader title="Today's Sessions">
             <Button
               variant="outline"
@@ -34,21 +33,19 @@ export default function SchedulesToday({
                 type="innerCard"
                 onClick={() => {}}
               >
-                <div className="flex items-center space-x-4">
+                <CardContent classname="flex items-center space-x-4">
                   <div
-                    className={`h-4 w-4 ${getSubjectColor(schedule.subject)} rounded-full`}
+                    className={`h-4 w-4 rounded-full bg-gradient-to-r from-slate-200 to-slate-300 dark:from-slate-600 dark:to-slate-700`}
                   ></div>
-                  <div>
-                    <h4 className="font-medium text-slate-900 dark:text-white">
-                      {schedule.subject}
-                    </h4>
-                    <p className="text-sm text-slate-500 dark:text-slate-400">
-                      {schedule.cardCount} cards • {schedule.estimatedTime} min
-                    </p>
-                  </div>
-                </div>
+                  <CardDiscription
+                    classnameFirst="font-medium text-slate-900 dark:text-white"
+                    classnameSecond="text-sm text-slate-500 dark:text-slate-400"
+                    textOne={schedule.subject}
+                    textTwo={`${schedule.cardCount} cards • ${schedule.estimatedTime} min`}
+                  />
+                </CardContent>
 
-                <div className="flex items-center space-x-4">
+                <CardContent classname="flex items-center space-x-4">
                   <div className="text-right">
                     <p className="text-sm font-medium text-slate-900 dark:text-white">
                       {schedule.scheduledTime}
@@ -61,14 +58,17 @@ export default function SchedulesToday({
                     </span>
                   </div>
 
-                  <button className="rounded-lg bg-emerald-500 p-2 text-white opacity-0 transition-colors group-hover:opacity-100 hover:bg-emerald-600">
+                  <Button
+                    variant="outline"
+                    classname="rounded-sm bg-slate-500 p-2 text-white opacity-0 transition-colors group-hover:opacity-100 hover:bg-slate-600"
+                  >
                     <LuPlay className="h-4 w-4" />
-                  </button>
-                </div>
+                  </Button>
+                </CardContent>
               </CardContent>
             ))}
           </div>
-        </CardOverview>
+        </>
       )}
     </div>
   );

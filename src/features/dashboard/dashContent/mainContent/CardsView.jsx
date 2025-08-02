@@ -3,6 +3,7 @@ import { LuChevronRight } from "react-icons/lu";
 import CardOverview from "../../../../ui/CardOverview";
 import CardHeader from "../../../../ui/CardHeader";
 import CardContent from "../../../../ui/CardContent";
+import CardDiscription from "../../../../ui/CardDiscription";
 
 export default function CardsView({
   mockData,
@@ -44,27 +45,25 @@ export default function CardsView({
             type="innerCard"
             onClick={() => handleFlashcardClick(flashcard)}
           >
-            <div className="flex items-center space-x-4">
+            <CardContent classname="flex items-center space-x-4">
               <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-r from-slate-200 to-slate-300 dark:from-slate-600 dark:to-slate-700">
                 <LuBookOpen className="h-5 w-5 text-slate-600 dark:text-slate-300" />
               </div>
-              <div>
-                <p className="font-medium text-slate-900 dark:text-white">
-                  {flashcard.term}
-                </p>
-                <p className="text-sm text-slate-500 dark:text-slate-400">
-                  {flashcard.subject}
-                </p>
-              </div>
-            </div>
-            <div className="flex items-center space-x-3">
+              <CardDiscription
+                classnameFirst="font-medium text-slate-900 dark:text-white"
+                classnameSecond="text-sm text-slate-500 dark:text-slate-400"
+                textOne={flashcard.term}
+                textTwo={flashcard.subject}
+              />
+            </CardContent>
+            <CardContent classname="flex items-center space-x-3">
               <span
                 className={`rounded-full px-2 py-1 text-xs font-medium ${getDifficultyColor(flashcard.difficulty)}`}
               >
                 {flashcard.difficulty}
               </span>
               <LuChevronRight className="h-4 w-4 text-slate-400 transition-colors group-hover:text-slate-600 dark:group-hover:text-slate-300" />
-            </div>
+            </CardContent>
           </CardContent>
         ))}
       </div>

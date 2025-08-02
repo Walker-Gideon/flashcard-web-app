@@ -7,6 +7,7 @@ import { LuCircleAlert } from "react-icons/lu";
 import SchedulesMonth from "./SchedulesMonth";
 import SchedulesToday from "./SchedulesToday";
 import ScheduleWeeks from "./ScheduleWeeks";
+import CardOverview from "../../../../ui/CardOverview";
 
 export default function SchedulesLeftContentLayout({ activeView }) {
   const getStatusColor = (status) => {
@@ -51,13 +52,12 @@ export default function SchedulesLeftContentLayout({ activeView }) {
   };
 
   return (
-    <div className="space-y-6 lg:col-span-2">
+    <CardOverview classname="space-y-6 lg:col-span-2">
       <SchedulesToday
         schedulesMockData={schedulesMockData}
         activeView={activeView}
         getStatusColor={getStatusColor}
         getStatusIcon={getStatusIcon}
-        getSubjectColor={getSubjectColor}
       />
 
       <ScheduleWeeks
@@ -71,6 +71,6 @@ export default function SchedulesLeftContentLayout({ activeView }) {
         schedulesMockData={schedulesMockData}
         activeView={activeView}
       />
-    </div>
+    </CardOverview>
   );
 }
