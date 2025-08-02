@@ -9,7 +9,6 @@ import CardOverview from "../../../../ui/CardOverview";
 export default function SchedulesToday({
   schedulesMockData,
   activeView,
-  getStatusColor,
   getStatusIcon,
 }) {
   return (
@@ -51,9 +50,7 @@ export default function SchedulesToday({
                     <p className="text-sm font-medium text-slate-900 dark:text-white">
                       {schedule.scheduledTime}
                     </p>
-                    <span
-                      className={`inline-flex items-center space-x-1 rounded-full px-2 py-1 text-xs font-medium ${getStatusColor(schedule.status)}`}
-                    >
+                    <span className="inline-flex items-center space-x-1 rounded-full bg-slate-200 px-2 py-1 text-xs font-medium text-slate-700 dark:bg-slate-900/30 dark:text-slate-300">
                       {getStatusIcon(schedule.status)}
                       <span>{schedule.status}</span>
                     </span>
