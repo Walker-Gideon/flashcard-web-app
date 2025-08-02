@@ -1,18 +1,15 @@
 import { LuSettings2 } from "react-icons/lu";
+import UserWelcome from "../user/UserWelcome";
 
 export default function SchedulesHeader({ activeView, setActiveView }) {
   return (
     <header className="medium:block sticky top-0 z-40 hidden border-b border-stone-300 bg-white/30 shadow-sm backdrop-blur-sm dark:border-slate-700 dark:bg-slate-800/80">
       {/* mb-8  */}
       <div className="flex items-center justify-between px-6 py-4">
-        <div>
-          <h1 className="text-3xl font-bold text-slate-900 dark:text-white">
-            Study Schedule
-          </h1>
-          <p className="mt-1 text-slate-600 dark:text-slate-400">
-            Plan and track your learning sessions
-          </p>
-        </div>
+        <UserWelcome
+          title="Study Schedule"
+          subText="Plan and track your learning sessions"
+        />
 
         <div className="flex items-center space-x-4">
           {/* View Toggle */}
