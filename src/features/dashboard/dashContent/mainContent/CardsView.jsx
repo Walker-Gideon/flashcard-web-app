@@ -2,6 +2,7 @@ import { LuBookOpen } from "react-icons/lu";
 import { LuChevronRight } from "react-icons/lu";
 import CardOverview from "../../../../ui/CardOverview";
 import CardHeader from "../../../../ui/CardHeader";
+import CardContent from "../../../../ui/CardContent";
 
 export default function CardsView({
   mockData,
@@ -37,9 +38,10 @@ export default function CardsView({
 
       <div className="space-y-3">
         {mockData.flashcardsDue.slice(0, 5).map((flashcard) => (
-          <div
+          <CardContent
             key={flashcard.id}
-            className="group flex cursor-pointer items-center justify-between rounded-xl bg-slate-50 p-4 transition-all duration-200 hover:bg-slate-100 dark:bg-slate-700/50 dark:hover:bg-slate-700"
+            role="button"
+            type="innerCard"
             onClick={() => handleFlashcardClick(flashcard)}
           >
             <div className="flex items-center space-x-4">
@@ -63,7 +65,7 @@ export default function CardsView({
               </span>
               <LuChevronRight className="h-4 w-4 text-slate-400 transition-colors group-hover:text-slate-600 dark:group-hover:text-slate-300" />
             </div>
-          </div>
+          </CardContent>
         ))}
       </div>
     </CardOverview>

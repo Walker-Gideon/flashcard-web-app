@@ -3,6 +3,7 @@ import { LuPlus } from "react-icons/lu";
 import CardOverview from "../../../../ui/CardOverview";
 import Button from "../../../../ui/Button";
 import CardHeader from "../../../../ui/CardHeader";
+import CardContent from "../../../../ui/CardContent";
 
 export default function SchedulesToday({
   schedulesMockData,
@@ -27,9 +28,11 @@ export default function SchedulesToday({
 
           <div className="space-y-4">
             {schedulesMockData.upcomingSchedules.map((schedule) => (
-              <div
+              <CardContent
                 key={schedule.id}
-                className="group flex items-center justify-between rounded-xl bg-slate-50 p-4 transition-all duration-200 hover:bg-slate-100 dark:bg-slate-700/50 dark:hover:bg-slate-700"
+                role="button"
+                type="innerCard"
+                onClick={() => {}}
               >
                 <div className="flex items-center space-x-4">
                   <div
@@ -62,7 +65,7 @@ export default function SchedulesToday({
                     <LuPlay className="h-4 w-4" />
                   </button>
                 </div>
-              </div>
+              </CardContent>
             ))}
           </div>
         </CardOverview>
