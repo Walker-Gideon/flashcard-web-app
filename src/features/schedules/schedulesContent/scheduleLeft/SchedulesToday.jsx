@@ -1,5 +1,7 @@
 import { LuPlay } from "react-icons/lu";
 import { LuPlus } from "react-icons/lu";
+import CardOverview from "../../../../ui/CardOverview";
+import Button from "../../../../ui/Button";
 
 export default function SchedulesToday({
   schedulesMockData,
@@ -11,15 +13,18 @@ export default function SchedulesToday({
   return (
     <div>
       {activeView === "today" && (
-        <div className="rounded-2xl border border-slate-200 bg-white/70 p-6 backdrop-blur-xl dark:border-slate-700 dark:bg-slate-800/70">
+        <CardOverview>
           <div className="mb-6 flex items-center justify-between">
             <h3 className="text-xl font-semibold text-slate-900 dark:text-white">
               Today's Sessions
             </h3>
-            <button className="flex items-center space-x-2 rounded-xl bg-emerald-500 px-4 py-2 text-white transition-colors hover:bg-emerald-600">
+            <Button
+              variant="outline"
+              classname="button flex items-center border-0 space-x-2 px-4 py-2 bg-slate-500 text-white hover:bg-slate-600 focus:ring-slate-300"
+            >
               <LuPlus className="h-4 w-4" />
               <span>Add Session</span>
-            </button>
+            </Button>
           </div>
 
           <div className="space-y-4">
@@ -62,7 +67,7 @@ export default function SchedulesToday({
               </div>
             ))}
           </div>
-        </div>
+        </CardOverview>
       )}
     </div>
   );
