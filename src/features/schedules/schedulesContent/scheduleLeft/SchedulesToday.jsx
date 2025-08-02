@@ -2,6 +2,7 @@ import { LuPlay } from "react-icons/lu";
 import { LuPlus } from "react-icons/lu";
 import CardOverview from "../../../../ui/CardOverview";
 import Button from "../../../../ui/Button";
+import CardHeader from "../../../../ui/CardHeader";
 
 export default function SchedulesToday({
   schedulesMockData,
@@ -14,10 +15,7 @@ export default function SchedulesToday({
     <div>
       {activeView === "today" && (
         <CardOverview>
-          <div className="mb-6 flex items-center justify-between">
-            <h3 className="text-xl font-semibold text-slate-900 dark:text-white">
-              Today's Sessions
-            </h3>
+          <CardHeader title="Today's Sessions">
             <Button
               variant="outline"
               classname="button flex items-center border-0 space-x-2 px-4 py-2 bg-slate-500 text-white hover:bg-slate-600 focus:ring-slate-300"
@@ -25,7 +23,7 @@ export default function SchedulesToday({
               <LuPlus className="h-4 w-4" />
               <span>Add Session</span>
             </Button>
-          </div>
+          </CardHeader>
 
           <div className="space-y-4">
             {schedulesMockData.upcomingSchedules.map((schedule) => (
