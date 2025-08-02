@@ -1,6 +1,7 @@
 import { LuBookOpen } from "react-icons/lu";
 import { LuChevronRight } from "react-icons/lu";
 import CardOverview from "../../../../ui/CardOverview";
+import CardHeader from "../../../../ui/CardHeader";
 
 export default function CardsView({
   mockData,
@@ -27,15 +28,12 @@ export default function CardsView({
 
   return (
     <CardOverview classname={"lg:col-span-2"}>
-      <div className="mb-6 flex items-center justify-between">
-        <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
-          Cards Due Today
-        </h3>
+      <CardHeader title="Cards Due Today">
         <span className="rounded-full bg-emerald-100 px-3 py-1 text-sm font-medium text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300">
           {mockData.flashcardsDue.filter((card) => card.due === "Today").length}{" "}
           cards
         </span>
-      </div>
+      </CardHeader>
 
       <div className="space-y-3">
         {mockData.flashcardsDue.slice(0, 5).map((flashcard) => (
