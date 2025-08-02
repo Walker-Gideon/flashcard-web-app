@@ -4,6 +4,7 @@ import Button from "../../../../ui/Button";
 import CardHeader from "../../../../ui/CardHeader";
 import CardContent from "../../../../ui/CardContent";
 import CardDiscription from "../../../../ui/CardDiscription";
+import CardOverview from "../../../../ui/CardOverview";
 
 export default function SchedulesToday({
   schedulesMockData,
@@ -14,7 +15,7 @@ export default function SchedulesToday({
   return (
     <div>
       {activeView === "today" && (
-        <>
+        <CardOverview classname={"lg:col-span-2 w-full"}>
           <CardHeader title="Today's Sessions">
             <Button
               variant="outline"
@@ -68,7 +69,7 @@ export default function SchedulesToday({
               </CardContent>
             ))}
           </div>
-        </>
+        </CardOverview>
       )}
     </div>
   );

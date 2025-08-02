@@ -41,7 +41,8 @@ export default function SchedulesLeftContentLayout({ activeView }) {
   };
 
   return (
-    <CardOverview classname="space-y-6 lg:col-span-2">
+    // Will adjust this later
+    <div className="space-y-6 lg:col-span-2">
       <SchedulesToday
         schedulesMockData={schedulesMockData}
         activeView={activeView}
@@ -58,6 +59,6 @@ export default function SchedulesLeftContentLayout({ activeView }) {
         schedulesMockData={schedulesMockData}
         activeView={activeView}
       />
-    </CardOverview>
+    </div>
   );
 }

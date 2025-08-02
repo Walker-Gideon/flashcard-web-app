@@ -1,11 +1,12 @@
 import { LuChevronRight } from "react-icons/lu";
 import { LuChevronLeft } from "react-icons/lu";
+import CardOverview from "../../../../ui/CardOverview";
 
 export default function SchedulesMonth({ schedulesMockData, activeView }) {
   return (
     <div>
       {activeView === "month" && (
-        <div className="rounded-2xl border border-slate-200 bg-white/70 p-6 backdrop-blur-xl dark:border-slate-700 dark:bg-slate-800/70">
+        <CardOverview>
           <div className="mb-6 flex items-center justify-between">
             <h3 className="text-xl font-semibold text-slate-900 dark:text-white">
               {schedulesMockData.monthlyCalendar.currentMonth}
@@ -87,7 +88,7 @@ export default function SchedulesMonth({ schedulesMockData, activeView }) {
               </span>
             </div>
           </div>
-        </div>
+        </CardOverview>
       )}
     </div>
   );

@@ -4,6 +4,7 @@ import CardHeader from "../../../../ui/CardHeader";
 import Button from "../../../../ui/Button";
 import CardContent from "../../../../ui/CardContent";
 import CardDiscription from "../../../../ui/CardDiscription";
+import CardOverview from "../../../../ui/CardOverview";
 
 export default function ScheduleWeeks({ schedulesMockData, activeView }) {
   const styling = {
@@ -13,7 +14,7 @@ export default function ScheduleWeeks({ schedulesMockData, activeView }) {
   return (
     <div>
       {activeView === "week" && (
-        <>
+        <CardOverview>
           <CardHeader title="This Week">
             <div className="flex items-center space-x-2">
               <Button
@@ -90,7 +91,7 @@ export default function ScheduleWeeks({ schedulesMockData, activeView }) {
               </CardContent>
             ))}
           </div>
-        </>
+        </CardOverview>
       )}
     </div>
   );
