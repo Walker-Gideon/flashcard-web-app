@@ -40,17 +40,6 @@ export default function SchedulesLeftContentLayout({ activeView }) {
     }
   };
 
-  const getSubjectColor = (subject) => {
-    const colors = {
-      Biology: "bg-emerald-500",
-      French: "bg-blue-500",
-      "French Verbs": "bg-blue-500",
-      Math: "bg-purple-500",
-      "Math Formulas": "bg-purple-500",
-    };
-    return colors[subject] || "bg-slate-500";
-  };
-
   return (
     <CardOverview classname="space-y-6 lg:col-span-2">
       <SchedulesToday
@@ -63,8 +52,6 @@ export default function SchedulesLeftContentLayout({ activeView }) {
       <ScheduleWeeks
         schedulesMockData={schedulesMockData}
         activeView={activeView}
-        getStatusColor={getStatusColor}
-        getSubjectColor={getSubjectColor}
       />
 
       <SchedulesMonth
