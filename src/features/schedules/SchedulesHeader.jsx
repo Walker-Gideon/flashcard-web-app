@@ -2,8 +2,9 @@ import { LuSettings2 } from "react-icons/lu";
 
 export default function SchedulesHeader({ activeView, setActiveView }) {
   return (
-    <header>
-      <div className="mb-8 flex items-center justify-between">
+    <header className="medium:block sticky top-0 z-40 hidden border-b border-stone-300 bg-white/30 shadow-sm backdrop-blur-sm dark:border-slate-700 dark:bg-slate-800/80">
+      {/* mb-8  */}
+      <div className="flex items-center justify-between px-6 py-4">
         <div>
           <h1 className="text-3xl font-bold text-slate-900 dark:text-white">
             Study Schedule
