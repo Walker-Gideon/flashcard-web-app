@@ -1,16 +1,33 @@
 import { LuPlay } from "react-icons/lu";
 import { LuPlus } from "react-icons/lu";
+import { LuClock } from "react-icons/lu";
+import { LuCalendar } from "react-icons/lu";
+import { LuCircleCheck } from "react-icons/lu";
+import { LuCircleX } from "react-icons/lu";
+import { LuCircleAlert } from "react-icons/lu";
 import Button from "../../../../ui/Button";
 import CardHeader from "../../../../ui/CardHeader";
 import CardContent from "../../../../ui/CardContent";
 import CardDiscription from "../../../../ui/CardDiscription";
 import CardOverview from "../../../../ui/CardOverview";
 
-export default function SchedulesToday({
-  schedulesMockData,
-  activeView,
-  getStatusIcon,
-}) {
+export default function SchedulesToday({ schedulesMockData, activeView }) {
+  const sizing = "h-4 w-4";
+  const getStatusIcon = (status) => {
+    switch (status) {
+      case "completed":
+        return <LuCircleCheck className={sizing} />;
+      case "pending":
+        return <LuClock className={sizing} />;
+      case "scheduled":
+        return <LuCalendar className={sizing} />;
+      case "skipped":
+        return <LuCircleX className={sizing} />;
+      default:
+        return <LuCircleAlert className={sizing} />;
+    }
+  };
+
   return (
     <div>
       {activeView === "today" && (
