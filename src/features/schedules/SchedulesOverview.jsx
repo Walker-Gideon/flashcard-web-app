@@ -3,6 +3,38 @@ import { LuTarget } from "react-icons/lu";
 import { LuClock } from "react-icons/lu";
 import { LuFlame } from "react-icons/lu";
 import { LuTrendingUp } from "react-icons/lu";
+import TargetCardStatus from "../dashboard/dashContent/TargetCardStatus.jsx";
+
+const cardData = [
+  {
+    icon: LuTarget,
+    // {schedulesMockData.todayStats.completedCards}/
+    // {schedulesMockData.todayStats.dueCards}
+    data:
+      schedulesMockData.todayStats.completedCards /
+      schedulesMockData.todayStats.dueCards,
+    text: "Cards Today",
+    other: <TargetCardStatus />,
+  },
+  {
+    icon: LuClock,
+    data: schedulesMockData.todayStats.studyTime + "m",
+    text: "Study Time",
+    styling: "mb-6",
+  },
+  {
+    icon: LuFlame,
+    data: schedulesMockData.todayStats.streak,
+    text: "Day Streak",
+    styling: "mb-6",
+  },
+  {
+    icon: LuTrendingUp,
+    data: schedulesMockData.todayStats.completionRate + "%",
+    text: "Success Rate",
+    styling: "mb-6",
+  },
+];
 
 export default function SchedulesOverview() {
   return (

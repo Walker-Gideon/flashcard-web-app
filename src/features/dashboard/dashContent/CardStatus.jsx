@@ -14,7 +14,7 @@ const cardData = [
     icon: LuTarget,
     data: mockData.stats.todaysMastery + "%",
     text: "Mastery",
-    other: <TargetCardStatus />,
+    other: <TargetCardStatus dashboard={true} />,
   },
   {
     icon: LuBookOpen,
