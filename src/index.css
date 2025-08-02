@@ -71,6 +71,11 @@ px-6 py-4
     @apply medium:text-[0.74rem] cursor-pointer rounded-sm border text-[0.7rem] transition-colors duration-300;
   }
 
+  /* I will be changing the primary button */
+  .primaryButton {
+    @apply cursor-pointer rounded-sm bg-slate-500 px-4 py-2 text-[0.8rem] text-white transition-colors duration-300 hover:bg-slate-600 focus:ring-slate-300;
+  }
+
   .navButton {
     @apply medium:justify-center mb-2 flex w-full cursor-pointer items-center gap-2.5 rounded-sm px-2 py-1.5 text-center text-sm font-semibold transition-colors duration-500 hover:rounded-sm;
   }
