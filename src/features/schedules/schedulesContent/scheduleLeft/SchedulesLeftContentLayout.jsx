@@ -28,7 +28,7 @@ export default function SchedulesLeftContentLayout({ activeView }) {
 
   return (
     // Will adjust this later
-    <div className="space-y-6 lg:col-span-2">
+    <div className="relative space-y-6 lg:col-span-2">
       <SchedulesToday
         schedulesMockData={schedulesMockData}
         activeView={activeView}

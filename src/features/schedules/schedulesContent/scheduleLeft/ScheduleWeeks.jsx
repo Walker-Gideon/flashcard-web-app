@@ -14,7 +14,7 @@ export default function ScheduleWeeks({ schedulesMockData, activeView }) {
   return (
     <div>
       {activeView === "week" && (
-        <CardOverview>
+        <CardOverview classname="lg:absolute w-full lg:top-0">
           <CardHeader title="This Week">
             <div className="flex items-center space-x-2">
               <Button

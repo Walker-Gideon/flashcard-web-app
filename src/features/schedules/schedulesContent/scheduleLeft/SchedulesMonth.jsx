@@ -6,7 +6,7 @@ export default function SchedulesMonth({ schedulesMockData, activeView }) {
   return (
     <div>
       {activeView === "month" && (
-        <CardOverview>
+        <CardOverview classname="lg:absolute w-full lg:top-0">
           <div className="mb-6 flex items-center justify-between">
             <h3 className="text-xl font-semibold text-slate-900 dark:text-white">
               {schedulesMockData.monthlyCalendar.currentMonth}
