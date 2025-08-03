@@ -16,6 +16,16 @@ export default function ForgetAuthPassword() {
   const navigate = useNavigate();
   const auth = getAuth(app);
 
+  const showToast = (message, type = "success") => {
+    setToastMessage(message);
+    setToastType(type);
+    setToast(true);
+
+    setTimeout(() => {
+      setToast(false);
+    }, 3000);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setToastType("success");
