@@ -11,8 +11,8 @@ export default function ForgetAuthPassword() {
   const [toast, setToast] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
   const [toastType, setToastType] = useState("success");
+  const [isLoading, setIsLoading] = useState(false);
   const emailRef = useRef(null);
-
   const navigate = useNavigate();
   const auth = getAuth(app);
 
