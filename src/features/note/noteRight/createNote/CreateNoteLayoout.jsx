@@ -15,6 +15,7 @@ export default function CreateNoteLayoout() {
     setIsSubmittingNote,
     addNoteTitle,
     setAddNoteTitle,
+    setCreateNote,
   } = useNote();
   const [error, setError] = useState("");
   const [noteTitle, setNoteTitle] = useState("");
@@ -23,7 +24,14 @@ export default function CreateNoteLayoout() {
     e.preventDefault();
     setError("");
     setIsSubmittingNote(true);
-    setAddNoteTitle(true);
+
+    setTimeout(() => {
+      setCreateNote(false);
+      setTitle("");
+      setContent("");
+    }, 1000);
+
+    setAddNoteTitle((show) => !show);
   };
 
   return (
