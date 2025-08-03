@@ -17,9 +17,9 @@ export default function Toast({
     return (
       <Overlay model={model} type="notify" classname={classOverlay}>
         <motion.div
-          initial={{ y: "-200%" }}
+          initial={{ y: "-400%" }}
           transition={{
-            duration: 0.6,
+            duration: 0.7,
             ease: "easeInOut",
           }}
           animate={{ y: "0" }}
