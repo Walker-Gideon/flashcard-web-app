@@ -66,11 +66,17 @@ export default function CreateNoteLayoout() {
             classname={"w-full dark:placeholder:text-white dark: text-white"}
           />
 
-          <div className="mt-4 flex items-center justify-between">
-            <Button variant="outline" classname={"primaryButton"}>
+          <div className="mt-4 flex items-center justify-end gap-3">
+            <Button
+              variant="outline"
+              classname={"primaryButton px-6 medium:px-8"}
+            >
               Skip
             </Button>
-            <Button variant="outline" classname={"primaryButton"}>
+            <Button
+              variant="outline"
+              classname={"primaryButton px-6 medium:px-8"}
+            >
               Save
             </Button>
           </div>
