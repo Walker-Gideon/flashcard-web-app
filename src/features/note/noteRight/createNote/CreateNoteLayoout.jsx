@@ -5,11 +5,7 @@ import { useNote } from "../../../../context/NoteContext";
 import CreateNote from "./CreateNote";
 import CreateNoteHeader from "./CreateNoteHeader";
 import CreateNoteSubHeader from "./CreateNoteSubHeader";
-import Overlay from "../../../../ui/Overlay";
-import { motion } from "motion/react";
-import Input from "../../../../ui/Input";
-import Button from "../../../../ui/Button";
-import Toast from "../../../../ui/Toast";
+import Model from "../../../../ui/Model";
 
 export default function CreateNoteLayoout() {
   const { setTitle, setContent, isSubmittingNote, setIsSubmittingNote } =
@@ -52,40 +48,15 @@ export default function CreateNoteLayoout() {
       </form>
 
       {/* Call the toast here to display the save note */}
-      <Toast
-        model={true}
-        classname={"flex items-center justify-center flex-col"}
-      >
-        <div className="medium:max-w-md mt-10 w-full max-w-xs rounded-2xl border border-slate-200 bg-white p-6 shadow-2xl dark:border-slate-700 dark:bg-slate-800">
-          <Input
-            type="text"
-            name="noteTitle"
-            value={noteTitle}
-            onChange={(e) => setNoteTitle(e.target.value)}
-            placeholder="Enter note title here..."
-            classname={
-              "w-full placeholder:text-slate-900  dark:placeholder:text-white dark: dark:text-white"
-            }
-          />
-
-          <div className="mt-4 flex items-center justify-end gap-3">
-            <Button
-              variant="outline"
-              classname={
-                "button px-5 medium:px-7 text-[0.8rem] py-[7px] dark:text-white dark:border-stone-100 border-slate-400"
-              }
-            >
-              Cancel
-            </Button>
-            <Button
-              variant="outline"
-              classname={"primaryButton px-6 medium:px-8"}
-            >
-              Save
-            </Button>
-          </div>
-        </div>
-      </Toast>
+      <Model
+        type="text"
+        name="noteTitle"
+        value={noteTitle}
+        onChange={(e) => setNoteTitle(e.target.value)}
+        placeholder="Enter note title here..."
+        btnFirstText="Cancel"
+        btnSecondText="Save"
+      />
     </div>
   );
 }
