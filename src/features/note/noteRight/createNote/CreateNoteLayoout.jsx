@@ -56,17 +56,19 @@ export default function CreateNoteLayoout() {
         model={true}
         classname={"flex items-center justify-center flex-col"}
       >
-        <Input
-          type="text"
-          name="noteTitle"
-          value={noteTitle}
-          onChange={(e) => setNoteTitle(e.target.value)}
-          placeholder="Enter note title here..."
-        />
+        <div className="w-full max-w-md rounded-2xl border border-slate-200 bg-white p-6 shadow-2xl dark:border-slate-700 dark:bg-slate-800">
+          <Input
+            type="text"
+            name="noteTitle"
+            value={noteTitle}
+            onChange={(e) => setNoteTitle(e.target.value)}
+            placeholder="Enter note title here..."
+          />
 
-        <div className="">
-          <Button>Skip</Button>
-          <Button>Save</Button>
+          <div className="">
+            <Button>Skip</Button>
+            <Button>Save</Button>
+          </div>
         </div>
       </Toast>
     </div>
