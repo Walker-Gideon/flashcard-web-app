@@ -63,15 +63,19 @@ export default function CreateNoteLayoout() {
             value={noteTitle}
             onChange={(e) => setNoteTitle(e.target.value)}
             placeholder="Enter note title here..."
-            classname={"w-full dark:placeholder:text-white dark: text-white"}
+            classname={
+              "w-full placeholder:text-slate-900  dark:placeholder:text-white dark: dark:text-white"
+            }
           />
 
           <div className="mt-4 flex items-center justify-end gap-3">
             <Button
               variant="outline"
-              classname={"primaryButton px-6 medium:px-8"}
+              classname={
+                "button px-5 medium:px-7 text-[0.8rem] py-[7px] dark:text-white dark:border-stone-100 border-slate-400"
+              }
             >
-              Skip
+              Cancel
             </Button>
             <Button
               variant="outline"
