@@ -9,10 +9,12 @@ export default function CreateNoteHeader() {
     setContent,
     setCreateNote,
     isSubmittingNote,
+    setAddNoteTitle,
   } = useNote();
 
   function handleSubmit() {
     setTimeout(() => {
+      // setAddNoteTitle(true);
       setCreateNote(false);
       setTitle("");
       setContent("");

@@ -25,6 +25,7 @@ function reducer(state, action) {
 function NoteProvider({ children }) {
   const [{ activeBtn }, dispatch] = useReducer(reducer, initialState);
   const [createNote, setCreateNote] = useState(false);
+  const [addNoteTitle, setAddNoteTitle] = useState(false);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [isSubmittingNote, setIsSubmittingNote] = useState(false);
@@ -40,6 +41,8 @@ function NoteProvider({ children }) {
     dispatch,
     isSubmittingNote,
     setIsSubmittingNote,
+    addNoteTitle,
+    setAddNoteTitle,
   };
 
   return <NoteContext.Provider value={value}>{children}</NoteContext.Provider>;

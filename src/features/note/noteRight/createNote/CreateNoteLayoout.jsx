@@ -8,8 +8,14 @@ import CreateNoteSubHeader from "./CreateNoteSubHeader";
 import Model from "../../../../ui/Model";
 
 export default function CreateNoteLayoout() {
-  const { setTitle, setContent, isSubmittingNote, setIsSubmittingNote } =
-    useNote();
+  const {
+    setTitle,
+    setContent,
+    isSubmittingNote,
+    setIsSubmittingNote,
+    addNoteTitle,
+    setAddNoteTitle,
+  } = useNote();
   const [error, setError] = useState("");
   const [noteTitle, setNoteTitle] = useState("");
 
@@ -17,6 +23,7 @@ export default function CreateNoteLayoout() {
     e.preventDefault();
     setError("");
     setIsSubmittingNote(true);
+    setAddNoteTitle(true);
   };
 
   return (
@@ -48,15 +55,17 @@ export default function CreateNoteLayoout() {
       </form>
 
       {/* Call the toast here to display the save note */}
-      <Model
-        type="text"
-        name="noteTitle"
-        value={noteTitle}
-        onChange={(e) => setNoteTitle(e.target.value)}
-        placeholder="Enter note title here..."
-        btnFirstText="Cancel"
-        btnSecondText="Save"
-      />
+      {addNoteTitle && (
+        <Model
+          type="text"
+          name="noteTitle"
+          value={noteTitle}
+          onChange={(e) => setNoteTitle(e.target.value)}
+          placeholder="Enter note title here..."
+          btnFirstText="Cancel"
+          btnSecondText="Save"
+        />
+      )}
     </div>
   );
 }
