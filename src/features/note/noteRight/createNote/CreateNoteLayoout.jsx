@@ -9,6 +9,7 @@ import Overlay from "../../../../ui/Overlay";
 import { motion } from "motion/react";
 import Input from "../../../../ui/Input";
 import Button from "../../../../ui/Button";
+import Toast from "../../../../ui/Toast";
 
 export default function CreateNoteLayoout() {
   const { setTitle, setContent, isSubmittingNote, setIsSubmittingNote } =
@@ -51,31 +52,20 @@ export default function CreateNoteLayoout() {
       </form>
 
       {/* Call the toast here to display the save note */}
-      <Overlay model={true}>
-        <motion.div
-          initial={{ y: "-400%" }}
-          transition={{
-            duration: 0.6,
-            ease: "easeInOut",
-          }}
-          animate={{ y: "0" }}
-          // ${classname} Type === "success" ? "bg-green-600" : "bg-red-600" px-6
-          className={`fixed top-5 left-1/2 z-50 -translate-x-1/2 rounded-sm bg-green-600 p-2 text-sm text-white shadow-lg`}
-        >
-          <Input
-            type="text"
-            name="noteTitle"
-            value={noteTitle}
-            onChange={(e) => setNoteTitle(e.target.value)}
-            placeholder="Enter note title here..."
-          />
+      <Toast model={true}>
+        <Input
+          type="text"
+          name="noteTitle"
+          value={noteTitle}
+          onChange={(e) => setNoteTitle(e.target.value)}
+          placeholder="Enter note title here..."
+        />
 
-          <div className="">
-            <Button>Skip</Button>
-            <Button>Save</Button>
-          </div>
-        </motion.div>
-      </Overlay>
+        <div className="">
+          <Button>Skip</Button>
+          <Button>Save</Button>
+        </div>
+      </Toast>
     </div>
   );
 }

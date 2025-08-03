@@ -9,9 +9,9 @@ export default function Toast({ children, classname, model, type }) {
 
   if (model)
     return (
-      <Overlay model={true}>
+      <Overlay model={model} type="notify">
         <motion.div
-          initial={{ y: "-400%" }}
+          initial={{ y: "-200%" }}
           transition={{
             duration: 0.6,
             ease: "easeInOut",

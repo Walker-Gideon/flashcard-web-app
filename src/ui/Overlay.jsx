@@ -1,6 +1,14 @@
 import { useNav } from "../context/NavigateContext";
 
-export default function Overlay({ index, btn, model, children }) {
+export default function Overlay({
+  index,
+  btn,
+  model,
+  children,
+  onClick,
+  notify,
+  type,
+}) {
   const { setNavShowOverLay, setShowSidebar } = useNav();
 
   function handleClick() {
@@ -8,21 +16,31 @@ export default function Overlay({ index, btn, model, children }) {
     setShowSidebar((show) => !show);
   }
 
+  const base = "fixed inset-0 backdrop-blur-sm";
+  const styling = {
+    btn: base + " cursor-pointer bg-gray-500/20",
+    model: base + " z-50 flex items-center justify-center p-4 bg-gray-500/20",
+    notify: base + " bg-gray-500/0 z-50",
+  };
+
+  // this not need to be use
   if (btn)
     return (
       <div
         role="button"
         onClick={handleClick}
-        className={`fixed inset-0 cursor-pointer bg-gray-500/20 backdrop-blur-sm ${index}`}
+        className={`${styling.btn} ${index}`}
       />
     );
 
-  if (model)
+  if (notify)
     return (
-      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm">
+      <div role="button" onClick={onClick} className={`${styling[type]}`}>
         {children}
       </div>
     );
+
+  if (model) return <div className={styling[type]}>{children}</div>;
 
   return (
     <div
