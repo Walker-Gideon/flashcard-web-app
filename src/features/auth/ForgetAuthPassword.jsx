@@ -28,22 +28,31 @@ export default function ForgetAuthPassword() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setToastType("success");
-    setToastMessage("Password reset link sent to your email!");
-    setToast(true);
 
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    if (!emailRegex.test(email)) {
-      setToastMessage("Please enter a valid email address");
-      setToast(false);
+    if (!email.trim()) {
+      showToast("Email is required", "error");
       return;
     }
 
+    if (!emailRegex.test(email)) {
+      showToast("Please enter a valid email address", "error");
+      return;
+    }
+
+    setIsLoading(true);
+
     try {
       await sendPasswordResetEmail(auth, email);
-      navigate("/accounts/login");
+
+      showToast("Password reset link sent to your email!", "success");
+
+      setTimeout(() => {
+        navigate("/accounts/login");
+      }, 2000);
     } catch (err) {
       let errorMessage = "Failed to send reset email. Please try again.";
+
       switch (err.code) {
         case "auth/user-not-found":
           errorMessage = "No account found with this email address.";
@@ -58,7 +67,10 @@ export default function ForgetAuthPassword() {
           console.error("Firebase password reset error:", err);
           break;
       }
-      return { error: errorMessage };
+
+      showToast(errorMessage, "error");
+    } finally {
+      setIsLoading(false);
     }
   };
 
