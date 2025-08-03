@@ -1,9 +1,6 @@
-import {
-  Form,
-  useActionData,
-  useNavigate,
-  useNavigation,
-} from "react-router-dom";
+import { getAuth, sendPasswordResetEmail } from "firebase/auth";
+import { app } from "../../firebase";
+
 import { useEffect, useRef, useState } from "react";
 import { useLoader } from "../../context/LoaderContext";
 import Loader from "../../ui/Loader";
@@ -12,16 +9,12 @@ import Toast from "../../ui/Toast";
 
 export default function ForgetAuthPassword() {
   const { setLoading } = useLoader();
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
   const [toast, setToast] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
   const [toastType, setToastType] = useState("success");
   const emailRef = useRef(null);
-
-  // const actionData = useActionData();
-  // const navigate = useNavigate();
-  // const navigation = useNavigation();
-
-  // const isSubmitting = navigation.state === "submitting";
 
   /*
   useEffect(() => {
@@ -55,7 +48,10 @@ export default function ForgetAuthPassword() {
   //   setLoading(isSubmitting);
   // }, [isSubmitting, setLoading]);
 
-  function handleSubmit() {}
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+  };
 
   return (
     <div className="relative">

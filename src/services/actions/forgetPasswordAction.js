@@ -1,6 +1,3 @@
-import { getAuth, sendPasswordResetEmail } from "firebase/auth";
-import { app } from "../../firebase";
-
 export async function forgetPasswordAction({ request }) {
   const auth = getAuth(app);
   const formData = await request.formData();
