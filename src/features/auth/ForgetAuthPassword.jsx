@@ -1,56 +1,55 @@
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import { app } from "../../firebase";
-
-import { useEffect, useRef, useState } from "react";
-import { useLoader } from "../../context/LoaderContext";
+import { useRef, useState } from "react";
 import Loader from "../../ui/Loader";
 import Button from "../../ui/Button";
 import Toast from "../../ui/Toast";
+import { useNavigate } from "react-router-dom";
 
 export default function ForgetAuthPassword() {
-  const { setLoading } = useLoader();
   const [email, setEmail] = useState("");
-  const [error, setError] = useState("");
   const [toast, setToast] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
   const [toastType, setToastType] = useState("success");
   const emailRef = useRef(null);
 
-  /*
-  useEffect(() => {
-    if (actionData) {
-      if (actionData.success) {
-        setToastMessage(actionData.message);
-        setToastType("success");
-        setToast(true);
-
-        setTimeout(() => {
-          setToast(false);
-          navigate("/accounts/login");
-        }, 3000);
-      } else if (actionData.error) {
-        // Show error toast
-        setToastMessage(actionData.error);
-        setToastType("error");
-        setToast(true);
-
-        // Hide error toast after 3 seconds
-        setTimeout(() => {
-          setToast(false);
-        }, 3000);
-      }
-    }
-  }, [actionData, navigate]);
-  */
-
-  // Handle loading state
-  // useEffect(() => {
-  //   setLoading(isSubmitting);
-  // }, [isSubmitting, setLoading]);
+  const navigate = useNavigate();
+  const auth = getAuth(app);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
+    setToastType("success");
+    setToastMessage("Password reset link sent to your email!");
+    setToast(true);
+
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailRegex.test(email)) {
+      setToastMessage("Please enter a valid email address");
+      setToast(false);
+      return;
+    }
+
+    try {
+      await sendPasswordResetEmail(auth, email);
+      navigate("/accounts/login");
+    } catch (err) {
+      let errorMessage = "Failed to send reset email. Please try again.";
+      switch (err.code) {
+        case "auth/user-not-found":
+          errorMessage = "No account found with this email address.";
+          break;
+        case "auth/invalid-email":
+          errorMessage = "Invalid email address.";
+          break;
+        case "auth/too-many-requests":
+          errorMessage = "Too many requests. Please try again later.";
+          break;
+        default:
+          console.error("Firebase password reset error:", err);
+          break;
+      }
+      return { error: errorMessage };
+    }
   };
 
   return (
@@ -74,16 +73,16 @@ export default function ForgetAuthPassword() {
           </div>
 
           <form onSubmit={handleSubmit}>
-            {/* <Form method="post"> */}
             <div className="mb-3 flex flex-col">
               <label className="medium:text-sm mb-1 text-xs">Email</label>
               <input
                 type="email"
                 name="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="user@email.com"
                 required={true}
                 ref={emailRef}
-                // disabled={isSubmitting}
                 className="input w-full disabled:opacity-50"
               />
             </div>
@@ -91,13 +90,10 @@ export default function ForgetAuthPassword() {
             <div className="medium:flex medium:items-end medium:justify-end">
               <Button
                 type="submit"
-                // disabled={isSubmitting}
                 variant="primary"
                 classname="w-full py-2 disabled:bg-gray-400 disabled:cursor-not-allowed"
-                // onClick={() => startLoadingAndNavigate("/accounts/login")}
               >
                 Send Link
-                {/* {isSubmitting ? "Sending..." : "Send Link"} */}
               </Button>
             </div>
           </form>
