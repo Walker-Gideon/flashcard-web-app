@@ -105,6 +105,7 @@ export default function ForgetAuthPassword() {
                 placeholder="user@email.com"
                 required={true}
                 ref={emailRef}
+                disabled={isLoading}
                 className="input w-full disabled:opacity-50"
               />
             </div>
@@ -114,8 +115,9 @@ export default function ForgetAuthPassword() {
                 type="submit"
                 variant="primary"
                 classname="w-full py-2 disabled:bg-gray-400 disabled:cursor-not-allowed"
+                disabled={isLoading}
               >
-                Send Link
+                {isLoading ? "Sending..." : "Send Link"}
               </Button>
             </div>
           </form>
