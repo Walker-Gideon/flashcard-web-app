@@ -1,5 +1,6 @@
 import { LuNotebookText } from "react-icons/lu";
 import PromptDisplay from "../../../ui/PromptDisplay";
+import DisplayNoteCreated from "./DisplayNoteCreated";
 
 export default function NoteDisplay() {
   return (
@@ -11,6 +12,7 @@ export default function NoteDisplay() {
           <LuNotebookText className="h-5 w-5 text-slate-600 dark:text-slate-300" />
         }
       ></PromptDisplay>
+      <DisplayNoteCreated />
     </main>
   );
 }
