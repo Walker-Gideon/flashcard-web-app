@@ -11,7 +11,7 @@ export default function ModelCard({ setShowReviewModal, selectedFlashcard }) {
   };
 
   return (
-    <Overlay model={true}>
+    <Overlay model={true} type={"model"}>
       <div className="w-full max-w-md rounded-2xl border border-slate-200 bg-white p-6 shadow-2xl dark:border-slate-700 dark:bg-slate-800">
         <div className="mb-4 flex items-center justify-between">
           <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
