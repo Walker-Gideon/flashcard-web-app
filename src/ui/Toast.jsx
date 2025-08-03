@@ -1,7 +1,13 @@
 import { motion } from "motion/react";
 import Overlay from "./Overlay";
 
-export default function Toast({ children, classname, model, type }) {
+export default function Toast({
+  children,
+  classname,
+  model,
+  type,
+  classOverlay,
+}) {
   const styling = {
     main: "fixed top-5 left-1/2 z-50 -translate-x-1/2 rounded-sm text-sm text-white shadow-lg",
   };
@@ -9,7 +15,7 @@ export default function Toast({ children, classname, model, type }) {
 
   if (model)
     return (
-      <Overlay model={model} type="notify">
+      <Overlay model={model} type="notify" classname={classOverlay}>
         <motion.div
           initial={{ y: "-200%" }}
           transition={{

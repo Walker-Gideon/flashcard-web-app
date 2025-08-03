@@ -52,7 +52,10 @@ export default function CreateNoteLayoout() {
       </form>
 
       {/* Call the toast here to display the save note */}
-      <Toast model={true}>
+      <Toast
+        model={true}
+        classname={"flex items-center justify-center flex-col"}
+      >
         <Input
           type="text"
           name="noteTitle"

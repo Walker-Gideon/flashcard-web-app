@@ -8,6 +8,7 @@ export default function Overlay({
   onClick,
   notify,
   type,
+  classname,
 }) {
   const { setNavShowOverLay, setShowSidebar } = useNav();
 
@@ -35,7 +36,11 @@ export default function Overlay({
 
   if (notify)
     return (
-      <div role="button" onClick={onClick} className={`${styling[type]}`}>
+      <div
+        role="button"
+        onClick={onClick}
+        className={`${styling[type]} ${classname}`}
+      >
         {children}
       </div>
     );
