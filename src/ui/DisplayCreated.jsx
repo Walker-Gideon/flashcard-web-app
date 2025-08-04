@@ -2,7 +2,7 @@ export default function DisplayCreated({ title, timing }) {
   return (
     <div
       role="button"
-      className="my-1 w-full cursor-pointer px-4 py-2 transition-colors hover:bg-slate-50 dark:hover:bg-slate-700"
+      className="my-1 w-full cursor-pointer border-b border-stone-300 px-4 py-2 transition-colors hover:bg-slate-50 dark:border-slate-700 dark:hover:bg-slate-700"
     >
       <h1 className="medium:text-sm mb-1 text-slate-900 dark:text-white">
         Title
