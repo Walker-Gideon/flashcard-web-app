@@ -119,6 +119,9 @@ function NoteProvider({ children }) {
     const headingPrefix = "#".repeat(level) + " ";
     const newLine = headingPrefix + cleanLine;
 
+    // This is what I did
+    // const newLine = cleanLine;
+
     // Replace the line
     const newContent =
       content.substring(0, lineStart) +
