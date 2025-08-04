@@ -7,6 +7,7 @@ import { LuTarget } from "react-icons/lu";
 import { LuBookOpen } from "react-icons/lu";
 import { LuMoon } from "react-icons/lu";
 import { LuSun } from "react-icons/lu";
+import InspireHeader from "./InspireHeader";
 
 export default function InspireLayout() {
   const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
@@ -57,7 +58,7 @@ export default function InspireLayout() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 p-6 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
-      {/* Header */}
+      <InspireHeader />
 
       {/* Main Content Grid */}
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">

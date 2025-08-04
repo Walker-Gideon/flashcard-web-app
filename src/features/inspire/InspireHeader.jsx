@@ -1,14 +1,12 @@
+import UserWelcome from "../user/UserWelcome";
+
 export default function InspireHeader() {
   return (
-    <header className="mb-8 flex items-center justify-between">
-      <div>
-        <h1 className="text-3xl font-bold text-slate-900 dark:text-white">
-          Inspire & Progress
-        </h1>
-        <p className="mt-1 text-slate-600 dark:text-slate-400">
-          Stay motivated and track your achievements
-        </p>
-      </div>
+    <header className="medium:block sticky top-0 z-40 hidden border-b border-stone-300 bg-white/30 shadow-sm backdrop-blur-sm dark:border-slate-700 dark:bg-slate-800/80">
+      <UserWelcome
+        title="Inspire & Progress"
+        subText="Stay motivated and track your achievements"
+      />
     </header>
   );
 }
