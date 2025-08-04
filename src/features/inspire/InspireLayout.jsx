@@ -55,5 +55,19 @@ export default function InspireLayout() {
     }
   };
 
-  return <div>InspireLayout</div>;
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 p-6 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
+      {/* Header */}
+      <div className="mb-8 flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-bold text-slate-900 dark:text-white">
+            Inspire & Progress
+          </h1>
+          <p className="mt-1 text-slate-600 dark:text-slate-400">
+            Stay motivated and track your achievements
+          </p>
+        </div>
+      </div>
+    </div>
+  );
 }
