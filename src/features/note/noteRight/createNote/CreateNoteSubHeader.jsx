@@ -9,7 +9,8 @@ export default function CreateNoteSubHeader() {
   const base =
     "font-medium text-sm border p-2 rounded-sm cursor-pointer border-stone-300 dark:border-slate-700";
   const primColors = "bg-slate-500 text-white hover:bg-slate-600";
-  const secColors = "text-white hover:bg-slate-600";
+  const secColors =
+    "text-slate-900  hover:text-white dark:text-white hover:bg-slate-600";
   const styling = {
     h1: base + ` px-2.5 ${select === "h1" ? `${primColors}` : `${secColors}`}`,
     h2: base + ` ${select === "h2" ? `${primColors}` : `${secColors}`}`,
