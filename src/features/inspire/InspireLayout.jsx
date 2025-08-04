@@ -1,3 +1,59 @@
+import { useEffect, useState } from "react";
+import { inspireMockData } from "../../data/inspireMockData";
+import { mockData } from "../../data/mockData";
+
+import { LuFlame } from "react-icons/lu";
+import { LuTarget } from "react-icons/lu";
+import { LuBookOpen } from "react-icons/lu";
+import { LuMoon } from "react-icons/lu";
+import { LuSun } from "react-icons/lu";
+
 export default function InspireLayout() {
+  const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
+  const [currentPraiseIndex, setCurrentPraiseIndex] = useState(0);
+
+  // Rotate quote every 10 seconds
+  useEffect(() => {
+    const quoteTimer = setInterval(() => {
+      setCurrentQuoteIndex(
+        (prevIndex) => (prevIndex + 1) % inspireMockData.quotes.length,
+      );
+    }, 10000); // 10 seconds
+    return () => clearInterval(quoteTimer);
+  }, []);
+
+  // Rotate praise every 15 seconds
+  useEffect(() => {
+    const praiseTimer = setInterval(() => {
+      setCurrentPraiseIndex(
+        (prevIndex) =>
+          (prevIndex + 1) % inspireMockData.personalizedPraise.length,
+      );
+    }, 15000); // 15 seconds
+    return () => clearInterval(praiseTimer);
+  }, []);
+
+  const currentQuote = inspireMockData.quotes[currentQuoteIndex];
+  const currentPraise = inspireMockData.personalizedPraise[currentPraiseIndex];
+  const streakDays = mockData.stats.streakDays; // Get streak from existing mockData
+
+  const getIconComponent = (iconName) => {
+    switch (iconName) {
+      case "FlameIcon":
+        return <LuFlame className="h-5 w-5" />;
+      case "BookOpen":
+        return <LuBookOpen className="h-5 w-5" />;
+      case "Sun":
+        return <LuSun className="h-5 w-5" />;
+      case "Moon":
+        return <LuMoon className="h-5 w-5" />;
+      case "Target":
+        return <LuTarget className="h-5 w-5" />;
+      default:
+        // Award
+        return <LuTarget className="h-5 w-5" />; // Default icon
+    }
+  };
+
   return <div>InspireLayout</div>;
 }
