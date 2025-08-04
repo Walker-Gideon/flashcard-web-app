@@ -17,7 +17,7 @@ export default function CreateNote({
 
   let textSize;
   if (activeBtn === "h1") {
-    textSize = "text-sm";
+    textSize = "text-sm md:text-base";
   } else if (activeBtn === "h2") {
     textSize = "text-lg";
   } else if (activeBtn === "bold") {
@@ -95,7 +95,7 @@ export default function CreateNote({
           onMouseUp={handleTextSelection}
           onKeyUp={handleTextSelection}
           onKeyDown={handleKeyDown}
-          className={`scroll-container h-full w-full resize-none bg-transparent text-gray-900 placeholder:text-gray-500 focus:outline-none md:text-base dark:text-white dark:placeholder:text-gray-400 ${textSize}`}
+          className={`scroll-container h-full w-full resize-none bg-transparent text-gray-900 placeholder:text-gray-500 focus:outline-none dark:text-white dark:placeholder:text-gray-400 ${textSize}`}
           disabled={disabled}
         />
       </div>
