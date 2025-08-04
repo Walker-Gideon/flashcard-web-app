@@ -6,7 +6,14 @@ export default function CreateNote({
   onContentChange,
   disabled,
 }) {
-  const { title, content, activeBtn } = useNote();
+  const {
+    title,
+    content,
+    activeBtn,
+    setSelectedText,
+    selectedText,
+    applyFormatting,
+  } = useNote();
 
   let textSize;
   if (activeBtn === "h1") {
@@ -20,6 +27,49 @@ export default function CreateNote({
   } else if (activeBtn === "underline") {
     textSize = "underline";
   }
+
+  const handleTextSelection = (e) => {
+    const textarea = e.target;
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    const selectedText = textarea.value.substring(start, end);
+
+    if (selectedText) {
+      setSelectedText({
+        start,
+        end,
+        text: selectedText,
+      });
+    } else {
+      setSelectedText({ start: 0, end: 0, text: "" });
+    }
+  };
+
+  const handleKeyDown = (e) => {
+    // Keyboard shortcuts for formatting
+    if (e.ctrlKey || e.metaKey) {
+      switch (e.key) {
+        case "b":
+          e.preventDefault();
+          if (selectedText.text) {
+            applyFormatting("bold");
+          }
+          break;
+        case "i":
+          e.preventDefault();
+          if (selectedText.text) {
+            applyFormatting("italic");
+          }
+          break;
+        case "u":
+          e.preventDefault();
+          if (selectedText.text) {
+            applyFormatting("underline");
+          }
+          break;
+      }
+    }
+  };
 
   return (
     <div className="mx-4 my-2 h-full py-2">
@@ -41,6 +91,10 @@ export default function CreateNote({
           placeholder="Start writing your note here..."
           value={content}
           onChange={onContentChange}
+          onSelect={handleTextSelection}
+          onMouseUp={handleTextSelection}
+          onKeyUp={handleTextSelection}
+          onKeyDown={handleKeyDown}
           className={`scroll-container h-full w-full resize-none bg-transparent text-gray-900 placeholder:text-gray-500 focus:outline-none md:text-base dark:text-white dark:placeholder:text-gray-400 ${textSize}`}
           disabled={disabled}
         />
