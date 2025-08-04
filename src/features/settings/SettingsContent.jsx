@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from "react";
+import { getFirestore, doc, getDoc, updateDoc } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
 
 import Button from "../../ui/Button";
 import CardOverview from "../../ui/CardOverview";
@@ -6,11 +8,9 @@ import Input from "../../ui/Input";
 import User from "../user/User";
 import SettlingsFormHeader from "./SettlingsFormHeader";
 import { useLoader } from "../../context/LoaderContext";
-import { useAuth } from "../../context/AuthContext";
 
 export default function SettingsContent() {
-  const { setImage } = useLoader();
-  const { userData, updateUsername, updateProfileImage } = useAuth();
+  const { image, setImage } = useLoader();
   const [placeholder, setPlaceholder] = useState("Enter username");
   const [message, setMessage] = useState("");
   const [newUsername, setNewUsername] = useState("");
@@ -18,12 +18,27 @@ export default function SettingsContent() {
 
   const fileInputRef = useRef();
 
+  const db = getFirestore();
+  const auth = getAuth();
+
   useEffect(() => {
-    // Set placeholder from userData
-    if (userData.username) {
-      setPlaceholder(userData.username);
-    }
-  }, [userData.username]);
+    const fetchUsername = async () => {
+      const user = auth.currentUser;
+      if (!user) return;
+
+      const docRef = doc(db, "users", user.uid);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        if (data.username) {
+          setPlaceholder(data.username);
+        }
+      }
+    };
+
+    fetchUsername();
+  }, [auth.currentUser, db]);
 
   useEffect(() => {
     if (message) {
@@ -33,42 +48,26 @@ export default function SettingsContent() {
   }, [message]);
 
   const handleUpdate = async () => {
-    if (!userData.uid || newUsername.trim() === "") return;
+    const user = auth.currentUser;
+    if (!user || newUsername.trim() === "") return;
 
     try {
-      const success = await updateUsername(newUsername);
-      if (success) {
-        setMessage("Username updated successfully!");
-        setPlaceholder(newUsername);
-        setNewUsername("");
-      } else {
-        setMessage("Error updating username");
-      }
+      const userRef = doc(db, "users", user.uid);
+      await updateDoc(userRef, { username: newUsername });
+      setMessage("Username updated successfully!");
+      setPlaceholder(newUsername);
+      setNewUsername("");
     } catch (error) {
       console.error("Error updating username:", error);
       setMessage("Error updating username");
     }
   };
 
-  const handleImageChange = async (e) => {
+  const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (!file) return;
-
     setImage(file);
     setPreview(URL.createObjectURL(file));
-
-    // Here you would typically upload the image to storage and get the URL
-    // For now, we'll use a placeholder URL
-    // In a real implementation, you'd upload to Firebase Storage and get the download URL
-    const imageUrl = URL.createObjectURL(file);
-
-    try {
-      await updateProfileImage(imageUrl);
-      setMessage("Profile image updated successfully!");
-    } catch (error) {
-      console.error("Error updating profile image:", error);
-      setMessage("Error updating profile image");
-    }
   };
 
   const styling = {
@@ -89,12 +88,6 @@ export default function SettingsContent() {
               <img
                 src={preview}
                 alt="preview"
-                className={`medium:w-30 medium:h-30 h-20 w-20 rounded-full object-cover`}
-              />
-            ) : userData.photoURL ? (
-              <img
-                src={userData.photoURL}
-                alt="profile"
                 className={`medium:w-30 medium:h-30 h-20 w-20 rounded-full object-cover`}
               />
             ) : (
@@ -131,7 +124,7 @@ export default function SettingsContent() {
             <input
               className={`rounded-sm border border-stone-300 px-1.5 py-1.5 text-sm text-black transition-all duration-300 placeholder:text-xs focus:outline-hidden disabled:cursor-not-allowed disabled:bg-gray-200 dark:disabled:bg-gray-500 ${styling.input}`}
               disabled={true}
-              placeholder={userData.email || "user@gmail.com"}
+              placeholder={"user@gmail.com"}
             />
           </div>
 
