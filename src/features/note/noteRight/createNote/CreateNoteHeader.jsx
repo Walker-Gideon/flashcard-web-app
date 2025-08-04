@@ -17,7 +17,7 @@ export default function CreateNoteHeader() {
         color={
           "bg-slate-500 text-white hover:bg-slate-600 focus:ring-slate-300 disabled:bg-gray-400 disabled:cursor-not-allowed"
         }
-        disabled={isSubmittingNote || !title || !content}
+        disabled={isSubmittingNote || !(title || content)}
       >
         {isSubmittingNote ? "Saving..." : "Save Note"}
       </Button>
