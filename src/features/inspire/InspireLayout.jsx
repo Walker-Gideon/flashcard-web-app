@@ -8,6 +8,7 @@ import { LuBookOpen } from "react-icons/lu";
 import { LuMoon } from "react-icons/lu";
 import { LuSun } from "react-icons/lu";
 import InspireHeader from "./InspireHeader";
+import InspireLeftLayout from "./inspireLeft/InspireLeftLayout";
 
 export default function InspireLayout() {
   const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
@@ -63,22 +64,9 @@ export default function InspireLayout() {
       <main className="medium:mt-0 mt-7 h-screen space-y-6 overflow-scroll p-6">
         {/* Main Content Grid */}
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
-          {/* Left Column */}
-          <div className="space-y-6 lg:col-span-2">
+          <InspireLeftLayout currentQuote={currentQuote} />
+          <div>
             {/* Daily Motivational Quotes */}
-            <div className="rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 p-6 text-white shadow-lg">
-              <div className="mb-4 flex items-center space-x-3">
-                {/* Lightbulb */}
-                <LuMoon className="h-6 w-6 text-emerald-200" />
-                <h3 className="text-xl font-semibold">Daily Inspiration</h3>
-              </div>
-              <blockquote className="mb-4 text-lg text-emerald-50 italic">
-                "{currentQuote.text}"
-              </blockquote>
-              <p className="text-right text-sm text-emerald-100">
-                - {currentQuote.author}
-              </p>
-            </div>
 
             {/* Achievement Badges */}
             <div className="rounded-2xl border border-slate-200 bg-white/70 p-6 backdrop-blur-xl dark:border-slate-700 dark:bg-slate-800/70">
