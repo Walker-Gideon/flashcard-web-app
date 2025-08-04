@@ -2,31 +2,6 @@ import { createContext, useContext, useReducer, useState } from "react";
 
 const NoteContext = createContext();
 
-/*
-const initialState = {
-  activeBtn: "h1",
-};
-
-function reducer(state, action) {
-  switch (action.type) {
-    // case "SHOW_NORMAL_SIZE":
-    case "SHOW_H1":
-      return { activeBtn: "h1" };
-    // case "SHOW_INCREASE_SIZE":
-    case "SHOW_H2":
-      return { activeBtn: "h2" };
-    case "SHOW_BOLD":
-      return { activeBtn: "bold" };
-    case "SHOW_UNDERLINE":
-      return { activeBtn: "underline" };
-    case "SHOW_ITALIC":
-      return { activeBtn: "italic" };
-    default:
-      return state;
-  }
-}
-  */
-
 const initialState = {
   activeBtn: null, // No default active button
 };
@@ -50,62 +25,7 @@ function NoteProvider({ children }) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [isSubmittingNote, setIsSubmittingNote] = useState(false);
-
-  /*
-  const [selectedText, setSelectedText] = useState({
-    start: 0,
-    end: 0,
-    text: "",
-  });
-  */
-
   const [textareaRef, setTextareaRef] = useState(null);
-
-  /*
-  // Function to apply formatting to selected text
-  const applyFormatting = (formatType) => {
-    if (!selectedText.text) return;
-
-    const { start, end, text } = selectedText;
-    let formattedText = text;
-
-    switch (formatType) {
-      case "bold":
-        formattedText = `**${text}**`;
-        break;
-      case "italic":
-        formattedText = `*${text}*`;
-        break;
-      case "underline":
-        formattedText = `__${text}__`;
-        break;
-      case "h1":
-        formattedText = `# ${text}`;
-        break;
-      case "h2":
-        formattedText = `## ${text}`;
-        break;
-      default:
-        return;
-    }
-
-    // Update content with formatted text
-    const newContent =
-      content.substring(0, start) + formattedText + content.substring(end);
-    setContent(newContent);
-
-    // Clear selection
-    setSelectedText({ start: 0, end: 0, text: "" });
-
-    // Update active button
-    dispatch({ type: "APPLY_FORMATTING", payload: formatType });
-  };
-
-  // Function to clear text selection
-  const clearSelection = () => {
-    setSelectedText({ start: 0, end: 0, text: "" });
-  };
-  */
 
   // Function to get current cursor position
   const getCursorPosition = () => {

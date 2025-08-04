@@ -158,10 +158,13 @@ export default function CreateNote({
           ref={(ref) => setTextareaRef(ref)}
           id="note-content"
           name="content"
-          placeholder="Start writing your note here... 
+          placeholder="Start writing your note here...
 
-Use **bold**, *italic*, __underline__ for formatting
-Use # for H1, ## for H2
+Select text and use the formatting buttons above to apply:
+• Bold formatting
+• Italic formatting  
+• Underline formatting
+• Heading styles
 
 Keyboard shortcuts:
 • Ctrl+B for bold
@@ -172,7 +175,7 @@ Keyboard shortcuts:
           value={content}
           onChange={onContentChange}
           onKeyDown={handleKeyDown}
-          className="scroll-container h-full w-full resize-none bg-transparent font-mono text-sm leading-relaxed text-gray-900 placeholder:text-gray-500 focus:outline-none md:text-base dark:text-white dark:placeholder:text-gray-400"
+          className="scroll-container h-full w-full resize-none bg-transparent text-sm leading-relaxed text-gray-900 placeholder:text-gray-500 focus:outline-none md:text-base dark:text-white dark:placeholder:text-gray-400"
           disabled={disabled}
           style={{
             lineHeight: "1.6",
@@ -190,19 +193,22 @@ Keyboard shortcuts:
           </summary>
           <div className="mt-2 space-y-1 pl-4">
             <div>
-              <code>**bold text**</code> → <strong>bold text</strong>
+              Select text and click <strong>B</strong> for bold formatting
             </div>
             <div>
-              <code>*italic text*</code> → <em>italic text</em>
+              Select text and click <em>I</em> for italic formatting
             </div>
             <div>
-              <code>__underlined text__</code> → <u>underlined text</u>
+              Select text and click <u>U</u> for underline formatting
             </div>
             <div>
-              <code># Heading 1</code> → Large heading
+              Select text and click <strong>H1</strong> for large heading
             </div>
             <div>
-              <code>## Heading 2</code> → Medium heading
+              Select text and click <strong>H2</strong> for medium heading
+            </div>
+            <div className="mt-2 text-gray-400">
+              Or use keyboard shortcuts: Ctrl+B, Ctrl+I, Ctrl+U
             </div>
           </div>
         </details>
