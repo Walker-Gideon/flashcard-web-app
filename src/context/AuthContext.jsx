@@ -1,6 +1,7 @@
 import { onAuthStateChanged, signOut } from "firebase/auth";
+import { getFirestore, doc, getDoc, updateDoc } from "firebase/firestore";
 import { auth } from "../firebase";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
 const AuthContext = createContext();
 
@@ -11,9 +12,84 @@ function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const [isSigningUp, setIsSigningUp] = useState(false);
 
+  // User data state
+  const [userData, setUserData] = useState({
+    email: "",
+    username: "",
+    photoURL: null,
+    uid: "",
+  });
+
+  const db = getFirestore();
+
+  // Function to fetch user data from Firestore
+  const fetchUserData = async (uid) => {
+    try {
+      const userRef = doc(db, "users", uid);
+      const userSnap = await getDoc(userRef);
+
+      if (userSnap.exists()) {
+        const data = userSnap.data();
+        setUserData({
+          email: data.email || "",
+          username: data.username || "",
+          photoURL: data.photoURL || null,
+          uid: data.uid || uid,
+        });
+      }
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+    }
+  };
+
+  // Function to update user data in Firestore
+  const updateUserData = async (updates) => {
+    try {
+      if (!user?.uid) return false;
+
+      const userRef = doc(db, "users", user.uid);
+      await updateDoc(userRef, updates);
+
+      // Update local state
+      setUserData((prev) => ({
+        ...prev,
+        ...updates,
+      }));
+
+      return true;
+    } catch (error) {
+      console.error("Error updating user data:", error);
+      return false;
+    }
+  };
+
+  // Function to update username
+  const updateUsername = async (newUsername) => {
+    return await updateUserData({ username: newUsername });
+  };
+
+  // Function to update profile image
+  const updateProfileImage = async (photoURL) => {
+    return await updateUserData({ photoURL });
+  };
+
   function loginAndSignup() {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser);
+
+      if (currentUser) {
+        // Fetch user data when user is authenticated
+        await fetchUserData(currentUser.uid);
+      } else {
+        // Clear user data when user is not authenticated
+        setUserData({
+          email: "",
+          username: "",
+          photoURL: null,
+          uid: "",
+        });
+      }
+
       setLoading(false);
     });
     return () => unsubscribe();
@@ -28,12 +104,25 @@ function AuthProvider({ children }) {
       // Reset all auth states to ensure clean logout
       setLoading(false);
       setIsSigningUp(false);
+      // Clear user data
+      setUserData({
+        email: "",
+        username: "",
+        photoURL: null,
+        uid: "",
+      });
     } catch (error) {
       console.error("Logout failed:", error);
       // Even if Firebase logout fails, reset local state
       setUser(null);
       setIsAuthenticated(false);
       setIsVerify(false);
+      setUserData({
+        email: "",
+        username: "",
+        photoURL: null,
+        uid: "",
+      });
     }
   };
 
@@ -50,6 +139,13 @@ function AuthProvider({ children }) {
     setIsVerify,
     isSigningUp,
     setIsSigningUp,
+    // User data
+    userData,
+    setUserData,
+    fetchUserData,
+    updateUserData,
+    updateUsername,
+    updateProfileImage,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

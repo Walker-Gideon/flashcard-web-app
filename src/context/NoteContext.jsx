@@ -7,9 +7,11 @@ const initialState = {
 
 function reducer(state, action) {
   switch (action.type) {
-    case "SHOW_NORMAL_SIZE":
+    // case "SHOW_NORMAL_SIZE":
+    case "SHOW_H1":
       return { activeBtn: "h1" };
-    case "SHOW_INCREASE_SIZE":
+    // case "SHOW_INCREASE_SIZE":
+    case "SHOW_H2":
       return { activeBtn: "h2" };
     case "SHOW_BOLD":
       return { activeBtn: "bold" };
