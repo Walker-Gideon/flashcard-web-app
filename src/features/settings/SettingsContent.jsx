@@ -7,12 +7,10 @@ import CardOverview from "../../ui/CardOverview";
 import Input from "../../ui/Input";
 import User from "../user/User";
 import SettlingsFormHeader from "./SettlingsFormHeader";
-import { useLoader } from "../../context/LoaderContext";
 import { useAuth } from "../../context/AuthContext";
 
 export default function SettingsContent() {
-  const { image, setImage } = useLoader();
-  const { userData, updateUsername } = useAuth();
+  const { userData, updateUsername, image, setImage } = useAuth();
 
   const [message, setMessage] = useState("");
   const [newUsername, setNewUsername] = useState("");

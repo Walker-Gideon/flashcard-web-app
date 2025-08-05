@@ -11,6 +11,7 @@ function AuthProvider({ children }) {
   const [isVerify, setIsVerify] = useState(false);
   const [loading, setLoading] = useState(true);
   const [isSigningUp, setIsSigningUp] = useState(false);
+  const [image, setImage] = useState(null);
   const [userData, setUserData] = useState({
     email: "",
     username: "",
@@ -142,6 +143,8 @@ function AuthProvider({ children }) {
   const value = {
     user,
     setUser,
+    image,
+    setImage,
     loading,
     setLoading,
     // logoutUser,
