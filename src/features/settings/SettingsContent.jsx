@@ -8,9 +8,12 @@ import Input from "../../ui/Input";
 import User from "../user/User";
 import SettlingsFormHeader from "./SettlingsFormHeader";
 import { useLoader } from "../../context/LoaderContext";
+import { useAuth } from "../../context/AuthContext";
 
 export default function SettingsContent() {
   const { image, setImage } = useLoader();
+  const { userData } = useAuth();
+
   const [placeholder, setPlaceholder] = useState("Enter username");
   const [message, setMessage] = useState("");
   const [newUsername, setNewUsername] = useState("");
@@ -70,6 +73,11 @@ export default function SettingsContent() {
     setPreview(URL.createObjectURL(file));
   };
 
+  const displayName =
+    userData.username &&
+    userData.username.charAt(0).toUpperCase() + userData.username.slice(1);
+  const displayEmail = userData.email;
+
   const styling = {
     label: `flex flex-col gap-1 text-xs font-medium text-slate-900 dark:text-white`,
     input: "w-full text-slate-900 dark:text-white",
@@ -114,7 +122,7 @@ export default function SettingsContent() {
               name="username"
               value={newUsername}
               onChange={(e) => setNewUsername(e.target.value)}
-              placeholder={placeholder}
+              placeholder={displayName ? displayName : "Enter username"}
               classname={styling.input}
             />
           </div>
@@ -124,7 +132,7 @@ export default function SettingsContent() {
             <input
               className={`rounded-sm border border-stone-300 px-1.5 py-1.5 text-sm text-black transition-all duration-300 placeholder:text-xs focus:outline-hidden disabled:cursor-not-allowed disabled:bg-gray-200 dark:disabled:bg-gray-500 ${styling.input}`}
               disabled={true}
-              placeholder={"user@gmail.com"}
+              placeholder={displayEmail ? displayEmail : "example123@gmail.com"}
             />
           </div>
 
