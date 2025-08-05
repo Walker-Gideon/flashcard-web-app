@@ -206,7 +206,7 @@ export default function SignupForm() {
           />
           <Button
             variant="outline"
-            disabled={!loading}
+            disabled={loading}
             classname={stylings.button}
             onClick={(e) => {
               e.preventDefault();
@@ -233,7 +233,7 @@ export default function SignupForm() {
           />
           <Button
             variant="outline"
-            disabled={!loading}
+            disabled={loading}
             classname={stylings.button}
             onClick={(e) => {
               e.preventDefault();
@@ -250,7 +250,7 @@ export default function SignupForm() {
 
         <Button
           type="submit"
-          disabled={!loading}
+          disabled={loading}
           variant="primary"
           classname="w-full py-2 disabled:bg-slate-600 disabled:cursor-not-allowed"
         >

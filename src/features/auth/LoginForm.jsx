@@ -126,7 +126,7 @@ export default function LoginForm() {
           />
           <Button
             variant="outline"
-            disabled={!loading}
+            disabled={loading}
             classname="absolute top-2.5 right-2 disabled:cursor-not-allowed"
             onClick={(e) => {
               e.preventDefault();
@@ -143,7 +143,7 @@ export default function LoginForm() {
 
         <Button
           type="submit"
-          disabled={!loading}
+          disabled={loading}
           variant="primary"
           classname="w-full py-2 disabled:bg-slate-600 disabled:cursor-not-allowed"
         >
