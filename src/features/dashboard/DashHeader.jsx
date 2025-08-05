@@ -14,11 +14,7 @@ export default function DashHeader() {
       <div className="flex items-center justify-between px-6 py-4">
         <UserWelcome
           title={`Welcome, ${displayName}!`}
-          subText={
-            userData.isNewUser
-              ? "Let’s help you get started with your first steps."
-              : "Let’s continue where you left off."
-          }
+          subText={"Glad to have you on board."}
         />
 
         <div className="flex items-center space-x-3">
