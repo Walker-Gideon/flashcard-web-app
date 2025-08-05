@@ -1,9 +1,10 @@
 import { LuFlame } from "react-icons/lu";
+import CardOverview from "../../../ui/CardOverview";
 
 export default function StreakCounter({ streakDays }) {
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white/70 p-6 text-center backdrop-blur-xl dark:border-slate-700 dark:bg-slate-800/70">
-      <LuFlame className="mx-auto mb-3 h-12 w-12 text-orange-500" />
+    <CardOverview classname="text-center">
+      <LuFlame className="mx-auto mb-3 h-12 w-12 text-slate-600 dark:text-slate-300" />
       <p className="text-4xl font-bold text-slate-900 dark:text-white">
         {streakDays}
       </p>
@@ -13,6 +14,6 @@ export default function StreakCounter({ streakDays }) {
       <p className="text-sm text-slate-500 dark:text-slate-400">
         Don’t break your streak!
       </p>
-    </div>
+    </CardOverview>
   );
 }
