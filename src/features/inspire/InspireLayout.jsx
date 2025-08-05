@@ -47,7 +47,10 @@ export default function InspireLayout() {
         {/* Right Column */}
 
         <div>
-          <InspireRightLAyout streakDays={streakDays} />
+          <InspireRightLAyout
+            streakDays={streakDays}
+            currentPraise={currentPraise}
+          />
           {/* Streak Counter */}
 
           {/* Personalized Praise */}
