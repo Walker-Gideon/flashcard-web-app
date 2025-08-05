@@ -1,6 +1,7 @@
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
-import { auth, db } from "../firebase";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { auth, db, app } from "../firebase";
 import { createContext, useContext, useEffect, useState } from "react";
 
 const AuthContext = createContext();
@@ -18,6 +19,8 @@ function AuthProvider({ children }) {
     photoURL: null,
     uid: "",
   });
+
+  const storage = getStorage(app);
 
   // Function to fetch user data from Firestore
   const fetchUserData = async (uid) => {
@@ -53,6 +56,21 @@ function AuthProvider({ children }) {
     }));
 
     return true;
+  };
+
+  // Function to upload profile image and return the download URL
+  const uploadProfileImage = async (file, uid) => {
+    if (!file || !uid) return null;
+
+    try {
+      const storageRef = ref(storage, `profileImages/${uid}`);
+      await uploadBytes(storageRef, file);
+      const downloadURL = await getDownloadURL(storageRef);
+      return downloadURL;
+    } catch (error) {
+      console.error("Image upload failed:", error);
+      return null;
+    }
   };
 
   /*
@@ -159,8 +177,9 @@ function AuthProvider({ children }) {
     userData,
     setUserData,
     fetchUserData,
-    // updateUserData,
+    uploadProfileImage,
     updateUsername,
+    // updateUserData,
     // updateProfileImage,
   };
 

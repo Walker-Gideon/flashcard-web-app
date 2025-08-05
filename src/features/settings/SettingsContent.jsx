@@ -10,7 +10,8 @@ import SettlingsFormHeader from "./SettlingsFormHeader";
 import { useAuth } from "../../context/AuthContext";
 
 export default function SettingsContent() {
-  const { userData, updateUsername, image, setImage } = useAuth();
+  const { userData, updateUsername, image, setImage, uploadProfileImage } =
+    useAuth();
 
   const [message, setMessage] = useState("");
   const [newUsername, setNewUsername] = useState("");
