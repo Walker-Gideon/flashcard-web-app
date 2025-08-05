@@ -30,7 +30,8 @@ export default function Achievement() {
   return (
     <CardOverview>
       <HeaderText classname="mb-6">Your Achievements</HeaderText>
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
+
+      <div className="medium:grid-cols-3 grid grid-cols-2 gap-4 md:grid-cols-4">
         {inspireMockData.achievements.map((badge) => (
           <div
             key={badge.id}
