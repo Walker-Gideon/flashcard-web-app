@@ -39,28 +39,22 @@ function AuthProvider({ children }) {
     }
   };
 
-  /*
   // Function to update user data in Firestore
-  const updateUserData = async (updates) => {
-    try {
-      if (!user?.uid) return false;
+  const updateUsername = async (newUsername) => {
+    if (!user?.uid) return false;
 
-      const userRef = doc(db, "users", user.uid);
-      await updateDoc(userRef, updates);
+    const userRef = doc(db, "users", user.uid);
+    await updateDoc(userRef, { username: newUsername });
 
-      // Update local state
-      setUserData((prev) => ({
-        ...prev,
-        ...updates,
-      }));
+    setUserData((prev) => ({
+      ...prev,
+      username: newUsername,
+    }));
 
-      return true;
-    } catch (error) {
-      console.error("Error updating user data:", error);
-      return false;
-    }
+    return true;
   };
 
+  /*
   // Function to update username
   const updateUsername = async (newUsername) => {
     return await updateUserData({ username: newUsername });
@@ -163,7 +157,7 @@ function AuthProvider({ children }) {
     setUserData,
     fetchUserData,
     // updateUserData,
-    // updateUsername,
+    updateUsername,
     // updateProfileImage,
   };
 

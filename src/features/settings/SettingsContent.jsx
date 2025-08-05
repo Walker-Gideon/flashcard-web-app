@@ -14,7 +14,9 @@ export default function SettingsContent() {
   const { image, setImage } = useLoader();
   const { userData } = useAuth();
 
-  const [placeholder, setPlaceholder] = useState("Enter username");
+  const [placeholder, setPlaceholder] = useState(
+    userData.username.charAt(0).toUpperCase() + userData.username.slice(1),
+  );
   const [message, setMessage] = useState("");
   const [newUsername, setNewUsername] = useState("");
   const [preview, setPreview] = useState(null);
@@ -73,9 +75,6 @@ export default function SettingsContent() {
     setPreview(URL.createObjectURL(file));
   };
 
-  const displayName =
-    userData.username &&
-    userData.username.charAt(0).toUpperCase() + userData.username.slice(1);
   const displayEmail = userData.email;
 
   const styling = {
@@ -122,7 +121,7 @@ export default function SettingsContent() {
               name="username"
               value={newUsername}
               onChange={(e) => setNewUsername(e.target.value)}
-              placeholder={displayName ? displayName : "Enter username"}
+              placeholder={placeholder ? placeholder : "Enter username"}
               classname={styling.input}
             />
           </div>
