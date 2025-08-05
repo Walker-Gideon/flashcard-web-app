@@ -8,7 +8,7 @@ export default function FlashcardLayout() {
 
   return (
     <div className="h-screen">
-      <div className="bg-amber-300">
+      <div className="">
         {!showCreateFlashcard ? <FlashcardInit /> : <CreateFlashcard />}
       </div>
 
