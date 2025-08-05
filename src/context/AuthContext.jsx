@@ -1,7 +1,7 @@
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { auth, db } from "../firebase";
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 const AuthContext = createContext();
 
@@ -38,8 +38,7 @@ function AuthProvider({ children }) {
     }
   };
 
-  console.log(userData);
-
+  /*
   // Function to update user data in Firestore
   const updateUserData = async (updates) => {
     try {
@@ -123,16 +122,37 @@ function AuthProvider({ children }) {
       });
     }
   };
+  */
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      console.log("Auth changed:", currentUser); // ✅ Check this logs when user signs in/out
+
+      setUser(currentUser);
+
+      if (currentUser) {
+        await fetchUserData(currentUser.uid); // ✅ This must happen after currentUser is available
+      }
+
+      setLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    console.log("User data updated:", userData);
+  }, [userData]);
 
   const value = {
     user,
     setUser,
     loading,
     setLoading,
-    logoutUser,
+    // logoutUser,
     isAuthenticated,
     setIsAuthenticated,
-    loginAndSignup,
+    // loginAndSignup,
     isVerify,
     setIsVerify,
     isSigningUp,
@@ -141,9 +161,9 @@ function AuthProvider({ children }) {
     userData,
     setUserData,
     fetchUserData,
-    updateUserData,
-    updateUsername,
-    updateProfileImage,
+    // updateUserData,
+    // updateUsername,
+    // updateProfileImage,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
