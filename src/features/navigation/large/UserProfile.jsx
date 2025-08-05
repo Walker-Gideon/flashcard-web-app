@@ -4,9 +4,12 @@ import Button from "../../../ui/Button";
 import { LuMoon } from "react-icons/lu";
 import { LuSun } from "react-icons/lu";
 import User from "../../user/User";
+import { useAuth } from "../../../context/AuthContext";
 
 export default function UserProfile() {
   const { resize } = useNav();
+  const { userData, user, fetchUserData } = useAuth();
+
   const [isDarkMode, setIsDarkMode] = useState(() => {
     if (typeof window !== "undefined") {
       const saved = localStorage.getItem("darkMode");
@@ -35,7 +38,9 @@ export default function UserProfile() {
           <p
             className={`transitioning z-30 text-sm font-medium whitespace-nowrap text-slate-900 dark:text-white ${resize ? `translate-x-0 delay-75` : `medium:-translate-x-[150px]`} inline-block`}
           >
-            User Name
+            {userData.username
+              ? userData.username[0].toUpperCase()
+              : "Username"}
           </p>
         </div>
 

@@ -1,7 +1,7 @@
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import { getFirestore, doc, getDoc, updateDoc } from "firebase/firestore";
-import { auth } from "../firebase";
-import { createContext, useContext, useState } from "react";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { auth, db } from "../firebase";
+import { createContext, useContext, useEffect, useState } from "react";
 
 const AuthContext = createContext();
 
@@ -19,8 +19,6 @@ function AuthProvider({ children }) {
     photoURL: null,
     uid: "",
   });
-
-  const db = getFirestore();
 
   // Function to fetch user data from Firestore
   const fetchUserData = async (uid) => {
@@ -41,6 +39,31 @@ function AuthProvider({ children }) {
       console.error("Error fetching user data:", error);
     }
   };
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const user = auth.currentUser;
+      if (!user) {
+        console.log("No user is logged in.");
+        return;
+      }
+
+      try {
+        const docRef = doc(db, "users", user.uid);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          console.log("User data:", docSnap.data());
+        } else {
+          console.log("No user document found in Firestore.");
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
 
   // Function to update user data in Firestore
   const updateUserData = async (updates) => {
