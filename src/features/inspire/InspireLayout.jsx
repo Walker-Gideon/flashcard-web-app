@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { inspireMockData } from "../../data/inspireMockData";
 import { mockData } from "../../data/mockData";
 
-import { LuFlame } from "react-icons/lu";
 import { LuBookOpen } from "react-icons/lu";
 import { LuAward } from "react-icons/lu";
 import { LuChartColumnIncreasing } from "react-icons/lu";
@@ -51,18 +50,6 @@ export default function InspireLayout() {
         <div>
           <InspireRightLAyout />
           {/* Streak Counter */}
-          <div className="rounded-2xl border border-slate-200 bg-white/70 p-6 text-center backdrop-blur-xl dark:border-slate-700 dark:bg-slate-800/70">
-            <LuFlame className="mx-auto mb-3 h-12 w-12 text-orange-500" />
-            <p className="text-4xl font-bold text-slate-900 dark:text-white">
-              {streakDays}
-            </p>
-            <p className="mb-3 text-lg text-slate-600 dark:text-slate-300">
-              Day Streak!
-            </p>
-            <p className="text-sm text-slate-500 dark:text-slate-400">
-              Don’t break your streak!
-            </p>
-          </div>
 
           {/* Personalized Praise */}
           <div className="rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 p-6 text-white shadow-lg">

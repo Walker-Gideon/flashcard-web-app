@@ -1,4 +1,3 @@
-import React from "react";
 import StreakCounter from "./StreakCounter";
 import Praise from "./Praise";
 import ActionsInspire from "./ActionsInspire";
