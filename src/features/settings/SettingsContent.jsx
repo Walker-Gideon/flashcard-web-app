@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { getFirestore, doc, getDoc, updateDoc } from "firebase/firestore";
-import { getAuth } from "firebase/auth";
+import { auth, db } from "../../firebase";
 
 import Button from "../../ui/Button";
 import CardOverview from "../../ui/CardOverview";
@@ -12,38 +12,13 @@ import { useAuth } from "../../context/AuthContext";
 
 export default function SettingsContent() {
   const { image, setImage } = useLoader();
-  const { userData } = useAuth();
+  const { userData, updateUsername } = useAuth();
 
-  const [placeholder, setPlaceholder] = useState(
-    userData.username.charAt(0).toUpperCase() + userData.username.slice(1),
-  );
   const [message, setMessage] = useState("");
   const [newUsername, setNewUsername] = useState("");
   const [preview, setPreview] = useState(null);
 
   const fileInputRef = useRef();
-
-  const db = getFirestore();
-  const auth = getAuth();
-
-  useEffect(() => {
-    const fetchUsername = async () => {
-      const user = auth.currentUser;
-      if (!user) return;
-
-      const docRef = doc(db, "users", user.uid);
-      const docSnap = await getDoc(docRef);
-
-      if (docSnap.exists()) {
-        const data = docSnap.data();
-        if (data.username) {
-          setPlaceholder(data.username);
-        }
-      }
-    };
-
-    fetchUsername();
-  }, [auth.currentUser, db]);
 
   useEffect(() => {
     if (message) {
@@ -53,18 +28,19 @@ export default function SettingsContent() {
   }, [message]);
 
   const handleUpdate = async () => {
-    const user = auth.currentUser;
-    if (!user || newUsername.trim() === "") return;
+    if (!newUsername.trim()) return;
 
     try {
-      const userRef = doc(db, "users", user.uid);
-      await updateDoc(userRef, { username: newUsername });
-      setMessage("Username updated successfully!");
-      setPlaceholder(newUsername);
-      setNewUsername("");
+      const success = await updateUsername(newUsername);
+      if (success) {
+        setMessage("Username updated successfully!");
+        setNewUsername("");
+      } else {
+        setMessage("Failed to update username.");
+      }
     } catch (error) {
       console.error("Error updating username:", error);
-      setMessage("Error updating username");
+      setMessage("Error updating username.");
     }
   };
 
@@ -76,6 +52,8 @@ export default function SettingsContent() {
   };
 
   const displayEmail = userData.email;
+  const displayUsername =
+    userData.username.charAt(0).toUpperCase() + userData.username.slice(1);
 
   const styling = {
     label: `flex flex-col gap-1 text-xs font-medium text-slate-900 dark:text-white`,
@@ -121,7 +99,7 @@ export default function SettingsContent() {
               name="username"
               value={newUsername}
               onChange={(e) => setNewUsername(e.target.value)}
-              placeholder={placeholder ? placeholder : "Enter username"}
+              placeholder={displayUsername || "Enter username"}
               classname={styling.input}
             />
           </div>
