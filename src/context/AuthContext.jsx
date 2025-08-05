@@ -58,6 +58,31 @@ function AuthProvider({ children }) {
     return true;
   };
 
+  // 1️⃣ This must come first
+  const updateUserData = async (updates) => {
+    try {
+      if (!user?.uid) return false;
+
+      const userRef = doc(db, "users", user.uid);
+      await updateDoc(userRef, updates);
+
+      setUserData((prev) => ({
+        ...prev,
+        ...updates,
+      }));
+
+      return true;
+    } catch (error) {
+      console.error("Error updating user data:", error);
+      return false;
+    }
+  };
+
+  // Function to update profile image
+  const updateProfileImage = async (photoURL) => {
+    return await updateUserData({ photoURL });
+  };
+
   // Function to upload profile image and return the download URL
   const uploadProfileImage = async (file, uid) => {
     if (!file || !uid) return null;
@@ -179,8 +204,8 @@ function AuthProvider({ children }) {
     fetchUserData,
     uploadProfileImage,
     updateUsername,
-    // updateUserData,
-    // updateProfileImage,
+    updateUserData,
+    updateProfileImage,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

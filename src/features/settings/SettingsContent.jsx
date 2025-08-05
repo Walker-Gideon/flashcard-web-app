@@ -10,8 +10,14 @@ import SettlingsFormHeader from "./SettlingsFormHeader";
 import { useAuth } from "../../context/AuthContext";
 
 export default function SettingsContent() {
-  const { userData, updateUsername, image, setImage, uploadProfileImage } =
-    useAuth();
+  const {
+    userData,
+    updateUsername,
+    image,
+    setImage,
+    uploadProfileImage,
+    updateProfileImage,
+  } = useAuth();
 
   const [message, setMessage] = useState("");
   const [newUsername, setNewUsername] = useState("");
@@ -27,6 +33,7 @@ export default function SettingsContent() {
   }, [message]);
 
   const handleUpdate = async () => {
+    /*
     if (!newUsername.trim()) return;
 
     try {
@@ -40,6 +47,47 @@ export default function SettingsContent() {
     } catch (error) {
       console.error("Error updating username:", error);
       setMessage("Error updating username.");
+    }
+      */
+
+    let hasChanges = false;
+
+    // 1. Handle username update
+    if (newUsername.trim() && newUsername !== userData.username) {
+      const success = await updateUsername(newUsername);
+      if (success) {
+        setMessage("Username updated successfully!");
+        setNewUsername("");
+        hasChanges = true;
+      } else {
+        setMessage("Failed to update username.");
+        return;
+      }
+    }
+
+    // 2. Handle image upload
+    if (image) {
+      const downloadURL = await uploadProfileImage(image, userData.uid);
+      if (downloadURL) {
+        const success = await updateProfileImage(downloadURL);
+        if (success) {
+          setMessage(
+            hasChanges
+              ? "Username and image updated!"
+              : "Profile image updated!",
+          );
+          setImage(null);
+          hasChanges = true;
+        } else {
+          setMessage("Failed to update image.");
+        }
+      } else {
+        setMessage("Failed to upload image.");
+      }
+    }
+
+    if (!hasChanges) {
+      setMessage("No changes to update.");
     }
   };
 
