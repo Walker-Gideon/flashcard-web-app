@@ -1,13 +1,19 @@
 import { LuFlame } from "react-icons/lu";
 import UserWelcome from "../user/UserWelcome";
 import { mockData } from "../../data/mockData";
+import { useAuth } from "../../context/AuthContext";
 
 export default function DashHeader() {
+  const { userData } = useAuth();
+  const displayName =
+    userData.username &&
+    userData.username.charAt(0).toUpperCase() + userData.username.slice(1);
+
   return (
     <header className="medium:block sticky top-0 z-40 hidden border-b border-stone-300 bg-white/30 shadow-sm backdrop-blur-sm dark:border-slate-700 dark:bg-slate-800/80">
       <div className="flex items-center justify-between px-6 py-4">
         <UserWelcome
-          title="Welcome back, X!"
+          title={`Welcome, ${displayName}!`}
           /* If the user first sign up we say : */
           subText="Ready to continue your learning journey?"
         />

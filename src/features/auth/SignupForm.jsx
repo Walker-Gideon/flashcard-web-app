@@ -108,6 +108,7 @@ export default function SignupForm() {
         photoURL: null,
         isGoogleSignIn: false,
         createdAt: serverTimestamp(),
+        isNewUser: true,
       });
 
       setIsAuthenticated(true);

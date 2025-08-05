@@ -16,6 +16,7 @@ function AuthProvider({ children }) {
     username: "",
     photoURL: null,
     uid: "",
+    isNewUser: false,
   });
 
   // Function to fetch user data from Firestore
@@ -31,6 +32,7 @@ function AuthProvider({ children }) {
           username: data.username || "",
           photoURL: data.photoURL || null,
           uid: data.uid || uid,
+          isNewUser: data.isNewUser ?? false,
         });
       }
     } catch (error) {
@@ -123,6 +125,23 @@ function AuthProvider({ children }) {
     }
   };
   */
+
+  // Checking for new user
+  useEffect(() => {
+    if (userData.isNewUser) {
+      const markNotNew = async () => {
+        try {
+          const userRef = doc(db, "users", userData.uid);
+          await updateDoc(userRef, { isNewUser: false });
+          setUserData((prev) => ({ ...prev, isNewUser: false }));
+        } catch (err) {
+          console.error("Error updating isNewUser:", err);
+        }
+      };
+
+      markNotNew();
+    }
+  }, [userData.isNewUser, userData.uid]);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
