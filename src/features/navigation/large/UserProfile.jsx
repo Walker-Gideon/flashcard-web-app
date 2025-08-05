@@ -42,7 +42,7 @@ export default function UserProfile() {
           <p
             className={`transitioning z-30 text-sm font-medium whitespace-nowrap text-slate-900 dark:text-white ${resize ? `translate-x-0 delay-75` : `medium:-translate-x-[150px]`} inline-block`}
           >
-            {displayName}
+            {displayName ? displayName : "Username"}
           </p>
         </div>
 
