@@ -3,10 +3,9 @@ import { inspireMockData } from "../../data/inspireMockData";
 import { mockData } from "../../data/mockData";
 
 import { LuFlame } from "react-icons/lu";
-import { LuTarget } from "react-icons/lu";
 import { LuBookOpen } from "react-icons/lu";
-import { LuMoon } from "react-icons/lu";
-import { LuSun } from "react-icons/lu";
+import { LuAward } from "react-icons/lu";
+import { LuChartColumnIncreasing } from "react-icons/lu";
 import InspireHeader from "./InspireHeader";
 import InspireLeftLayout from "./inspireLeft/InspireLeftLayout";
 
@@ -65,8 +64,7 @@ export default function InspireLayout() {
           {/* Personalized Praise */}
           <div className="rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 p-6 text-white shadow-lg">
             <div className="mb-4 flex items-center space-x-3">
-              {/* Award */}
-              <LuTarget className="h-6 w-6 text-blue-200" />
+              <LuAward className="h-6 w-6 text-blue-200" />
               <h3 className="text-xl font-semibold">Your Encouragement</h3>
             </div>
             <p className="mb-4 text-lg text-blue-50 italic">
@@ -86,8 +84,7 @@ export default function InspireLayout() {
                 <span>Review Cards</span>
               </button>
               <button className="flex w-full items-center space-x-3 rounded-xl bg-blue-50 p-3 text-blue-700 transition-colors hover:bg-blue-100 dark:bg-blue-900/20 dark:text-blue-300 dark:hover:bg-blue-900/30">
-                {/* BarChart3 */}
-                <LuFlame className="h-5 w-5" />
+                <LuChartColumnIncreasing className="h-5 w-5" />
                 <span>View Detailed Analytics</span>
               </button>
             </div>

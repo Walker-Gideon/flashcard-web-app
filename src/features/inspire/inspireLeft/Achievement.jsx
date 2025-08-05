@@ -4,6 +4,7 @@ import { LuTarget } from "react-icons/lu";
 import { LuBookOpen } from "react-icons/lu";
 import { LuMoon } from "react-icons/lu";
 import { LuSun } from "react-icons/lu";
+import { LuAward } from "react-icons/lu";
 import CardOverview from "../../../ui/CardOverview";
 import HeaderText from "../../../ui/HeaderText";
 
@@ -22,8 +23,7 @@ export default function Achievement() {
       case "Target":
         return <LuTarget className={iconStyling} />;
       default:
-        // Award
-        return <LuTarget className={iconStyling} />; // Default icon
+        return <LuAward className={iconStyling} />;
     }
   };
 
