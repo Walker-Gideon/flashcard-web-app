@@ -40,14 +40,14 @@ export default function UserProfile() {
           <User />
 
           <p
-            className={`transitioning z-30 text-sm font-medium whitespace-nowrap text-slate-900 dark:text-white ${resize ? `translate-x-0 delay-75` : `medium:-translate-x-[150px]`} inline-block`}
+            className={`transitioning z-30 text-sm font-medium whitespace-nowrap text-slate-900 dark:text-white ${resize ? `translate-x-0 delay-75` : `medium:-translate-x-[250px]`} inline-block`}
           >
             {displayName ? displayName : "Username"}
           </p>
         </div>
 
         <div
-          className={`transitioning z-30 ${resize ? `translate-x-0 delay-150` : `medium:-translate-x-[170px]`} inline-block`}
+          className={`transitioning z-30 ${resize ? `translate-x-0 delay-150` : `medium:-translate-x-[250px]`} inline-block`}
         >
           <Button
             onClick={toggleDarkMode}
