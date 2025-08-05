@@ -3,7 +3,6 @@ import { inspireMockData } from "../../data/inspireMockData";
 import { mockData } from "../../data/mockData";
 
 import { LuBookOpen } from "react-icons/lu";
-import { LuAward } from "react-icons/lu";
 import { LuChartColumnIncreasing } from "react-icons/lu";
 import InspireHeader from "./InspireHeader";
 import InspireLeftLayout from "./inspireLeft/InspireLeftLayout";
@@ -52,16 +51,6 @@ export default function InspireLayout() {
           {/* Streak Counter */}
 
           {/* Personalized Praise */}
-          <div className="rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 p-6 text-white shadow-lg">
-            <div className="mb-4 flex items-center space-x-3">
-              <LuAward className="h-6 w-6 text-blue-200" />
-              <h3 className="text-xl font-semibold">Your Encouragement</h3>
-            </div>
-            <p className="mb-4 text-lg text-blue-50 italic">
-              "{currentPraise}"
-            </p>
-            <p className="text-right text-sm text-blue-100">- FlashMaster AI</p>
-          </div>
 
           {/* Quick Actions (Optional, can be removed if not needed) */}
           <div className="rounded-2xl border border-slate-200 bg-white/70 p-6 backdrop-blur-xl dark:border-slate-700 dark:bg-slate-800/70">
