@@ -8,6 +8,7 @@ import { LuAward } from "react-icons/lu";
 import { LuChartColumnIncreasing } from "react-icons/lu";
 import InspireHeader from "./InspireHeader";
 import InspireLeftLayout from "./inspireLeft/InspireLeftLayout";
+import InspireRightLAyout from "./inspireRight/InspireRightLAyout";
 
 export default function InspireLayout() {
   const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
@@ -46,7 +47,9 @@ export default function InspireLayout() {
         <InspireLeftLayout currentQuote={currentQuote} />
 
         {/* Right Column */}
-        <div className="space-y-6">
+
+        <div>
+          <InspireRightLAyout />
           {/* Streak Counter */}
           <div className="rounded-2xl border border-slate-200 bg-white/70 p-6 text-center backdrop-blur-xl dark:border-slate-700 dark:bg-slate-800/70">
             <LuFlame className="mx-auto mb-3 h-12 w-12 text-orange-500" />
