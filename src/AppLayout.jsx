@@ -18,7 +18,7 @@ export default function AppLayout() {
       >
         <NavigationLayout />
 
-        <div className={`h-screen w-full`}>
+        <div className={`relative h-screen w-full`}>
           <Outlet />
 
           <div className="medium:hidden block transition-all duration-500 ease-in-out">
