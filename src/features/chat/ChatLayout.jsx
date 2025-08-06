@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { LuBrain } from "react-icons/lu";
 import { LuSendHorizontal } from "react-icons/lu";
 import { LuUser } from "react-icons/lu";
+import ChatHeader from "./ChatHeader";
 
 // ChatLayout Component - AI Chat Interface
 export default function ChatLayout() {
@@ -79,15 +80,7 @@ export default function ChatLayout() {
   return (
     <div className="medium:w-90 w-ful defaultColor absolute top-0 right-0 h-screen border-l border-stone-300 shadow-2xl dark:border-slate-700 dark:shadow-slate-700">
       <div className="flex min-h-screen flex-col bg-gradient-to-br from-slate-50 via-white to-slate-100 p-4 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
-        {/* Header */}
-        <header className="mb-6 flex flex-col items-center justify-center">
-          <h1 className="text-3xl font-bold text-slate-900 dark:text-white">
-            AI Chat Assistant
-          </h1>
-          <p className="mt-1 text-slate-600 dark:text-slate-400">
-            Ask me anything about your studies!
-          </p>
-        </header>
+        <ChatHeader />
 
         {/* Chat Messages Area */}
         <div className="chat-messages-container">

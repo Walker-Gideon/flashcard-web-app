@@ -122,6 +122,13 @@ export default function SettingsContent() {
                 alt="preview"
                 className={`medium:w-30 medium:h-30 h-20 w-20 rounded-full object-cover`}
               />
+            ) : userData.photoURL ? (
+              // Else show the saved user image if it exists
+              <img
+                src={userData.photoURL}
+                alt="User profile"
+                className="medium:w-30 medium:h-30 h-20 w-20 rounded-full object-cover"
+              />
             ) : (
               <User
                 classname={"w-20 h-20 medium:w-30 medium:h-30"}
