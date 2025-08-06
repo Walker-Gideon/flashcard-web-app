@@ -7,10 +7,10 @@ import useLazyLoading from "../../ui/LazyLoading";
 
 export default function FlashcardInit() {
   const { setShowCreateFlashcard } = useFlash();
-  const lazyLoading = useLazyLoading();
+  const lazyLoading = useLazyLoading(setShowCreateFlashcard, 2000);
 
   function handleCreateFlashcard() {
-    setShowCreateFlashcard((show) => !show);
+    lazyLoading(true);
   }
 
   return (

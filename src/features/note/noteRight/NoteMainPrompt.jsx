@@ -6,7 +6,7 @@ import useLazyLoading from "../../../ui/LazyLoading";
 
 export default function NoteMainPrompt() {
   const { setCreateNote } = useNote();
-  const lazyTaggle = useLazyLoading(setCreateNote, 1000);
+  const lazyTaggle = useLazyLoading(setCreateNote, 2000);
 
   function handleCreateNote() {
     lazyTaggle(true);

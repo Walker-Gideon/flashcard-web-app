@@ -11,7 +11,7 @@ export default function NoteLeftHeader() {
   const { setCreateNote, createNote } = useNote();
   const [query, setQuery] = useState("");
 
-  const lazyTaggle = useLazyLoading(setCreateNote, 1000);
+  const lazyTaggle = useLazyLoading(setCreateNote, 2000);
 
   function handleCreateNote() {
     lazyTaggle(true);
