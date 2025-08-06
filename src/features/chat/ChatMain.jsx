@@ -2,13 +2,13 @@ import MessageInput from "./MessageInput";
 import RenderMessage from "./RenderMessage";
 import TypingIndicator from "./TypingIndicator";
 
-export default function ChatMain({ messages }) {
+export default function ChatMain({ messages, isTyping }) {
   return (
     <main className="flex h-full flex-1 flex-col overflow-hidden bg-red-500 p-1">
       {/* chat-scrollbar overflow-y-auto */}
       <div className="h-[50vh] flex-1 overflow-y-scroll bg-green-500 pr-2">
         <RenderMessage messages={messages} />
-        <TypingIndicator />
+        <TypingIndicator isTyping={isTyping} />
       </div>
 
       <MessageInput />
