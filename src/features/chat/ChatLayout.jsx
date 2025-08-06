@@ -108,13 +108,13 @@ export default function ChatLayout() {
                 <div
                   className={`max-w-[70%] rounded-lg p-3 shadow-sm ${
                     message.sender === "user"
-                      ? "rounded-br-none bg-blue-500 text-white"
+                      ? "rounded-br-none bg-slate-500 text-white"
                       : "rounded-bl-none bg-slate-100 text-slate-900 dark:bg-slate-700 dark:text-white"
                   }`}
                 >
                   <div className="mb-1 flex items-center">
                     {message.sender === "ai" && (
-                      <LuBrain className="mr-2 h-4 w-4 text-blue-600 dark:text-blue-400" />
+                      <LuBrain className="mr-2 h-4 w-4 text-slate-600 dark:text-slate-400" />
                     )}
                     {message.sender === "user" && (
                       <LuUser className="mr-2 h-4 w-4 text-white" />
