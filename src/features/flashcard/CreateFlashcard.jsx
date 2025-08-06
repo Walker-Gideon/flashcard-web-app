@@ -206,7 +206,7 @@ export default function CreateFlashcard() {
 
           {/* Add More Button Section */}
           <div className="mt-5 flex items-center justify-end gap-2">
-            {/* Reduce the flashcard */}
+            {/* Reduce the flashcard nd this will disply only if you add a flashcard */}
             <Button
               variant={"outline"}
               type="button"
@@ -247,24 +247,25 @@ export default function CreateFlashcard() {
           </div>
 
           {/* Action Buttons Section */}
-          <div className="flex justify-end gap-3 pt-2">
+          <div className="flex justify-end gap-3 pt-7">
             {/* Cancel Button (UI only) */}
-            <button
+            <Button
+              variant="outline"
               type="button"
-              className="cursor-not-allowed rounded-lg bg-slate-200 px-4 py-2 text-slate-700 hover:bg-slate-300 dark:bg-slate-700 dark:text-slate-200 dark:hover:bg-slate-600"
+              // disabled:cursor-not-allowed disabled:opacity-80
+              classname="primaryButton px-12"
               disabled
             >
               Cancel
-            </button>
+            </Button>
+
             {/* Create Button (UI only) */}
-            <button
-              type="submit"
-              className="rounded-lg bg-blue-600 px-4 py-2 font-semibold text-white hover:bg-blue-700"
-            >
+            <Button variant="outline" type="submit" classname="primaryButton">
               Create Flashcard
-            </button>
+            </Button>
           </div>
-          {/* Max pairs info */}
+
+          {/* Max pairs info will use this as a toast for notification */}
           <div className="pt-2 text-right text-xs text-slate-400">
             {pairs.length >= MAX_PAIRS && (
               <span>
