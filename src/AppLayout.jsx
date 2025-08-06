@@ -3,6 +3,7 @@ import NavigationLayout from "./features/navigation/NavigationLayout";
 import Overlay from "./ui/Overlay";
 import { useNav } from "./context/NavigateContext";
 import Loader from "./ui/Loader";
+import ChatLayout from "./features/chat/ChatLayout";
 
 export default function AppLayout() {
   const { navShowOverLay } = useNav();
@@ -26,6 +27,8 @@ export default function AppLayout() {
           </div>
         </div>
       </div>
+
+      <ChatLayout />
     </div>
   );
 }
