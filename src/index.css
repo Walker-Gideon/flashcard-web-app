@@ -130,16 +130,6 @@ className="rounded-sm border border-slate-200 bg-white p-1 shadow-sm dark:border
 
 /* ===== CHAT LAYOUT STYLES ===== */
 
-/* Chat Messages Container - Main chat area */
-.chat-messages-container {
-  @apply;
-}
-
-/* Chat Messages Scroll - Scrollable messages area */
-.chat-messages-scroll {
-  @apply chat-scrollbar flex-1 overflow-y-auto pr-2;
-}
-
 /* Message Wrapper - Container for individual messages */
 .message-wrapper {
   @apply mb-4 flex;

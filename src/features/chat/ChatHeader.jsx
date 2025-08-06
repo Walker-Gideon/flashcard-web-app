@@ -9,7 +9,7 @@ export default function ChatHeader() {
   };
 
   return (
-    <header className="mb-6 flex w-full items-center justify-between">
+    <header className="mb-4 flex w-full items-center justify-between">
       <div className="flex items-center space-x-1">
         <Button variant="outline">
           <LuChevronsRight className={styling.icon} />

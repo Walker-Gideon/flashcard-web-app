@@ -88,11 +88,17 @@ export default function ChatLayout() {
               <p className="mt-1 text-slate-600 dark:text-slate-400">
                 Ask me anything about your studies!
               </p>
+
+              match /b/{bucket}/o {
+      match /{allPaths=**} {
+         allow read, write: if request.auth != null;
+      }
+    }
                   */}
 
         {/* Chat Messages Area */}
-        <div className="flex flex-1 flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white/70 p-6 backdrop-blur-xl dark:border-slate-700 dark:bg-slate-800/70">
-          <div className="chat-messages-scroll">
+        <div className="flex flex-1 flex-col overflow-hidden p-1">
+          <div className="chat-scrollbar flex-1 overflow-y-auto pr-2">
             {/* Render existing messages */}
             {messages.map((message) => (
               <div
