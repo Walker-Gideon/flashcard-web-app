@@ -129,27 +129,9 @@ className="rounded-sm border border-slate-200 bg-white p-1 shadow-sm dark:border
 */
 
 /* ===== CHAT LAYOUT STYLES ===== */
-/* Chat Layout Container - Main wrapper for the chat interface */
-.chat-layout-container {
-  @apply medium:w-90 defaultColor absolute top-0 right-0 h-screen w-full border-l border-stone-300 shadow-2xl dark:border-slate-700 dark:shadow-slate-700;
-}
-
-/* Chat Layout Content - Inner content wrapper */
-.chat-layout-content {
-  @apply flex min-h-screen flex-col bg-gradient-to-br from-slate-50 via-white to-slate-100 p-6 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900;
-}
-
-/* Chat Header - Title and subtitle section */
-.chat-header {
-  @apply mb-6 flex items-center justify-between;
-}
-
-.chat-title {
-  @apply text-3xl font-bold text-slate-900 dark:text-white;
-}
 
 .chat-subtitle {
-  @apply mt-1 text-slate-600 dark:text-slate-400;
+  @apply;
 }
 
 /* Chat Messages Container - Main chat area */
