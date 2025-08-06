@@ -58,12 +58,16 @@ export default function ChatLayout() {
 
   return (
     <div className="medium:w-90 w-ful defaultColor absolute top-0 right-0 h-screen border-l border-stone-300 shadow-2xl dark:border-slate-700 dark:shadow-slate-700">
-      <div className="min-h-screen flex flex-col bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 p-6">
+      <div className="flex min-h-screen flex-col bg-gradient-to-br from-slate-50 via-white to-slate-100 p-6 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
         {/* Header */}
-        <div className="flex items-center justify-between mb-6">
+        <div className="mb-6 flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-slate-900 dark:text-white">AI Chat Assistant</h1>
-            <p className="text-slate-600 dark:text-slate-400 mt-1">Ask me anything about your studies!</p>
+            <h1 className="text-3xl font-bold text-slate-900 dark:text-white">
+              AI Chat Assistant
+            </h1>
+            <p className="mt-1 text-slate-600 dark:text-slate-400">
+              Ask me anything about your studies!
+            </p>
           </div>
         </div>
       </div>
