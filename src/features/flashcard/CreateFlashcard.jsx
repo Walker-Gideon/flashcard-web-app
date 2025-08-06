@@ -2,6 +2,8 @@ import { useState } from "react";
 import FlashcardHeader from "./FlashcardHeader";
 import CardOverview from "../../ui/CardOverview";
 import Input from "../../ui/Input";
+import Button from "../../ui/Button";
+import { LuPlus } from "react-icons/lu";
 
 // CreateFlashcard Component - UI for creating and previewing a flashcard
 // This component provides a form layout for creating a new flashcard with multiple terms/definitions,
@@ -28,6 +30,13 @@ export default function CreateFlashcard() {
     if (pairs.length < MAX_PAIRS) {
       setPairs([...pairs, { term: "", definition: "" }]);
     }
+  };
+
+  const handleReducePair = () => {
+    // Get the id of the newly added and remove it
+    // if (pairs.length < MAX_PAIRS) {
+    //   setPairs([...pairs, { term: "", definition: "" }]);
+    // }
   };
 
   // Handler to update term or definition in a specific pair
@@ -137,8 +146,8 @@ export default function CreateFlashcard() {
 
       <CardOverview classname="medium:h-[70vh] mx-auto h-full max-w-3xl">
         {/* Flashcard Form Section */}
-        <form className="space-y-6" onSubmit={handleCreateFlashcard}>
-          <div className="medium:h-[35vh] space-y-6 overflow-y-scroll">
+        <form className="space-y-4" onSubmit={handleCreateFlashcard}>
+          <div className="medium:h-[41vh] medium:px-4 space-y-6 overflow-y-scroll">
             {pairs.map((pair, idx) => (
               <div
                 key={idx}
@@ -196,33 +205,43 @@ export default function CreateFlashcard() {
           </div>
 
           {/* Add More Button Section */}
-          <div className="flex justify-end">
-            {/* Only show if under max pairs */}
-            <button
+          <div className="mt-5 flex items-center justify-end gap-2">
+            {/* Reduce the flashcard */}
+            <Button
+              variant={"outline"}
               type="button"
-              onClick={handleAddPair}
-              className="rounded-lg bg-blue-100 px-4 py-2 font-semibold text-blue-700 transition hover:bg-blue-200 disabled:cursor-not-allowed disabled:opacity-50"
+              onClick={handleReducePair}
+              classname="primaryButton disabled:cursor-not-allowed disabled:opacity-80 flex items-center gap-2"
               disabled={pairs.length >= MAX_PAIRS}
             >
-              + Add Term & Definition
-            </button>
+              <LuPlus className="h-4 w-4" />{" "}
+              <span>Remove Previous Flashcard</span>
+            </Button>
+
+            {/* Only show if under max pairs */}
+            <Button
+              variant={"outline"}
+              type="button"
+              onClick={handleAddPair}
+              classname="primaryButton disabled:cursor-not-allowed disabled:opacity-80 flex items-center gap-2"
+              disabled={pairs.length >= MAX_PAIRS}
+            >
+              <LuPlus className="h-4 w-4" /> <span>Add Flashcard</span>
+            </Button>
           </div>
 
           {/* Tags Input (Optional) */}
           <div>
-            <label
-              htmlFor="tags"
-              className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-200"
-            >
-              Tags <span className="text-xs text-slate-400">(optional)</span>
+            <label htmlFor="tags" className={styling.label}>
+              Tags (optional)
             </label>
-            <input
+            <Input
               id="tags"
               name="tags"
               type="text"
               value={tags}
               onChange={handleTagsChange}
-              className="w-full rounded-lg border border-slate-300 p-3 text-slate-900 focus:ring-2 focus:ring-blue-500 focus:outline-none dark:border-slate-600 dark:bg-slate-700 dark:text-white"
+              classname={styling.inputArea}
               placeholder="e.g. Biology, Chapter 2"
             />
           </div>

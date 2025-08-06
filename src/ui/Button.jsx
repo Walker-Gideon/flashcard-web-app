@@ -38,15 +38,16 @@ export default function Button({
   // variant === "outline"
   if (variant)
     return (
-      <button
+      <motion.button
         disabled={disabled}
         type={type}
+        whileTap={{ y: 1 }}
         onClick={onClick}
         // className={`cursor-pointer transition-colors duration-300 ${classname}`}
         className={styling[variant]}
       >
         {children}
-      </button>
+      </motion.button>
     );
 
   /*
