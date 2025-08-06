@@ -1,6 +1,7 @@
 import { useState } from "react";
 import FlashcardHeader from "./FlashcardHeader";
 import CardOverview from "../../ui/CardOverview";
+import Input from "../../ui/Input";
 
 // CreateFlashcard Component - UI for creating and previewing a flashcard
 // This component provides a form layout for creating a new flashcard with multiple terms/definitions,
@@ -121,38 +122,31 @@ export default function CreateFlashcard() {
     );
   }
 
+  const styling = {
+    label:
+      "mb-1 block medium:text-xs text-sm font-medium text-slate-500 dark:text-slate-400",
+    inputArea: "w-full input text-slate-900 dark:text-white",
+  };
+
   // --- Flashcard Creation Form UI ---
   return (
     // dark:bg-slate-800 bg-white p-6  scroll-container h-screen  overflow-y-scroll bg-red-600 shadow-lg
     <div className="">
       {/* Header Section */}
-      <FlashcardHeader text="Create Flashcard" />
-      <div className="mb-4 text-center">
-        {/* 
-        <p className="mt-1 text-sm text-slate-500 dark:text-slate-300">
-          Fill in at least two terms and definitions to add a new flashcard to
-          your collection.
-        </p>
-         */}
-      </div>
+      <FlashcardHeader text="Create Flashcard" classname="mb-4" />
 
-      <CardOverview classname="medium:h-[70vh] mx-auto h-full max-w-3xl rounded-2xl p-6">
+      <CardOverview classname="medium:h-[70vh] mx-auto h-full max-w-3xl">
         {/* Flashcard Form Section */}
         <form className="space-y-6" onSubmit={handleCreateFlashcard}>
-          {/* Dynamic Term/Definition Pairs Section */}
-          <div className="space-y-6">
-            {/* Map over each pair and render inputs */}
+          <div className="medium:h-[35vh] space-y-6 overflow-y-scroll">
             {pairs.map((pair, idx) => (
               <div
                 key={idx}
-                className="flex flex-col gap-4 rounded-lg bg-slate-50 p-4 dark:bg-slate-700/40"
+                className="flex flex-col gap-4 rounded-lg bg-slate-50 p-4 dark:bg-slate-600"
               >
                 {/* Term Input */}
                 <div>
-                  <label
-                    htmlFor={`term-${idx}`}
-                    className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-200"
-                  >
+                  <label htmlFor={`term-${idx}`} className={styling.label}>
                     Term{" "}
                     {pairs.length > 2
                       ? `#${idx + 1}`
@@ -160,7 +154,7 @@ export default function CreateFlashcard() {
                         ? "One"
                         : "Two"}
                   </label>
-                  <input
+                  <Input
                     id={`term-${idx}`}
                     name={`term-${idx}`}
                     type="text"
@@ -168,7 +162,7 @@ export default function CreateFlashcard() {
                     onChange={(e) =>
                       handlePairChange(idx, "term", e.target.value)
                     }
-                    className="w-full rounded-lg border border-slate-300 p-3 text-slate-900 focus:ring-2 focus:ring-blue-500 focus:outline-none dark:border-slate-600 dark:bg-slate-700 dark:text-white"
+                    classname={styling.inputArea}
                     placeholder="Enter term..."
                   />
                 </div>
@@ -176,7 +170,7 @@ export default function CreateFlashcard() {
                 <div>
                   <label
                     htmlFor={`definition-${idx}`}
-                    className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-200"
+                    className={styling.label}
                   >
                     Definition{" "}
                     {pairs.length > 2
@@ -193,7 +187,7 @@ export default function CreateFlashcard() {
                     onChange={(e) =>
                       handlePairChange(idx, "definition", e.target.value)
                     }
-                    className="w-full resize-none rounded-lg border border-slate-300 p-3 text-slate-900 focus:ring-2 focus:ring-blue-500 focus:outline-none dark:border-slate-600 dark:bg-slate-700 dark:text-white"
+                    className={`resize-none ${styling.inputArea}`}
                     placeholder="Enter definition..."
                   />
                 </div>

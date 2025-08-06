@@ -14,6 +14,7 @@ export default function Input({
       <input
         id={id}
         name={name}
+        type={type}
         value={value}
         onChange={onChange}
         placeholder={placeholder}
