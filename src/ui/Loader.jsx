@@ -12,7 +12,9 @@ export default function Loader({ spin }) {
     <>
       {spin
         ? spinner && <div className="spinner w-5 bg-black p-1 text-black" />
-        : loading && <div className="progress bg-black text-black" />}
+        : loading && (
+            <div className="progress bg-slate-500 text-slate-500 dark:bg-slate-600 dark:text-slate-600" />
+          )}
     </>
   );
 }
