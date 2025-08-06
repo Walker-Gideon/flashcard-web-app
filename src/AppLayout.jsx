@@ -8,7 +8,7 @@ export default function AppLayout() {
   const { navShowOverLay } = useNav();
 
   return (
-    <div className="defaultColor relative h-screen overflow-hidden">
+    <div className="defaultColor h-screen overflow-hidden">
       <div className="medium:h-[0.5px] h-0">
         <Loader />
       </div>
@@ -18,7 +18,7 @@ export default function AppLayout() {
       >
         <NavigationLayout />
 
-        <div className={`relative h-screen w-full`}>
+        <div className={`h-screen w-full`}>
           <Outlet />
 
           <div className="medium:hidden block transition-all duration-500 ease-in-out">

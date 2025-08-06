@@ -78,7 +78,8 @@ export default function ChatLayout() {
   };
 
   return (
-    <div className="medium:w-90 w-ful defaultColor absolute top-0 right-0 h-screen border-l border-stone-300 shadow-2xl dark:border-slate-700 dark:shadow-slate-700">
+    <div className="medium:w-90 w-ful defaultColor absolute top-0 right-0 border-l border-stone-300 shadow-2xl dark:border-slate-700 dark:shadow-slate-700">
+      {/* min-h-screen */}
       <div className="flex min-h-screen flex-col px-4 py-2">
         <ChatHeader />
         {/* 
@@ -98,7 +99,8 @@ export default function ChatLayout() {
 
         {/* Chat Messages Area */}
         <div className="flex flex-1 flex-col overflow-hidden p-1">
-          <div className="chat-scrollbar flex-1 overflow-y-auto pr-2">
+          {/* chat-scrollbar */}
+          <div className="scroll-container h-0 flex-1 overflow-y-auto bg-amber-300 pr-2">
             {/* Render existing messages */}
             {messages.map((message) => (
               <div
