@@ -79,7 +79,7 @@ export default function ChatLayout() {
 
   return (
     <div className="medium:w-90 w-ful defaultColor absolute top-0 right-0 h-screen border-l border-stone-300 shadow-2xl dark:border-slate-700 dark:shadow-slate-700">
-      <div className="flex min-h-screen flex-col bg-gradient-to-br from-slate-50 via-white to-slate-100 p-4 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
+      <div className="flex min-h-screen flex-col px-4 py-2">
         <ChatHeader />
         {/* 
               <h1 className="text-3xl font-bold text-slate-900 dark:text-white">
