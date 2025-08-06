@@ -128,6 +128,142 @@ Will use this in the flashcard section to switch between normal created card or 
 className="rounded-sm border border-slate-200 bg-white p-1 shadow-sm dark:border-slate-700 dark:bg-slate-800"
 */
 
+/* ===== CHAT LAYOUT STYLES ===== */
+/* Chat Layout Container - Main wrapper for the chat interface */
+.chat-layout-container {
+  @apply medium:w-90 defaultColor absolute top-0 right-0 h-screen w-full border-l border-stone-300 shadow-2xl dark:border-slate-700 dark:shadow-slate-700;
+}
+
+/* Chat Layout Content - Inner content wrapper */
+.chat-layout-content {
+  @apply flex min-h-screen flex-col bg-gradient-to-br from-slate-50 via-white to-slate-100 p-6 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900;
+}
+
+/* Chat Header - Title and subtitle section */
+.chat-header {
+  @apply mb-6 flex items-center justify-between;
+}
+
+.chat-title {
+  @apply text-3xl font-bold text-slate-900 dark:text-white;
+}
+
+.chat-subtitle {
+  @apply mt-1 text-slate-600 dark:text-slate-400;
+}
+
+/* Chat Messages Container - Main chat area */
+.chat-messages-container {
+  @apply flex flex-1 flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white/70 p-6 backdrop-blur-xl dark:border-slate-700 dark:bg-slate-800/70;
+}
+
+/* Chat Messages Scroll - Scrollable messages area */
+.chat-messages-scroll {
+  @apply chat-scrollbar flex-1 overflow-y-auto pr-2;
+}
+
+/* Message Wrapper - Container for individual messages */
+.message-wrapper {
+  @apply mb-4 flex;
+}
+
+.user-message {
+  @apply justify-end;
+}
+
+.ai-message {
+  @apply justify-start;
+}
+
+/* Message Bubble - Individual message styling */
+.message-bubble {
+  @apply max-w-[70%] rounded-lg p-3 shadow-sm;
+}
+
+.user-bubble {
+  @apply rounded-br-none bg-blue-500 text-white;
+}
+
+.ai-bubble {
+  @apply rounded-bl-none bg-slate-100 text-slate-900 dark:bg-slate-700 dark:text-white;
+}
+
+/* Message Header - Sender info and icon */
+.message-header {
+  @apply mb-1 flex items-center;
+}
+
+.message-icon {
+  @apply mr-2 h-4 w-4;
+}
+
+.ai-icon {
+  @apply text-blue-600 dark:text-blue-400;
+}
+
+.user-icon {
+  @apply text-white;
+}
+
+.message-sender {
+  @apply text-sm font-semibold;
+}
+
+/* Message Text - Actual message content */
+.message-text {
+  @apply text-sm;
+}
+
+/* Typing Indicator - Shows when AI is typing */
+.typing-indicator {
+  @apply animate-pulse text-sm;
+}
+
+/* Chat Input Form - Message input area */
+.chat-input-form {
+  @apply mt-6 flex items-center space-x-4;
+}
+
+/* Chat Input - Textarea for typing messages */
+.chat-input {
+  @apply h-12 flex-1 resize-none overflow-hidden rounded-xl border border-slate-300 bg-slate-50 p-3 text-slate-900 focus:ring-2 focus:ring-blue-500 focus:outline-none dark:border-slate-600 dark:bg-slate-700 dark:text-white;
+}
+
+/* Chat Send Button - Send message button */
+.chat-send-button {
+  @apply rounded-xl bg-blue-600 p-3 text-white transition-colors hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50;
+}
+
+.send-icon {
+  @apply h-5 w-5;
+}
+
+/* Chat Scrollbar - Custom scrollbar styling */
+.chat-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.chat-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.chat-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(148, 163, 184, 0.5); /* slate-400 with opacity */
+  border-radius: 4px;
+}
+
+.chat-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(148, 163, 184, 0.7);
+}
+
+.dark .chat-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(71, 85, 105, 0.5); /* slate-600 with opacity */
+}
+
+.dark .chat-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(71, 85, 105, 0.7);
+}
+
 /* 
  **Absolutely!** I'll definitely help you integrate Firebase to make everything realtime and user-specific. This is actually the exciting part where we bring all the UI components to life with real data!
 

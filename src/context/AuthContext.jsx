@@ -43,22 +43,7 @@ function AuthProvider({ children }) {
     }
   };
 
-  // Function to update user data in Firestore
-  const updateUsername = async (newUsername) => {
-    if (!user?.uid) return false;
-
-    const userRef = doc(db, "users", user.uid);
-    await updateDoc(userRef, { username: newUsername });
-
-    setUserData((prev) => ({
-      ...prev,
-      username: newUsername,
-    }));
-
-    return true;
-  };
-
-  // 1️⃣ This must come first
+  // Updata the User Data
   const updateUserData = async (updates) => {
     try {
       if (!user?.uid) return false;
@@ -76,6 +61,21 @@ function AuthProvider({ children }) {
       console.error("Error updating user data:", error);
       return false;
     }
+  };
+
+  // Function to update user data in Firestore
+  const updateUsername = async (newUsername) => {
+    if (!user?.uid) return false;
+
+    const userRef = doc(db, "users", user.uid);
+    await updateDoc(userRef, { username: newUsername });
+
+    setUserData((prev) => ({
+      ...prev,
+      username: newUsername,
+    }));
+
+    return true;
   };
 
   // Function to update profile image
