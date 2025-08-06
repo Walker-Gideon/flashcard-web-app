@@ -3,6 +3,7 @@ import { LuBrain } from "react-icons/lu";
 import { LuSendHorizontal } from "react-icons/lu";
 import { LuUser } from "react-icons/lu";
 import ChatHeader from "./ChatHeader";
+import ChatMain from "./ChatMain";
 
 // ChatLayout Component - AI Chat Interface
 export default function ChatLayout() {
@@ -92,8 +93,9 @@ export default function ChatLayout() {
                   */}
 
         {/* Chat Messages Area */}
-        {/* flex-1 */}
-        <div className="flex h-full flex-col overflow-hidden bg-red-500 p-1">
+        <ChatMain />
+        {/*  */}
+        <div>
           {/* chat-scrollbar overflow-y-auto */}
           <div className="h-[50vh] flex-1 overflow-y-scroll bg-green-500 pr-2">
             {/* Render existing messages */}
