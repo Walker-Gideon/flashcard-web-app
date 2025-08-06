@@ -1,4 +1,6 @@
 import { useState } from "react";
+import FlashcardHeader from "./FlashcardHeader";
+import CardOverview from "../../ui/CardOverview";
 
 // CreateFlashcard Component - UI for creating and previewing a flashcard
 // This component provides a form layout for creating a new flashcard with multiple terms/definitions,
@@ -121,133 +123,144 @@ export default function CreateFlashcard() {
 
   // --- Flashcard Creation Form UI ---
   return (
-    <div className="mx-auto mt-10 h-screen max-w-xl overflow-y-scroll rounded-2xl bg-white p-6 shadow-lg dark:bg-slate-800">
+    // dark:bg-slate-800 bg-white p-6  scroll-container h-screen  overflow-y-scroll bg-red-600 shadow-lg
+    <div className="">
       {/* Header Section */}
-      <div className="mb-6 text-center">
-        <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
-          Create New Flashcard
-        </h2>
+      <FlashcardHeader text="Create Flashcard" />
+      <div className="mb-4 text-center">
+        {/* 
         <p className="mt-1 text-sm text-slate-500 dark:text-slate-300">
           Fill in at least two terms and definitions to add a new flashcard to
           your collection.
         </p>
+         */}
       </div>
 
-      {/* Flashcard Form Section */}
-      <form className="space-y-6" onSubmit={handleCreateFlashcard}>
-        {/* Dynamic Term/Definition Pairs Section */}
-        <div className="space-y-6">
-          {/* Map over each pair and render inputs */}
-          {pairs.map((pair, idx) => (
-            <div
-              key={idx}
-              className="flex flex-col gap-4 rounded-lg bg-slate-50 p-4 dark:bg-slate-700/40"
+      <CardOverview classname="medium:h-[70vh] mx-auto h-full max-w-3xl rounded-2xl p-6">
+        {/* Flashcard Form Section */}
+        <form className="space-y-6" onSubmit={handleCreateFlashcard}>
+          {/* Dynamic Term/Definition Pairs Section */}
+          <div className="space-y-6">
+            {/* Map over each pair and render inputs */}
+            {pairs.map((pair, idx) => (
+              <div
+                key={idx}
+                className="flex flex-col gap-4 rounded-lg bg-slate-50 p-4 dark:bg-slate-700/40"
+              >
+                {/* Term Input */}
+                <div>
+                  <label
+                    htmlFor={`term-${idx}`}
+                    className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-200"
+                  >
+                    Term{" "}
+                    {pairs.length > 2
+                      ? `#${idx + 1}`
+                      : idx === 0
+                        ? "One"
+                        : "Two"}
+                  </label>
+                  <input
+                    id={`term-${idx}`}
+                    name={`term-${idx}`}
+                    type="text"
+                    value={pair.term}
+                    onChange={(e) =>
+                      handlePairChange(idx, "term", e.target.value)
+                    }
+                    className="w-full rounded-lg border border-slate-300 p-3 text-slate-900 focus:ring-2 focus:ring-blue-500 focus:outline-none dark:border-slate-600 dark:bg-slate-700 dark:text-white"
+                    placeholder="Enter term..."
+                  />
+                </div>
+                {/* Definition Input */}
+                <div>
+                  <label
+                    htmlFor={`definition-${idx}`}
+                    className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-200"
+                  >
+                    Definition{" "}
+                    {pairs.length > 2
+                      ? `#${idx + 1}`
+                      : idx === 0
+                        ? "One"
+                        : "Two"}
+                  </label>
+                  <textarea
+                    id={`definition-${idx}`}
+                    name={`definition-${idx}`}
+                    rows={2}
+                    value={pair.definition}
+                    onChange={(e) =>
+                      handlePairChange(idx, "definition", e.target.value)
+                    }
+                    className="w-full resize-none rounded-lg border border-slate-300 p-3 text-slate-900 focus:ring-2 focus:ring-blue-500 focus:outline-none dark:border-slate-600 dark:bg-slate-700 dark:text-white"
+                    placeholder="Enter definition..."
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Add More Button Section */}
+          <div className="flex justify-end">
+            {/* Only show if under max pairs */}
+            <button
+              type="button"
+              onClick={handleAddPair}
+              className="rounded-lg bg-blue-100 px-4 py-2 font-semibold text-blue-700 transition hover:bg-blue-200 disabled:cursor-not-allowed disabled:opacity-50"
+              disabled={pairs.length >= MAX_PAIRS}
             >
-              {/* Term Input */}
-              <div>
-                <label
-                  htmlFor={`term-${idx}`}
-                  className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-200"
-                >
-                  Term{" "}
-                  {pairs.length > 2 ? `#${idx + 1}` : idx === 0 ? "One" : "Two"}
-                </label>
-                <input
-                  id={`term-${idx}`}
-                  name={`term-${idx}`}
-                  type="text"
-                  value={pair.term}
-                  onChange={(e) =>
-                    handlePairChange(idx, "term", e.target.value)
-                  }
-                  className="w-full rounded-lg border border-slate-300 p-3 text-slate-900 focus:ring-2 focus:ring-blue-500 focus:outline-none dark:border-slate-600 dark:bg-slate-700 dark:text-white"
-                  placeholder="Enter term..."
-                />
-              </div>
-              {/* Definition Input */}
-              <div>
-                <label
-                  htmlFor={`definition-${idx}`}
-                  className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-200"
-                >
-                  Definition{" "}
-                  {pairs.length > 2 ? `#${idx + 1}` : idx === 0 ? "One" : "Two"}
-                </label>
-                <textarea
-                  id={`definition-${idx}`}
-                  name={`definition-${idx}`}
-                  rows={2}
-                  value={pair.definition}
-                  onChange={(e) =>
-                    handlePairChange(idx, "definition", e.target.value)
-                  }
-                  className="w-full resize-none rounded-lg border border-slate-300 p-3 text-slate-900 focus:ring-2 focus:ring-blue-500 focus:outline-none dark:border-slate-600 dark:bg-slate-700 dark:text-white"
-                  placeholder="Enter definition..."
-                />
-              </div>
-            </div>
-          ))}
-        </div>
+              + Add Term & Definition
+            </button>
+          </div>
 
-        {/* Add More Button Section */}
-        <div className="flex justify-end">
-          {/* Only show if under max pairs */}
-          <button
-            type="button"
-            onClick={handleAddPair}
-            className="rounded-lg bg-blue-100 px-4 py-2 font-semibold text-blue-700 transition hover:bg-blue-200 disabled:cursor-not-allowed disabled:opacity-50"
-            disabled={pairs.length >= MAX_PAIRS}
-          >
-            + Add Term & Definition
-          </button>
-        </div>
+          {/* Tags Input (Optional) */}
+          <div>
+            <label
+              htmlFor="tags"
+              className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-200"
+            >
+              Tags <span className="text-xs text-slate-400">(optional)</span>
+            </label>
+            <input
+              id="tags"
+              name="tags"
+              type="text"
+              value={tags}
+              onChange={handleTagsChange}
+              className="w-full rounded-lg border border-slate-300 p-3 text-slate-900 focus:ring-2 focus:ring-blue-500 focus:outline-none dark:border-slate-600 dark:bg-slate-700 dark:text-white"
+              placeholder="e.g. Biology, Chapter 2"
+            />
+          </div>
 
-        {/* Tags Input (Optional) */}
-        <div>
-          <label
-            htmlFor="tags"
-            className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-200"
-          >
-            Tags <span className="text-xs text-slate-400">(optional)</span>
-          </label>
-          <input
-            id="tags"
-            name="tags"
-            type="text"
-            value={tags}
-            onChange={handleTagsChange}
-            className="w-full rounded-lg border border-slate-300 p-3 text-slate-900 focus:ring-2 focus:ring-blue-500 focus:outline-none dark:border-slate-600 dark:bg-slate-700 dark:text-white"
-            placeholder="e.g. Biology, Chapter 2"
-          />
-        </div>
-
-        {/* Action Buttons Section */}
-        <div className="flex justify-end gap-3 pt-2">
-          {/* Cancel Button (UI only) */}
-          <button
-            type="button"
-            className="cursor-not-allowed rounded-lg bg-slate-200 px-4 py-2 text-slate-700 hover:bg-slate-300 dark:bg-slate-700 dark:text-slate-200 dark:hover:bg-slate-600"
-            disabled
-          >
-            Cancel
-          </button>
-          {/* Create Button (UI only) */}
-          <button
-            type="submit"
-            className="rounded-lg bg-blue-600 px-4 py-2 font-semibold text-white hover:bg-blue-700"
-          >
-            Create Flashcard
-          </button>
-        </div>
-        {/* Max pairs info */}
-        <div className="pt-2 text-right text-xs text-slate-400">
-          {pairs.length >= MAX_PAIRS && (
-            <span>
-              Maximum of {MAX_PAIRS} terms & definitions per card reached.
-            </span>
-          )}
-        </div>
-      </form>
+          {/* Action Buttons Section */}
+          <div className="flex justify-end gap-3 pt-2">
+            {/* Cancel Button (UI only) */}
+            <button
+              type="button"
+              className="cursor-not-allowed rounded-lg bg-slate-200 px-4 py-2 text-slate-700 hover:bg-slate-300 dark:bg-slate-700 dark:text-slate-200 dark:hover:bg-slate-600"
+              disabled
+            >
+              Cancel
+            </button>
+            {/* Create Button (UI only) */}
+            <button
+              type="submit"
+              className="rounded-lg bg-blue-600 px-4 py-2 font-semibold text-white hover:bg-blue-700"
+            >
+              Create Flashcard
+            </button>
+          </div>
+          {/* Max pairs info */}
+          <div className="pt-2 text-right text-xs text-slate-400">
+            {pairs.length >= MAX_PAIRS && (
+              <span>
+                Maximum of {MAX_PAIRS} terms & definitions per card reached.
+              </span>
+            )}
+          </div>
+        </form>
+      </CardOverview>
     </div>
   );
 }

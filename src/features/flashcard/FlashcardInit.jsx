@@ -15,7 +15,7 @@ export default function FlashcardInit() {
 
   return (
     <div>
-      <FlashcardHeader />
+      <FlashcardHeader text="My Flashcards" />
 
       <div className="h-full">
         <PromptDisplay
