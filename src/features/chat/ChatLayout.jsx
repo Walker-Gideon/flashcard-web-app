@@ -81,9 +81,17 @@ export default function ChatLayout() {
     <div className="medium:w-90 w-ful defaultColor absolute top-0 right-0 h-screen border-l border-stone-300 shadow-2xl dark:border-slate-700 dark:shadow-slate-700">
       <div className="flex min-h-screen flex-col bg-gradient-to-br from-slate-50 via-white to-slate-100 p-4 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
         <ChatHeader />
+        {/* 
+              <h1 className="text-3xl font-bold text-slate-900 dark:text-white">
+                AI Chat Assistant
+              </h1>
+              <p className="mt-1 text-slate-600 dark:text-slate-400">
+                Ask me anything about your studies!
+              </p>
+                  */}
 
         {/* Chat Messages Area */}
-        <div className="chat-messages-container">
+        <div className="flex flex-1 flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white/70 p-6 backdrop-blur-xl dark:border-slate-700 dark:bg-slate-800/70">
           <div className="chat-messages-scroll">
             {/* Render existing messages */}
             {messages.map((message) => (
