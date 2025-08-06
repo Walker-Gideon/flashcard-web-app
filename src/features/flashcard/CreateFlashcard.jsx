@@ -4,6 +4,7 @@ import CardOverview from "../../ui/CardOverview";
 import Input from "../../ui/Input";
 import Button from "../../ui/Button";
 import { LuPlus } from "react-icons/lu";
+import ActionButton from "./createFlashcard/ActionButton";
 
 // CreateFlashcard Component - UI for creating and previewing a flashcard
 // This component provides a form layout for creating a new flashcard with multiple terms/definitions,
@@ -246,23 +247,7 @@ export default function CreateFlashcard() {
           </div>
 
           {/* Action Buttons Section */}
-          <div className="flex justify-end gap-3 pt-7">
-            {/* Cancel Button (UI only) */}
-            <Button
-              variant="outline"
-              type="button"
-              // disabled:cursor-not-allowed disabled:opacity-80
-              classname="primaryButton px-12"
-              disabled
-            >
-              Cancel
-            </Button>
-
-            {/* Create Button (UI only) */}
-            <Button variant="outline" type="submit" classname="primaryButton">
-              Create Flashcard
-            </Button>
-          </div>
+          <ActionButton />
 
           {/* Max pairs info will use this as a toast for notification */}
           <div className="pt-2 text-right text-xs text-slate-400">

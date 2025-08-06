@@ -1,5 +1,34 @@
-import React from "react";
+import { useFlash } from "../../../context/FlashcardContext";
+import Button from "../../../ui/Button";
+import useLazyLoading from "../../../ui/LazyLoading";
 
 export default function ActionButton() {
-  return <div></div>;
+  const { setShowCreateFlashcard } = useFlash();
+  const lazyLoading = useLazyLoading(setShowCreateFlashcard, 2000);
+
+  function handleCreateFlashcard(e) {
+    e.preventDefault();
+    lazyLoading(false);
+  }
+
+  return (
+    <div className="flex justify-end gap-3 pt-7">
+      {/* Cancel Button (UI only) */}
+      <Button
+        variant="outline"
+        // type="button"
+        // disabled:cursor-not-allowed disabled:opacity-80
+        classname="primaryButton px-12"
+        // disabled
+        onClick={handleCreateFlashcard}
+      >
+        Cancel
+      </Button>
+
+      {/* Create Button (UI only) */}
+      <Button variant="outline" type="submit" classname="primaryButton">
+        Create Flashcard
+      </Button>
+    </div>
+  );
 }
