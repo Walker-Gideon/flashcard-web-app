@@ -139,8 +139,7 @@ export default function CreateFlashcard() {
 
   // --- Flashcard Creation Form UI ---
   return (
-    // dark:bg-slate-800 bg-white p-6  scroll-container h-screen  overflow-y-scroll bg-red-600 shadow-lg
-    <div className="">
+    <div>
       {/* Header Section */}
       <FlashcardHeader text="Create Flashcard" classname="mb-4" />
 
