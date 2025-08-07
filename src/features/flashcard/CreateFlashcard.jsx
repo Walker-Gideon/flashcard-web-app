@@ -65,7 +65,12 @@ export default function CreateFlashcard() {
   if (showPreview)
     return (
       <div>
-        <CreatedLayout />;
+        <CreatedLayout
+          handleBackToEdit={handleBackToEdit}
+          tags={tags}
+          pairs={pairs}
+        />
+        ;
       </div>
     );
 

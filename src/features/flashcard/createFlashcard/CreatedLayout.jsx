@@ -1,6 +1,4 @@
-import React from "react";
-
-export default function CreatedLayout({}) {
+export default function CreatedLayout({ handleBackToEdit, tags, pairs }) {
   return (
     <div className="mx-auto mt-10 h-screen max-w-xl overflow-y-scroll rounded-2xl bg-gradient-to-br from-blue-50 via-white to-blue-100 p-6 shadow-2xl dark:from-slate-800 dark:via-slate-900 dark:to-slate-800">
       {/* Preview Header */}
