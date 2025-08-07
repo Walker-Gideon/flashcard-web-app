@@ -2,11 +2,11 @@ import CreatedHeader from "./CreatedHeader";
 
 export default function CreatedLayout({ handleBackToEdit, tags, pairs }) {
   return (
-    <div>
+    <div className="mx-auto flex h-screen max-w-5xl flex-col items-center p-8">
       {/* Preview Header */}
       <CreatedHeader handleBackToEdit={handleBackToEdit} tags={tags} />
 
-      <div className="mx-auto mt-10 h-screen max-w-xl overflow-y-scroll rounded-2xl bg-gradient-to-br from-blue-50 via-white to-blue-100 p-6 shadow-2xl dark:from-slate-800 dark:via-slate-900 dark:to-slate-800">
+      <div className="mx-auto mt-10 max-w-xl overflow-y-scroll rounded-2xl bg-gradient-to-br from-blue-50 via-white to-blue-100 p-6 shadow-2xl dark:from-slate-800 dark:via-slate-900 dark:to-slate-800">
         {/* Fun styling area - you can add color pickers, stickers, etc. here in the future */}
         <div className="mb-4 flex flex-wrap gap-2">
           {/* Example: Tag display */}
