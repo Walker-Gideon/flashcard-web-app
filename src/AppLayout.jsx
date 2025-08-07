@@ -10,11 +10,10 @@ export default function AppLayout() {
 
   return (
     <div className="defaultColor">
-      <div className="medium:h-0.5 z-50 h-0">
+      <div className="z-50 h-0.5">
         <Loader />
       </div>
 
-      {/*  */}
       <div className="defaultColor z-30 h-[99.9vh] w-full overflow-hidden">
         <div
           className={`medium:grid medium:grid-cols-[auto_1fr] overflow-hidden`}
