@@ -6,7 +6,7 @@ import Input from "../../ui/Input";
 import ActionButton from "./createFlashcard/ActionButton";
 import AddFlashcard from "./createFlashcard/AddFlashcard";
 import FlashcardInput from "./createFlashcard/FlashcardInput";
-import CreatedLayout from "./createFlashcard/CreatedLayout";
+import CreatedLayout from "./myCreated/CreatedLayout";
 
 // CreateFlashcard Component - UI for creating and previewing a flashcard
 // This component provides a form layout for creating a new flashcard with multiple terms/definitions,
