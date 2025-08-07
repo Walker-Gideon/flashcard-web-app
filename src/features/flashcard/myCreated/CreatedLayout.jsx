@@ -4,7 +4,7 @@ export default function CreatedLayout({ handleBackToEdit, tags, pairs }) {
   return (
     <div>
       {/* Preview Header */}
-      <CreatedHeader handleBackToEdit={handleBackToEdit} />
+      <CreatedHeader handleBackToEdit={handleBackToEdit} tags={tags} />
 
       <div className="mx-auto mt-10 h-screen max-w-xl overflow-y-scroll rounded-2xl bg-gradient-to-br from-blue-50 via-white to-blue-100 p-6 shadow-2xl dark:from-slate-800 dark:via-slate-900 dark:to-slate-800">
         {/* Fun styling area - you can add color pickers, stickers, etc. here in the future */}
