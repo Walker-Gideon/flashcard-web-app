@@ -3,8 +3,9 @@ import FlashcardHeader from "./FlashcardHeader";
 import CardOverview from "../../ui/CardOverview";
 import Input from "../../ui/Input";
 import Button from "../../ui/Button";
-import { LuPlus } from "react-icons/lu";
+
 import ActionButton from "./createFlashcard/ActionButton";
+import AddFlashcard from "./createFlashcard/AddFlashcard";
 
 // CreateFlashcard Component - UI for creating and previewing a flashcard
 // This component provides a form layout for creating a new flashcard with multiple terms/definitions,
@@ -205,30 +206,12 @@ export default function CreateFlashcard() {
           </div>
 
           {/* Add More Button Section */}
-          <div className="mt-5 flex items-center justify-end gap-2">
-            {/* Reduce the flashcard nd this will disply only if you add a flashcard */}
-            <Button
-              variant={"outline"}
-              type="button"
-              onClick={handleReducePair}
-              classname="primaryButton disabled:cursor-not-allowed disabled:opacity-80 flex items-center gap-2"
-              disabled={pairs.length >= MAX_PAIRS}
-            >
-              <LuPlus className="h-4 w-4" />{" "}
-              <span>Remove Previous Flashcard</span>
-            </Button>
-
-            {/* Only show if under max pairs */}
-            <Button
-              variant={"outline"}
-              type="button"
-              onClick={handleAddPair}
-              classname="primaryButton disabled:cursor-not-allowed disabled:opacity-80 flex items-center gap-2"
-              disabled={pairs.length >= MAX_PAIRS}
-            >
-              <LuPlus className="h-4 w-4" /> <span>Add Flashcard</span>
-            </Button>
-          </div>
+          <AddFlashcard
+            handleAddPair={handleAddPair}
+            handleReducePair={handleReducePair}
+            pairs={pairs}
+            MAX_PAIRS={MAX_PAIRS}
+          />
 
           {/* Tags Input (Optional) */}
           <div>
