@@ -35,25 +35,7 @@ export default function CreatedHeader({ handleBackToEdit, tags }) {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0 }}
               className={`${styling.smalleOverView} medium:relative medium:top-0 medium:border-0 medium:bg-transparent medium:dark:bg-transparent medium:flex-row medium:whitespace-nowrap`}
-            >
-              <Button
-                variant="outline"
-                //   onClick={handleBackToEdit}
-                classname={`${styling.buttonSmall} ${styling.buttonMedium}`}
-              >
-                Back to Flashcard
-              </Button>
-
-              <hr className="medium:hidden w-full border border-stone-300 dark:border-slate-700" />
-
-              <Button
-                variant="outline"
-                onClick={handleBackToEdit}
-                classname={`${styling.buttonSmall} ${styling.buttonMedium}`}
-              >
-                Back to Edit
-              </Button>
-            </motion.div>
+            ></motion.div>
           ) : null}
         </AnimatePresence>
       </div>
