@@ -1,13 +1,11 @@
 import { useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
 import Button from "../../../ui/Button";
 import HeaderText from "../../../ui/HeaderText";
 import { LuEllipsis } from "react-icons/lu";
-import CardOverview from "../../../ui/CardOverview";
 
 export default function CreatedHeader({ handleBackToEdit, tags }) {
-  const [isVisible, setIsVisible] = useState(true);
-
-  function handleShowModel() {}
+  const [isVisible, setIsVisible] = useState(false);
 
   const styling = {
     smalleOverView:
@@ -22,35 +20,42 @@ export default function CreatedHeader({ handleBackToEdit, tags }) {
       <HeaderText>{tags ? tags : "Untitled Flashcard"}</HeaderText>
 
       <div className="relative">
-        <Button
-          variant="outline"
-          onClick={handleShowModel}
-          classname="bg-gradient-to-r from-slate-200 to-slate-300 dark:from-slate-600 p-2 rounded-full dark:to-slate-700 block medium:hidden"
+        <motion.button
+          whileTap={{ y: 1 }}
+          onClick={() => setIsVisible(!isVisible)}
+          className="medium:hidden block cursor-pointer rounded-full bg-gradient-to-r from-slate-200 to-slate-300 p-2 transition-colors duration-300 dark:from-slate-600 dark:to-slate-700"
         >
           <LuEllipsis className="h-5 w-5 dark:text-white" />
-        </Button>
+        </motion.button>
 
-        <div
-          className={`${styling.smalleOverView} medium:relative medium:top-0 medium:border-0 medium:bg-transparent medium:dark:bg-transparent medium:flex-row medium:whitespace-nowrap`}
-        >
-          <Button
-            variant="outline"
-            //   onClick={handleBackToEdit}
-            classname={`${styling.buttonSmall} ${styling.buttonMedium}`}
-          >
-            Back to Flashcard
-          </Button>
+        <AnimatePresence initial={false}>
+          {isVisible ? (
+            <motion.div
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0 }}
+              className={`${styling.smalleOverView} medium:relative medium:top-0 medium:border-0 medium:bg-transparent medium:dark:bg-transparent medium:flex-row medium:whitespace-nowrap`}
+            >
+              <Button
+                variant="outline"
+                //   onClick={handleBackToEdit}
+                classname={`${styling.buttonSmall} ${styling.buttonMedium}`}
+              >
+                Back to Flashcard
+              </Button>
 
-          <hr className="medium:hidden w-full border border-stone-300 dark:border-slate-700" />
+              <hr className="medium:hidden w-full border border-stone-300 dark:border-slate-700" />
 
-          <Button
-            variant="outline"
-            onClick={handleBackToEdit}
-            classname={`${styling.buttonSmall} ${styling.buttonMedium}`}
-          >
-            Back to Edit
-          </Button>
-        </div>
+              <Button
+                variant="outline"
+                onClick={handleBackToEdit}
+                classname={`${styling.buttonSmall} ${styling.buttonMedium}`}
+              >
+                Back to Edit
+              </Button>
+            </motion.div>
+          ) : null}
+        </AnimatePresence>
       </div>
     </header>
   );
