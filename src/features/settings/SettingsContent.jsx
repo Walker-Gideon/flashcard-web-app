@@ -1,7 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { getFirestore, doc, getDoc, updateDoc } from "firebase/firestore";
-import { auth, db } from "../../firebase";
-
 import Button from "../../ui/Button";
 import CardOverview from "../../ui/CardOverview";
 import Input from "../../ui/Input";
@@ -22,7 +19,6 @@ export default function SettingsContent() {
   const [message, setMessage] = useState("");
   const [newUsername, setNewUsername] = useState("");
   const [preview, setPreview] = useState(null);
-
   const fileInputRef = useRef();
 
   useEffect(() => {
@@ -106,7 +102,6 @@ export default function SettingsContent() {
                 className={`medium:w-30 medium:h-30 h-20 w-20 rounded-full object-cover`}
               />
             ) : userData.photoURL ? (
-              // Else show the saved user image if it exists
               <img
                 src={userData.photoURL}
                 alt="User profile"
