@@ -6,6 +6,7 @@ import CreateNote from "./CreateNote";
 import CreateNoteHeader from "./CreateNoteHeader";
 import CreateNoteSubHeader from "./CreateNoteSubHeader";
 import Model from "../../../../ui/Model";
+import { AnimatePresence } from "motion/react";
 
 export default function CreateNoteLayoout() {
   const {
@@ -19,25 +20,48 @@ export default function CreateNoteLayoout() {
   } = useNote();
   const [error, setError] = useState("");
   const [noteTitle, setNoteTitle] = useState("");
+  const [isRequired, setIsRequired] = useState(true);
+  const [isSaveClick, setIsSaveClick] = useState(false);
 
-  const handleSaveNote = async (e) => {
+  const handleSubmitting = async (e) => {
     e.preventDefault();
-    setError("");
-    setIsSubmittingNote(true);
+    setIsSaveClick(true);
 
-    setTimeout(() => {
-      setCreateNote(false);
-      setTitle("");
-      setContent("");
-    }, 1000);
+    if (!noteTitle) {
+      setIsRequired(false);
+      setAddNoteTitle(true);
+    } else {
+      setAddNoteTitle(false);
+      setError("");
+      setIsSubmittingNote(true);
 
-    setAddNoteTitle((show) => !show);
+      setTimeout(() => {
+        setCreateNote(false);
+        setTitle("");
+        setContent("");
+        setIsSubmittingNote(false);
+      }, 2000);
+    }
+  };
+
+  const handelCanale = async (e) => {
+    e.preventDefault();
+    setAddNoteTitle(false);
+
+    if (isSaveClick) {
+      console.log(isSaveClick + " I am " + isSaveClick);
+
+      // we will save it on this without name
+    }
   };
 
   return (
     <div className="medium:mt-0 medium:overflow-hidden mt-7 h-screen">
-      <form onSubmit={handleSaveNote} className="flex flex-grow flex-col">
-        <CreateNoteHeader />
+      <form onSubmit={handleSubmitting} className="flex flex-grow flex-col">
+        <CreateNoteHeader
+          setIsRequired={setIsRequired}
+          setIsSaveClick={setIsSaveClick}
+        />
 
         <main className="medium:h-[90vh] scroll-container h-[74vh] overflow-y-scroll">
           <CreateNoteSubHeader />
@@ -63,17 +87,23 @@ export default function CreateNoteLayoout() {
       </form>
 
       {/* Call the toast here to display the save note */}
-      {addNoteTitle && (
-        <Model
-          type="text"
-          name="noteTitle"
-          value={noteTitle}
-          onChange={(e) => setNoteTitle(e.target.value)}
-          placeholder="Enter note title here..."
-          btnFirstText="Cancel"
-          btnSecondText="Save"
-        />
-      )}
+      <AnimatePresence>
+        {addNoteTitle && (
+          <Model
+            type="text"
+            name="noteTitle"
+            value={noteTitle}
+            onChange={(e) => setNoteTitle(e.target.value)}
+            placeholder={`${isRequired ? `Enter note title here...` : `Please enter note title or Cancel and Save`} `}
+            animation={addNoteTitle}
+            btnFirstText="Cancel"
+            onClickFirst={handelCanale}
+            btnSecondText="Save"
+            onClickSecond={handleSubmitting}
+            required={isRequired}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 }

@@ -7,6 +7,7 @@ export default function Toast({
   model,
   type,
   classOverlay,
+  animation,
 }) {
   const styling = {
     main: "fixed top-5 left-1/2 z-50 -translate-x-1/2 rounded-sm text-sm text-white shadow-lg",
@@ -18,11 +19,9 @@ export default function Toast({
       <Overlay model={model} type="notify" classname={classOverlay}>
         <motion.div
           initial={{ y: "-400%" }}
-          transition={{
-            duration: 0.7,
-            ease: "easeInOut",
-          }}
-          animate={{ y: "0" }}
+          animate={{ y: animation ? 0 : "-400%" }}
+          exit={{ y: "-400%" }}
+          transition={{ duration: 0.7, ease: "easeInOut" }}
           className={`p-2 ${styling[type]} ${classname}`}
         >
           {children}

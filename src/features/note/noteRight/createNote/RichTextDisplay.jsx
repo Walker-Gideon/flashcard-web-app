@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function RichTextDisplay({ content, className = "" }) {
   // Function to safely render HTML content
   const createMarkup = (htmlContent) => {

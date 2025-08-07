@@ -13,9 +13,15 @@ export default function Model({
   onClickFirst,
   onClickSecond,
   btnClass,
+  animation,
+  required,
 }) {
   return (
-    <Toast model={true} classname={"flex items-center justify-center flex-col"}>
+    <Toast
+      model={true}
+      animation={animation}
+      classname={"flex items-center justify-center flex-col"}
+    >
       <div className="medium:max-w-md mt-10 w-full max-w-xs rounded-2xl border border-slate-200 bg-white p-6 shadow-2xl dark:border-slate-700 dark:bg-slate-800">
         <Input
           type={type}
@@ -23,6 +29,7 @@ export default function Model({
           value={value}
           onChange={onChange}
           placeholder={placeholder}
+          required={required}
           classname={
             "w-full placeholder:text-slate-900  dark:placeholder:text-white dark: dark:text-white"
           }

@@ -21,7 +21,7 @@ export default function Overlay({
   const styling = {
     btn: base + " cursor-pointer",
     model: base + " z-50 flex items-center justify-center p-4",
-    notify: base + " z-50",
+    notify: base + " z-50 ",
   };
 
   // this not need to be use

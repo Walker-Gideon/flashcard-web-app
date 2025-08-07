@@ -44,12 +44,6 @@ export default function CreateNoteSubHeader() {
     <div
       className={`mx-4 flex h-16 items-center gap-2 border-b border-stone-300 dark:border-slate-700 ${hasSelectedText ? "bg-blue-50 dark:bg-blue-900/20" : ""}`}
     >
-      {hasSelectedText && (
-        <span className="mr-2 text-xs text-blue-600 dark:text-blue-400">
-          Selected: {selectedText.text.length} chars
-        </span>
-      )}
-
       <Button
         variant="outline"
         classname={styling.h1}
