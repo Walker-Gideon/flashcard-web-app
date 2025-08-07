@@ -2,7 +2,7 @@ import CreatedHeader from "./CreatedHeader";
 
 export default function CreatedLayout({ handleBackToEdit, tags, pairs }) {
   return (
-    <div className="mx-auto flex h-screen max-w-5xl flex-col items-center p-8">
+    <div className="medium:p-8 mx-auto flex h-screen max-w-5xl flex-col items-center px-5">
       {/* Preview Header */}
       <CreatedHeader handleBackToEdit={handleBackToEdit} tags={tags} />
 
