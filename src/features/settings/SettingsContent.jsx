@@ -33,23 +33,6 @@ export default function SettingsContent() {
   }, [message]);
 
   const handleUpdate = async () => {
-    /*
-    if (!newUsername.trim()) return;
-
-    try {
-      const success = await updateUsername(newUsername);
-      if (success) {
-        setMessage("Username updated successfully!");
-        setNewUsername("");
-      } else {
-        setMessage("Failed to update username.");
-      }
-    } catch (error) {
-      console.error("Error updating username:", error);
-      setMessage("Error updating username.");
-    }
-      */
-
     let hasChanges = false;
 
     // 1. Handle username update

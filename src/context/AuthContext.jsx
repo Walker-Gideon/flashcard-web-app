@@ -1,7 +1,6 @@
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { auth, db, app } from "../firebase";
+import { auth, db } from "../firebase";
 import { createContext, useContext, useEffect, useState } from "react";
 
 const AuthContext = createContext();
@@ -19,8 +18,6 @@ function AuthProvider({ children }) {
     photoURL: null,
     uid: "",
   });
-
-  const storage = getStorage(app);
 
   // Function to fetch user data from Firestore
   const fetchUserData = async (uid) => {
@@ -79,21 +76,45 @@ function AuthProvider({ children }) {
   };
 
   // Function to update profile image
-  const updateProfileImage = async (photoURL) => {
-    return await updateUserData({ photoURL });
+  const updateProfileImage = async (downloadURL) => {
+    try {
+      const userDocRef = doc(db, "users", user.uid);
+      await updateDoc(userDocRef, {
+        photoURL: downloadURL,
+      });
+      setUserData((prev) => ({ ...prev, photoURL: downloadURL }));
+      return true;
+    } catch (error) {
+      console.error("Error updating profile image:", error);
+      return false;
+    }
   };
 
   // Function to upload profile image and return the download URL
   const uploadProfileImage = async (file, uid) => {
-    if (!file || !uid) return null;
-
     try {
-      const storageRef = ref(storage, `profileImages/${uid}`);
-      await uploadBytes(storageRef, file);
-      const downloadURL = await getDownloadURL(storageRef);
-      return downloadURL;
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", "unsigned_preset"); // Replace with your actual unsigned preset name
+
+      const response = await fetch(
+        `https://api.cloudinary.com/v1_1/dttlsqszp/image/upload`,
+        {
+          method: "POST",
+          body: formData,
+        },
+      );
+
+      const data = await response.json();
+
+      if (response.ok && data.secure_url) {
+        return data.secure_url;
+      } else {
+        console.error("Cloudinary upload error", data);
+        return null;
+      }
     } catch (error) {
-      console.error("Image upload failed:", error);
+      console.error("Upload error:", error);
       return null;
     }
   };

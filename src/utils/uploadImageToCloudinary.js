@@ -1,5 +1,5 @@
 const uploadImageToCloudinary = async (file) => {
-  const cloudName = "WalkWiseUserImage";
+  const cloudName = "dttlsqszp";
   const uploadPreset = "unsigned_preset";
 
   const formData = new FormData();
@@ -15,7 +15,7 @@ const uploadImageToCloudinary = async (file) => {
   );
 
   const data = await res.json();
-  return data.secure_url; // This is the image URL
+  return data.secure_url;
 };
 
 export default uploadImageToCloudinary;

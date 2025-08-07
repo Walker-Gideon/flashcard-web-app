@@ -1,5 +1,5 @@
 export const handleImageUpload = async (file) => {
-  const cloudName = "WalkWiseUserImage";
+  const cloudName = "dttlsqszp";
   const uploadPreset = "unsigned_preset";
 
   const formData = new FormData();
@@ -18,7 +18,7 @@ export const handleImageUpload = async (file) => {
     const data = await res.json();
 
     if (res.ok) {
-      return data.secure_url; // ✅ Use this URL to save in Firebase or show image
+      return data.secure_url;
     } else {
       throw new Error(data.error?.message || "Upload failed");
     }
