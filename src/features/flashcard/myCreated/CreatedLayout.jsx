@@ -1,18 +1,10 @@
+import CreatedHeader from "./CreatedHeader";
+
 export default function CreatedLayout({ handleBackToEdit, tags, pairs }) {
   return (
     <div>
       {/* Preview Header */}
-      <div className="mb-6 flex items-center justify-between">
-        <h2 className="text-2xl font-bold text-blue-700 dark:text-blue-300">
-          Your Flashcard Preview
-        </h2>
-        <button
-          onClick={handleBackToEdit}
-          className="rounded-lg bg-slate-200 px-4 py-2 text-slate-700 hover:bg-slate-300 dark:bg-slate-700 dark:text-slate-200 dark:hover:bg-slate-600"
-        >
-          Back to Edit
-        </button>
-      </div>
+      <CreatedHeader handleBackToEdit={handleBackToEdit} />
 
       <div className="mx-auto mt-10 h-screen max-w-xl overflow-y-scroll rounded-2xl bg-gradient-to-br from-blue-50 via-white to-blue-100 p-6 shadow-2xl dark:from-slate-800 dark:via-slate-900 dark:to-slate-800">
         {/* Fun styling area - you can add color pickers, stickers, etc. here in the future */}
