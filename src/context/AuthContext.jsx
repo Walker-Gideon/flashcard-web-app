@@ -19,6 +19,19 @@ function AuthProvider({ children }) {
     uid: "",
   });
 
+  // Check for user change
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        await fetchUserData(user.uid);
+      } else {
+        setUserData(null);
+      }
+    });
+
+    return unsubscribe;
+  }, []);
+
   // Function to fetch user data from Firestore
   const fetchUserData = async (uid) => {
     try {
