@@ -6,6 +6,7 @@ import Button from "../../ui/Button";
 
 import ActionButton from "./createFlashcard/ActionButton";
 import AddFlashcard from "./createFlashcard/AddFlashcard";
+import FlashcardInput from "./createFlashcard/FlashcardInput";
 
 // CreateFlashcard Component - UI for creating and previewing a flashcard
 // This component provides a form layout for creating a new flashcard with multiple terms/definitions,
@@ -146,64 +147,9 @@ export default function CreateFlashcard() {
       <FlashcardHeader text="Create Flashcard" classname="mb-4" />
 
       <CardOverview classname="medium:h-[70vh] mx-auto h-full max-w-3xl">
-        {/* Flashcard Form Section */}
         <form className="space-y-4" onSubmit={handleCreateFlashcard}>
-          <div className="medium:h-[41vh] medium:px-4 space-y-6 overflow-y-scroll">
-            {pairs.map((pair, idx) => (
-              <div
-                key={idx}
-                className="flex flex-col gap-4 rounded-lg bg-slate-50 p-4 dark:bg-slate-600"
-              >
-                {/* Term Input */}
-                <div>
-                  <label htmlFor={`term-${idx}`} className={styling.label}>
-                    Term{" "}
-                    {pairs.length > 2
-                      ? `#${idx + 1}`
-                      : idx === 0
-                        ? "One"
-                        : "Two"}
-                  </label>
-                  <Input
-                    id={`term-${idx}`}
-                    name={`term-${idx}`}
-                    type="text"
-                    value={pair.term}
-                    onChange={(e) =>
-                      handlePairChange(idx, "term", e.target.value)
-                    }
-                    classname={styling.inputArea}
-                    placeholder="Enter term..."
-                  />
-                </div>
-                {/* Definition Input */}
-                <div>
-                  <label
-                    htmlFor={`definition-${idx}`}
-                    className={styling.label}
-                  >
-                    Definition{" "}
-                    {pairs.length > 2
-                      ? `#${idx + 1}`
-                      : idx === 0
-                        ? "One"
-                        : "Two"}
-                  </label>
-                  <textarea
-                    id={`definition-${idx}`}
-                    name={`definition-${idx}`}
-                    rows={2}
-                    value={pair.definition}
-                    onChange={(e) =>
-                      handlePairChange(idx, "definition", e.target.value)
-                    }
-                    className={`resize-none ${styling.inputArea}`}
-                    placeholder="Enter definition..."
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
+          {/* inputs */}
+          <FlashcardInput pairs={pairs} handlePairChange={handlePairChange} />
 
           {/* Add More Button Section */}
           <AddFlashcard
