@@ -1,3 +1,7 @@
+import { getFirestore, doc, setDoc, collection } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
+import { auth, db } from "../../../../firebase";
+// import { v4 as uuidv4 } from "uuid"; // to generate unique noteId\
 import { useState } from "react";
 import { LuX } from "react-icons/lu";
 import { LuLoader } from "react-icons/lu";
@@ -34,6 +38,13 @@ export default function CreateNoteLayoout() {
       setAddNoteTitle(false);
       setError("");
       setIsSubmittingNote(true);
+
+      // firebase code
+      const user = auth.currentUser;
+      if (!user) {
+        alert("User not logged in");
+        return;
+      }
 
       setTimeout(() => {
         setCreateNote(false);
