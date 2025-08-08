@@ -33,6 +33,7 @@ function NoteProvider({ children }) {
   const [addNoteTitle, setAddNoteTitle] = useState(false);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [noteName, setNoteName] = useState("");
   const [isSubmittingNote, setIsSubmittingNote] = useState(false);
 
   // Rich text functionality
@@ -205,6 +206,8 @@ function NoteProvider({ children }) {
     setTitle,
     content,
     setContent,
+    noteName,
+    setNoteName,
     activeBtn,
     dispatch,
     isSubmittingNote,

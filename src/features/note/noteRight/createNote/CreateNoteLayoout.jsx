@@ -1,7 +1,7 @@
 import { getFirestore, doc, setDoc, collection } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { auth, db } from "../../../../firebase";
-// import { v4 as uuidv4 } from "uuid"; // to generate unique noteId\
+import { v4 as uuidv4 } from "uuid"; // to generate unique noteId\
 import { useState } from "react";
 import { LuX } from "react-icons/lu";
 import { LuLoader } from "react-icons/lu";
@@ -14,8 +14,12 @@ import { AnimatePresence } from "motion/react";
 
 export default function CreateNoteLayoout() {
   const {
+    title,
+    content,
+    noteName,
     setTitle,
     setContent,
+    setNoteName,
     isSubmittingNote,
     setIsSubmittingNote,
     addNoteTitle,
@@ -30,6 +34,26 @@ export default function CreateNoteLayoout() {
   const handleSubmitting = async (e) => {
     e.preventDefault();
     setIsSaveClick(true);
+
+    const user = auth.currentUser;
+    if (!user) {
+      alert("User not logged in");
+      return;
+    }
+
+    const noteId = uuidv4(); // unique ID for each note
+
+    const noteData = {
+      title,
+      content,
+      noteName,
+      createdAt: new Date(),
+    };
+
+    try {
+      await setDoc(doc(db, "users", user.uid, "notes", noteId), noteData);
+      alert("Note saved successfully!");
+    } catch (err) {}
 
     if (!noteTitle) {
       setIsRequired(false);
