@@ -18,7 +18,7 @@ export default function AddFlashcard({
         classname="primaryButton disabled:cursor-not-allowed disabled:opacity-80 flex items-center gap-2"
         disabled={pairs.length >= MAX_PAIRS}
       >
-        <LuMinus className="h-4 w-4" /> <span>Remove Previous Flashcard</span>
+        <LuMinus className="h-4 w-4" />
       </Button>
 
       {/* Only show if under max pairs */}
@@ -29,7 +29,7 @@ export default function AddFlashcard({
         classname="primaryButton disabled:cursor-not-allowed disabled:opacity-80 flex items-center gap-2"
         disabled={pairs.length >= MAX_PAIRS}
       >
-        <LuPlus className="h-4 w-4" /> <span>Add Flashcard</span>
+        <LuPlus className="h-4 w-4" />
       </Button>
     </div>
   );

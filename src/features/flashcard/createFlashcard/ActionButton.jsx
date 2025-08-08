@@ -26,7 +26,11 @@ export default function ActionButton() {
       </Button>
 
       {/* Create Button (UI only) */}
-      <Button variant="outline" type="submit" classname="primaryButton">
+      <Button
+        variant="outline"
+        type="submit"
+        classname="primaryButton sm:py-1 sm:px-3"
+      >
         Create Flashcard
       </Button>
     </div>

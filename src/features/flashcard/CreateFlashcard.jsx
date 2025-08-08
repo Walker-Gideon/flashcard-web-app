@@ -82,52 +82,54 @@ export default function CreateFlashcard() {
 
   // --- Flashcard Creation Form UI ---
   return (
-    <div>
-      {/* Header Section */}
-      <FlashcardHeader text="Create Flashcard" classname="mb-4" />
+    <div className="medium:overflow-hidden h-screen w-full overflow-y-scroll px-8">
+      <div className="">
+        {/* Header Section */}
+        <FlashcardHeader text="Create Flashcard" classname="medium:my-4" />
 
-      <CardOverview classname="medium:h-[70vh] mx-auto h-full max-w-3xl">
-        <form className="space-y-4" onSubmit={handleCreateFlashcard}>
-          {/* inputs */}
-          <FlashcardInput pairs={pairs} handlePairChange={handlePairChange} />
+        <CardOverview classname="medium:h-[70vh] mx-auto max-w-3xl medium:mt-2 mt-10">
+          <form className="space-y-2" onSubmit={handleCreateFlashcard}>
+            {/* inputs */}
+            <FlashcardInput pairs={pairs} handlePairChange={handlePairChange} />
 
-          {/* Add More Button Section */}
-          <AddFlashcard
-            handleAddPair={handleAddPair}
-            handleReducePair={handleReducePair}
-            pairs={pairs}
-            MAX_PAIRS={MAX_PAIRS}
-          />
-
-          {/* Tags Input (Optional) */}
-          <div>
-            <label htmlFor="tags" className={styling.label}>
-              Tags (optional)
-            </label>
-            <Input
-              id="tags"
-              name="tags"
-              type="text"
-              value={tags}
-              onChange={handleTagsChange}
-              classname={styling.inputArea}
-              placeholder="e.g. Biology, Chapter 2"
+            {/* Add More Button Section */}
+            <AddFlashcard
+              handleAddPair={handleAddPair}
+              handleReducePair={handleReducePair}
+              pairs={pairs}
+              MAX_PAIRS={MAX_PAIRS}
             />
-          </div>
 
-          {/* Action Buttons Section */}
-          <ActionButton />
+            {/* Tags Input (Optional) */}
+            <div>
+              <label htmlFor="tags" className={styling.label}>
+                Tags (optional)
+              </label>
+              <Input
+                id="tags"
+                name="tags"
+                type="text"
+                value={tags}
+                onChange={handleTagsChange}
+                classname={styling.inputArea}
+                placeholder="e.g. Biology, Chapter 2"
+              />
+            </div>
 
-          {/* Max pairs info will use this as a toast for notification */}
-          <div className="pt-2 text-right text-xs text-slate-400">
-            {pairs.length >= MAX_PAIRS && (
-              <span>
-                Maximum of {MAX_PAIRS} terms & definitions per card reached.
-              </span>
-            )}
-          </div>
-        </form>
-      </CardOverview>
+            {/* Action Buttons Section */}
+            <ActionButton />
+
+            {/* Max pairs info will use this as a toast for notification */}
+            <div className="pt-2 text-right text-xs text-slate-400">
+              {pairs.length >= MAX_PAIRS && (
+                <span>
+                  Maximum of {MAX_PAIRS} terms & definitions per card reached.
+                </span>
+              )}
+            </div>
+          </form>
+        </CardOverview>
+      </div>
     </div>
   );
 }
