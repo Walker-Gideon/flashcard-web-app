@@ -62,7 +62,6 @@ export default function CreateFlashcard() {
   const handleBackToEdit = () => setShowPreview(false);
 
   // --- Flashcard Preview UI ---
-  /*
   if (showPreview)
     return (
       <div>
@@ -74,7 +73,6 @@ export default function CreateFlashcard() {
         ;
       </div>
     );
-    */
 
   const styling = {
     label:
