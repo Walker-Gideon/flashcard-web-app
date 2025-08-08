@@ -89,7 +89,7 @@ export default function CreateFlashcard() {
         {/* Header Section */}
         <FlashcardHeader text="Create Flashcard" classname="medium:my-4" />
 
-        <CardOverview classname="medium:h-[70vh] mx-auto max-w-3xl medium:mt-2 mt-10">
+        <CardOverview classname="medium:h-[70vh] mx-auto max-w-3xl medium:mt-2 mt-4">
           <form className="space-y-2" onSubmit={handleCreateFlashcard}>
             {/* inputs */}
             <FlashcardInput pairs={pairs} handlePairChange={handlePairChange} />

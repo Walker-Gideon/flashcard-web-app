@@ -12,7 +12,7 @@ export default function ActionButton() {
   }
 
   return (
-    <div className="flex justify-end gap-3 pt-7">
+    <div className="medium:pt-10 flex justify-end gap-3 pt-7">
       {/* Cancel Button (UI only) */}
       <Button
         variant="outline"

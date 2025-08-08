@@ -8,7 +8,7 @@ export default function FlashcardInput({ pairs, handlePairChange }) {
   };
 
   return (
-    <div className="medium:h-[41vh] medium:px-4 h-[30vh] space-y-6 overflow-y-scroll">
+    <div className="medium:h-[41vh] medium:px-4 h-[36vh] space-y-6 overflow-y-scroll">
       {pairs.map((pair, idx) => (
         <div
           key={idx}
