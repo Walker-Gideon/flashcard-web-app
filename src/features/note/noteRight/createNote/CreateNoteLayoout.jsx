@@ -1,4 +1,4 @@
-import { doc, setDoc, collection } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import { auth, db } from "../../../../firebase";
 import { v4 as uuidv4 } from "uuid";
 import { useState } from "react";
