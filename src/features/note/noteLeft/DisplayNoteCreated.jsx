@@ -4,6 +4,7 @@ import { db, auth } from "../../../firebase";
 import DisplayCreated from "../../../ui/DisplayCreated";
 import { useAuth } from "../../../context/AuthContext";
 import { useNote } from "../../../context/NoteContext";
+import DisplayTiming from "../../../ui/DisplayTiming";
 
 export default function DisplayNoteCreated() {
   const { user } = useAuth();
@@ -32,7 +33,10 @@ export default function DisplayNoteCreated() {
     <div className="scroll-container mb-4 h-screen overflow-y-scroll">
       {notes.map((note) => (
         <div key={note.id} className="">
-          <DisplayCreated title={note.noteName} />
+          <DisplayCreated
+            title={note.noteName}
+            timing={<DisplayTiming createdAt={note.createdAt} />}
+          />
         </div>
       ))}
     </div>

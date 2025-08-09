@@ -13,7 +13,7 @@ export default function DisplayCreated({ title, timing }) {
         </h1>
 
         <p className="medium:text-xs text-sm text-slate-500 dark:text-slate-400">
-          <span>X</span> <span>days ago</span>
+          {timing}
         </p>
       </div>
 
