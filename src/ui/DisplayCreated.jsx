@@ -17,8 +17,12 @@ export default function DisplayCreated({ title, timing }) {
         </p>
       </div>
 
-      <Button variant="outline" onClick={() => {}}>
-        <LuEllipsisVertical />
+      <Button
+        variant="outline"
+        onClick={() => {}}
+        classname="text-slate-700 dark:text-slate-200"
+      >
+        <LuEllipsisVertical className="h-5 w-5" />
       </Button>
     </div>
   );
