@@ -1,14 +1,12 @@
 import { useNote } from "../../../../context/NoteContext";
 import Button from "../../../../ui/Button";
 
-export default function CreateNoteHeader({ setIsRequired, setIsSaveClick }) {
+export default function CreateNoteHeader() {
   const { title, content, isSubmittingNote, setAddNoteTitle } = useNote();
 
   function handleSaveNote(e) {
     e.preventDefault();
     setAddNoteTitle(true);
-    setIsRequired(true);
-    setIsSaveClick(false);
   }
 
   return (

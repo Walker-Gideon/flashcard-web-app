@@ -26,29 +26,10 @@ export default function CreateNoteLayoout() {
     setCreateNote,
   } = useNote();
   const [error, setError] = useState("");
-  const [isRequired, setIsRequired] = useState(true);
-  const [isSaveClick, setIsSaveClick] = useState(false);
-
-  /*
-    if (!noteName) {
-        setIsRequired(false);
-        setAddNoteTitle(true);
-      } else {
-        setAddNoteTitle(false);
-        setError("");
-        setIsSubmittingNote(true);
-
-        setTimeout(() => {
-          setCreateNote(false);
-          //
-          setIsSubmittingNote(false);
-        }, 2000);
-      }
-        */
+  const [isSaving, setIsSaving] = useState(false);
 
   const handleSubmitting = async (e) => {
     e.preventDefault();
-    setIsSaveClick(true);
 
     const user = auth.currentUser;
     if (!user) {
@@ -67,31 +48,43 @@ export default function CreateNoteLayoout() {
 
     try {
       await setDoc(doc(db, "users", user.uid, "notes", noteId), noteData);
-      alert("Note saved successfully!");
+
+      if (!noteName) {
+        setAddNoteTitle(true);
+      }
+      // else {
+      setAddNoteTitle(false);
+      setError("");
+      setIsSubmittingNote(true);
+      // }
 
       // clear form
-      setTitle("");
-      setContent("");
-      setNoteName("");
-      setError("");
+      setTimeout(() => {
+        setCreateNote(false);
+        setTitle("");
+        setContent("");
+        setNoteName("");
+        setError("");
+        setIsSubmittingNote(false);
+      }, 3000);
     } catch (error) {
       console.error("Error saving note: ", error);
       alert(error.message);
     }
+    // finally {
+    // }
   };
 
   const handelCanale = async (e) => {
     e.preventDefault();
     setAddNoteTitle(false);
+    setNoteName("");
   };
 
   return (
     <div className="medium:mt-0 medium:overflow-hidden mt-7 h-screen">
       <form onSubmit={handleSubmitting} className="flex flex-grow flex-col">
-        <CreateNoteHeader
-          setIsRequired={setIsRequired}
-          setIsSaveClick={setIsSaveClick}
-        />
+        <CreateNoteHeader />
 
         <main className="medium:h-[90vh] scroll-container h-[74vh] overflow-y-scroll">
           <CreateNoteSubHeader />
@@ -130,7 +123,7 @@ export default function CreateNoteLayoout() {
             onClickFirst={handelCanale}
             btnSecondText="Save"
             onClickSecond={handleSubmitting}
-            required={isRequired}
+            required={true}
             disabledSec={!noteName}
           />
         )}
