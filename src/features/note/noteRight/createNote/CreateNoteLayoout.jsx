@@ -1,10 +1,8 @@
 import { doc, setDoc, collection } from "firebase/firestore";
 import { auth, db } from "../../../../firebase";
-import { v4 as uuidv4 } from "uuid"; // to generate unique noteId\
+import { v4 as uuidv4 } from "uuid";
 import { useState } from "react";
-import { motion } from "motion/react";
 import { LuX } from "react-icons/lu";
-import { LuLoader } from "react-icons/lu";
 import { LuCheck } from "react-icons/lu";
 import { useNote } from "../../../../context/NoteContext";
 import CreateNote from "./CreateNote";
@@ -12,6 +10,7 @@ import CreateNoteHeader from "./CreateNoteHeader";
 import CreateNoteSubHeader from "./CreateNoteSubHeader";
 import Model from "../../../../ui/Model";
 import { AnimatePresence } from "motion/react";
+import Toast from "../../../../ui/Toast";
 
 export default function CreateNoteLayoout() {
   const {
@@ -28,11 +27,9 @@ export default function CreateNoteLayoout() {
     setCreateNote,
   } = useNote();
   const [error, setError] = useState("");
-  const [isSaving, setIsSaving] = useState(true);
 
   const handleSubmitting = async (e) => {
     e.preventDefault();
-    setIsSaving(true);
 
     const user = auth.currentUser;
     if (!user) {
@@ -54,12 +51,11 @@ export default function CreateNoteLayoout() {
 
       if (!noteName) {
         setAddNoteTitle(true);
+      } else {
+        setAddNoteTitle(false);
+        setError("");
+        setIsSubmittingNote(true);
       }
-      // else {
-      setAddNoteTitle(false);
-      setError("");
-      setIsSubmittingNote(true);
-      // }
 
       // clear form
       setTimeout(() => {
@@ -71,10 +67,7 @@ export default function CreateNoteLayoout() {
         setIsSubmittingNote(false);
       }, 3000);
     } catch (error) {
-      console.error("Error saving note: ", error);
-      alert(error.message);
-    } finally {
-      setIsSaving(true);
+      console.error("Error saving note: ", error.message);
     }
   };
 
@@ -99,35 +92,28 @@ export default function CreateNoteLayoout() {
         </main>
 
         {error && (
-          <div className="absolute inset-0 flex items-center justify-center text-sm text-red-600 dark:text-red-400">
+          <Toast
+            animation={error}
+            notify={true}
+            classname={"text-red-600 dark:text-red-400"}
+          >
             <LuX className="mr-1 h-4 w-4" />
             <span>{error}</span>
-          </div>
-        )}
-        {isSubmittingNote && (
-          <div className="absolute inset-0 flex items-center justify-center text-sm text-blue-600 dark:text-blue-400">
-            <LuLoader className="mr-1 h-4 w-4 animate-spin" />
-            <span>Saving note...</span>
-          </div>
+          </Toast>
         )}
 
-        <div className="absolute inset-0 top-10 z-50">
-          {isSaving && (
-            <motion.div
-              initial={{ y: "-400%" }}
-              animate={{ y: isSaving ? 0 : "-800%" }}
-              exit={{ y: "-400%" }}
-              transition={{ duration: 1.5, ease: "easeInOut" }}
-              className="mx-auto flex h-10 max-w-50 items-center justify-center rounded-sm border bg-slate-100 text-sm font-medium text-green-600 dark:bg-white dark:text-green-400"
-            >
-              <LuCheck className="mr-1 h-4 w-4" />
-              <span>Note save successiful</span>
-            </motion.div>
-          )}
-        </div>
+        {isSubmittingNote && (
+          <Toast
+            animation={isSubmittingNote}
+            notify={true}
+            classname={"text-green-600 dark:text-green-400"}
+          >
+            <LuCheck className="mr-1 h-4 w-4" />
+            <span>Note save successiful</span>
+          </Toast>
+        )}
       </form>
 
-      {/* Call the toast here to display the save note */}
       <AnimatePresence>
         {addNoteTitle && (
           <Model

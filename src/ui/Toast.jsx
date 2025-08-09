@@ -8,11 +8,27 @@ export default function Toast({
   type,
   classOverlay,
   animation,
+  notify,
 }) {
   const styling = {
     main: "fixed top-5 left-1/2 z-50 -translate-x-1/2 rounded-sm text-sm text-white shadow-lg",
   };
   //"bg-green-600" : "bg-red-600"
+
+  if (notify)
+    return (
+      <div className="absolute inset-0 top-10 z-50">
+        <motion.div
+          initial={{ y: "-400%" }}
+          animate={{ y: animation ? 0 : "-800%" }}
+          exit={{ y: "-400%" }}
+          transition={{ duration: 1.5, ease: "easeInOut" }}
+          className={`mx-auto flex h-10 max-w-50 items-center justify-center rounded-sm border bg-slate-100 text-sm font-medium dark:bg-white ${classname}`}
+        >
+          {children}
+        </motion.div>
+      </div>
+    );
 
   if (model)
     return (
