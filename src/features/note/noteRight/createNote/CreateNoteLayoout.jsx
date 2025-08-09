@@ -83,12 +83,6 @@ export default function CreateNoteLayoout() {
   const handelCanale = async (e) => {
     e.preventDefault();
     setAddNoteTitle(false);
-
-    if (isSaveClick) {
-      console.log(isSaveClick + " I am " + isSaveClick);
-
-      // we will save it on this without name
-    }
   };
 
   return (
@@ -130,7 +124,7 @@ export default function CreateNoteLayoout() {
             name="noteTitle"
             value={noteName}
             onChange={(e) => setNoteName(e.target.value)}
-            placeholder={`${isRequired ? `Enter note title here...` : `Please enter note title or Cancel and Save`} `}
+            placeholder="Name this Note"
             animation={addNoteTitle}
             btnFirstText="Cancel"
             onClickFirst={handelCanale}
