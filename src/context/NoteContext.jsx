@@ -35,6 +35,7 @@ function NoteProvider({ children }) {
   const [content, setContent] = useState("");
   const [noteName, setNoteName] = useState("");
   const [isSubmittingNote, setIsSubmittingNote] = useState(false);
+  const [notes, setNotes] = useState([]);
 
   // Rich text functionality
   const [selectedText, setSelectedText] = useState({
@@ -200,6 +201,8 @@ function NoteProvider({ children }) {
   };
 
   const value = {
+    notes,
+    setNotes,
     createNote,
     setCreateNote,
     title,

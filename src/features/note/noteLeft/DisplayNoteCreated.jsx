@@ -3,10 +3,11 @@ import { collection, query, where, onSnapshot } from "firebase/firestore";
 import { db, auth } from "../../../firebase";
 import DisplayCreated from "../../../ui/DisplayCreated";
 import { useAuth } from "../../../context/AuthContext";
+import { useNote } from "../../../context/NoteContext";
 
 export default function DisplayNoteCreated() {
   const { user } = useAuth();
-  const [notes, setNotes] = useState([]);
+  const { notes, setNotes } = useNote();
 
   useEffect(() => {
     if (!user?.uid) return; // wait for login
@@ -23,13 +24,17 @@ export default function DisplayNoteCreated() {
     });
 
     return () => unsubscribe(); // cleanup
-  }, [user]);
+  }, [user, setNotes]);
 
   console.log(notes);
 
   return (
     <div className="scroll-container mb-4 h-screen overflow-y-scroll">
-      <DisplayCreated />
+      {notes.map((note) => (
+        <div key={note.id} className="">
+          <DisplayCreated title={note.noteName} />
+        </div>
+      ))}
     </div>
   );
 }
