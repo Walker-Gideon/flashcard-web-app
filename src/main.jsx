@@ -8,21 +8,24 @@ import { NavigateProvider } from "./context/NavigateContext.jsx";
 import { AuthProvider } from "./context/AuthContext.jsx";
 import { LoaderProvider } from "./context/LoaderContext.jsx";
 import { FlashcardProvider } from "./context/FlashcardContext.jsx";
+import { ChatProvider } from "./context/ChatContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <FlashcardProvider>
-      <NoteProvider>
-        <NavigateProvider>
-          <AuthProvider>
-            <LoaderProvider>
-              <BrowserRouter>
-                <App />
-              </BrowserRouter>
-            </LoaderProvider>
-          </AuthProvider>
-        </NavigateProvider>
-      </NoteProvider>
-    </FlashcardProvider>
+    <ChatProvider>
+      <FlashcardProvider>
+        <NoteProvider>
+          <NavigateProvider>
+            <AuthProvider>
+              <LoaderProvider>
+                <BrowserRouter>
+                  <App />
+                </BrowserRouter>
+              </LoaderProvider>
+            </AuthProvider>
+          </NavigateProvider>
+        </NoteProvider>
+      </FlashcardProvider>
+    </ChatProvider>
   </StrictMode>,
 );

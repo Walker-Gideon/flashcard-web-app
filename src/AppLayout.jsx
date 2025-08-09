@@ -9,7 +9,7 @@ export default function AppLayout() {
   const { navShowOverLay } = useNav();
 
   return (
-    <div className="defaultColor">
+    <div className="defaultColor overflow-hidden">
       <div className="z-50 h-0.5">
         <Loader />
       </div>
@@ -28,9 +28,8 @@ export default function AppLayout() {
             </div>
           </div>
         </div>
-
-        <ChatLayout />
       </div>
+      <ChatLayout />
     </div>
   );
 }

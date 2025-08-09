@@ -1,9 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import ChatHeader from "./ChatHeader";
 import ChatMain from "./ChatMain";
+import { useChat } from "../../context/ChatContext";
 
 // ChatLayout Component - AI Chat Interface
 export default function ChatLayout() {
+  const { isChatShow } = useChat();
+
   // State for managing chat messages
   const [messages, setMessages] = useState([
     {
@@ -76,7 +79,9 @@ export default function ChatLayout() {
   };
 
   return (
-    <div className="medium:w-90 defaultColor absolute top-0 right-0 z-50 w-full border-l border-stone-300 shadow-2xl dark:border-slate-700 dark:shadow-slate-700">
+    <div
+      className={`medium:w-90 defaultColor absolute top-0 right-0 z-50 w-full transform border-l border-stone-300 shadow-2xl transition-transform duration-500 dark:border-slate-700 dark:shadow-slate-700 ${!isChatShow ? `translate-0` : `hidden translate-x-100`}`}
+    >
       {/* min-h-screen */}
       <div className="flex min-h-screen flex-col px-4 py-2">
         <ChatHeader />

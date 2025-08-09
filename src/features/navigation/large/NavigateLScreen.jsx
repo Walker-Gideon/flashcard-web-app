@@ -11,6 +11,7 @@ import ButtonNav from "../../../ui/ButtonNav";
 import Button from "../../../ui/Button";
 import LargeHeader from "./LargeHeader";
 import UserProfile from "./UserProfile";
+import { useChat } from "../../../context/ChatContext";
 
 const buttonsData = [
   {
@@ -56,6 +57,7 @@ export default function NavigateLScreen() {
     resize,
     setNavigateTitle,
   } = useNav();
+  const { setIsChatShow } = useChat();
 
   function handleClick(title) {
     setNavShowOverLay((show) => !show);
@@ -91,7 +93,10 @@ export default function NavigateLScreen() {
               <ButtonNav navLarge={true} text="Chat" classname="w-full">
                 <Button
                   variant="outline"
-                  onClick={() => handleClick("Chat")}
+                  onClick={() => {
+                    // handleClick("Chat")
+                    setIsChatShow((show) => !show);
+                  }}
                   classname={`navButton hover:bg-slate-600 hover:text-white dark:text-white  ${resize ? `flex items-start justify-start` : ``}`}
                 >
                   <LuMessageCircle />
