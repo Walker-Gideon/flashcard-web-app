@@ -131,6 +131,7 @@ export default function CreateNoteLayoout() {
             btnSecondText="Save"
             onClickSecond={handleSubmitting}
             required={isRequired}
+            disabledSec={!noteName}
           />
         )}
       </AnimatePresence>

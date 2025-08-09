@@ -15,6 +15,7 @@ export default function Model({
   btnClass,
   animation,
   required,
+  disabledSec,
 }) {
   return (
     <Toast
@@ -45,7 +46,10 @@ export default function Model({
           </Button>
           <Button
             variant="outline"
-            classname={"primaryButton px-6 medium:px-8"}
+            disabled={disabledSec}
+            classname={
+              "primaryButton px-6 medium:px-8 disabled:bg-gray-400 disabled:cursor-not-allowed"
+            }
             onClick={onClickSecond}
           >
             {btnSecondText}
