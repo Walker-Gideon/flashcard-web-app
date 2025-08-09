@@ -5,7 +5,7 @@ export default function TestimonailConStructure({ text, name, place }) {
         <p>
           <span className="text-xl font-bold md:text-2xl">“</span>
           {text}
-          <snap className="text-xl font-bold md:text-2xl">”</snap>
+          <span className="text-xl font-bold md:text-2xl">”</span>
         </p>
 
         <p>

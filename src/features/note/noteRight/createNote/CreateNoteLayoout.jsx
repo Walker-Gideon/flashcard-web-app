@@ -1,5 +1,4 @@
-import { getFirestore, doc, setDoc, collection } from "firebase/firestore";
-import { getAuth } from "firebase/auth";
+import { doc, setDoc, collection } from "firebase/firestore";
 import { auth, db } from "../../../../firebase";
 import { v4 as uuidv4 } from "uuid"; // to generate unique noteId\
 import { useState } from "react";
@@ -27,9 +26,25 @@ export default function CreateNoteLayoout() {
     setCreateNote,
   } = useNote();
   const [error, setError] = useState("");
-  const [noteTitle, setNoteTitle] = useState("");
   const [isRequired, setIsRequired] = useState(true);
   const [isSaveClick, setIsSaveClick] = useState(false);
+
+  /*
+    if (!noteName) {
+        setIsRequired(false);
+        setAddNoteTitle(true);
+      } else {
+        setAddNoteTitle(false);
+        setError("");
+        setIsSubmittingNote(true);
+
+        setTimeout(() => {
+          setCreateNote(false);
+          //
+          setIsSubmittingNote(false);
+        }, 2000);
+      }
+        */
 
   const handleSubmitting = async (e) => {
     e.preventDefault();
@@ -53,29 +68,15 @@ export default function CreateNoteLayoout() {
     try {
       await setDoc(doc(db, "users", user.uid, "notes", noteId), noteData);
       alert("Note saved successfully!");
-    } catch (err) {}
 
-    if (!noteTitle) {
-      setIsRequired(false);
-      setAddNoteTitle(true);
-    } else {
-      setAddNoteTitle(false);
+      // clear form
+      setTitle("");
+      setContent("");
+      setNoteName("");
       setError("");
-      setIsSubmittingNote(true);
-
-      // firebase code
-      const user = auth.currentUser;
-      if (!user) {
-        alert("User not logged in");
-        return;
-      }
-
-      setTimeout(() => {
-        setCreateNote(false);
-        setTitle("");
-        setContent("");
-        setIsSubmittingNote(false);
-      }, 2000);
+    } catch (error) {
+      console.error("Error saving note: ", error);
+      alert(error.message);
     }
   };
 
@@ -127,8 +128,8 @@ export default function CreateNoteLayoout() {
           <Model
             type="text"
             name="noteTitle"
-            value={noteTitle}
-            onChange={(e) => setNoteTitle(e.target.value)}
+            value={noteName}
+            onChange={(e) => setNoteName(e.target.value)}
             placeholder={`${isRequired ? `Enter note title here...` : `Please enter note title or Cancel and Save`} `}
             animation={addNoteTitle}
             btnFirstText="Cancel"
