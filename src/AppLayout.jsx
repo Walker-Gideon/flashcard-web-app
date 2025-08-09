@@ -29,7 +29,7 @@ export default function AppLayout() {
           </div>
         </div>
 
-        {/* <ChatLayout /> */}
+        <ChatLayout />
       </div>
     </div>
   );

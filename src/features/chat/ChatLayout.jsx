@@ -76,7 +76,7 @@ export default function ChatLayout() {
   };
 
   return (
-    <div className="medium:w-90 w-ful defaultColor absolute top-0 right-0 z-50 border-l border-stone-300 shadow-2xl dark:border-slate-700 dark:shadow-slate-700">
+    <div className="medium:w-90 defaultColor absolute top-0 right-0 z-50 w-full border-l border-stone-300 shadow-2xl dark:border-slate-700 dark:shadow-slate-700">
       {/* min-h-screen */}
       <div className="flex min-h-screen flex-col px-4 py-2">
         <ChatHeader />
