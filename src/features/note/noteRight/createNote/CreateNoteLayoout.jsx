@@ -2,8 +2,10 @@ import { doc, setDoc, collection } from "firebase/firestore";
 import { auth, db } from "../../../../firebase";
 import { v4 as uuidv4 } from "uuid"; // to generate unique noteId\
 import { useState } from "react";
+import { motion } from "motion/react";
 import { LuX } from "react-icons/lu";
 import { LuLoader } from "react-icons/lu";
+import { LuCheck } from "react-icons/lu";
 import { useNote } from "../../../../context/NoteContext";
 import CreateNote from "./CreateNote";
 import CreateNoteHeader from "./CreateNoteHeader";
@@ -26,10 +28,11 @@ export default function CreateNoteLayoout() {
     setCreateNote,
   } = useNote();
   const [error, setError] = useState("");
-  const [isSaving, setIsSaving] = useState(false);
+  const [isSaving, setIsSaving] = useState(true);
 
   const handleSubmitting = async (e) => {
     e.preventDefault();
+    setIsSaving(true);
 
     const user = auth.currentUser;
     if (!user) {
@@ -70,9 +73,9 @@ export default function CreateNoteLayoout() {
     } catch (error) {
       console.error("Error saving note: ", error);
       alert(error.message);
+    } finally {
+      setIsSaving(true);
     }
-    // finally {
-    // }
   };
 
   const handelCanale = async (e) => {
@@ -107,6 +110,21 @@ export default function CreateNoteLayoout() {
             <span>Saving note...</span>
           </div>
         )}
+
+        <div className="absolute inset-0 top-10 z-50">
+          {isSaving && (
+            <motion.div
+              initial={{ y: "-400%" }}
+              animate={{ y: isSaving ? 0 : "-800%" }}
+              exit={{ y: "-400%" }}
+              transition={{ duration: 1.5, ease: "easeInOut" }}
+              className="mx-auto flex h-10 max-w-50 items-center justify-center rounded-sm border bg-slate-100 text-sm font-medium text-green-600 dark:bg-white dark:text-green-400"
+            >
+              <LuCheck className="mr-1 h-4 w-4" />
+              <span>Note save successiful</span>
+            </motion.div>
+          )}
+        </div>
       </form>
 
       {/* Call the toast here to display the save note */}
