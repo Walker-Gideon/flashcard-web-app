@@ -25,6 +25,7 @@ export default function CreateNoteLayoout() {
     addNoteTitle,
     setAddNoteTitle,
     setCreateNote,
+    setDisplayCreatedNote,
   } = useNote();
   const [error, setError] = useState("");
 
@@ -65,6 +66,7 @@ export default function CreateNoteLayoout() {
         setNoteName("");
         setError("");
         setIsSubmittingNote(false);
+        setDisplayCreatedNote(true);
       }, 3000);
     } catch (error) {
       console.error("Error saving note: ", error.message);
