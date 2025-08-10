@@ -2,7 +2,8 @@ import { useNote } from "../../../../context/NoteContext";
 import Button from "../../../../ui/Button";
 
 export default function CreateNoteHeader() {
-  const { title, content, isSubmittingNote, setAddNoteTitle } = useNote();
+  const { title, content, isSubmittingNote, setAddNoteTitle, noteName } =
+    useNote();
 
   function handleSaveNote(e) {
     e.preventDefault();
@@ -12,7 +13,8 @@ export default function CreateNoteHeader() {
   return (
     <header className="flex h-14 items-center justify-between border-b border-stone-300 px-4 dark:border-slate-700">
       <h1 className="text-sm font-semibold text-slate-500 dark:text-slate-400">
-        Untitled Note
+        {/* Need to write a logic to display the note name on click from the note display */}
+        {noteName ? noteName : "Untitled Note"}
       </h1>
 
       <Button
