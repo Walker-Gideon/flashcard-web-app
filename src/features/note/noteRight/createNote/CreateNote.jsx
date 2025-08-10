@@ -13,6 +13,7 @@ export default function CreateNote({
     setTextareaRef,
     handleKeyboardShortcut,
     handleTextSelection,
+    currentNote,
   } = useNote();
 
   let textSize;
@@ -27,6 +28,8 @@ export default function CreateNote({
   } else if (activeBtn === "underline") {
     textSize = "underline";
   }
+
+  console.log(currentNote);
 
   return (
     <div className="mx-4 my-2 h-full py-2">

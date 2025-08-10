@@ -36,6 +36,11 @@ function NoteProvider({ children }) {
   const [noteName, setNoteName] = useState("");
   const [isSubmittingNote, setIsSubmittingNote] = useState(false);
   const [notes, setNotes] = useState([]);
+  const [currentNote, setCurrentNote] = useState({
+    id: "", // Firebase doc ID
+    title: "", // Note title
+    content: "", // Note content
+  });
 
   // Rich text functionality
   const [selectedText, setSelectedText] = useState({
@@ -203,6 +208,8 @@ function NoteProvider({ children }) {
   const value = {
     notes,
     setNotes,
+    currentNote,
+    setCurrentNote,
     createNote,
     setCreateNote,
     title,

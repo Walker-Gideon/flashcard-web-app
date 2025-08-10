@@ -1,4 +1,5 @@
 import { LuEllipsisVertical } from "react-icons/lu";
+import { RiDeleteBin5Line } from "react-icons/ri";
 import Button from "./Button";
 
 export default function DisplayCreated({ title, timing }) {
@@ -22,7 +23,7 @@ export default function DisplayCreated({ title, timing }) {
         onClick={() => {}}
         classname="text-slate-700 dark:text-slate-200"
       >
-        <LuEllipsisVertical className="h-5 w-5" />
+        <RiDeleteBin5Line className="h-5 w-5" />
       </Button>
     </div>
   );

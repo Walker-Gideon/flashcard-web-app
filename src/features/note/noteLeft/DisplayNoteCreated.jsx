@@ -1,5 +1,12 @@
 import { useEffect, useState } from "react";
-import { collection, query, where, onSnapshot } from "firebase/firestore";
+import {
+  collection,
+  query,
+  where,
+  onSnapshot,
+  doc,
+  getDoc,
+} from "firebase/firestore";
 import { db, auth } from "../../../firebase";
 import DisplayCreated from "../../../ui/DisplayCreated";
 import { useAuth } from "../../../context/AuthContext";
@@ -8,7 +15,7 @@ import DisplayTiming from "../../../ui/DisplayTiming";
 
 export default function DisplayNoteCreated() {
   const { user } = useAuth();
-  const { notes, setNotes } = useNote();
+  const { notes, setNotes, setCurrentNote } = useNote();
 
   useEffect(() => {
     if (!user?.uid) return; // wait for login
@@ -29,10 +36,34 @@ export default function DisplayNoteCreated() {
 
   console.log(notes);
 
+  async function handleNoteClick(noteId) {
+    try {
+      const noteRef = doc(db, "users", user.uid, "notes", noteId);
+      const noteSnap = await getDoc(noteRef);
+
+      if (noteSnap.exists()) {
+        const noteData = noteSnap.data();
+        setCurrentNote({
+          id: noteId,
+          title: noteData.title,
+          content: noteData.content,
+        });
+      } else {
+        console.log("No such note!");
+      }
+    } catch (error) {
+      console.error("Error fetching note:", error);
+    }
+  }
+
   return (
     <div className="scroll-container mb-4 h-screen overflow-y-scroll">
       {notes.map((note) => (
-        <div key={note.id} className="">
+        <div
+          key={note.id}
+          className=""
+          onClick={() => handleNoteClick(note.id)}
+        >
           <DisplayCreated
             title={note.noteName}
             timing={<DisplayTiming createdAt={note.createdAt} />}

@@ -8,7 +8,7 @@ export default function NoteDisplay() {
 
   return (
     <main className="h-full">
-      {displayCreatedNote ? (
+      {!displayCreatedNote ? (
         <DisplayNoteCreated />
       ) : (
         <PromptDisplay
