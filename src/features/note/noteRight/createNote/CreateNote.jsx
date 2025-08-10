@@ -10,10 +10,12 @@ export default function CreateNote({
     title,
     content,
     activeBtn,
-    setTextareaRef,
+    // setTextareaRef,
     handleKeyboardShortcut,
     handleTextSelection,
     currentNote,
+    setCurrentNote,
+    readAlredyNote,
   } = useNote();
 
   let textSize;
@@ -38,15 +40,19 @@ export default function CreateNote({
         id="note-title"
         name="title"
         placeholder="Title"
-        value={title}
-        onChange={onTitleChange}
+        value={readAlredyNote ? currentNote.title : title}
+        onChange={
+          readAlredyNote
+            ? (e) => setCurrentNote({ ...currentNote, title: e.target.value })
+            : onTitleChange
+        }
         classname="w-full border-b border-stone-300 dark:border-slate-700 bg-transparent pb-2 text-xl font-bold text-slate-900 placeholder:text-gray-400 focus:outline-none medium:text-2xl dark:text-white dark:placeholder:text-gray-500"
         disabled={disabled}
       />
 
       <div className="mt-4 h-full flex-grow">
         <textarea
-          ref={(ref) => setTextareaRef(ref)}
+          // ref={(ref) => setTextareaRef(ref)}
           id="note-content"
           name="content"
           placeholder="Start writing your note here...
@@ -58,8 +64,13 @@ Select text and use the formatting buttons above to apply:
 • Heading styles (Ctrl+Shift+1/2)
 
 Or use the buttons in the toolbar above."
-          value={content}
-          onChange={onContentChange}
+          value={readAlredyNote ? currentNote.content : content}
+          onChange={
+            readAlredyNote
+              ? (e) =>
+                  setCurrentNote({ ...currentNote, content: e.target.value })
+              : onContentChange
+          }
           onSelect={handleTextSelection}
           onMouseUp={handleTextSelection}
           onKeyUp={handleTextSelection}

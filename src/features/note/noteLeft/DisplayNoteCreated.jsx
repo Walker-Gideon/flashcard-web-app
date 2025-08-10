@@ -15,8 +15,10 @@ import DisplayTiming from "../../../ui/DisplayTiming";
 
 export default function DisplayNoteCreated() {
   const { user } = useAuth();
-  const { notes, setNotes, setCurrentNote } = useNote();
+  const { notes, setNotes, setCurrentNote, setReadAlredyNote, setCreateNote } =
+    useNote();
 
+  // Display note on mount
   useEffect(() => {
     if (!user?.uid) return; // wait for login
 
@@ -36,6 +38,7 @@ export default function DisplayNoteCreated() {
 
   console.log(notes);
 
+  // Function to fetch the note
   async function handleNoteClick(noteId) {
     try {
       const noteRef = doc(db, "users", user.uid, "notes", noteId);
@@ -48,6 +51,8 @@ export default function DisplayNoteCreated() {
           title: noteData.title,
           content: noteData.content,
         });
+        setReadAlredyNote(true);
+        setCreateNote(true);
       } else {
         console.log("No such note!");
       }

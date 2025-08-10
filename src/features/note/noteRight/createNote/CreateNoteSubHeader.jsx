@@ -3,7 +3,8 @@ import { useNote } from "../../../../context/NoteContext";
 import Button from "../../../../ui/Button";
 
 export default function CreateNoteSubHeader() {
-  const { dispatch, applyRichTextFormatting, selectedText } = useNote();
+  const { dispatch } = useNote();
+  // , applyRichTextFormatting, selectedText
   const [select, setSelect] = useState("h1");
 
   const base =
@@ -13,7 +14,7 @@ export default function CreateNoteSubHeader() {
     "text-slate-900  hover:text-white dark:text-white hover:bg-slate-600";
 
   // Visual feedback when text is selected
-  const hasSelectedText = selectedText.text && selectedText.text.length > 0;
+  // const hasSelectedText = selectedText.text && selectedText.text.length > 0;
 
   const styling = {
     h1: base + ` px-2.5 ${select === "h1" ? `${primColors}` : `${secColors}`}`,
@@ -29,6 +30,7 @@ export default function CreateNoteSubHeader() {
       ` underline px-3 ${select === "underline" ? `${primColors}` : `${secColors}`}`,
   };
 
+  /*
   const handleFormatting = (formatType) => {
     if (hasSelectedText) {
       // If text is selected, apply formatting to selected text
@@ -39,17 +41,19 @@ export default function CreateNoteSubHeader() {
       dispatch({ type: `SHOW_${formatType.toUpperCase()}` });
     }
   };
+  */
 
   return (
     <div
-      className={`mx-4 flex h-16 items-center gap-2 border-b border-stone-300 dark:border-slate-700 ${hasSelectedText ? "bg-blue-50 dark:bg-blue-900/20" : ""}`}
+      // ${hasSelectedText ? "bg-blue-50 dark:bg-blue-900/20" : ""}
+      className={`mx-4 flex h-16 items-center gap-2 border-b border-stone-300 dark:border-slate-700`}
     >
       <Button
         variant="outline"
         classname={styling.h1}
         onClick={(e) => {
           e.preventDefault();
-          handleFormatting("h1");
+          // handleFormatting("h1");
         }}
         title="Heading 1 (Ctrl+Shift+1)"
       >
@@ -61,7 +65,7 @@ export default function CreateNoteSubHeader() {
         classname={styling.h2}
         onClick={(e) => {
           e.preventDefault();
-          handleFormatting("h2");
+          // handleFormatting("h2");
         }}
         title="Heading 2 (Ctrl+Shift+2)"
       >
@@ -73,7 +77,7 @@ export default function CreateNoteSubHeader() {
         classname={styling.bold}
         onClick={(e) => {
           e.preventDefault();
-          handleFormatting("bold");
+          // handleFormatting("bold");
         }}
         title="Bold (Ctrl+B)"
       >
@@ -85,7 +89,7 @@ export default function CreateNoteSubHeader() {
         classname={styling.italic}
         onClick={(e) => {
           e.preventDefault();
-          handleFormatting("italic");
+          // handleFormatting("italic");
         }}
         title="Italic (Ctrl+I)"
       >
@@ -97,7 +101,7 @@ export default function CreateNoteSubHeader() {
         classname={styling.underline}
         onClick={(e) => {
           e.preventDefault();
-          handleFormatting("underline");
+          // handleFormatting("underline");
         }}
         title="Underline (Ctrl+U)"
       >

@@ -42,6 +42,10 @@ function NoteProvider({ children }) {
     content: "", // Note content
   });
 
+  // This will check is the user naw to display already created note
+  const [readAlredyNote, setReadAlredyNote] = useState(false);
+
+  /*
   // Rich text functionality
   const [selectedText, setSelectedText] = useState({
     start: 0,
@@ -204,6 +208,7 @@ function NoteProvider({ children }) {
       setSelectedText({ start: 0, end: 0, text: "" });
     }
   };
+  */
 
   const value = {
     notes,
@@ -212,6 +217,8 @@ function NoteProvider({ children }) {
     setCurrentNote,
     createNote,
     setCreateNote,
+    readAlredyNote,
+    setReadAlredyNote,
     title,
     setTitle,
     content,
@@ -226,6 +233,8 @@ function NoteProvider({ children }) {
     setAddNoteTitle,
     displayCreatedNote,
     setDisplayCreatedNote,
+
+    /*
     // Rich text functionality
     selectedText,
     setSelectedText,
@@ -234,6 +243,7 @@ function NoteProvider({ children }) {
     applyRichTextFormatting,
     handleKeyboardShortcut,
     handleTextSelection,
+    */
   };
 
   return <NoteContext.Provider value={value}>{children}</NoteContext.Provider>;
