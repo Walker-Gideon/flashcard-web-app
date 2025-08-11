@@ -1,14 +1,30 @@
+import { useEffect, useState } from "react";
+import { collection, onSnapshot } from "firebase/firestore";
+import { db } from "../../../firebase";
+import { useAuth } from "../../../context/AuthContext";
 import { LuNotebookText } from "react-icons/lu";
 import PromptDisplay from "../../../ui/PromptDisplay";
 import DisplayNoteCreated from "./DisplayNoteCreated";
-import { useNote } from "../../../context/NoteContext";
 
 export default function NoteDisplay() {
-  const { hasNotes } = useNote();
+  const { user } = useAuth();
+  const [hasNotes, setHasNotes] = useState(false);
+
+  useEffect(() => {
+    if (!user?.uid) return;
+
+    const notesRef = collection(db, "users", user.uid, "notes");
+
+    const unsubscribe = onSnapshot(notesRef, (snapshot) => {
+      setHasNotes(snapshot.size > 0);
+    });
+
+    return () => unsubscribe();
+  }, [user]);
 
   return (
     <main className="h-full">
-      {!hasNotes ? (
+      {hasNotes ? (
         <DisplayNoteCreated />
       ) : (
         <PromptDisplay
