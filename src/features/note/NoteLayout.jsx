@@ -1,10 +1,36 @@
+import { deleteDoc, doc } from "firebase/firestore";
+import { db, auth } from "../../firebase";
+
 import NoteLeftLayout from "./noteLeft/NoteLeftLayout";
 import NoteRightLayout from "./noteRight/NoteRightLayout";
 import Notify from "../../ui/Notify";
 import { useNote } from "../../context/NoteContext";
 
 export default function NoteLayout() {
-  const { noteNotify, setNoteNotify } = useNote();
+  const { noteNotify, setNoteNotify, setNotes, notes } = useNote();
+
+  const handleDeleteNote = async (noteId) => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this note? This action cannot be undone.",
+    );
+
+    if (!confirmDelete) return;
+
+    const user = auth.currentUser;
+    if (!user) return alert("User not logged in");
+
+    try {
+      await deleteDoc(doc(db, "users", user.uid, "notes", noteId));
+
+      // Update UI without refetching
+      setNotes((prevNotes) => prevNotes.filter((note) => note.id !== noteId));
+
+      alert("Note deleted successfully!");
+    } catch (error) {
+      console.error("Error deleting note:", error);
+      alert("Failed to delete note");
+    }
+  };
 
   return (
     <div className="medium:grid medium:grid-cols-[17.5rem_auto] h-screen w-full overflow-hidden">
@@ -12,15 +38,18 @@ export default function NoteLayout() {
       <NoteRightLayout />
 
       {/* Notification for delete */}
-      <Notify
-        classname={`max-w-2xs medium:max-w-xs px-4 py-3 flex`}
-        btnClass={`dark:text-slate-900 dark:border-stone-500 border-slate-500`}
-        animation={noteNotify}
-        message="Are you sure you want to delete this note? This action cannot be undone."
-        btnFirstText="Cancel"
-        onClickFirst={() => setNoteNotify((show) => !show)}
-        btnSecondText="Delete"
-      />
+      {noteNotify && (
+        <Notify
+          classname={`max-w-2xs medium:max-w-xs px-4 py-3 flex`}
+          btnClass={`dark:text-slate-900 dark:border-stone-500 border-slate-500`}
+          animation={noteNotify}
+          message="Are you sure you want to delete this note? This action cannot be undone."
+          btnFirstText="Cancel"
+          onClickFirst={() => setNoteNotify((show) => !show)}
+          btnSecondText="Delete"
+          onClickSecond={() => handleDeleteNote(notes.id)}
+        />
+      )}
     </div>
   );
 }

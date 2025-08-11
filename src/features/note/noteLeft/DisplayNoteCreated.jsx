@@ -36,8 +36,6 @@ export default function DisplayNoteCreated() {
     return () => unsubscribe(); // cleanup
   }, [user, setNotes]);
 
-  console.log(notes);
-
   // Function to fetch the note
   async function handleNoteClick(noteId) {
     try {
@@ -70,7 +68,6 @@ export default function DisplayNoteCreated() {
           onClick={() => handleNoteClick(note.id)}
         >
           <DisplayCreated
-            id={note.id}
             title={note.noteName}
             timing={<DisplayTiming createdAt={note.createdAt} />}
           />

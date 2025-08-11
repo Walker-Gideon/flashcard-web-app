@@ -97,7 +97,7 @@ export default function CreateNoteLayoout() {
           <Toast
             animation={error}
             notify={true}
-            classname={"text-red-600 dark:text-red-400"}
+            classname={"text-red-600 dark:text-red-400 h-10 max-w-50"}
           >
             <LuX className="mr-1 h-4 w-4" />
             <span>{error}</span>
@@ -108,7 +108,7 @@ export default function CreateNoteLayoout() {
           <Toast
             animation={isSubmittingNote}
             notify={true}
-            classname={"text-green-600 dark:text-green-400"}
+            classname={"text-green-600 dark:text-green-400 h-10 max-w-50"}
           >
             <LuCheck className="mr-1 h-4 w-4" />
             <span>Note save successiful</span>
