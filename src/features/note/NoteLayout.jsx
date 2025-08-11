@@ -10,11 +10,11 @@ export default function NoteLayout() {
   const { noteNotify, setNoteNotify, setNotes, notes } = useNote();
 
   const handleDeleteNote = async (noteId) => {
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete this note? This action cannot be undone.",
-    );
+    // const confirmDelete = window.confirm(
+    //   "Are you sure you want to delete this note? This action cannot be undone.",
+    // );
 
-    if (!confirmDelete) return;
+    // if (!confirmDelete) return;
 
     const user = auth.currentUser;
     if (!user) return alert("User not logged in");
@@ -25,7 +25,8 @@ export default function NoteLayout() {
       // Update UI without refetching
       setNotes((prevNotes) => prevNotes.filter((note) => note.id !== noteId));
 
-      alert("Note deleted successfully!");
+      // alert("Note deleted successfully!");
+      setNoteNotify(false);
     } catch (error) {
       console.error("Error deleting note:", error);
       alert("Failed to delete note");
