@@ -55,15 +55,13 @@ export default function DisplayNoteCreated() {
   return (
     <div className="scroll-container mb-4 h-screen overflow-y-scroll">
       {notes.map((note) => (
-        <div>
-          <DisplayCreated
-            key={note.id}
-            id={note.id}
-            title={note.noteName}
-            onClick={() => handleNoteClick(note.id)}
-            timing={<DisplayTiming createdAt={note.createdAt} />}
-          />
-        </div>
+        <DisplayCreated
+          key={note.id}
+          id={note.id}
+          title={note.noteName}
+          onClick={() => handleNoteClick(note.id)}
+          timing={<DisplayTiming createdAt={note.createdAt} />}
+        />
       ))}
     </div>
   );
