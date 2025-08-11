@@ -4,11 +4,11 @@ import DisplayNoteCreated from "./DisplayNoteCreated";
 import { useNote } from "../../../context/NoteContext";
 
 export default function NoteDisplay() {
-  const { notes } = useNote();
+  const { hasNotes } = useNote();
 
   return (
     <main className="h-full">
-      {notes && notes.length > 0 ? (
+      {!hasNotes ? (
         <DisplayNoteCreated />
       ) : (
         <PromptDisplay

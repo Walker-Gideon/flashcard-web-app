@@ -55,15 +55,15 @@ export default function CreateNote({
           // ref={(ref) => setTextareaRef(ref)}
           id="note-content"
           name="content"
-          placeholder="Start writing your note here...
-
-Select text and use the formatting buttons above to apply:
+          /*
+          Select text and use the formatting buttons above to apply:
 • Bold formatting (Ctrl+B)
 • Italic formatting (Ctrl+I)  
 • Underline formatting (Ctrl+U)
 • Heading styles (Ctrl+Shift+1/2)
 
-Or use the buttons in the toolbar above."
+Or use the buttons in the toolbar above.*/
+          placeholder="Start writing your note here..."
           value={readAlredyNote ? currentNote.content : content}
           onChange={
             readAlredyNote
@@ -83,7 +83,7 @@ Or use the buttons in the toolbar above."
         />
       </div>
 
-      {/* Formatting Help */}
+      {/* Formatting Help 
       <div className="mt-2 text-xs text-gray-500 dark:text-gray-400">
         <details className="cursor-pointer">
           <summary className="hover:text-gray-700 dark:hover:text-gray-300">
@@ -115,6 +115,7 @@ Or use the buttons in the toolbar above."
           </div>
         </details>
       </div>
+      */}
     </div>
   );
 }
