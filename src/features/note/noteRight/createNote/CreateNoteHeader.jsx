@@ -13,10 +13,12 @@ export default function CreateNoteHeader() {
     setAddNoteTitle,
     noteName,
     currentNote,
+    readAlredyNote,
   } = useNote();
   const { user } = useAuth();
 
-  async function saveNote() {
+  async function saveNote(e) {
+    e.preventDefault();
     if (!currentNote.title || !currentNote.content) return;
 
     try {
@@ -46,17 +48,32 @@ export default function CreateNoteHeader() {
         {noteName ? noteName : "Untitled Note"}
       </h1>
 
-      <Button
-        variant="primary"
-        classname={"py-2 border-0"}
-        color={
-          "bg-slate-500 text-white hover:bg-slate-600 focus:ring-slate-300 disabled:bg-gray-400 disabled:cursor-not-allowed"
-        }
-        disabled={isSubmittingNote || !(title || content)}
-        onClick={handleSaveNote}
-      >
-        {isSubmittingNote ? "Saving..." : "Save Note"}
-      </Button>
+      {readAlredyNote ? (
+        <Button
+          variant="primary"
+          classname={"py-2 border-0"}
+          color={
+            "bg-slate-500 text-white hover:bg-slate-600 focus:ring-slate-300 disabled:bg-gray-400 disabled:cursor-not-allowed"
+          }
+          // disabled={isSubmittingNote || !(title || content)}
+          onClick={saveNote}
+        >
+          {/* {isSubmittingNote ? "Saving..." : "Save Note"} */}
+          Save
+        </Button>
+      ) : (
+        <Button
+          variant="primary"
+          classname={"py-2 border-0"}
+          color={
+            "bg-slate-500 text-white hover:bg-slate-600 focus:ring-slate-300 disabled:bg-gray-400 disabled:cursor-not-allowed"
+          }
+          disabled={isSubmittingNote || !(title || content)}
+          onClick={handleSaveNote}
+        >
+          {isSubmittingNote ? "Saving..." : "Save Note"}
+        </Button>
+      )}
     </header>
   );
 }
