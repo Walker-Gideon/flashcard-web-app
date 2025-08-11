@@ -1,13 +1,6 @@
-import { useEffect, useState } from "react";
-import {
-  collection,
-  query,
-  where,
-  onSnapshot,
-  doc,
-  getDoc,
-} from "firebase/firestore";
-import { db, auth } from "../../../firebase";
+import { useEffect } from "react";
+import { collection, onSnapshot, doc, getDoc } from "firebase/firestore";
+import { db } from "../../../firebase";
 import DisplayCreated from "../../../ui/DisplayCreated";
 import { useAuth } from "../../../context/AuthContext";
 import { useNote } from "../../../context/NoteContext";
