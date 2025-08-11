@@ -116,6 +116,8 @@ export default function CreateNoteLayoout() {
         )}
       </form>
 
+      {/* Notification for delete */}
+
       <AnimatePresence>
         {addNoteTitle && (
           <Model
