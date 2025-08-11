@@ -4,7 +4,7 @@ import { RiDeleteBin5Line } from "react-icons/ri";
 import Button from "./Button";
 import { useNote } from "../context/NoteContext";
 
-export default function DisplayCreated({ title, timing }) {
+export default function DisplayCreated({ title, timing, id }) {
   const { setNotes } = useNote();
 
   const handleDeleteNote = async (noteId) => {
@@ -47,7 +47,7 @@ export default function DisplayCreated({ title, timing }) {
 
       <Button
         variant="outline"
-        onClick={handleDeleteNote}
+        onClick={() => handleDeleteNote(id)}
         classname="text-slate-700 dark:text-slate-200"
       >
         <RiDeleteBin5Line className="h-5 w-5" />

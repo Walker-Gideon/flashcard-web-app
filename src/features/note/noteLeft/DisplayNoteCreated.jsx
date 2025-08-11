@@ -70,6 +70,7 @@ export default function DisplayNoteCreated() {
           onClick={() => handleNoteClick(note.id)}
         >
           <DisplayCreated
+            id={note.id}
             title={note.noteName}
             timing={<DisplayTiming createdAt={note.createdAt} />}
           />
