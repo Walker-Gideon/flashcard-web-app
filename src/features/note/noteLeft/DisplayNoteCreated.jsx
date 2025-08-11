@@ -65,6 +65,7 @@ export default function DisplayNoteCreated() {
         <div>
           <DisplayCreated
             key={note.id}
+            id={note.id}
             title={note.noteName}
             onClick={() => handleNoteClick(note.id)}
             timing={<DisplayTiming createdAt={note.createdAt} />}

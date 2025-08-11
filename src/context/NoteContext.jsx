@@ -47,6 +47,7 @@ function NoteProvider({ children }) {
 
   // for notify the note on delete
   const [noteNotify, setNoteNotify] = useState(false);
+  const [noteToDelete, setNoteToDelete] = useState(null);
 
   /*
   // Rich text functionality
@@ -224,6 +225,8 @@ function NoteProvider({ children }) {
     setReadAlredyNote,
     noteNotify,
     setNoteNotify,
+    noteToDelete,
+    setNoteToDelete,
     title,
     setTitle,
     content,

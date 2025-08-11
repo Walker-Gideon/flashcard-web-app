@@ -7,15 +7,9 @@ import Notify from "../../ui/Notify";
 import { useNote } from "../../context/NoteContext";
 
 export default function NoteLayout() {
-  const { noteNotify, setNoteNotify, setNotes, notes } = useNote();
+  const { noteNotify, setNoteNotify, setNotes, noteToDelete } = useNote();
 
   const handleDeleteNote = async (noteId) => {
-    // const confirmDelete = window.confirm(
-    //   "Are you sure you want to delete this note? This action cannot be undone.",
-    // );
-
-    // if (!confirmDelete) return;
-
     const user = auth.currentUser;
     if (!user) return alert("User not logged in");
 
@@ -25,7 +19,6 @@ export default function NoteLayout() {
       // Update UI without refetching
       setNotes((prevNotes) => prevNotes.filter((note) => note.id !== noteId));
 
-      // alert("Note deleted successfully!");
       setNoteNotify(false);
     } catch (error) {
       console.error("Error deleting note:", error);
@@ -48,7 +41,7 @@ export default function NoteLayout() {
           btnFirstText="Cancel"
           onClickFirst={() => setNoteNotify((show) => !show)}
           btnSecondText="Delete"
-          onClickSecond={() => handleDeleteNote(notes.id)}
+          onClickSecond={() => handleDeleteNote(noteToDelete)}
         />
       )}
     </div>

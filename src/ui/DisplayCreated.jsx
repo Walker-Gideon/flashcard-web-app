@@ -2,8 +2,13 @@ import { RiDeleteBin5Line } from "react-icons/ri";
 import Button from "./Button";
 import { useNote } from "../context/NoteContext";
 
-export default function DisplayCreated({ title, timing, onClick }) {
-  const { setNoteNotify } = useNote();
+export default function DisplayCreated({ title, timing, onClick, id }) {
+  const { setNoteNotify, setNoteToDelete } = useNote();
+
+  function handleDelete(id) {
+    setNoteNotify((show) => !show);
+    setNoteToDelete(id);
+  }
 
   return (
     <div className="my-1 flex w-full cursor-pointer items-center justify-between gap-2 border-b border-stone-300 transition-colors hover:bg-slate-50 dark:border-slate-700 dark:hover:bg-slate-700">
@@ -19,10 +24,7 @@ export default function DisplayCreated({ title, timing, onClick }) {
 
       <Button
         variant="outline"
-        onClick={(e) => {
-          e.preventDefault();
-          setNoteNotify((show) => !show);
-        }}
+        onClick={() => handleDelete(id)}
         classname="text-slate-700 pr-4 dark:text-slate-200"
       >
         <RiDeleteBin5Line className="h-5 w-5" />
