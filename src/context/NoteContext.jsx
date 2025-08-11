@@ -45,6 +45,9 @@ function NoteProvider({ children }) {
   // This will check is the user naw to display already created note
   const [readAlredyNote, setReadAlredyNote] = useState(false);
 
+  // for notify the note on delete
+  const [noteNotify, setNoteNotify] = useState(false);
+
   /*
   // Rich text functionality
   const [selectedText, setSelectedText] = useState({
@@ -219,6 +222,8 @@ function NoteProvider({ children }) {
     setCreateNote,
     readAlredyNote,
     setReadAlredyNote,
+    noteNotify,
+    setNoteNotify,
     title,
     setTitle,
     content,

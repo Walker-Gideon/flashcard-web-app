@@ -39,7 +39,7 @@ export default function Model({
         <div className="mt-4 flex items-center justify-end gap-3">
           <Button
             variant="outline"
-            classname={`button px-5 medium:px-7 text-[0.8rem] py-[7px] dark:text-white dark:border-stone-100 border-slate-400 ${btnClass}`}
+            classname={`button px-5 medium:px-7 text-[0.8rem] py-[7px]  ${btnClass ? `${btnClass}` : `dark:text-white dark:border-stone-100 border-slate-400`}`}
             onClick={onClickFirst}
           >
             {btnFirstText}
