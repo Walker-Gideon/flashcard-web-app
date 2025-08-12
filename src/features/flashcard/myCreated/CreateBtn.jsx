@@ -6,18 +6,24 @@ export default function CreateBtn({ handleBackToEdit }) {
 
   return (
     <>
-      <Button
-        variant="outline"
-        //   onClick={handleBackToEdit}
-        classname={styling}
-      >
-        Back to Flashcard
+      <Button variant="outline" onClick={() => {}} classname={styling}>
+        Save Flashcards
       </Button>
 
       <hr className="w-full border border-stone-300 dark:border-slate-700" />
 
       <Button variant="outline" onClick={handleBackToEdit} classname={styling}>
         Back to Edit
+      </Button>
+
+      <hr className="w-full border border-stone-300 dark:border-slate-700" />
+
+      <Button
+        variant="outline"
+        //   onClick={handleBackToEdit}
+        classname={styling}
+      >
+        Back to Flashcard
       </Button>
     </>
   );
