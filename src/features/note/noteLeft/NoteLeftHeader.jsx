@@ -14,6 +14,7 @@ export default function NoteLeftHeader() {
     setFilteredNotes,
     query,
     setQuery,
+    readAlredyNote,
   } = useNote();
   const lazyTaggle = useLazyLoading(setCreateNote, 2000);
 
@@ -30,6 +31,7 @@ export default function NoteLeftHeader() {
 
   function handleCreateNote() {
     lazyTaggle(true);
+    readAlredyNote((show) => !show);
   }
 
   return (
@@ -58,7 +60,7 @@ export default function NoteLeftHeader() {
         color={
           "bg-slate-500 text-white hover:bg-slate-600 focus:ring-slate-300 disabled:bg-gray-400 disabled:cursor-not-allowed"
         }
-        disabled={createNote}
+        disabled={readAlredyNote ? !readAlredyNote : createNote}
         onClick={handleCreateNote}
       >
         <LuPlus className="text-base" /> New Note

@@ -11,7 +11,6 @@ export default function CreateNoteHeader() {
     content,
     isSubmittingNote,
     setAddNoteTitle,
-    noteName,
     currentNote,
     readAlredyNote,
   } = useNote();

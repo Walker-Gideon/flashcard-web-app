@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { collection, onSnapshot, doc, getDoc } from "firebase/firestore";
 import { db } from "../../../firebase";
 import DisplayCreated from "../../../ui/DisplayCreated";
@@ -18,6 +18,7 @@ export default function DisplayNoteCreated() {
     setFilteredNotes,
     setQuery,
   } = useNote();
+  const [selectedNoteId, setSelectedNoteId] = useState(null);
 
   // Display note on mount
   useEffect(() => {
@@ -54,6 +55,7 @@ export default function DisplayNoteCreated() {
         });
         setReadAlredyNote(true);
         setCreateNote(true);
+        setSelectedNoteId(noteId);
       }
 
       // Handle note click → clear search and show all notes again
@@ -71,6 +73,7 @@ export default function DisplayNoteCreated() {
           <DisplayCreated
             id={note.id}
             title={note.noteName}
+            selectedNoteId={selectedNoteId}
             onClick={() => handleNoteClick(note.id)}
             timing={<DisplayTiming createdAt={note.createdAt} />}
           />
