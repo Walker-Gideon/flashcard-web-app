@@ -15,7 +15,7 @@ export default function DisplayCreated({ title, timing, onClick, id }) {
       className={`my-1 flex w-full cursor-pointer items-center justify-between gap-2 border-b border-stone-300 transition-colors hover:bg-slate-50 dark:border-slate-700 dark:hover:bg-slate-700 ${id === selectedNoteId ? "bg-slate-50 dark:bg-slate-700" : ""}`}
     >
       <div role="button" onClick={onClick} className="w-full py-2 pl-4">
-        <h1 className="medium:text-sm mb-1 text-slate-900 dark:text-white">
+        <h1 className="medium:text-sm mb-1 w-40 truncate overflow-hidden whitespace-nowrap text-slate-900 dark:text-white">
           {title}
         </h1>
 

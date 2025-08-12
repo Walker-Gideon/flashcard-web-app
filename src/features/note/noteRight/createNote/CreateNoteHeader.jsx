@@ -42,7 +42,7 @@ export default function CreateNoteHeader() {
 
   return (
     <header className="flex h-14 items-center justify-between border-b border-stone-300 px-4 dark:border-slate-700">
-      <h1 className="text-sm font-semibold text-slate-500 dark:text-slate-400">
+      <h1 className="maxmid:w-full w-48 truncate overflow-hidden text-sm font-semibold whitespace-nowrap text-slate-500 dark:text-slate-400">
         {readAlredyNote ? currentNote.noteName : "Untitled Note"}
       </h1>
 
