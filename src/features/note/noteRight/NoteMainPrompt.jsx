@@ -5,11 +5,12 @@ import { useNote } from "../../../context/NoteContext";
 import useLazyLoading from "../../../ui/LazyLoading";
 
 export default function NoteMainPrompt() {
-  const { setCreateNote } = useNote();
+  const { setCreateNote, setContent } = useNote();
   const lazyTaggle = useLazyLoading(setCreateNote, 2000);
 
   function handleCreateNote() {
     lazyTaggle(true);
+    setContent("<p>Start...</p>");
   }
 
   return (

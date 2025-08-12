@@ -6,7 +6,7 @@ function NoteProvider({ children }) {
   const [createNote, setCreateNote] = useState(false);
   const [addNoteTitle, setAddNoteTitle] = useState(false);
   const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+  const [content, setContent] = useState("<p>Start...</p>");
   const [noteName, setNoteName] = useState("");
   const [isSubmittingNote, setIsSubmittingNote] = useState(false);
   const [notes, setNotes] = useState([]);

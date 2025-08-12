@@ -1,7 +1,7 @@
 import { doc, setDoc } from "firebase/firestore";
 import { auth, db } from "../../../../firebase";
 import { v4 as uuidv4 } from "uuid";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { LuX } from "react-icons/lu";
 import { LuCheck } from "react-icons/lu";
 import { useNote } from "../../../../context/NoteContext";
@@ -30,8 +30,46 @@ export default function CreateNoteLayoout() {
     addNoteTitle,
     setAddNoteTitle,
     setCreateNote,
+    readAlredyNote,
+    currentNote,
+    setCurrentNote,
   } = useNote();
   const [error, setError] = useState("");
+
+  // Editing note
+  const editor = useEditor({
+    extensions: [
+      StarterKit,
+      TextAlign.configure({
+        types: ["heading", "paragraph"],
+      }),
+      Highlight,
+      Underline,
+    ],
+    content,
+    onUpdate: ({ editor }) => {
+      const html = editor.getHTML();
+      if (readAlredyNote) {
+        setCurrentNote((prev) => ({ ...prev, content: html }));
+      } else {
+        setContent(html);
+      }
+    },
+  });
+
+  // Update editor content when currentNote.content changes
+  useEffect(() => {
+    if (editor && readAlredyNote) {
+      editor.commands.setContent(currentNote.content || "");
+    }
+  }, [editor, currentNote.content, readAlredyNote]);
+
+  // Optionally handle clearing content when not readAlredyNote, too
+  useEffect(() => {
+    if (editor && !readAlredyNote) {
+      editor.commands.setContent(content || "");
+    }
+  }, [editor, content, readAlredyNote]);
 
   const handleSubmitting = async (e) => {
     e.preventDefault();
@@ -76,19 +114,6 @@ export default function CreateNoteLayoout() {
     }
   };
 
-  // Editing note
-  const editor = useEditor({
-    extensions: [
-      StarterKit,
-      TextAlign.configure({
-        types: ["heading", "paragraph"],
-      }),
-      Highlight,
-      Underline,
-    ],
-    content: "<p>Start here...</p>",
-  });
-
   const handelCanale = async (e) => {
     e.preventDefault();
     setAddNoteTitle(false);
@@ -104,7 +129,6 @@ export default function CreateNoteLayoout() {
           <CreateNoteSubHeader editor={editor} />
           <CreateNote
             onTitleChange={(e) => setTitle(e.target.value)}
-            onContentChange={(e) => setContent(e.target.value)}
             disabled={isSubmittingNote}
             editor={editor}
           />
