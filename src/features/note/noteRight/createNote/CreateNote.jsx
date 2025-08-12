@@ -1,5 +1,6 @@
 import { useNote } from "../../../../context/NoteContext";
 import Input from "../../../../ui/Input";
+import { EditorContent } from "@tiptap/react";
 
 export default function CreateNote({
   onTitleChange,
@@ -15,6 +16,7 @@ export default function CreateNote({
     setCurrentNote,
     readAlredyNote,
   } = useNote();
+  console.log(editor);
 
   let textSize;
   if (activeBtn === "h1") {
@@ -27,6 +29,10 @@ export default function CreateNote({
     textSize = "italic";
   } else if (activeBtn === "underline") {
     textSize = "underline";
+  }
+
+  if (!editor) {
+    return null;
   }
 
   return (
@@ -46,7 +52,7 @@ export default function CreateNote({
         disabled={disabled}
       />
 
-      <div className="mt-4 h-full flex-grow">
+      <div className="mt-4 h-full flex-grow text-gray-900 placeholder:text-gray-500 dark:text-white dark:placeholder:text-gray-400">
         {/*
         <textarea
           id="note-content"
@@ -66,44 +72,9 @@ export default function CreateNote({
           }}
         />
             */}
-      </div>
 
-      {/* Now in use */}
-      <div className="">{editor}</div>
-
-      {/* Formatting Help 
-      <div className="mt-2 text-xs text-gray-500 dark:text-gray-400">
-        <details className="cursor-pointer">
-          <summary className="hover:text-gray-700 dark:hover:text-gray-300">
-            Formatting Help
-          </summary>
-          <div className="mt-2 space-y-1 pl-4">
-            <div>
-              Select text and click <strong>B</strong> for bold formatting
-              (Ctrl+B)
-            </div>
-            <div>
-              Select text and click <em>I</em> for italic formatting (Ctrl+I)
-            </div>
-            <div>
-              Select text and click <u>U</u> for underline formatting (Ctrl+U)
-            </div>
-            <div>
-              Select text and click <strong>H1</strong> for large heading
-              (Ctrl+Shift+1)
-            </div>
-            <div>
-              Select text and click <strong>H2</strong> for medium heading
-              (Ctrl+Shift+2)
-            </div>
-            <div className="mt-2 text-gray-400">
-              Or use keyboard shortcuts: Ctrl+B, Ctrl+I, Ctrl+U, Ctrl+Shift+1,
-              Ctrl+Shift+2
-            </div>
-          </div>
-        </details>
+        <EditorContent editor={editor} />
       </div>
-      */}
     </div>
   );
 }

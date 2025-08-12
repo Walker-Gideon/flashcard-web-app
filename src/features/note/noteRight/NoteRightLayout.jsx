@@ -7,6 +7,7 @@ import StarterKit from "@tiptap/starter-kit";
 export default function NoteRightLayout() {
   const { createNote } = useNote();
 
+  /*
   const editor = useEditor({
     extensions: [
       StarterKit, // Bold, Italic, Headings, Lists, etc.
@@ -14,10 +15,11 @@ export default function NoteRightLayout() {
     ],
     content: "<p>Start writing your note...</p>",
   });
-
+  
   if (!editor) {
     return null;
   }
+  */
 
   return (
     <div>
@@ -26,7 +28,7 @@ export default function NoteRightLayout() {
           <NoteMainPrompt />
         </div>
       ) : (
-        <CreateNoteLayoout editor={editor} />
+        <CreateNoteLayoout />
         /* 
         <div style={{ border: "1px solid #ccc", padding: "10px" }}>
           <div style={{ marginBottom: "10px" }}>

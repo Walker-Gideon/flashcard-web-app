@@ -11,6 +11,8 @@ import CreateNoteSubHeader from "./CreateNoteSubHeader";
 import Model from "../../../../ui/Model";
 import { AnimatePresence } from "motion/react";
 import Toast from "../../../../ui/Toast";
+import { useEditor } from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
 
 export default function CreateNoteLayoout() {
   const {
@@ -71,6 +73,15 @@ export default function CreateNoteLayoout() {
     }
   };
 
+  // Editing note
+  const editor = useEditor({
+    extensions: [
+      StarterKit, // Bold, Italic, Headings, Lists, etc.
+      // Underline, // Adds underline
+    ],
+    content: "<p>Start here...</p>",
+  });
+
   const handelCanale = async (e) => {
     e.preventDefault();
     setAddNoteTitle(false);
@@ -88,6 +99,7 @@ export default function CreateNoteLayoout() {
             onTitleChange={(e) => setTitle(e.target.value)}
             onContentChange={(e) => setContent(e.target.value)}
             disabled={isSubmittingNote}
+            editor={editor}
           />
         </main>
 

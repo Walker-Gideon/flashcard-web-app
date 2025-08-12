@@ -92,6 +92,19 @@ import { LuLoader } from "react-icons/lu";
     display: none;
   }
 
+  /* Style the editable area */
+  .ProseMirror {
+    min-height: 30rem;
+    width: 100%;
+    border: none;
+    outline: none;
+    background-color: transparent;
+  }
+
+  .ProseMirror:focus {
+    outline: none;
+  }
+
   .progress {
     width: 100%;
     height: 3px;
