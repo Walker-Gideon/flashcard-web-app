@@ -150,6 +150,24 @@ import { LuLoader } from "react-icons/lu";
   }
 }
 
+/* .toolbar-btn {
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  background: #fff;
+  cursor: pointer;
+}
+
+.toolbar-btn.is-active {
+  background: #333;
+  color: #fff;
+  border-color: #333;
+}
+
+.toolbar-btn.not-active {
+  background: #fff;
+  color: #000;
+} */
+
 /*
 Will use this in the flashcard section to switch between normal created card or ai generated
 
