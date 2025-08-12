@@ -50,6 +50,7 @@ export default function DisplayNoteCreated() {
           id: noteId,
           title: noteData.title,
           content: noteData.content,
+          noteName: noteData.noteName,
         });
         setReadAlredyNote(true);
         setCreateNote(true);

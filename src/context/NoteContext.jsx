@@ -41,6 +41,7 @@ function NoteProvider({ children }) {
     id: "", // Firebase doc ID
     title: "", // Note title
     content: "", // Note content
+    noteName: "",
   });
 
   // This will check is the user naw to display already created note
