@@ -8,14 +8,8 @@ export default function CreateNote({
   disabled,
   editor,
 }) {
-  const {
-    title,
-    content,
-    activeBtn,
-    currentNote,
-    setCurrentNote,
-    readAlredyNote,
-  } = useNote();
+  const { title, content, currentNote, setCurrentNote, readAlredyNote } =
+    useNote();
 
   if (!editor) {
     return null;
