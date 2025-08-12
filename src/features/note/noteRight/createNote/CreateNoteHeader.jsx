@@ -11,6 +11,7 @@ export default function CreateNoteHeader() {
     content,
     isSubmittingNote,
     setAddNoteTitle,
+    notes,
     currentNote,
     readAlredyNote,
   } = useNote();
@@ -18,7 +19,22 @@ export default function CreateNoteHeader() {
 
   async function saveNote(e) {
     e.preventDefault();
+
     if (!currentNote.title || !currentNote.content) return;
+
+    // If editing, check if any changes were made
+    if (currentNote.id) {
+      const originalNote = notes.find((note) => note.id === currentNote.id);
+      if (
+        originalNote &&
+        originalNote.title === currentNote.title &&
+        originalNote.content === currentNote.content &&
+        originalNote.noteName === currentNote.noteName
+      ) {
+        console.log("No changes detected — not saving.");
+        return;
+      }
+    }
 
     try {
       await setDoc(
@@ -26,10 +42,18 @@ export default function CreateNoteHeader() {
         {
           title: currentNote.title,
           content: currentNote.content,
+          noteName: currentNote.noteName,
           updatedAt: new Date(),
+          ...(currentNote.id ? {} : { createdAt: new Date() }), // Keep createdAt only for new notes
         },
+        { merge: true }, // ✅ Ensures update instead of overwrite
       );
-      console.log("Note saved successfully!");
+
+      console.log(
+        currentNote.id
+          ? "Note updated successfully!"
+          : "Note created successfully!",
+      );
     } catch (error) {
       console.error("Error saving note:", error);
     }

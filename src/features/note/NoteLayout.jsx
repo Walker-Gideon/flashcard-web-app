@@ -7,7 +7,14 @@ import Notify from "../../ui/Notify";
 import { useNote } from "../../context/NoteContext";
 
 export default function NoteLayout() {
-  const { noteNotify, setNoteNotify, setNotes, noteToDelete } = useNote();
+  const {
+    noteNotify,
+    setNoteNotify,
+    setNotes,
+    noteToDelete,
+    setReadAlredyNote,
+    setCreateNote,
+  } = useNote();
 
   const handleDeleteNote = async (noteId) => {
     const user = auth.currentUser;
@@ -20,9 +27,13 @@ export default function NoteLayout() {
       setNotes((prevNotes) => prevNotes.filter((note) => note.id !== noteId));
 
       setNoteNotify(false);
+      setTimeout(() => {
+        setCreateNote(false);
+        setReadAlredyNote(false);
+      }, 1000);
     } catch (error) {
       console.error("Error deleting note:", error);
-      alert("Failed to delete note");
+      return error;
     }
   };
 

@@ -7,7 +7,9 @@ export default function DisplayCreated({ title, timing, onClick, id }) {
 
   function handleDelete(id) {
     setNoteNotify((show) => !show);
-    setNoteToDelete(id);
+    setTimeout(() => {
+      setNoteToDelete(id);
+    }, 2000);
   }
 
   return (
