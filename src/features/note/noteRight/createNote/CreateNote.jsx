@@ -1,5 +1,7 @@
 import { useNote } from "../../../../context/NoteContext";
 import Input from "../../../../ui/Input";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 export default function CreateNote({
   onTitleChange,
@@ -10,9 +12,6 @@ export default function CreateNote({
     title,
     content,
     activeBtn,
-    // setTextareaRef,
-    handleKeyboardShortcut,
-    handleTextSelection,
     currentNote,
     setCurrentNote,
     readAlredyNote,
@@ -30,6 +29,22 @@ export default function CreateNote({
   } else if (activeBtn === "underline") {
     textSize = "underline";
   }
+
+  // Define allowed formats
+  const formats = [
+    "header", // h1, h2
+    "bold",
+    "italic",
+    "underline",
+  ];
+
+  // Toolbar setup
+  const modules = {
+    toolbar: [
+      [{ header: [1, 2, false] }], // H1, H2, normal
+      ["bold", "italic", "underline"], // B, I, U
+    ],
+  };
 
   return (
     <div className="mx-4 my-2 h-full py-2">
@@ -49,18 +64,26 @@ export default function CreateNote({
       />
 
       <div className="mt-4 h-full flex-grow">
+        <ReactQuill
+          theme="snow"
+          value={readAlredyNote ? currentNote.content : content}
+          onChange={
+            readAlredyNote
+              ? (e) =>
+                  setCurrentNote({ ...currentNote, content: e.target.value })
+              : onContentChange
+          }
+          modules={modules}
+          formats={formats}
+          placeholder="Start writing your note here..."
+          readOnly={disabled}
+          className={`scroll-container h-full w-full bg-transparent text-gray-900 placeholder:text-gray-500 focus:outline-none dark:text-white dark:placeholder:text-gray-400 ${textSize}`}
+        />
+
+        {/*
         <textarea
-          // ref={(ref) => setTextareaRef(ref)}
           id="note-content"
           name="content"
-          /*
-          Select text and use the formatting buttons above to apply:
-• Bold formatting (Ctrl+B)
-• Italic formatting (Ctrl+I)  
-• Underline formatting (Ctrl+U)
-• Heading styles (Ctrl+Shift+1/2)
-
-Or use the buttons in the toolbar above.*/
           placeholder="Start writing your note here..."
           value={readAlredyNote ? currentNote.content : content}
           onChange={
@@ -69,16 +92,13 @@ Or use the buttons in the toolbar above.*/
                   setCurrentNote({ ...currentNote, content: e.target.value })
               : onContentChange
           }
-          onSelect={handleTextSelection}
-          onMouseUp={handleTextSelection}
-          onKeyUp={handleTextSelection}
-          onKeyDown={handleKeyboardShortcut}
           className={`scroll-container h-full w-full resize-none bg-transparent text-gray-900 placeholder:text-gray-500 focus:outline-none dark:text-white dark:placeholder:text-gray-400 ${textSize}`}
           disabled={disabled}
           style={{
             lineHeight: "1.6",
           }}
         />
+            */}
       </div>
 
       {/* Formatting Help 
