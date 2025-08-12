@@ -16,20 +16,6 @@ export default function CreateNote({
     setCurrentNote,
     readAlredyNote,
   } = useNote();
-  console.log(editor);
-
-  let textSize;
-  if (activeBtn === "h1") {
-    textSize = "text-sm md:text-base";
-  } else if (activeBtn === "h2") {
-    textSize = "text-lg";
-  } else if (activeBtn === "bold") {
-    textSize = "font-bold";
-  } else if (activeBtn === "italic") {
-    textSize = "italic";
-  } else if (activeBtn === "underline") {
-    textSize = "underline";
-  }
 
   if (!editor) {
     return null;

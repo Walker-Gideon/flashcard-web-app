@@ -105,6 +105,18 @@ import { LuLoader } from "react-icons/lu";
     outline: none;
   }
 
+  .ProseMirror h1 {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin: 0.5em 0;
+  }
+
+  .ProseMirror h2 {
+    font-size: 0.875rem;
+    font-weight: bold;
+    margin: 0.5em 0;
+  }
+
   .progress {
     width: 100%;
     height: 3px;

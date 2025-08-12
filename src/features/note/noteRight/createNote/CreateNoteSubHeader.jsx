@@ -34,7 +34,6 @@ export default function CreateNoteSubHeader({ editor }) {
     >
       <Button
         variant="outline"
-        // classname={styling.h1}
         classname={editor.isActive("heading", { level: 1 }) ? "is-active" : ""}
         onClick={(e) => {
           e.preventDefault();
@@ -79,7 +78,7 @@ export default function CreateNoteSubHeader({ editor }) {
 
       <Button
         variant="outline"
-        classname={styling.underline}
+        classname={editor.isActive("underline") ? "is-active" : ""}
         onClick={(e) => {
           e.preventDefault();
           editor.chain().focus().toggleUnderline().run();
@@ -95,7 +94,7 @@ export default function CreateNoteSubHeader({ editor }) {
           e.preventDefault();
           editor.chain().focus().toggleHighlight().run();
         }}
-        classname="mt-2 rounded border border-yellow-400 bg-yellow-200 px-4 py-1"
+        classname={editor.isActive("highlight") ? "is-active" : ""}
       >
         H
       </Button>
