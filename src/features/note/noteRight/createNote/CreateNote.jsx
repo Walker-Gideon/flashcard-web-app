@@ -1,12 +1,11 @@
 import { useNote } from "../../../../context/NoteContext";
 import Input from "../../../../ui/Input";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
 
 export default function CreateNote({
   onTitleChange,
   onContentChange,
   disabled,
+  editor,
 }) {
   const {
     title,
@@ -30,22 +29,6 @@ export default function CreateNote({
     textSize = "underline";
   }
 
-  // Define allowed formats
-  const formats = [
-    "header", // h1, h2
-    "bold",
-    "italic",
-    "underline",
-  ];
-
-  // Toolbar setup
-  const modules = {
-    toolbar: [
-      [{ header: [1, 2, false] }], // H1, H2, normal
-      ["bold", "italic", "underline"], // B, I, U
-    ],
-  };
-
   return (
     <div className="mx-4 my-2 h-full py-2">
       <Input
@@ -64,22 +47,6 @@ export default function CreateNote({
       />
 
       <div className="mt-4 h-full flex-grow">
-        <ReactQuill
-          theme="snow"
-          value={readAlredyNote ? currentNote.content : content}
-          onChange={
-            readAlredyNote
-              ? (e) =>
-                  setCurrentNote({ ...currentNote, content: e.target.value })
-              : onContentChange
-          }
-          modules={modules}
-          formats={formats}
-          placeholder="Start writing your note here..."
-          readOnly={disabled}
-          className={`scroll-container h-full w-full bg-transparent text-gray-900 placeholder:text-gray-500 focus:outline-none dark:text-white dark:placeholder:text-gray-400 ${textSize}`}
-        />
-
         {/*
         <textarea
           id="note-content"
@@ -100,6 +67,9 @@ export default function CreateNote({
         />
             */}
       </div>
+
+      {/* Now in use */}
+      <div className="">{editor}</div>
 
       {/* Formatting Help 
       <div className="mt-2 text-xs text-gray-500 dark:text-gray-400">
