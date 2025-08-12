@@ -35,6 +35,7 @@ function NoteProvider({ children }) {
   const [noteName, setNoteName] = useState("");
   const [isSubmittingNote, setIsSubmittingNote] = useState(false);
   const [notes, setNotes] = useState([]);
+  const [filteredNotes, setFilteredNotes] = useState([]);
   const [currentNote, setCurrentNote] = useState({
     id: "", // Firebase doc ID
     title: "", // Note title
@@ -229,6 +230,8 @@ function NoteProvider({ children }) {
     setNoteToDelete,
     hasNotes,
     setHasNotes,
+    filteredNotes,
+    setFilteredNotes,
     title,
     setTitle,
     content,

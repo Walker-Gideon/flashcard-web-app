@@ -8,8 +8,14 @@ import DisplayTiming from "../../../ui/DisplayTiming";
 
 export default function DisplayNoteCreated() {
   const { user } = useAuth();
-  const { notes, setNotes, setCurrentNote, setReadAlredyNote, setCreateNote } =
-    useNote();
+  const {
+    setNotes,
+    setCurrentNote,
+    setReadAlredyNote,
+    setCreateNote,
+    filteredNotes,
+    setFilteredNotes,
+  } = useNote();
 
   // Display note on mount
   useEffect(() => {
@@ -24,10 +30,11 @@ export default function DisplayNoteCreated() {
         ...doc.data(),
       }));
       setNotes(fetchedNotes);
+      setFilteredNotes(fetchedNotes);
     });
 
     return () => unsubscribe(); // cleanup
-  }, [user, setNotes]);
+  }, [user, setNotes, setFilteredNotes]);
 
   // Function to fetch the note
   async function handleNoteClick(noteId) {
@@ -52,7 +59,7 @@ export default function DisplayNoteCreated() {
 
   return (
     <div className="scroll-container mb-4 h-screen overflow-y-scroll">
-      {notes.map((note) => (
+      {filteredNotes.map((note) => (
         <div key={note.id}>
           <DisplayCreated
             id={note.id}

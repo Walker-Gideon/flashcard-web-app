@@ -8,10 +8,19 @@ import { useNote } from "../../../context/NoteContext";
 import useLazyLoading from "../../../ui/LazyLoading";
 
 export default function NoteLeftHeader() {
-  const { setCreateNote, createNote } = useNote();
+  const { setCreateNote, createNote, notes, setFilteredNotes } = useNote();
   const [query, setQuery] = useState("");
-
   const lazyTaggle = useLazyLoading(setCreateNote, 2000);
+
+  const handleSearch = (e) => {
+    if (e.key === "Enter") {
+      // Filter notes by noteName (case-insensitive)
+      const results = notes.filter((note) =>
+        note.noteName.toLowerCase().includes(query.toLowerCase()),
+      );
+      setFilteredNotes(results);
+    }
+  };
 
   function handleCreateNote() {
     lazyTaggle(true);
@@ -21,19 +30,20 @@ export default function NoteLeftHeader() {
     <header className="medium:py-3 border-b border-stone-300 px-4 py-5 dark:border-slate-700">
       <HeaderText classname={"mb-2 medium:block hidden"}>My Note</HeaderText>
 
-      <form action="" className="relative mb-2">
+      <div className="relative mb-2">
         <Input
           type="text"
           name="query"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search note..."
+          onKeyDown={handleSearch}
           classname={
             "w-full pr-1 pl-6 bg-transparent dark:border-slate-700 dark:placeholder:text-slate-400 dark:text-white"
           }
         />
         <LuSearch className="absolute top-2.5 left-2 text-sm text-slate-600 dark:text-slate-300" />
-      </form>
+      </div>
 
       <Button
         variant="primary"

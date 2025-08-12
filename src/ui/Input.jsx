@@ -8,6 +8,7 @@ export default function Input({
   onChange,
   id,
   disabled,
+  onKeyDown,
 }) {
   if (id)
     return (
@@ -18,6 +19,7 @@ export default function Input({
         value={value}
         onChange={onChange}
         placeholder={placeholder}
+        onKeyDown={onKeyDown}
         className={classname}
         required={required ? required : false}
         disabled={disabled}
@@ -31,6 +33,7 @@ export default function Input({
       value={value}
       onChange={onChange}
       placeholder={placeholder}
+      onKeyDown={onKeyDown}
       className={`input ${classname}`}
       required={required ? required : false}
       disabled={disabled}
