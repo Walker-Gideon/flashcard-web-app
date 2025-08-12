@@ -2,20 +2,14 @@ import { useState } from "react";
 import FlashcardHeader from "./FlashcardHeader";
 import CardOverview from "../../ui/CardOverview";
 import Input from "../../ui/Input";
-
 import ActionButton from "./createFlashcard/ActionButton";
 import AddFlashcard from "./createFlashcard/AddFlashcard";
 import FlashcardInput from "./createFlashcard/FlashcardInput";
 import CreatedLayout from "./myCreated/CreatedLayout";
-
-// CreateFlashcard Component - UI for creating and previewing a flashcard
-// This component provides a form layout for creating a new flashcard with multiple terms/definitions,
-// and a stylish preview section after creation. All sections are commented for clarity.
+import useLazyLoading from "../../ui/LazyLoading";
 
 export default function CreateFlashcard() {
-  // State to manage the list of term/definition pairs
-  // Minimum 2 pairs, maximum 10 pairs (adjustable)
-  const MIN_PAIRS = 2;
+  const MIN_PAIRS = 2; // Minimum 2 pairs, maximum 10 pairs (adjustable)
   const MAX_PAIRS = 10; // You can change this if you want more/less
   const [pairs, setPairs] = useState([
     { term: "", definition: "" },
@@ -27,6 +21,9 @@ export default function CreateFlashcard() {
 
   // State to toggle between form and preview
   const [showPreview, setShowPreview] = useState(false);
+
+  // Calling lazing loading on the back button
+  const lazyLoading = useLazyLoading(setShowPreview, 1000);
 
   // Handler to add a new empty pair (if under max)
   const handleAddPair = () => {
@@ -59,7 +56,9 @@ export default function CreateFlashcard() {
   };
 
   // Handler to go back to edit mode
-  const handleBackToEdit = () => setShowPreview(false);
+  function handleBackToEdit() {
+    lazyLoading(false);
+  }
 
   // --- Flashcard Preview UI ---
   if (showPreview)
