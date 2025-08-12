@@ -13,9 +13,6 @@ export default function CreateNoteSubHeader() {
   const secColors =
     "text-slate-900  hover:text-white dark:text-white hover:bg-slate-600";
 
-  // Visual feedback when text is selected
-  // const hasSelectedText = selectedText.text && selectedText.text.length > 0;
-
   const styling = {
     h1: base + ` px-2.5 ${select === "h1" ? `${primColors}` : `${secColors}`}`,
     h2: base + ` ${select === "h2" ? `${primColors}` : `${secColors}`}`,
@@ -30,22 +27,8 @@ export default function CreateNoteSubHeader() {
       ` underline px-3 ${select === "underline" ? `${primColors}` : `${secColors}`}`,
   };
 
-  /*
-  const handleFormatting = (formatType) => {
-    if (hasSelectedText) {
-      // If text is selected, apply formatting to selected text
-      applyRichTextFormatting(formatType);
-    } else {
-      // If no text is selected, just update the active button
-      setSelect(formatType);
-      dispatch({ type: `SHOW_${formatType.toUpperCase()}` });
-    }
-  };
-  */
-
   return (
     <div
-      // ${hasSelectedText ? "bg-blue-50 dark:bg-blue-900/20" : ""}
       className={`mx-4 flex h-16 items-center gap-2 border-b border-stone-300 dark:border-slate-700`}
     >
       <Button
