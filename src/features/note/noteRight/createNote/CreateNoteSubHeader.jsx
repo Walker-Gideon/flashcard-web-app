@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { useNote } from "../../../../context/NoteContext";
 import Button from "../../../../ui/Button";
+import { LuAlignLeft } from "react-icons/lu";
+import { LuAlignJustify } from "react-icons/lu";
+import { LuAlignRight } from "react-icons/lu";
+import { LuAlignCenter } from "react-icons/lu";
 
-export default function CreateNoteSubHeader() {
-  const { dispatch } = useNote();
-  // , applyRichTextFormatting, selectedText
+export default function CreateNoteSubHeader({ editor }) {
   const [select, setSelect] = useState("h1");
 
   const base =
@@ -33,48 +34,45 @@ export default function CreateNoteSubHeader() {
     >
       <Button
         variant="outline"
-        classname={styling.h1}
+        // classname={styling.h1}
+        classname={editor.isActive("heading", { level: 1 }) ? "is-active" : ""}
         onClick={(e) => {
           e.preventDefault();
-          // handleFormatting("h1");
+          editor.chain().focus().toggleHeading({ level: 1 }).run();
         }}
-        title="Heading 1 (Ctrl+Shift+1)"
       >
         H1
       </Button>
 
       <Button
         variant="outline"
-        classname={styling.h2}
+        classname={editor.isActive("heading", { level: 2 }) ? "is-active" : ""}
         onClick={(e) => {
           e.preventDefault();
-          // handleFormatting("h2");
+          editor.chain().focus().toggleHeading({ level: 2 }).run();
         }}
-        title="Heading 2 (Ctrl+Shift+2)"
       >
         H2
       </Button>
 
       <Button
         variant="outline"
-        classname={styling.bold}
+        classname={editor.isActive("bold") ? "is-active" : ""}
         onClick={(e) => {
           e.preventDefault();
-          // handleFormatting("bold");
+          editor.chain().focus().toggleBold().run();
         }}
-        title="Bold (Ctrl+B)"
       >
         B
       </Button>
 
       <Button
         variant="outline"
-        classname={styling.italic}
+        classname={editor.isActive("italic") ? "is-active" : ""}
         onClick={(e) => {
           e.preventDefault();
-          // handleFormatting("italic");
+          editor.chain().focus().toggleItalic().run();
         }}
-        title="Italic (Ctrl+I)"
       >
         I
       </Button>
@@ -84,11 +82,64 @@ export default function CreateNoteSubHeader() {
         classname={styling.underline}
         onClick={(e) => {
           e.preventDefault();
-          // handleFormatting("underline");
+          editor.chain().focus().toggleUnderline().run();
         }}
         title="Underline (Ctrl+U)"
       >
         U
+      </Button>
+
+      <Button
+        variant="outline"
+        onClick={(e) => {
+          e.preventDefault();
+          editor.chain().focus().toggleHighlight().run();
+        }}
+        classname="mt-2 rounded border border-yellow-400 bg-yellow-200 px-4 py-1"
+      >
+        H
+      </Button>
+
+      {/* Alignments */}
+      <Button
+        variant="outline"
+        onClick={(e) => {
+          e.preventDefault();
+          editor.chain().focus().setTextAlign("left").run();
+        }}
+        classname={editor.isActive({ textAlign: "left" }) ? "is-active" : ""}
+      >
+        <LuAlignLeft />
+      </Button>
+      <Button
+        variant="outline"
+        onClick={(e) => {
+          e.preventDefault();
+          editor.chain().focus().setTextAlign("center").run();
+        }}
+        classname={editor.isActive({ textAlign: "center" }) ? "is-active" : ""}
+      >
+        <LuAlignCenter />
+      </Button>
+      <Button
+        variant="outline"
+        onClick={(e) => {
+          e.preventDefault();
+          editor.chain().focus().setTextAlign("right").run();
+        }}
+        classname={editor.isActive({ textAlign: "right" }) ? "is-active" : ""}
+      >
+        <LuAlignRight />
+      </Button>
+      <Button
+        variant="outline"
+        onClick={(e) => {
+          e.preventDefault();
+          editor.chain().focus().setTextAlign("justify").run();
+        }}
+        classname={editor.isActive({ textAlign: "justify" }) ? "is-active" : ""}
+      >
+        <LuAlignJustify />
       </Button>
     </div>
   );

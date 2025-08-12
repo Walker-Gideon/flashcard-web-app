@@ -1,33 +1,8 @@
-import { createContext, useContext, useReducer, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
 const NoteContext = createContext();
-const initialState = {
-  activeBtn: "h1",
-};
-
-function reducer(state, action) {
-  switch (action.type) {
-    case "SHOW_NORMAL_SIZE":
-      return { activeBtn: "h1" };
-    case "SHOW_INCREASE_SIZE":
-      return { activeBtn: "h2" };
-    case "SHOW_BOLD":
-      return { activeBtn: "bold" };
-    case "SHOW_UNDERLINE":
-      return { activeBtn: "underline" };
-    case "SHOW_ITALIC":
-      return { activeBtn: "italic" };
-    case "SET_ACTIVE_BUTTON":
-      return { activeBtn: action.payload };
-    case "CLEAR_ACTIVE_BUTTON":
-      return { activeBtn: null };
-    default:
-      return state;
-  }
-}
 
 function NoteProvider({ children }) {
-  const [{ activeBtn }, dispatch] = useReducer(reducer, initialState);
   const [createNote, setCreateNote] = useState(false);
   const [addNoteTitle, setAddNoteTitle] = useState(false);
   const [title, setTitle] = useState("");
@@ -80,8 +55,6 @@ function NoteProvider({ children }) {
     setContent,
     noteName,
     setNoteName,
-    activeBtn,
-    dispatch,
     isSubmittingNote,
     setIsSubmittingNote,
     addNoteTitle,

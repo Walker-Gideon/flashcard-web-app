@@ -11,6 +11,9 @@ import CreateNoteSubHeader from "./CreateNoteSubHeader";
 import Model from "../../../../ui/Model";
 import { AnimatePresence } from "motion/react";
 import Toast from "../../../../ui/Toast";
+import Highlight from "@tiptap/extension-highlight";
+import TextAlign from "@tiptap/extension-text-align";
+import Underline from "@tiptap/extension-underline";
 import { useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 
@@ -76,8 +79,12 @@ export default function CreateNoteLayoout() {
   // Editing note
   const editor = useEditor({
     extensions: [
-      StarterKit, // Bold, Italic, Headings, Lists, etc.
-      // Underline, // Adds underline
+      StarterKit,
+      TextAlign.configure({
+        types: ["heading", "paragraph"],
+      }),
+      Highlight,
+      Underline,
     ],
     content: "<p>Start here...</p>",
   });
@@ -94,7 +101,7 @@ export default function CreateNoteLayoout() {
         <CreateNoteHeader />
 
         <main className="medium:h-[90vh] scroll-container h-[74vh] overflow-y-scroll">
-          <CreateNoteSubHeader />
+          <CreateNoteSubHeader editor={editor} />
           <CreateNote
             onTitleChange={(e) => setTitle(e.target.value)}
             onContentChange={(e) => setContent(e.target.value)}
