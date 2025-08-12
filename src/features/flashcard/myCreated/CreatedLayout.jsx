@@ -1,10 +1,9 @@
-import Button from "../../../ui/Button";
-import CardOverview from "../../../ui/CardOverview";
-import CreatedHeader from "./CreatedHeader";
-import { LuChevronLeft } from "react-icons/lu";
-import { LuChevronRight } from "react-icons/lu";
-import { motion, AnimatePresence } from "motion/react";
 import { useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
+import { LuChevronRight } from "react-icons/lu";
+import { LuChevronLeft } from "react-icons/lu";
+import Button from "../../../ui/Button";
+import CreatedHeader from "./CreatedHeader";
 
 export default function CreatedLayout({ handleBackToEdit, tags, pairs }) {
   const [index, setIndex] = useState(0); // current card index
@@ -57,8 +56,11 @@ export default function CreatedLayout({ handleBackToEdit, tags, pairs }) {
     <div className="medium:p-8 medium:max-w-xl mx-auto flex h-screen flex-col items-center px-5 lg:max-w-5xl">
       <CreatedHeader handleBackToEdit={handleBackToEdit} tags={tags} />
 
-      <CardOverview classname="mx-auto max-w-3xl mt-20">
-        <div className="perspective h-48 w-80" onClick={flipCard}>
+      <div className="medium:mt-20 mx-auto mt-15 max-w-3xl">
+        <div
+          className="perspective medium:w-100 h-48 w-90 lg:w-150"
+          onClick={flipCard}
+        >
           <AnimatePresence custom={direction} mode="wait">
             <motion.div
               key={index}
@@ -71,7 +73,7 @@ export default function CreatedLayout({ handleBackToEdit, tags, pairs }) {
               className="h-full w-full"
             >
               <motion.div
-                className="relative flex h-full w-full cursor-pointer items-center justify-center rounded-xl bg-blue-50 text-xl font-medium text-slate-800 shadow-lg dark:bg-slate-700 dark:text-slate-100"
+                className="relative flex h-full w-full cursor-pointer items-center justify-center rounded-2xl border border-stone-300 bg-white/70 text-xl font-medium shadow-lg backdrop-blur-xl transition-all duration-300 dark:border-slate-700 dark:bg-slate-800/70 dark:text-white"
                 variants={flipVariants}
                 animate={showFront ? "front" : "back"}
                 transition={{ duration: 0.5 }}
@@ -79,7 +81,7 @@ export default function CreatedLayout({ handleBackToEdit, tags, pairs }) {
               >
                 {/* Front side */}
                 <div
-                  className="absolute flex h-full w-full items-center justify-center backface-hidden"
+                  className="absolute flex h-full w-full items-center justify-center"
                   style={{ backfaceVisibility: "hidden" }}
                 >
                   {pairs[index].term || (
@@ -89,10 +91,10 @@ export default function CreatedLayout({ handleBackToEdit, tags, pairs }) {
 
                 {/* Back side */}
                 <div
-                  className="absolute flex h-full w-full rotate-y-180 items-center justify-center bg-blue-100 dark:bg-slate-600"
+                  className="absolute flex h-full w-full items-center justify-center bg-blue-100 dark:bg-slate-600"
                   style={{
-                    transform: "rotateY(180deg)",
                     backfaceVisibility: "hidden",
+                    transform: "rotateY(180deg)",
                   }}
                 >
                   {pairs[index].definition || (
@@ -103,7 +105,7 @@ export default function CreatedLayout({ handleBackToEdit, tags, pairs }) {
             </motion.div>
           </AnimatePresence>
         </div>
-      </CardOverview>
+      </div>
 
       <div className="mt-8 space-x-4">
         <Button
