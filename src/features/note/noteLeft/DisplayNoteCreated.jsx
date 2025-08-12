@@ -44,18 +44,16 @@ export default function DisplayNoteCreated() {
         });
         setReadAlredyNote(true);
         setCreateNote(true);
-      } else {
-        console.log("No such note!");
       }
     } catch (error) {
-      console.error("Error fetching note:", error);
+      return error;
     }
   }
 
   return (
     <div className="scroll-container mb-4 h-screen overflow-y-scroll">
       {notes.map((note) => (
-        <div key={note.id} className="">
+        <div key={note.id}>
           <DisplayCreated
             id={note.id}
             title={note.noteName}
