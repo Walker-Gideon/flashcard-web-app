@@ -33,7 +33,7 @@ export default function CreateNoteLayoout() {
 
     const user = auth.currentUser;
     if (!user) {
-      alert("User not logged in");
+      console.log("User not logged in");
       return;
     }
 

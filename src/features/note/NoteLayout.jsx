@@ -30,7 +30,7 @@ export default function NoteLayout() {
       setTimeout(() => {
         setCreateNote(false);
         setReadAlredyNote(false);
-      }, 1000);
+      }, 500);
     } catch (error) {
       console.error("Error deleting note:", error);
       return error;

@@ -31,8 +31,6 @@ export default function CreateNote({
     textSize = "underline";
   }
 
-  console.log(currentNote);
-
   return (
     <div className="mx-4 my-2 h-full py-2">
       <Input
