@@ -9,12 +9,14 @@ import DisplayTiming from "../../../ui/DisplayTiming";
 export default function DisplayNoteCreated() {
   const { user } = useAuth();
   const {
+    notes,
     setNotes,
     setCurrentNote,
     setReadAlredyNote,
     setCreateNote,
     filteredNotes,
     setFilteredNotes,
+    setQuery,
   } = useNote();
 
   // Display note on mount
@@ -52,6 +54,10 @@ export default function DisplayNoteCreated() {
         setReadAlredyNote(true);
         setCreateNote(true);
       }
+
+      // Handle note click → clear search and show all notes again
+      setQuery(""); // Clear input
+      setFilteredNotes(notes); // Reset to full list
     } catch (error) {
       return error;
     }

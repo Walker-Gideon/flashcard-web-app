@@ -8,18 +8,25 @@ import { useNote } from "../../../context/NoteContext";
 import useLazyLoading from "../../../ui/LazyLoading";
 
 export default function NoteLeftHeader() {
-  const { setCreateNote, createNote, notes, setFilteredNotes } = useNote();
-  const [query, setQuery] = useState("");
+  const {
+    setCreateNote,
+    createNote,
+    notes,
+    setFilteredNotes,
+    query,
+    setQuery,
+  } = useNote();
   const lazyTaggle = useLazyLoading(setCreateNote, 2000);
 
   const handleSearch = (e) => {
-    if (e.key === "Enter") {
-      // Filter notes by noteName (case-insensitive)
-      const results = notes.filter((note) =>
-        note.noteName.toLowerCase().includes(query.toLowerCase()),
-      );
-      setFilteredNotes(results);
-    }
+    const value = e.target.value;
+    setQuery(value);
+
+    // Show notes that match the typed term
+    const results = notes.filter((note) =>
+      note.noteName.toLowerCase().includes(value.toLowerCase()),
+    );
+    setFilteredNotes(results);
   };
 
   function handleCreateNote() {
@@ -35,9 +42,8 @@ export default function NoteLeftHeader() {
           type="text"
           name="query"
           value={query}
-          onChange={(e) => setQuery(e.target.value)}
+          onChange={handleSearch}
           placeholder="Search note..."
-          onKeyDown={handleSearch}
           classname={
             "w-full pr-1 pl-6 bg-transparent dark:border-slate-700 dark:placeholder:text-slate-400 dark:text-white"
           }
