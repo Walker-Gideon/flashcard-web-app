@@ -43,6 +43,7 @@ function NoteProvider({ children }) {
     content: "", // Note content
     noteName: "",
   });
+  const [selectedNoteId, setSelectedNoteId] = useState(null);
 
   // This will check is the user naw to display already created note
   const [hasNotes, setHasNotes] = useState(false);
@@ -234,6 +235,8 @@ function NoteProvider({ children }) {
     setHasNotes,
     filteredNotes,
     setFilteredNotes,
+    selectedNoteId,
+    setSelectedNoteId,
     query,
     setQuery,
     title,

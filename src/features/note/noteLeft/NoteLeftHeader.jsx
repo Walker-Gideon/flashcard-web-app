@@ -15,6 +15,8 @@ export default function NoteLeftHeader() {
     query,
     setQuery,
     readAlredyNote,
+    setReadAlredyNote,
+    setSelectedNoteId,
   } = useNote();
   const lazyTaggle = useLazyLoading(setCreateNote, 2000);
 
@@ -31,7 +33,10 @@ export default function NoteLeftHeader() {
 
   function handleCreateNote() {
     lazyTaggle(true);
-    readAlredyNote((show) => !show);
+    setTimeout(() => {
+      setReadAlredyNote((show) => !show);
+      setSelectedNoteId(null);
+    }, 2000);
   }
 
   return (

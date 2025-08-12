@@ -2,14 +2,8 @@ import { RiDeleteBin5Line } from "react-icons/ri";
 import Button from "./Button";
 import { useNote } from "../context/NoteContext";
 
-export default function DisplayCreated({
-  title,
-  timing,
-  onClick,
-  id,
-  selectedNoteId,
-}) {
-  const { setNoteNotify, setNoteToDelete } = useNote();
+export default function DisplayCreated({ title, timing, onClick, id }) {
+  const { setNoteNotify, setNoteToDelete, selectedNoteId } = useNote();
 
   function handleDelete(id) {
     setNoteNotify((show) => !show);
