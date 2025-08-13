@@ -1,4 +1,6 @@
+import Button from "../../../ui/Button";
 import Input from "../../../ui/Input";
+import { RiDeleteBin5Line } from "react-icons/ri";
 
 export default function FlashcardInput({ pairs, handlePairChange }) {
   const styling = {
@@ -16,10 +18,22 @@ export default function FlashcardInput({ pairs, handlePairChange }) {
         >
           {/* Term Input */}
           <div>
-            <label htmlFor={`term-${idx}`} className={styling.label}>
-              Term{" "}
-              {pairs.length > 2 ? `#${idx + 1}` : idx === 0 ? "One" : "Two"}
-            </label>
+            <div className="flex w-full items-center justify-between">
+              <label htmlFor={`term-${idx}`} className={styling.label}>
+                Term{" "}
+                {pairs.length > 2 ? `#${idx + 1}` : idx === 0 ? "One" : "Two"}
+              </label>
+
+              <Button
+                variant={"outline"}
+                type="button"
+                // onClick={handleReducePair}
+                classname="mb-1.5 text-slate-500 dark:text-slate-200"
+                // disabled={pairs.length >= MAX_PAIRS}
+              >
+                <RiDeleteBin5Line className="h-4 w-4" />
+              </Button>
+            </div>
             <Input
               id={`term-${idx}`}
               name={`term-${idx}`}
@@ -30,6 +44,7 @@ export default function FlashcardInput({ pairs, handlePairChange }) {
               placeholder="Enter term..."
             />
           </div>
+
           {/* Definition Input */}
           <div>
             <label htmlFor={`definition-${idx}`} className={styling.label}>

@@ -9,21 +9,16 @@ import CreatedLayout from "./myCreated/CreatedLayout";
 import useLazyLoading from "../../ui/LazyLoading";
 
 export default function CreateFlashcard() {
-  const MIN_PAIRS = 2; // Minimum 2 pairs, maximum 10 pairs (adjustable)
-  const MAX_PAIRS = 10; // You can change this if you want more/less
   const [pairs, setPairs] = useState([
     { term: "", definition: "" },
     { term: "", definition: "" },
   ]);
-
-  // State for tags input
   const [tags, setTags] = useState("");
-
-  // State to toggle between form and preview
   const [showPreview, setShowPreview] = useState(false);
 
-  // Calling lazing loading on the back button
   const lazyLoading = useLazyLoading(setShowPreview, 1000);
+
+  const MAX_PAIRS = 100;
 
   // Handler to add a new empty pair (if under max)
   const handleAddPair = () => {
@@ -32,11 +27,8 @@ export default function CreateFlashcard() {
     }
   };
 
-  const handleReducePair = () => {
-    // Get the id of the newly added and remove it
-    // if (pairs.length < MAX_PAIRS) {
-    //   setPairs([...pairs, { term: "", definition: "" }]);
-    // }
+  const handleRemovePair = (indexToRemove) => {
+    setPairs(pairs.filter((_, index) => index !== indexToRemove));
   };
 
   // Handler to update term or definition in a specific pair
