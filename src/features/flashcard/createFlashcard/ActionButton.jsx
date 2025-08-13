@@ -3,29 +3,30 @@ import Button from "../../../ui/Button";
 import useLazyLoading from "../../../ui/LazyLoading";
 
 export default function ActionButton() {
-  const { setShowCreateFlashcard } = useFlash();
+  const { setShowCreateFlashcard, setPairs, setTags } = useFlash();
   const lazyLoading = useLazyLoading(setShowCreateFlashcard, 1000);
 
   function handleCreateFlashcard(e) {
     e.preventDefault();
     lazyLoading(false);
+
+    setPairs([
+      { term: "", definition: "" },
+      { term: "", definition: "" },
+    ]);
+    setTags("");
   }
 
   return (
     <div className="medium:pt-10 medium:justify-end flex justify-center gap-3 pt-7">
-      {/* Cancel Button (UI only) */}
       <Button
         variant="outline"
-        // type="button"
-        // disabled:cursor-not-allowed disabled:opacity-80
         classname="primaryButton px-12"
-        // disabled
         onClick={handleCreateFlashcard}
       >
         Cancel
       </Button>
 
-      {/* Create Button (UI only) */}
       <Button
         variant="outline"
         type="submit"
