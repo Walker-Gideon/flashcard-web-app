@@ -59,7 +59,7 @@ export default function CreatedLayout({ handleBackToEdit, tags, pairs }) {
       <div className="medium:mt-20 mx-auto mt-15 max-w-3xl">
         <div
           className="perspective medium:w-100 h-48 w-90 lg:w-150"
-          onClick={flipCard}
+          // onClick={flipCard}
         >
           <AnimatePresence custom={direction} mode="wait">
             <motion.div
@@ -72,36 +72,119 @@ export default function CreatedLayout({ handleBackToEdit, tags, pairs }) {
               transition={{ duration: 0.3 }}
               className="h-full w-full"
             >
+              {/* 
               <motion.div
                 className="relative flex h-full w-full cursor-pointer items-center justify-center rounded-2xl border border-stone-300 bg-white/70 text-xl font-medium shadow-lg backdrop-blur-xl transition-all duration-300 dark:border-slate-700 dark:bg-slate-800/70 dark:text-white"
-                variants={flipVariants}
-                animate={showFront ? "front" : "back"}
-                transition={{ duration: 0.5 }}
-                style={{ transformStyle: "preserve-3d" }}
+                onClick={flipCard}
               >
-                {/* Front side */}
-                <div
+                <motion.div
                   className="absolute flex h-full w-full items-center justify-center"
-                  style={{ backfaceVisibility: "hidden" }}
+                  initial={false}
+                  animate={{
+                    opacity: showFront ? 1 : 0,
+                    zIndex: showFront ? 10 : 0,
+                  }}
+                  transition={{ duration: 0.5 }}
                 >
                   {pairs[index].term || (
                     <span className="text-slate-400 italic">(empty)</span>
                   )}
-                </div>
+                </motion.div>
 
-                {/* Back side */}
-                <div
+                <motion.div
                   className="absolute flex h-full w-full items-center justify-center bg-blue-100 dark:bg-slate-600"
-                  style={{
-                    backfaceVisibility: "hidden",
-                    transform: "rotateY(180deg)",
+                  initial={false}
+                  animate={{
+                    opacity: showFront ? 0 : 1,
+                    zIndex: showFront ? 0 : 10,
                   }}
+                  transition={{ duration: 0.5 }}
                 >
                   {pairs[index].definition || (
                     <span className="text-slate-400 italic">(empty)</span>
                   )}
-                </div>
+                </motion.div>
               </motion.div>
+               
+
+              <motion.div
+                className="relative flex h-full w-full cursor-pointer items-center justify-center rounded-2xl border border-stone-300 bg-white/70 text-xl font-medium shadow-lg backdrop-blur-xl transition-all duration-300 dark:border-slate-700 dark:bg-slate-800/70 dark:text-white"
+                onClick={flipCard}
+                style={{ perspective: 800 }}
+              >
+                <motion.div
+                  className="absolute flex h-full w-full items-center justify-center"
+                  initial={false}
+                  animate={{
+                    opacity: showFront ? 1 : 0,
+                    x: showFront ? 0 : -50,
+                    zIndex: showFront ? 10 : 0,
+                  }}
+                  transition={{ duration: 0.4 }}
+                >
+                  {pairs[index].term || (
+                    <span className="text-slate-400 italic">(empty)</span>
+                  )}
+                </motion.div>
+
+                <motion.div
+                  className="absolute flex h-full w-full items-center justify-center bg-blue-100 dark:bg-slate-600"
+                  initial={false}
+                  animate={{
+                    opacity: showFront ? 0 : 1,
+                    x: showFront ? 50 : 0,
+                    zIndex: showFront ? 0 : 10,
+                  }}
+                  transition={{ duration: 0.4 }}
+                >
+                  {pairs[index].definition || (
+                    <span className="text-slate-400 italic">(empty)</span>
+                  )}
+                </motion.div>
+              </motion.div>
+                  */}
+
+              <div
+                // relative flex h-full w-full cursor-pointer items-center justify-center rounded-2xl border border-stone-300 bg-white/70 text-xl font-medium shadow-lg backdrop-blur-xl transition-all duration-300 dark:border-slate-700 dark:bg-slate-800/70 dark:text-white
+
+                // perspective h-40 w-64 cursor-pointer
+                className="relative flex h-full w-full cursor-pointer items-center justify-center rounded-2xl border border-stone-300 bg-white/70 text-xl font-medium shadow-lg backdrop-blur-xl transition-all duration-300 dark:border-slate-700 dark:bg-slate-800/70 dark:text-white"
+                style={{ perspective: 1000 }} // perspective on parent container
+                onClick={() => setShowFront(!showFront)}
+              >
+                <motion.div
+                  className="relative h-full w-full rounded-lg border border-gray-300 bg-white shadow-lg dark:border-gray-600 dark:bg-gray-800"
+                  style={{
+                    transformStyle: "preserve-3d",
+                    position: "relative",
+                  }}
+                  animate={{ rotateY: showFront ? 0 : 180 }}
+                  transition={{ duration: 0.6 }}
+                >
+                  {/* Front Side */}
+                  <div
+                    className="absolute inset-0 flex items-center justify-center p-4 text-xl font-semibold"
+                    style={{ backfaceVisibility: "hidden" }}
+                  >
+                    {pairs[index].term || (
+                      <span className="text-gray-400 italic">(empty)</span>
+                    )}
+                  </div>
+
+                  {/* Back Side */}
+                  <div
+                    className="absolute inset-0 flex items-center justify-center bg-blue-100 p-4 text-xl font-semibold dark:bg-blue-900"
+                    style={{
+                      backfaceVisibility: "hidden",
+                      transform: "rotateY(180deg)",
+                    }}
+                  >
+                    {pairs[index].definition || (
+                      <span className="text-gray-400 italic">(empty)</span>
+                    )}
+                  </div>
+                </motion.div>
+              </div>
             </motion.div>
           </AnimatePresence>
         </div>
