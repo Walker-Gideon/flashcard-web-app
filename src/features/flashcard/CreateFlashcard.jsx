@@ -1,7 +1,6 @@
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, serverTimestamp } from "firebase/firestore";
 import { auth, db } from "../../firebase";
 import { v4 as uuidv4 } from "uuid";
-import { useState } from "react";
 import FlashcardHeader from "./FlashcardHeader";
 import CardOverview from "../../ui/CardOverview";
 import Input from "../../ui/Input";
@@ -12,13 +11,74 @@ import CreatedLayout from "./myCreated/CreatedLayout";
 import { useFlash } from "../../context/FlashcardContext";
 
 export default function CreateFlashcard() {
-  const { showPreview, setShowPreview, pairs, MAX_PAIRS, setTags, tags } =
-    useFlash();
+  const {
+    showPreview,
+    setShowPreview,
+    pairs,
+    MAX_PAIRS,
+    setTags,
+    tags,
+    setPairs,
+    setLoadingCard,
+  } = useFlash();
+
+  /*
+  {
+  title: tags || "Untitled Deck",
+  createdAt: serverTimestamp(),
+  ownerId: currentUser.uid,
+  pairs: [
+    { term: "Term 1", definition: "Definition 1" },
+    { term: "Term 2", definition: "Definition 2" },
+    // ...
+  ],
+}
+
+  */
 
   // Handler for Create Flashcard button
-  const handleCreateFlashcard = (e) => {
+  const handleCreateFlashcard = async (e) => {
     e.preventDefault();
-    setShowPreview(true);
+    const user = auth.currentUser;
+    if (!user) {
+      console.log("User not logged in");
+      return;
+    }
+
+    setLoadingCard(true);
+    const flashcardId = uuidv4(); // unique ID for each flashcard
+
+    // Filter out empty pairs
+    const filteredPairs = pairs.filter(
+      (pair) => pair.term.trim() !== "" || pair.definition.trim() !== "",
+    );
+
+    const flashcardData = {
+      tags: tags.trim() === "" ? "Untitled Deck" : tags.trim(),
+      pairs: filteredPairs,
+      createdAt: serverTimestamp(),
+    };
+
+    try {
+      await setDoc(
+        doc(db, "users", user.uid, "flashcards", flashcardId),
+        flashcardData,
+      );
+
+      // clear form after a delay to show preview or feedback
+      setTimeout(() => {
+        setShowPreview(true);
+        setPairs([
+          { term: "", definition: "" },
+          { term: "", definition: "" },
+        ]);
+        setTags("");
+      }, 1000);
+    } catch (error) {
+      console.error("Error saving flashcard: ", error.message);
+    } finally {
+      setLoadingCard(false);
+    }
   };
 
   if (showPreview)
