@@ -1,8 +1,23 @@
+import { useFlash } from "../../../context/FlashcardContext";
 import Button from "../../../ui/Button";
 import Input from "../../../ui/Input";
 import { RiDeleteBin5Line } from "react-icons/ri";
 
-export default function FlashcardInput({ pairs, handlePairChange }) {
+export default function FlashcardInput() {
+  const { pairs, setPairs } = useFlash();
+
+  // Handler to update term or definition in a specific pair
+  const handlePairChange = (index, field, value) => {
+    const updatedPairs = [...pairs];
+    updatedPairs[index][field] = value;
+    setPairs(updatedPairs);
+  };
+
+  // Deleting unwanted card
+  const handleRemovePair = (indexToRemove) => {
+    setPairs(pairs.filter((_, index) => index !== indexToRemove));
+  };
+
   const styling = {
     label:
       "mb-1 block medium:text-xs text-sm font-medium text-slate-500 dark:text-slate-400",

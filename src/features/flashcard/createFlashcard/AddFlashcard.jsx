@@ -1,7 +1,17 @@
+import { useFlash } from "../../../context/FlashcardContext";
 import Button from "../../../ui/Button";
 import { LuPlus } from "react-icons/lu";
 
-export default function AddFlashcard({ handleAddPair, pairs, MAX_PAIRS }) {
+export default function AddFlashcard() {
+  const { pairs, MAX_PAIRS, setPairs } = useFlash();
+
+  // Handler to add a new empty pair (if under max)
+  const handleAddPair = () => {
+    if (pairs.length < MAX_PAIRS) {
+      setPairs([...pairs, { term: "", definition: "" }]);
+    }
+  };
+
   return (
     <div className="mt-5 flex items-center justify-end gap-2">
       <Button

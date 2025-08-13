@@ -5,6 +5,13 @@ const FlashcardContext = createContext();
 function FlashcardProvider({ children }) {
   const [showCreateFlashcard, setShowCreateFlashcard] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
+  const [tags, setTags] = useState("");
+  const [pairs, setPairs] = useState([
+    { term: "", definition: "" },
+    { term: "", definition: "" },
+  ]);
+
+  const MAX_PAIRS = 100;
 
   const value = useMemo(
     () => ({
@@ -12,8 +19,13 @@ function FlashcardProvider({ children }) {
       setShowCreateFlashcard,
       showPreview,
       setShowPreview,
+      pairs,
+      setPairs,
+      tags,
+      setTags,
+      MAX_PAIRS,
     }),
-    [showCreateFlashcard, showPreview],
+    [showCreateFlashcard, showPreview, pairs, tags],
   );
 
   return (

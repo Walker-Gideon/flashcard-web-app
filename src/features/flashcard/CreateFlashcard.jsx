@@ -1,3 +1,6 @@
+import { doc, setDoc } from "firebase/firestore";
+import { auth, db } from "../../firebase";
+import { v4 as uuidv4 } from "uuid";
 import { useState } from "react";
 import FlashcardHeader from "./FlashcardHeader";
 import CardOverview from "../../ui/CardOverview";
@@ -9,35 +12,8 @@ import CreatedLayout from "./myCreated/CreatedLayout";
 import { useFlash } from "../../context/FlashcardContext";
 
 export default function CreateFlashcard() {
-  const { showPreview, setShowPreview } = useFlash();
-  const [pairs, setPairs] = useState([
-    { term: "", definition: "" },
-    { term: "", definition: "" },
-  ]);
-  const [tags, setTags] = useState("");
-
-  const MAX_PAIRS = 100;
-
-  // Handler to add a new empty pair (if under max)
-  const handleAddPair = () => {
-    if (pairs.length < MAX_PAIRS) {
-      setPairs([...pairs, { term: "", definition: "" }]);
-    }
-  };
-
-  const handleRemovePair = (indexToRemove) => {
-    setPairs(pairs.filter((_, index) => index !== indexToRemove));
-  };
-
-  // Handler to update term or definition in a specific pair
-  const handlePairChange = (index, field, value) => {
-    const updatedPairs = [...pairs];
-    updatedPairs[index][field] = value;
-    setPairs(updatedPairs);
-  };
-
-  // Handler for tags input
-  const handleTagsChange = (e) => setTags(e.target.value);
+  const { showPreview, setShowPreview, pairs, MAX_PAIRS, setTags, tags } =
+    useFlash();
 
   // Handler for Create Flashcard button
   const handleCreateFlashcard = (e) => {
@@ -45,11 +21,10 @@ export default function CreateFlashcard() {
     setShowPreview(true);
   };
 
-  // --- Flashcard Preview UI ---
   if (showPreview)
     return (
       <div>
-        <CreatedLayout tags={tags} pairs={pairs} />;
+        <CreatedLayout />;
       </div>
     );
 
@@ -59,24 +34,15 @@ export default function CreateFlashcard() {
     inputArea: "w-full input text-slate-900 dark:text-white",
   };
 
-  // --- Flashcard Creation Form UI ---
   return (
     <div className="medium:overflow-hidden h-screen w-full overflow-y-scroll px-8">
-      <div className="">
-        {/* Header Section */}
+      <div>
         <FlashcardHeader text="Create Flashcard" classname="medium:my-4" />
 
         <CardOverview classname="medium:h-[70vh] mx-auto max-w-3xl medium:mt-2 mt-4">
           <form className="space-y-2" onSubmit={handleCreateFlashcard}>
-            {/* inputs */}
-            <FlashcardInput pairs={pairs} handlePairChange={handlePairChange} />
-
-            {/* Add More Button Section */}
-            <AddFlashcard
-              handleAddPair={handleAddPair}
-              pairs={pairs}
-              MAX_PAIRS={MAX_PAIRS}
-            />
+            <FlashcardInput />
+            <AddFlashcard />
 
             {/* Tags Input (Optional) */}
             <div>
@@ -88,13 +54,11 @@ export default function CreateFlashcard() {
                 name="tags"
                 type="text"
                 value={tags}
-                onChange={handleTagsChange}
+                onChange={(e) => setTags(e.target.value)}
                 classname={styling.inputArea}
                 placeholder="e.g. Biology, Chapter 2"
               />
             </div>
-
-            {/* Action Buttons Section */}
             <ActionButton />
 
             {/* Max pairs info will use this as a toast for notification */}

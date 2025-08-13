@@ -4,8 +4,10 @@ import { LuChevronRight } from "react-icons/lu";
 import { LuChevronLeft } from "react-icons/lu";
 import Button from "../../../ui/Button";
 import CreatedHeader from "./CreatedHeader";
+import { useFlash } from "../../../context/FlashcardContext";
 
-export default function CreatedLayout({ tags, pairs }) {
+export default function CreatedLayout() {
+  const { pairs } = useFlash();
   const [index, setIndex] = useState(0); // current card index
   const [showFront, setShowFront] = useState(true); // term or definition
   const [direction, setDirection] = useState(0); // swipe direction
@@ -49,7 +51,7 @@ export default function CreatedLayout({ tags, pairs }) {
 
   return (
     <div className="medium:p-8 medium:max-w-xl mx-auto flex h-screen flex-col items-center px-5 lg:max-w-5xl">
-      <CreatedHeader tags={tags} />
+      <CreatedHeader />
 
       <div className="medium:mt-20 mx-auto mt-15 max-w-3xl">
         <div

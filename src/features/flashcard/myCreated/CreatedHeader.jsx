@@ -6,8 +6,8 @@ import CreateBtn from "./CreateBtn";
 import useLazyLoading from "../../../ui/LazyLoading";
 import { useFlash } from "../../../context/FlashcardContext";
 
-export default function CreatedHeader({ tags }) {
-  const { setShowPreview } = useFlash();
+export default function CreatedHeader() {
+  const { setShowPreview, tags } = useFlash();
   const [isVisible, setIsVisible] = useState(false);
   const lazyLoading = useLazyLoading(setShowPreview, 1000);
 
