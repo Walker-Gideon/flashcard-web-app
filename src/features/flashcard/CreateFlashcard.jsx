@@ -6,17 +6,15 @@ import ActionButton from "./createFlashcard/ActionButton";
 import AddFlashcard from "./createFlashcard/AddFlashcard";
 import FlashcardInput from "./createFlashcard/FlashcardInput";
 import CreatedLayout from "./myCreated/CreatedLayout";
-import useLazyLoading from "../../ui/LazyLoading";
+import { useFlash } from "../../context/FlashcardContext";
 
 export default function CreateFlashcard() {
+  const { showPreview, setShowPreview } = useFlash();
   const [pairs, setPairs] = useState([
     { term: "", definition: "" },
     { term: "", definition: "" },
   ]);
   const [tags, setTags] = useState("");
-  const [showPreview, setShowPreview] = useState(false);
-
-  const lazyLoading = useLazyLoading(setShowPreview, 1000);
 
   const MAX_PAIRS = 100;
 
@@ -47,21 +45,11 @@ export default function CreateFlashcard() {
     setShowPreview(true);
   };
 
-  // Handler to go back to edit mode
-  function handleBackToEdit() {
-    lazyLoading(false);
-  }
-
   // --- Flashcard Preview UI ---
   if (showPreview)
     return (
       <div>
-        <CreatedLayout
-          handleBackToEdit={handleBackToEdit}
-          tags={tags}
-          pairs={pairs}
-        />
-        ;
+        <CreatedLayout tags={tags} pairs={pairs} />;
       </div>
     );
 
@@ -86,7 +74,6 @@ export default function CreateFlashcard() {
             {/* Add More Button Section */}
             <AddFlashcard
               handleAddPair={handleAddPair}
-              handleReducePair={handleReducePair}
               pairs={pairs}
               MAX_PAIRS={MAX_PAIRS}
             />

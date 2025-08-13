@@ -4,10 +4,16 @@ const FlashcardContext = createContext();
 
 function FlashcardProvider({ children }) {
   const [showCreateFlashcard, setShowCreateFlashcard] = useState(false);
+  const [showPreview, setShowPreview] = useState(false);
 
   const value = useMemo(
-    () => ({ showCreateFlashcard, setShowCreateFlashcard }),
-    [showCreateFlashcard],
+    () => ({
+      showCreateFlashcard,
+      setShowCreateFlashcard,
+      showPreview,
+      setShowPreview,
+    }),
+    [showCreateFlashcard, showPreview],
   );
 
   return (

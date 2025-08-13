@@ -3,9 +3,18 @@ import { AnimatePresence, motion } from "motion/react";
 import { LuEllipsis } from "react-icons/lu";
 import HeaderText from "../../../ui/HeaderText";
 import CreateBtn from "./CreateBtn";
+import useLazyLoading from "../../../ui/LazyLoading";
+import { useFlash } from "../../../context/FlashcardContext";
 
-export default function CreatedHeader({ handleBackToEdit, tags }) {
+export default function CreatedHeader({ tags }) {
+  const { setShowPreview } = useFlash();
   const [isVisible, setIsVisible] = useState(false);
+  const lazyLoading = useLazyLoading(setShowPreview, 1000);
+
+  // Handler to go back to edit mode
+  function handleBackToEdit() {
+    lazyLoading(false);
+  }
 
   return (
     <header className="medium:mt-0 medium:mb-6 mt-15 flex w-full items-center justify-between gap-2">
