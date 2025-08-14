@@ -7,6 +7,7 @@ function FlashcardProvider({ children }) {
   const [showPreview, setShowPreview] = useState(false);
   const [loadingCard, setLoadingCard] = useState(false);
   const [tags, setTags] = useState("");
+  const [queryFlashcard, setQueryFlashcard] = useState("");
   const [pairs, setPairs] = useState([
     { term: "", definition: "" },
     { term: "", definition: "" },
@@ -14,39 +15,33 @@ function FlashcardProvider({ children }) {
 
   // Display the created flashcard
   const [displayCreatedFlashcard, setDisplayCreatedFlashcard] = useState([]);
+  const [filteredFlashcard, setFilteredFlashcard] = useState([]);
 
   const [successFlashcard, setSuccessFlashcard] = useState(false);
 
   const MAX_PAIRS = 100;
 
-  const value = useMemo(
-    () => ({
-      showCreateFlashcard,
-      setShowCreateFlashcard,
-      showPreview,
-      setShowPreview,
-      pairs,
-      setPairs,
-      tags,
-      setTags,
-      MAX_PAIRS,
-      loadingCard,
-      setLoadingCard,
-      successFlashcard,
-      setSuccessFlashcard,
-      displayCreatedFlashcard,
-      setDisplayCreatedFlashcard,
-    }),
-    [
-      showCreateFlashcard,
-      showPreview,
-      pairs,
-      tags,
-      loadingCard,
-      successFlashcard,
-      displayCreatedFlashcard,
-    ],
-  );
+  const value = {
+    showCreateFlashcard,
+    setShowCreateFlashcard,
+    showPreview,
+    setShowPreview,
+    pairs,
+    setPairs,
+    tags,
+    setTags,
+    MAX_PAIRS,
+    loadingCard,
+    setLoadingCard,
+    successFlashcard,
+    setSuccessFlashcard,
+    displayCreatedFlashcard,
+    setDisplayCreatedFlashcard,
+    queryFlashcard,
+    setQueryFlashcard,
+    filteredFlashcard,
+    setFilteredFlashcard,
+  };
 
   return (
     <FlashcardContext.Provider value={value}>

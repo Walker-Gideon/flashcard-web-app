@@ -14,7 +14,13 @@ import Input from "../../ui/Input";
 
 export default function FlashcardInit() {
   const { user } = useAuth();
-  const { setShowCreateFlashcard } = useFlash();
+  const {
+    setShowCreateFlashcard,
+    queryFlashcard,
+    setQueryFlashcard,
+    displayCreatedFlashcard,
+    setFilteredFlashcard,
+  } = useFlash();
   const [hasFlashcard, setHasFlashcard] = useState(false);
   const lazyLoading = useLazyLoading(setShowCreateFlashcard, 1000);
 
@@ -34,6 +40,17 @@ export default function FlashcardInit() {
     lazyLoading(true);
   }
 
+  const handleFlashcardSearch = (e) => {
+    const value = e.target.value;
+    setQueryFlashcard(value);
+
+    // Show notes that match the typed term
+    const results = displayCreatedFlashcard.filter((flashcard) =>
+      flashcard.tags.toLowerCase().includes(value.toLowerCase()),
+    );
+    setFilteredFlashcard(results);
+  };
+
   return (
     <div>
       <div className="medium:flex-col medium:mt-0 medium:p-0 medium:px-4 medium:items-end mt-8 flex w-full flex-col-reverse items-center gap-3 p-4">
@@ -43,19 +60,21 @@ export default function FlashcardInit() {
           handleCreateFlashcard={handleCreateFlashcard}
         />
 
-        <div className="medium:my-6 medium:max-w-80 middle:max-w-xl relative w-full">
-          <Input
-            type="text"
-            name="query"
-            // value={query}
-            // onChange={handleSearch}
-            placeholder="Search flashcards"
-            classname={
-              "w-full px-2 bg-transparent dark:border-slate-700 dark:placeholder:text-slate-400 dark:text-white medium:right-0"
-            }
-          />
-          <LuSearch className="absolute top-2.5 right-2 text-sm text-slate-600 dark:text-slate-300" />
-        </div>
+        {hasFlashcard && (
+          <div className="medium:my-6 medium:max-w-80 middle:max-w-xl relative w-full">
+            <Input
+              type="text"
+              name="query"
+              value={queryFlashcard}
+              onChange={handleFlashcardSearch}
+              placeholder="Search flashcards"
+              classname={
+                "w-full px-2 bg-transparent dark:border-slate-700 dark:placeholder:text-slate-400 dark:text-white medium:right-0"
+              }
+            />
+            <LuSearch className="absolute top-2.5 right-2 text-sm text-slate-600 dark:text-slate-300" />
+          </div>
+        )}
       </div>
 
       <>

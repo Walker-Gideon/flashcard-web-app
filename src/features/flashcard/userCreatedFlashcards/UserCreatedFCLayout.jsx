@@ -8,7 +8,12 @@ import DisplayTiming from "../../../ui/DisplayTiming";
 
 export default function UserCreatedFCLayout() {
   const { user } = useAuth();
-  const { displayCreatedFlashcard, setDisplayCreatedFlashcard } = useFlash();
+  const {
+    displayCreatedFlashcard,
+    setDisplayCreatedFlashcard,
+    filteredFlashcard,
+    setFilteredFlashcard,
+  } = useFlash();
 
   // Display flashcard on mount
   useEffect(() => {
@@ -23,10 +28,11 @@ export default function UserCreatedFCLayout() {
         ...doc.data(),
       }));
       setDisplayCreatedFlashcard(fetchedFlashcard);
+      setFilteredFlashcard(fetchedFlashcard);
     });
 
     return () => unsubscribe(); // cleanup
-  }, [user, setDisplayCreatedFlashcard]);
+  }, [user, setDisplayCreatedFlashcard, setFilteredFlashcard]);
 
   console.log(displayCreatedFlashcard);
 
@@ -41,7 +47,7 @@ export default function UserCreatedFCLayout() {
     <div className="">
       <div className="scroll-container h-screen overflow-y-scroll">
         <div className="medium:mb-44 mb-54 px-8 lg:mx-auto lg:max-w-5xl">
-          {displayCreatedFlashcard.map((flashcard) => (
+          {filteredFlashcard.map((flashcard) => (
             <div key={flashcard.id} className="">
               <UserDisplayFC
                 title={flashcard.tags}
