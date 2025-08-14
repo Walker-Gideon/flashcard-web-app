@@ -1,20 +1,28 @@
-import { LuEllipsisVertical } from "react-icons/lu";
 import Button from "../../../ui/Button";
+import { LuEllipsisVertical } from "react-icons/lu";
+import { GoDotFill } from "react-icons/go";
 
-export default function UserDisplayFC({ title, timing, onClick }) {
+export default function UserDisplayFC({ title, timing, onClick, totalCards }) {
   // id
   return (
     <div
       // ${id === selectedNoteId ? "bg-slate-50 dark:bg-slate-700" : ""}
-      className={`my-1 flex w-full cursor-pointer items-center justify-between gap-2 border-b border-stone-300 transition-colors hover:bg-slate-50 dark:border-slate-700 dark:hover:bg-slate-700`}
+      className={`my-1 mb-4 flex w-full cursor-pointer items-center justify-between gap-2 rounded-sm border border-stone-300 shadow-md transition-all duration-300 ease-in-out hover:scale-105 hover:bg-slate-50 hover:shadow-xl dark:border-slate-700 dark:hover:bg-slate-700`}
     >
       <div role="button" onClick={onClick} className="w-full py-2 pl-4">
         <h1 className="medium:text-sm mb-1 w-40 truncate overflow-hidden whitespace-nowrap text-slate-900 dark:text-white">
           {title}
         </h1>
 
-        <p className="medium:text-xs text-sm text-slate-500 dark:text-slate-400">
-          {timing}
+        <p className="flex items-center gap-4 text-slate-500 dark:text-slate-400">
+          <span className="text-sm">
+            {totalCards} {totalCards === 1 ? "card" : "cards"}
+          </span>
+
+          <span className="medium:text-xs mt-0.5 flex items-center gap-1 text-sm font-bold">
+            <GoDotFill className="h-3 w-3 text-slate-500 dark:text-slate-400" />
+            {timing}
+          </span>
         </p>
       </div>
 

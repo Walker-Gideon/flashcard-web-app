@@ -29,7 +29,6 @@ export default function UserCreatedFCLayout() {
   }, [user, setDisplayCreatedFlashcard]);
 
   console.log(displayCreatedFlashcard);
-  console.log(displayCreatedFlashcard.tags);
 
   /*
   const flashcardData = {
@@ -39,15 +38,20 @@ export default function UserCreatedFCLayout() {
       };
 */
   return (
-    <div>
-      {displayCreatedFlashcard.map((flashcard) => (
-        <div key={flashcard.id} className="">
-          <UserDisplayFC
-            title={flashcard.tags}
-            timing={<DisplayTiming createdAt={flashcard.createdAt} />}
-          />
+    <div className="">
+      <div className="scroll-container h-screen overflow-y-scroll">
+        <div className="medium:mb-25 mb-38 px-8 lg:mx-auto lg:max-w-5xl">
+          {displayCreatedFlashcard.map((flashcard) => (
+            <div key={flashcard.id} className="">
+              <UserDisplayFC
+                title={flashcard.tags}
+                totalCards={flashcard.pairs.length + 1}
+                timing={<DisplayTiming createdAt={flashcard.createdAt} />}
+              />
+            </div>
+          ))}
         </div>
-      ))}
+      </div>
     </div>
   );
 }
