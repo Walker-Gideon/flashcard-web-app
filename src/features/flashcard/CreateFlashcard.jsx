@@ -7,13 +7,11 @@ import Input from "../../ui/Input";
 import ActionButton from "./createFlashcard/ActionButton";
 import AddFlashcard from "./createFlashcard/AddFlashcard";
 import FlashcardInput from "./createFlashcard/FlashcardInput";
-import CreatedLayout from "./myCreated/CreatedLayout";
 import { useFlash } from "../../context/FlashcardContext";
 import { LuLoader } from "react-icons/lu";
 
 export default function CreateFlashcard() {
   const {
-    showPreview,
     setShowPreview,
     pairs,
     MAX_PAIRS,
@@ -68,13 +66,6 @@ export default function CreateFlashcard() {
       setLoadingCard(false);
     }
   };
-
-  // if (showPreview)
-  //   return (
-  //     <div>
-  //     ;
-  //     </div>
-  //   );
 
   const styling = {
     label:

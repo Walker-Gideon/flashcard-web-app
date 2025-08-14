@@ -8,6 +8,7 @@ import Button from "../../ui/Button";
 import PromptDisplay from "../../ui/PromptDisplay";
 import FlashcardHeader from "./FlashcardHeader";
 import useLazyLoading from "../../ui/LazyLoading";
+import UserCreatedFCLayout from "./userCreatedFlashcards/UserCreatedFCLayout";
 
 export default function FlashcardInit() {
   const { user } = useAuth();
@@ -33,11 +34,12 @@ export default function FlashcardInit() {
 
   return (
     <div>
-      {hasFlashcard ? (
-        <div className=""> have flashcard</div>
-      ) : (
-        <>
-          <FlashcardHeader text="My Flashcards" />
+      <FlashcardHeader text="My Flashcards" />
+
+      <>
+        {hasFlashcard ? (
+          <UserCreatedFCLayout />
+        ) : (
           <div className="h-full">
             <PromptDisplay
               hight={"h-[80dvh]"}
@@ -62,9 +64,9 @@ export default function FlashcardInit() {
                 Create Flashcard
               </Button>
             </PromptDisplay>
-          </div>{" "}
-        </>
-      )}
+          </div>
+        )}
+      </>
     </div>
   );
 }

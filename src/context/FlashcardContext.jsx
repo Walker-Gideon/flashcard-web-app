@@ -12,6 +12,9 @@ function FlashcardProvider({ children }) {
     { term: "", definition: "" },
   ]);
 
+  // Display the created flashcard
+  const [displayCreatedFlashcard, setDisplayCreatedFlashcard] = useState([]);
+
   const [successFlashcard, setSuccessFlashcard] = useState(false);
 
   const MAX_PAIRS = 100;
@@ -31,6 +34,8 @@ function FlashcardProvider({ children }) {
       setLoadingCard,
       successFlashcard,
       setSuccessFlashcard,
+      displayCreatedFlashcard,
+      setDisplayCreatedFlashcard,
     }),
     [
       showCreateFlashcard,
@@ -39,6 +44,7 @@ function FlashcardProvider({ children }) {
       tags,
       loadingCard,
       successFlashcard,
+      displayCreatedFlashcard,
     ],
   );
 
