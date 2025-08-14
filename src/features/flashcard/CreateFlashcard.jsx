@@ -69,12 +69,12 @@ export default function CreateFlashcard() {
     }
   };
 
-  if (showPreview)
-    return (
-      <div>
-        <CreatedLayout />;
-      </div>
-    );
+  // if (showPreview)
+  //   return (
+  //     <div>
+  //     ;
+  //     </div>
+  //   );
 
   const styling = {
     label:

@@ -1,5 +1,5 @@
 import { useFlash } from "../../context/FlashcardContext";
-import CreateFlashcard from "./CreateFlashcard";
+import CreateFlashcardLayout from "./CreateFlashcardLayout";
 import FlashcardInit from "./FlashcardInit";
 import { LuCheck } from "react-icons/lu";
 
@@ -8,7 +8,7 @@ export default function FlashcardLayout() {
 
   return (
     <div>
-      {!showCreateFlashcard ? <FlashcardInit /> : <CreateFlashcard />}
+      {showCreateFlashcard ? <CreateFlashcardLayout /> : <FlashcardInit />}
 
       {/* Will use this for different stuff */}
       {successFlashcard && (
