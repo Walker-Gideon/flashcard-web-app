@@ -10,18 +10,19 @@ export default function CreateBtn({ isVisible, setIsVisible }) {
   const lazyLoading = useLazyLoading(setShowPreview, 1000);
   const lazyLoadingFlashcard = useLazyLoading(setShowCreateFlashcard, 1000);
 
-  // Handler to go back to edit mode
-  function handleBackToEdit(bool) {
-    lazyLoading(bool);
+  function isButtonVisible() {
     setIsVisible(!isVisible);
   }
 
-  // Handler to go back to flashcard scren
-  function handleBackToFlashcard() {
-    setShowCreateFlashcard(true);
+  function handleBackToEdit() {
+    lazyLoading(false);
+    isButtonVisible();
+  }
 
-    // handleBackToEdit(false);
-    setIsVisible(!isVisible);
+  function handleToFlashcard() {
+    lazyLoadingFlashcard(false);
+    isButtonVisible();
+    handleBackToEdit();
   }
 
   const styling = {
@@ -34,7 +35,7 @@ export default function CreateBtn({ isVisible, setIsVisible }) {
     <>
       <Button
         variant="outline"
-        onClick={() => handleBackToEdit(false)}
+        onClick={handleBackToEdit}
         classname={styling.button}
       >
         <LuPencilLine className={styling.icon} />
@@ -45,7 +46,7 @@ export default function CreateBtn({ isVisible, setIsVisible }) {
 
       <Button
         variant="outline"
-        onClick={handleBackToFlashcard}
+        onClick={handleToFlashcard}
         classname={styling.button}
       >
         <LuCheckCheck className={styling.icon} />
