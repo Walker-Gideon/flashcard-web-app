@@ -81,7 +81,7 @@ export default function CreateFlashcard() {
           classname="medium:my-4"
         />
 
-        <CardOverview classname="medium:h-[70vh] mx-auto max-w-3xl medium:mt-2 mt-4">
+        <CardOverview classname="medium:h-[70vh] mx-auto max-w-3xl medium:mt-8 mt-14">
           <form className="space-y-2" onSubmit={handleCreateFlashcard}>
             <FlashcardInput />
             <AddFlashcard />
