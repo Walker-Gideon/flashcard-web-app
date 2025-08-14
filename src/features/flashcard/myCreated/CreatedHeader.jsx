@@ -3,18 +3,11 @@ import { AnimatePresence, motion } from "motion/react";
 import { LuEllipsis } from "react-icons/lu";
 import HeaderText from "../../../ui/HeaderText";
 import CreateBtn from "./CreateBtn";
-import useLazyLoading from "../../../ui/LazyLoading";
 import { useFlash } from "../../../context/FlashcardContext";
 
 export default function CreatedHeader() {
-  const { setShowPreview, tags } = useFlash();
+  const { tags } = useFlash();
   const [isVisible, setIsVisible] = useState(false);
-  const lazyLoading = useLazyLoading(setShowPreview, 1000);
-
-  // Handler to go back to edit mode
-  function handleBackToEdit() {
-    lazyLoading(false);
-  }
 
   return (
     <header className="medium:mt-0 medium:mb-6 mt-15 flex w-full items-center justify-between gap-2">
@@ -37,7 +30,7 @@ export default function CreatedHeader() {
               exit={{ opacity: 0, scale: 0 }}
               className="absolute top-12 right-0 z-50 flex w-50 flex-col items-start gap-2 rounded-2xl border border-stone-300 bg-white/70 p-2 text-[0.8rem] text-slate-900 backdrop-blur-xl transition-all duration-300 dark:border-slate-700 dark:bg-slate-800/70 dark:text-white"
             >
-              <CreateBtn handleBackToEdit={handleBackToEdit} />
+              <CreateBtn isVisible={isVisible} setIsVisible={setIsVisible} />
             </motion.div>
           ) : null}
         </AnimatePresence>

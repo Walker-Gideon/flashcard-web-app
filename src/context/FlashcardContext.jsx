@@ -12,6 +12,8 @@ function FlashcardProvider({ children }) {
     { term: "", definition: "" },
   ]);
 
+  const [successFlashcard, setSuccessFlashcard] = useState(false);
+
   const MAX_PAIRS = 100;
 
   const value = useMemo(
@@ -27,8 +29,17 @@ function FlashcardProvider({ children }) {
       MAX_PAIRS,
       loadingCard,
       setLoadingCard,
+      successFlashcard,
+      setSuccessFlashcard,
     }),
-    [showCreateFlashcard, showPreview, pairs, tags, loadingCard],
+    [
+      showCreateFlashcard,
+      showPreview,
+      pairs,
+      tags,
+      loadingCard,
+      successFlashcard,
+    ],
   );
 
   return (
