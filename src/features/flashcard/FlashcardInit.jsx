@@ -34,7 +34,11 @@ export default function FlashcardInit() {
 
   return (
     <div>
-      <FlashcardHeader text="My Flashcards" />
+      <FlashcardHeader
+        text="My Flashcards"
+        hasFlashcard={hasFlashcard}
+        handleCreateFlashcard={handleCreateFlashcard}
+      />
 
       <>
         {hasFlashcard ? (
