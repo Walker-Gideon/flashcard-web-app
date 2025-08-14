@@ -9,6 +9,7 @@ import AddFlashcard from "./createFlashcard/AddFlashcard";
 import FlashcardInput from "./createFlashcard/FlashcardInput";
 import CreatedLayout from "./myCreated/CreatedLayout";
 import { useFlash } from "../../context/FlashcardContext";
+import { LuLoader } from "react-icons/lu";
 
 export default function CreateFlashcard() {
   const {
@@ -19,22 +20,9 @@ export default function CreateFlashcard() {
     setTags,
     tags,
     setPairs,
+    loadingCard,
     setLoadingCard,
   } = useFlash();
-
-  /*
-  {
-  title: tags || "Untitled Deck",
-  createdAt: serverTimestamp(),
-  ownerId: currentUser.uid,
-  pairs: [
-    { term: "Term 1", definition: "Definition 1" },
-    { term: "Term 2", definition: "Definition 2" },
-    // ...
-  ],
-}
-
-  */
 
   // Handler for Create Flashcard button
   const handleCreateFlashcard = async (e) => {
@@ -132,6 +120,14 @@ export default function CreateFlashcard() {
           </form>
         </CardOverview>
       </div>
+
+      {loadingCard && (
+        <div className="absolute inset-0 z-50 flex h-screen items-center justify-center">
+          <div className="rounded-full bg-slate-800/50 p-2 shadow-sm dark:bg-slate-400/50">
+            <LuLoader className="for spinning medium:h-6 medium:w-6 h-5 w-5 animate-spin text-white" />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

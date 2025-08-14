@@ -5,7 +5,7 @@ const FlashcardContext = createContext();
 function FlashcardProvider({ children }) {
   const [showCreateFlashcard, setShowCreateFlashcard] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
-  const [loadingCard, setLoadingCard] = useState(true);
+  const [loadingCard, setLoadingCard] = useState(false);
   const [tags, setTags] = useState("");
   const [pairs, setPairs] = useState([
     { term: "", definition: "" },
