@@ -76,7 +76,10 @@ export default function CreateFlashcard() {
   return (
     <div className="medium:overflow-hidden h-screen w-full overflow-y-scroll px-8">
       <div>
-        <FlashcardHeader text="Create Flashcard" classname="medium:my-4" />
+        <FlashcardHeader
+          text="Create a new flashcard set"
+          classname="medium:my-4"
+        />
 
         <CardOverview classname="medium:h-[70vh] mx-auto max-w-3xl medium:mt-2 mt-4">
           <form className="space-y-2" onSubmit={handleCreateFlashcard}>

@@ -51,7 +51,7 @@ export default function NoteLeftHeader() {
           name="query"
           value={query}
           onChange={handleSearch}
-          placeholder="Search note..."
+          placeholder="Search notes"
           classname={
             "w-full pr-1 pl-6 bg-transparent dark:border-slate-700 dark:placeholder:text-slate-400 dark:text-white"
           }

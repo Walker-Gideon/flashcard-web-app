@@ -40,7 +40,7 @@ export default function UserCreatedFCLayout() {
   return (
     <div className="">
       <div className="scroll-container h-screen overflow-y-scroll">
-        <div className="medium:mb-25 mb-38 px-8 lg:mx-auto lg:max-w-5xl">
+        <div className="medium:mb-44 mb-54 px-8 lg:mx-auto lg:max-w-5xl">
           {displayCreatedFlashcard.map((flashcard) => (
             <div key={flashcard.id} className="">
               <UserDisplayFC
