@@ -3,6 +3,8 @@ import { collection, onSnapshot, doc, getDoc } from "firebase/firestore";
 import { db } from "../../../firebase";
 import { useAuth } from "../../../context/AuthContext";
 import { useFlash } from "../../../context/FlashcardContext";
+import UserDisplayFC from "./UserDisplayFC";
+import DisplayTiming from "../../../ui/DisplayTiming";
 
 export default function UserCreatedFCLayout() {
   const { user } = useAuth();
@@ -27,12 +29,23 @@ export default function UserCreatedFCLayout() {
   }, [user, setDisplayCreatedFlashcard]);
 
   console.log(displayCreatedFlashcard);
+  console.log(displayCreatedFlashcard.tags);
 
+  /*
+  const flashcardData = {
+        tags: tags.trim() === "" ? "Untitled Deck" : tags.trim(),
+        pairs: filteredPairs,
+        createdAt: serverTimestamp(),
+      };
+*/
   return (
     <div>
       {displayCreatedFlashcard.map((flashcard) => (
         <div key={flashcard.id} className="">
-          {/* {flashcard} */}
+          <UserDisplayFC
+            title={flashcard.tags}
+            timing={<DisplayTiming createdAt={flashcard.createdAt} />}
+          />
         </div>
       ))}
     </div>
