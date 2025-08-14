@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useFlash } from "../../../context/FlashcardContext";
 import Button from "../../../ui/Button";
 import Input from "../../../ui/Input";
@@ -5,6 +6,7 @@ import { RiDeleteBin5Line } from "react-icons/ri";
 
 export default function FlashcardInput() {
   const { pairs, setPairs } = useFlash();
+  const [index, setIndex] = useState(0);
 
   // Handler to update term or definition in a specific pair
   const handlePairChange = (index, field, value) => {
@@ -13,9 +15,17 @@ export default function FlashcardInput() {
     setPairs(updatedPairs);
   };
 
-  // Deleting unwanted card
-  const handleRemovePair = (indexToRemove) => {
-    setPairs(pairs.filter((_, index) => index !== indexToRemove));
+  // Remove current card
+  const handleRemovePair = () => {
+    if (pairs.length > 2) {
+      const updatedPairs = pairs.filter((_, i) => i !== index);
+      setPairs(updatedPairs);
+
+      // Adjust index to avoid going out of bounds
+      setIndex((prev) =>
+        prev >= updatedPairs.length ? updatedPairs.length - 1 : prev,
+      );
+    }
   };
 
   const styling = {
@@ -42,9 +52,9 @@ export default function FlashcardInput() {
               <Button
                 variant={"outline"}
                 type="button"
-                // onClick={handleReducePair}
-                classname="mb-1.5 text-slate-500 dark:text-slate-200"
-                // disabled={pairs.length >= MAX_PAIRS}
+                onClick={handleRemovePair}
+                classname="mb-1.5 text-slate-500 dark:text-slate-200 disabled:cursor-not-allowed disabled:opacity-80"
+                disabled={pairs.length <= 2}
               >
                 <RiDeleteBin5Line className="h-4 w-4" />
               </Button>

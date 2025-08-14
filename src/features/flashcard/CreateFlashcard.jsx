@@ -122,23 +122,3 @@ export default function CreateFlashcard() {
     </div>
   );
 }
-
-/*
- // Add a new card
-  const handleAddPair = () => {
-    if (pairs.length < MAX_PAIRS) {
-      setPairs([...pairs, { term: "", definition: "" }]);
-    }
-  };
-
-  // Remove current card
-  const handleRemovePair = () => {
-    if (pairs.length > 1) {
-      const updatedPairs = pairs.filter((_, i) => i !== index);
-      setPairs(updatedPairs);
-
-      // Adjust index to avoid going out of bounds
-      setIndex((prev) => (prev >= updatedPairs.length ? updatedPairs.length - 1 : prev));
-    }
-  };
-  */
