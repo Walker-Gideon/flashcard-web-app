@@ -3,8 +3,12 @@ import Button from "../../../ui/Button";
 import useLazyLoading from "../../../ui/LazyLoading";
 
 export default function ActionButton() {
-  const { setShowCreateFlashcard, setPairs, setTags } = useFlash();
+  const { setShowCreateFlashcard, setPairs, pairs, setTags } = useFlash();
   const lazyLoading = useLazyLoading(setShowCreateFlashcard, 1000);
+
+  const isButtonDisabled = pairs.some(
+    (pair) => pair.term.trim() === "" || pair.definition.trim() === "",
+  );
 
   function handleCreateFlashcard(e) {
     e.preventDefault();
@@ -30,7 +34,8 @@ export default function ActionButton() {
       <Button
         variant="outline"
         type="submit"
-        classname="primaryButton sm:py-1 sm:px-3"
+        disabled={isButtonDisabled}
+        classname="primaryButton sm:py-1 sm:px-3 disable: disabled:bg-gray-400 disabled:cursor-not-allowed"
       >
         Create Flashcard
       </Button>
