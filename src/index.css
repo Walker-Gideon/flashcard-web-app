@@ -30,6 +30,11 @@ animate-spin for spinning
 import { LuLoader } from "react-icons/lu";
  */
 
+/*
+ 
+ This will prevent the animation from jumping
+ import { AnimatePresence } from "motion/react";
+  */
 @theme {
   /* default */
   --font-sans: "Quicksand", sans-serif;

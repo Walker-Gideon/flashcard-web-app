@@ -65,11 +65,11 @@ export default function UserCreatedFCLayout() {
         setShowCreateFlashcard(true);
         setReadAlredyFlashcard(true);
 
+        // Will use this id so that the user can edit their flashcard incase
         // setSelectedNoteId(flashcardId);
       }
 
       // Handle note click → clear search and show all notes again
-
       setQueryFlashcard(""); // Clear input
       setFilteredFlashcard(displayCreatedFlashcard); // Reset to full list
     } catch (error) {
@@ -78,15 +78,6 @@ export default function UserCreatedFCLayout() {
       setLoadingFC(false);
     }
   }
-
-  /*
-  const flashcardData = {
-        tags: tags.trim() === "" ? "Untitled Deck" : tags.trim(),
-        pairs: filteredPairs,
-        createdAt: serverTimestamp(),
-      };
-*/
-  console.log("Here is the flashcard click data ", currentFlashcard);
 
   return (
     <>

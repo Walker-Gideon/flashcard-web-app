@@ -24,6 +24,8 @@ function FlashcardProvider({ children }) {
   const [flashcardNotify, setFlashcardNotify] = useState(false);
   const [flashcardToDelete, setFlashcardToDelete] = useState(null);
 
+  console.log("Flashcard ID want to delete", flashcardToDelete);
+
   // Display the created flashcard
   const [displayCreatedFlashcard, setDisplayCreatedFlashcard] = useState([]);
   const [filteredFlashcard, setFilteredFlashcard] = useState([]);

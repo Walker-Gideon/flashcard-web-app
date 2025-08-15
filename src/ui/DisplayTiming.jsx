@@ -31,9 +31,9 @@ export default function DisplayTiming({ createdAt, timeDisplay }) {
   return (
     <div className="text-xs text-gray-500">
       {timeDisplay ? (
-        <span>{createdAt ? getExactTime(dateObj) : "Loading..."}</span>
+        <p>{createdAt ? getExactTime(dateObj) : "Loading..."}</p>
       ) : (
-        <span>{createdAt ? getTimeAgo(createdAt.toDate()) : "Loading..."}</span>
+        <p>{createdAt ? getTimeAgo(createdAt.toDate()) : "Loading..."}</p>
       )}
     </div>
   );
