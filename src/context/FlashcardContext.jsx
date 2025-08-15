@@ -20,6 +20,10 @@ function FlashcardProvider({ children }) {
     createdAt: null,
   });
 
+  // for notify the note on delete
+  const [flashcardNotify, setFlashcardNotify] = useState(false);
+  const [flashcardToDelete, setFlashcardToDelete] = useState(null);
+
   // Display the created flashcard
   const [displayCreatedFlashcard, setDisplayCreatedFlashcard] = useState([]);
   const [filteredFlashcard, setFilteredFlashcard] = useState([]);
@@ -53,6 +57,10 @@ function FlashcardProvider({ children }) {
     setCurrentFlashcard,
     readAlredyFlashcard,
     setReadAlredyFlashcard,
+    flashcardToDelete,
+    setFlashcardToDelete,
+    flashcardNotify,
+    setFlashcardNotify,
   };
 
   return (

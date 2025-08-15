@@ -95,6 +95,7 @@ export default function UserCreatedFCLayout() {
           {filteredFlashcard.map((flashcard) => (
             <div key={flashcard.id} className="">
               <UserDisplayFC
+                id={flashcard.id}
                 title={flashcard.tags}
                 totalCards={flashcard.pairs.length + 1}
                 onClick={() => handleFlashcardsClick(flashcard.id)}

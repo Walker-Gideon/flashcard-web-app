@@ -1,13 +1,60 @@
+import { deleteDoc, doc } from "firebase/firestore";
+import { db, auth } from "../../firebase";
+
 import { useFlash } from "../../context/FlashcardContext";
+import Notify from "../../ui/Notify";
 import CreateFlashcardLayout from "./CreateFlashcardLayout";
 import FlashcardInit from "./FlashcardInit";
 
 export default function FlashcardLayout() {
-  const { showCreateFlashcard } = useFlash();
+  const {
+    showCreateFlashcard,
+    setFlashcardNotify,
+    flashcardNotify,
+    setDisplayCreatedFlashcard,
+    setReadAlredyFlashcard,
+    flashcardToDelete,
+  } = useFlash();
+
+  const handleDeleteNote = async (noteId) => {
+    const user = auth.currentUser;
+    if (!user) return alert("User not logged in");
+
+    try {
+      await deleteDoc(doc(db, "users", user.uid, "notes", noteId));
+
+      // Update UI without refetching
+      setDisplayCreatedFlashcard((prevNotes) =>
+        prevNotes.filter((note) => note.id !== noteId),
+      );
+
+      setFlashcardNotify(false);
+      setTimeout(() => {
+        setReadAlredyFlashcard(false);
+      }, 500);
+    } catch (error) {
+      console.error("Error deleting note:", error);
+      return error;
+    }
+  };
 
   return (
     <div>
       {showCreateFlashcard ? <CreateFlashcardLayout /> : <FlashcardInit />}
+
+      {/* Notification for delete */}
+      {flashcardNotify && (
+        <Notify
+          classname={`max-w-2xs medium:max-w-xs px-4 py-3 flex`}
+          btnClass={`dark:text-slate-900 dark:border-stone-500 border-slate-500`}
+          animation={flashcardNotify}
+          message="Are you sure you want to delete this flashcard? This action cannot be undone."
+          btnFirstText="Cancel"
+          onClickFirst={() => setFlashcardNotify((show) => !show)}
+          btnSecondText="Delete"
+          onClickSecond={() => handleDeleteNote(flashcardToDelete)}
+        />
+      )}
     </div>
   );
 }

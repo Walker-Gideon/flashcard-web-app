@@ -1,9 +1,24 @@
 import Button from "../../../ui/Button";
 import { LuEllipsisVertical } from "react-icons/lu";
 import { GoDotFill } from "react-icons/go";
+import { useFlash } from "../../../context/FlashcardContext";
 
-export default function UserDisplayFC({ title, timing, onClick, totalCards }) {
-  // id
+export default function UserDisplayFC({
+  title,
+  timing,
+  onClick,
+  totalCards,
+  id,
+}) {
+  const { setFlashcardToDelete, setFlashcardNotify } = useFlash();
+
+  function handleDelete(id) {
+    setFlashcardNotify((show) => !show);
+    setTimeout(() => {
+      setFlashcardToDelete(id);
+    }, 2000);
+  }
+
   return (
     <div
       // ${id === selectedNoteId ? "bg-slate-50 dark:bg-slate-700" : ""}
@@ -28,7 +43,7 @@ export default function UserDisplayFC({ title, timing, onClick, totalCards }) {
 
       <Button
         variant="outline"
-        // onClick={() => handleDelete(id)}
+        onClick={() => handleDelete(id)}
         classname="text-slate-700 pr-4 dark:text-slate-200"
       >
         <LuEllipsisVertical className="h-5 w-5" />
