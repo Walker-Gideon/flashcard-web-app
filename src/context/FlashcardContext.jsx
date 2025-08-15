@@ -25,11 +25,7 @@ function FlashcardProvider({ children }) {
   const [filteredFlashcard, setFilteredFlashcard] = useState([]);
 
   // This will check if the user want to display already created flashcard
-  // const [hasNotes, setHasNotes] = useState(false);
   const [readAlredyFlashcard, setReadAlredyFlashcard] = useState(false);
-
-  // Not used yet
-  const [successFlashcard, setSuccessFlashcard] = useState(false);
 
   const MAX_PAIRS = 100;
 
@@ -45,8 +41,6 @@ function FlashcardProvider({ children }) {
     MAX_PAIRS,
     loadingCard,
     setLoadingCard,
-    successFlashcard,
-    setSuccessFlashcard,
     displayCreatedFlashcard,
     setDisplayCreatedFlashcard,
     queryFlashcard,
