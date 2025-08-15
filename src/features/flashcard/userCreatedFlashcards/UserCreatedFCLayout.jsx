@@ -1,10 +1,11 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { collection, onSnapshot, doc, getDoc } from "firebase/firestore";
 import { db } from "../../../firebase";
 import { useAuth } from "../../../context/AuthContext";
 import { useFlash } from "../../../context/FlashcardContext";
 import UserDisplayFC from "./UserDisplayFC";
 import DisplayTiming from "../../../ui/DisplayTiming";
+import { LuLoader } from "react-icons/lu";
 
 export default function UserCreatedFCLayout() {
   const { user } = useAuth();
@@ -19,6 +20,7 @@ export default function UserCreatedFCLayout() {
     setShowCreateFlashcard,
     setShowPreview,
   } = useFlash();
+  const [loadingFC, setLoadingFC] = useState(false);
 
   // Display flashcard on mount
   useEffect(() => {
@@ -41,6 +43,8 @@ export default function UserCreatedFCLayout() {
 
   // Function to fetch the flashcards
   async function handleFlashcardsClick(flashcardId) {
+    setLoadingFC(true);
+
     try {
       const flashcardsRef = doc(
         db,
@@ -55,16 +59,21 @@ export default function UserCreatedFCLayout() {
         const flashcardData = flashcardSnap.data();
         setCurrentFlashcard({ id: flashcardId, ...flashcardData });
 
-        setShowCreateFlashcard(null);
-        setShowPreview(true);
+        // These two are working
+        // setShowPreview(true);
+        // setShowCreateFlashcard(true);
+
         // setSelectedNoteId(flashcardId);
       }
 
       // Handle note click → clear search and show all notes again
+
       setQueryFlashcard(""); // Clear input
       setFilteredFlashcard(displayCreatedFlashcard); // Reset to full list
     } catch (error) {
       return error;
+    } finally {
+      setLoadingFC(false);
     }
   }
 
@@ -78,19 +87,29 @@ export default function UserCreatedFCLayout() {
   console.log("Here is the flashcard click data ", currentFlashcard);
 
   return (
-    <div className="scroll-container h-screen overflow-y-scroll">
-      <div className="medium:mb-44 mb-54 px-8 lg:mx-auto lg:max-w-5xl">
-        {filteredFlashcard.map((flashcard) => (
-          <div key={flashcard.id} className="">
-            <UserDisplayFC
-              title={flashcard.tags}
-              totalCards={flashcard.pairs.length + 1}
-              onClick={() => handleFlashcardsClick(flashcard.id)}
-              timing={<DisplayTiming createdAt={flashcard.createdAt} />}
-            />
-          </div>
-        ))}
+    <>
+      <div className="scroll-container h-screen overflow-y-scroll">
+        <div className="medium:mb-44 mb-54 px-8 lg:mx-auto lg:max-w-5xl">
+          {filteredFlashcard.map((flashcard) => (
+            <div key={flashcard.id} className="">
+              <UserDisplayFC
+                title={flashcard.tags}
+                totalCards={flashcard.pairs.length + 1}
+                onClick={() => handleFlashcardsClick(flashcard.id)}
+                timing={<DisplayTiming createdAt={flashcard.createdAt} />}
+              />
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+
+      {loadingFC && (
+        <div className="absolute inset-0 z-50 flex h-screen items-center justify-center">
+          <div className="rounded-full bg-slate-800/50 p-2 shadow-sm dark:bg-slate-400/50">
+            <LuLoader className="for spinning medium:h-6 medium:w-6 h-5 w-5 animate-spin text-white" />
+          </div>
+        </div>
+      )}
+    </>
   );
 }
