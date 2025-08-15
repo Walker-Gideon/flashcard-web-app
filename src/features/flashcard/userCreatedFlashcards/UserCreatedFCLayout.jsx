@@ -12,7 +12,12 @@ export default function UserCreatedFCLayout() {
     displayCreatedFlashcard,
     setDisplayCreatedFlashcard,
     filteredFlashcard,
+    setQueryFlashcard,
     setFilteredFlashcard,
+    setCurrentFlashcard,
+    currentFlashcard,
+    setShowCreateFlashcard,
+    setShowPreview,
   } = useFlash();
 
   // Display flashcard on mount
@@ -34,7 +39,34 @@ export default function UserCreatedFCLayout() {
     return () => unsubscribe(); // cleanup
   }, [user, setDisplayCreatedFlashcard, setFilteredFlashcard]);
 
-  console.log(displayCreatedFlashcard);
+  // Function to fetch the flashcards
+  async function handleFlashcardsClick(flashcardId) {
+    try {
+      const flashcardsRef = doc(
+        db,
+        "users",
+        user.uid,
+        "flashcards",
+        flashcardId,
+      );
+      const flashcardSnap = await getDoc(flashcardsRef);
+
+      if (flashcardSnap.exists()) {
+        const flashcardData = flashcardSnap.data();
+        setCurrentFlashcard({ id: flashcardId, ...flashcardData });
+
+        setShowCreateFlashcard(null);
+        setShowPreview(true);
+        // setSelectedNoteId(flashcardId);
+      }
+
+      // Handle note click → clear search and show all notes again
+      setQueryFlashcard(""); // Clear input
+      setFilteredFlashcard(displayCreatedFlashcard); // Reset to full list
+    } catch (error) {
+      return error;
+    }
+  }
 
   /*
   const flashcardData = {
@@ -43,20 +75,21 @@ export default function UserCreatedFCLayout() {
         createdAt: serverTimestamp(),
       };
 */
+  console.log("Here is the flashcard click data ", currentFlashcard);
+
   return (
-    <div className="">
-      <div className="scroll-container h-screen overflow-y-scroll">
-        <div className="medium:mb-44 mb-54 px-8 lg:mx-auto lg:max-w-5xl">
-          {filteredFlashcard.map((flashcard) => (
-            <div key={flashcard.id} className="">
-              <UserDisplayFC
-                title={flashcard.tags}
-                totalCards={flashcard.pairs.length + 1}
-                timing={<DisplayTiming createdAt={flashcard.createdAt} />}
-              />
-            </div>
-          ))}
-        </div>
+    <div className="scroll-container h-screen overflow-y-scroll">
+      <div className="medium:mb-44 mb-54 px-8 lg:mx-auto lg:max-w-5xl">
+        {filteredFlashcard.map((flashcard) => (
+          <div key={flashcard.id} className="">
+            <UserDisplayFC
+              title={flashcard.tags}
+              totalCards={flashcard.pairs.length + 1}
+              onClick={() => handleFlashcardsClick(flashcard.id)}
+              timing={<DisplayTiming createdAt={flashcard.createdAt} />}
+            />
+          </div>
+        ))}
       </div>
     </div>
   );

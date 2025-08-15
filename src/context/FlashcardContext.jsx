@@ -6,12 +6,19 @@ function FlashcardProvider({ children }) {
   const [showCreateFlashcard, setShowCreateFlashcard] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
   const [loadingCard, setLoadingCard] = useState(false);
+  const [selectedCard, setSelectedCard] = useState(null);
   const [tags, setTags] = useState("");
   const [queryFlashcard, setQueryFlashcard] = useState("");
   const [pairs, setPairs] = useState([
     { term: "", definition: "" },
     { term: "", definition: "" },
   ]);
+  const [currentFlashcard, setCurrentFlashcard] = useState({
+    id: "",
+    tags: "",
+    pairs: [],
+    createdAt: null,
+  });
 
   // Display the created flashcard
   const [displayCreatedFlashcard, setDisplayCreatedFlashcard] = useState([]);
@@ -41,6 +48,10 @@ function FlashcardProvider({ children }) {
     setQueryFlashcard,
     filteredFlashcard,
     setFilteredFlashcard,
+    selectedCard,
+    setSelectedCard,
+    currentFlashcard,
+    setCurrentFlashcard,
   };
 
   return (
