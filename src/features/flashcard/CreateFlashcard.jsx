@@ -20,6 +20,7 @@ export default function CreateFlashcard() {
     setPairs,
     loadingCard,
     setLoadingCard,
+    setReadAlredyFlashcard,
   } = useFlash();
 
   // Handler for Create Flashcard button
@@ -54,6 +55,7 @@ export default function CreateFlashcard() {
       // clear form after a delay to show preview or feedback
       setTimeout(() => {
         setShowPreview(true);
+        setReadAlredyFlashcard(false);
         setPairs([
           { term: "", definition: "" },
           { term: "", definition: "" },

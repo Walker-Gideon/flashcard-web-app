@@ -17,7 +17,8 @@ import { useAuth } from "../../../context/AuthContext";
 
 export default function CreatedLayout() {
   const { user } = useAuth();
-  const { pairs, currentFlashcard, readAlredyFlashcard } = useFlash();
+  const { pairs, tags, currentFlashcard, readAlredyFlashcard, setTags } =
+    useFlash();
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(0);
   const [showFront, setShowFront] = useState(true);
@@ -41,10 +42,11 @@ export default function CreatedLayout() {
         ...doc.data(),
       }));
       setFlashcard(fetchedFlashcard);
+      setTags(fetchedFlashcard);
     });
 
     return () => unsubscribe(); // cleanup
-  }, [user]);
+  }, [user, setTags]);
 
   function nextCard() {
     setDirection(1);

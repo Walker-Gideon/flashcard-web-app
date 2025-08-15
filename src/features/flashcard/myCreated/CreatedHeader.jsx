@@ -15,7 +15,7 @@ export default function CreatedHeader() {
         {readAlredyFlashcard
           ? currentFlashcard.tags
           : tags
-            ? tags
+            ? tags[0].tags
             : "Untitled Flashcard"}
       </HeaderText>
 
