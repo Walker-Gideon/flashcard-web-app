@@ -5,7 +5,7 @@ import { useAuth } from "../../../context/AuthContext";
 import { useFlash } from "../../../context/FlashcardContext";
 import UserDisplayFC from "./UserDisplayFC";
 import DisplayTiming from "../../../ui/DisplayTiming";
-import { LuLoader } from "react-icons/lu";
+import Loader from "../../../ui/Loader";
 
 export default function UserCreatedFCLayout() {
   const { user } = useAuth();
@@ -103,13 +103,7 @@ export default function UserCreatedFCLayout() {
         </div>
       </div>
 
-      {loadingFC && (
-        <div className="absolute inset-0 z-50 flex h-screen items-center justify-center">
-          <div className="rounded-full bg-slate-800/50 p-2 shadow-sm dark:bg-slate-400/50">
-            <LuLoader className="for spinning medium:h-6 medium:w-6 h-5 w-5 animate-spin text-white" />
-          </div>
-        </div>
-      )}
+      {loadingFC && <Loader loadingSpin={true} />}
     </>
   );
 }
