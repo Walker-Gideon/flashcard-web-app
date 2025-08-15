@@ -20,7 +20,7 @@ function NoteProvider({ children }) {
   });
   const [selectedNoteId, setSelectedNoteId] = useState(null);
 
-  // This will check is the user naw to display already created note
+  // This will check if the user want to display already created note
   const [hasNotes, setHasNotes] = useState(false);
   const [readAlredyNote, setReadAlredyNote] = useState(false);
 

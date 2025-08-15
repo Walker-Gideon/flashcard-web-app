@@ -17,7 +17,7 @@ import { useAuth } from "../../../context/AuthContext";
 
 export default function CreatedLayout() {
   const { user } = useAuth();
-  const { pairs } = useFlash();
+  const { pairs, currentFlashcard, readAlredyFlashcard } = useFlash();
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(0);
   const [showFront, setShowFront] = useState(true);
@@ -121,7 +121,9 @@ export default function CreatedLayout() {
                     className="absolute inset-0 flex h-full flex-col items-center justify-center px-6 py-4 text-xl font-semibold"
                     style={{ backfaceVisibility: "hidden" }}
                   >
-                    {flashcard[0]?.pairs[index]?.term}
+                    {readAlredyFlashcard
+                      ? currentFlashcard?.pairs[index]?.term
+                      : flashcard[0]?.pairs[index]?.term}
                     <span className="absolute bottom-4 text-xs text-gray-400 italic">
                       Tap to view answer
                     </span>
@@ -135,7 +137,9 @@ export default function CreatedLayout() {
                       transform: "rotateY(180deg)",
                     }}
                   >
-                    {flashcard[0]?.pairs[index]?.definition}
+                    {readAlredyFlashcard
+                      ? currentFlashcard?.pairs[index]?.definition
+                      : flashcard[0]?.pairs[index]?.definition}
                     <span className="absolute bottom-4 text-xs text-gray-400 italic">
                       Tap to view question
                     </span>

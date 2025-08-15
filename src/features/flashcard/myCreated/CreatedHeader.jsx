@@ -6,12 +6,18 @@ import CreateBtn from "./CreateBtn";
 import { useFlash } from "../../../context/FlashcardContext";
 
 export default function CreatedHeader() {
-  const { tags } = useFlash();
+  const { tags, readAlredyFlashcard, currentFlashcard } = useFlash();
   const [isVisible, setIsVisible] = useState(false);
 
   return (
     <header className="medium:mt-0 medium:mb-6 mt-15 flex w-full items-center justify-between gap-2">
-      <HeaderText>{tags ? tags : "Untitled Flashcard"}</HeaderText>
+      <HeaderText>
+        {readAlredyFlashcard
+          ? currentFlashcard.tags
+          : tags
+            ? tags
+            : "Untitled Flashcard"}
+      </HeaderText>
 
       <div className="relative">
         <motion.button

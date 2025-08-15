@@ -19,6 +19,7 @@ export default function UserCreatedFCLayout() {
     currentFlashcard,
     setShowCreateFlashcard,
     setShowPreview,
+    setReadAlredyFlashcard,
   } = useFlash();
   const [loadingFC, setLoadingFC] = useState(false);
 
@@ -60,8 +61,9 @@ export default function UserCreatedFCLayout() {
         setCurrentFlashcard({ id: flashcardId, ...flashcardData });
 
         // These two are working
-        // setShowPreview(true);
-        // setShowCreateFlashcard(true);
+        setShowPreview(true);
+        setShowCreateFlashcard(true);
+        setReadAlredyFlashcard(true);
 
         // setSelectedNoteId(flashcardId);
       }
