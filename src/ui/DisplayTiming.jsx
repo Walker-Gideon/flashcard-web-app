@@ -1,4 +1,4 @@
-export default function DisplayTiming({ createdAt }) {
+export default function DisplayTiming({ createdAt, timeDisplay }) {
   const getTimeAgo = (date) => {
     const seconds = Math.floor((new Date() - date) / 1000);
 
@@ -23,9 +23,18 @@ export default function DisplayTiming({ createdAt }) {
     return "Just now";
   };
 
+  const getExactTime = (date) => {
+    return date.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
+  };
+  const dateObj = createdAt.toDate();
+
   return (
-    <span className="text-xs text-gray-500">
-      {createdAt ? getTimeAgo(createdAt.toDate()) : "Loading..."}
-    </span>
+    <div className="text-xs text-gray-500">
+      {timeDisplay ? (
+        <span>{createdAt ? getExactTime(dateObj) : "Loading..."}</span>
+      ) : (
+        <span>{createdAt ? getTimeAgo(createdAt.toDate()) : "Loading..."}</span>
+      )}
+    </div>
   );
 }

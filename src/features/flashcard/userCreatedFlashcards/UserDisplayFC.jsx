@@ -1,5 +1,5 @@
 import Button from "../../../ui/Button";
-import { LuEllipsisVertical } from "react-icons/lu";
+import { RiDeleteBin5Line } from "react-icons/ri";
 import { GoDotFill } from "react-icons/go";
 import { useFlash } from "../../../context/FlashcardContext";
 
@@ -46,7 +46,7 @@ export default function UserDisplayFC({
         onClick={() => handleDelete(id)}
         classname="text-slate-700 pr-4 dark:text-slate-200"
       >
-        <LuEllipsisVertical className="h-5 w-5" />
+        <RiDeleteBin5Line className="h-5 w-5" />
       </Button>
     </div>
   );
