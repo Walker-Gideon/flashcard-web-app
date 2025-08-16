@@ -13,7 +13,6 @@ export default function FlashcardLayout() {
     setFlashcardNotify,
     flashcardNotify,
     setDisplayCreatedFlashcard,
-    setFilteredFlashcard,
     setReadAlredyFlashcard,
     flashcardToDelete,
   } = useFlash();
@@ -25,8 +24,8 @@ export default function FlashcardLayout() {
     try {
       await deleteDoc(doc(db, "users", user.uid, "flashcards", flashcardsId));
 
-      // Update UI without refetching
-      setFilteredFlashcard((prevNotes) =>
+      // Delete and Update flashcard without refetching
+      setDisplayCreatedFlashcard((prevNotes) =>
         prevNotes.filter((note) => note.id !== flashcardsId),
       );
 

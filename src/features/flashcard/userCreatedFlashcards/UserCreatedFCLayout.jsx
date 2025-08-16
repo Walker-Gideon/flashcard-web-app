@@ -11,12 +11,11 @@ export default function UserCreatedFCLayout() {
   const { user } = useAuth();
   const {
     displayCreatedFlashcard,
-    setDisplayCreatedFlashcard,
     filteredFlashcard,
+    setDisplayCreatedFlashcard,
     setQueryFlashcard,
     setFilteredFlashcard,
     setCurrentFlashcard,
-    currentFlashcard,
     setShowCreateFlashcard,
     setShowPreview,
     setReadAlredyFlashcard,
@@ -25,11 +24,10 @@ export default function UserCreatedFCLayout() {
 
   // Display flashcard on mount
   useEffect(() => {
-    if (!user?.uid) return; // wait for login
+    if (!user?.uid) return;
 
     const flashcardRef = collection(db, "users", user.uid, "flashcards");
 
-    // Real-time listener
     const unsubscribe = onSnapshot(flashcardRef, (snapshot) => {
       const fetchedFlashcard = snapshot.docs.map((doc) => ({
         id: doc.id,
@@ -39,7 +37,7 @@ export default function UserCreatedFCLayout() {
       setFilteredFlashcard(fetchedFlashcard);
     });
 
-    return () => unsubscribe(); // cleanup
+    return () => unsubscribe();
   }, [user, setDisplayCreatedFlashcard, setFilteredFlashcard]);
 
   // Function to fetch the flashcards
@@ -60,7 +58,7 @@ export default function UserCreatedFCLayout() {
         const flashcardData = flashcardSnap.data();
         setCurrentFlashcard({ id: flashcardId, ...flashcardData });
 
-        // These two are working
+        // Display the flashcard on click
         setShowPreview(true);
         setShowCreateFlashcard(true);
         setReadAlredyFlashcard(true);
@@ -69,9 +67,8 @@ export default function UserCreatedFCLayout() {
         // setSelectedNoteId(flashcardId);
       }
 
-      // Handle note click → clear search and show all notes again
-      setQueryFlashcard(""); // Clear input
-      setFilteredFlashcard(displayCreatedFlashcard); // Reset to full list
+      setQueryFlashcard("");
+      setFilteredFlashcard(displayCreatedFlashcard);
     } catch (error) {
       return error;
     } finally {

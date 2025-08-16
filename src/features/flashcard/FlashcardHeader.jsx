@@ -15,7 +15,7 @@ export default function FlashcardHeader({
         {text}
       </HeaderText>
 
-      <div className="">
+      <div>
         {hasFlashcard && (
           <Button
             variant="primary"

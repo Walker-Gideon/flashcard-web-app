@@ -15,6 +15,7 @@ import Input from "../../ui/Input";
 export default function FlashcardInit() {
   const { user } = useAuth();
   const {
+    setTags,
     setShowCreateFlashcard,
     queryFlashcard,
     setQueryFlashcard,
@@ -38,6 +39,7 @@ export default function FlashcardInit() {
 
   function handleCreateFlashcard() {
     lazyLoading(true);
+    setTags("");
   }
 
   const handleFlashcardSearch = (e) => {

@@ -17,8 +17,7 @@ import { useAuth } from "../../../context/AuthContext";
 
 export default function CreatedLayout() {
   const { user } = useAuth();
-  const { pairs, tags, currentFlashcard, readAlredyFlashcard, setTags } =
-    useFlash();
+  const { pairs, currentFlashcard, readAlredyFlashcard, setTags } = useFlash();
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(0);
   const [showFront, setShowFront] = useState(true);
