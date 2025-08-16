@@ -82,7 +82,7 @@ export default function UserCreatedFCLayout() {
               <UserDisplayFC
                 id={flashcard.id}
                 title={flashcard.tags}
-                totalCards={flashcard.pairs.length + 1}
+                totalCards={flashcard.pairs.length}
                 onClick={() => handleFlashcardsClick(flashcard.id)}
                 timing={<DisplayTiming createdAt={flashcard.createdAt} />}
               />

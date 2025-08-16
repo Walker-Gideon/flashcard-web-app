@@ -17,17 +17,11 @@ import { useAuth } from "../../../context/AuthContext";
 
 export default function CreatedLayout() {
   const { user } = useAuth();
-  const {
-    pairs,
-    currentFlashcard,
-    readAlredyFlashcard,
-    setTags,
-    newlyFlashcard,
-  } = useFlash();
+  const { currentFlashcard, readAlredyFlashcard, setTags, newlyFlashcard } =
+    useFlash();
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(0);
   const [showFront, setShowFront] = useState(true);
-  const [flashcard, setFlashcard] = useState([]);
 
   // Display flashcard on mount
   useEffect(() => {
@@ -45,27 +39,26 @@ export default function CreatedLayout() {
         id: doc.id,
         ...doc.data(),
       }));
-      setFlashcard(fetchedFlashcard);
       setTags(fetchedFlashcard);
     });
 
     return () => unsubscribe();
   }, [user, setTags]);
 
-  const currentPairs = newlyFlashcard.pairs;
-  console.log(currentPairs.length);
+  const currentPairs = readAlredyFlashcard
+    ? currentFlashcard.pairs
+    : newlyFlashcard.pairs;
+  console.log(currentFlashcard);
 
   function nextCard() {
     setDirection(1);
     setIndex((prev) => (prev + 1) % currentPairs.length);
-    // setIndex((prev) => (prev + 1) % pairs.length);
     setShowFront(true);
   }
 
   function prevCard() {
     setDirection(-1);
     setIndex((prev) => (prev - 1 + currentPairs.length) % currentPairs.length);
-    // setIndex((prev) => (prev - 1 + pairs.length) % pairs.length);
     setShowFront(true);
   }
 
@@ -132,9 +125,7 @@ export default function CreatedLayout() {
                     className="absolute inset-0 flex h-full flex-col items-center justify-center px-6 py-4 text-xl font-semibold"
                     style={{ backfaceVisibility: "hidden" }}
                   >
-                    {readAlredyFlashcard
-                      ? currentFlashcard?.pairs[index]?.term
-                      : newlyFlashcard.pairs[index]?.term}
+                    {currentPairs[index]?.term}
                     <span className="absolute bottom-4 text-xs text-gray-400 italic">
                       Tap to view answer
                     </span>
@@ -148,9 +139,7 @@ export default function CreatedLayout() {
                       transform: "rotateY(180deg)",
                     }}
                   >
-                    {readAlredyFlashcard
-                      ? currentFlashcard?.pairs[index]?.definition
-                      : newlyFlashcard.pairs[index]?.definition}
+                    {currentPairs[index]?.definition}
                     <span className="absolute bottom-4 text-xs text-gray-400 italic">
                       Tap to view question
                     </span>
