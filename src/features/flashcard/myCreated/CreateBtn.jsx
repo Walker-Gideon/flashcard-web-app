@@ -5,7 +5,14 @@ import { useFlash } from "../../../context/FlashcardContext";
 import useLazyLoading from "../../../ui/LazyLoading";
 
 export default function CreateBtn({ isVisible, setIsVisible }) {
-  const { setShowPreview, setShowCreateFlashcard } = useFlash();
+  const {
+    setShowPreview,
+    setShowCreateFlashcard,
+    setEditMode,
+    setEditFlashcardId,
+    setEditTags,
+    setEditPairs,
+  } = useFlash();
 
   const lazyLoading = useLazyLoading(setShowPreview, 1000);
   const lazyLoadingFlashcard = useLazyLoading(setShowCreateFlashcard, 1000);
@@ -14,9 +21,17 @@ export default function CreateBtn({ isVisible, setIsVisible }) {
     setIsVisible(!isVisible);
   }
 
-  function handleBackToEdit() {
+  // const handleEditClick = (flashcard) => {};
+
+  function handleBackToEdit(flashcard) {
     lazyLoading(false);
     isButtonVisible();
+
+    // State to manage the editing flashcard
+    setEditMode(true);
+    setEditFlashcardId(flashcard.id);
+    setEditTags(flashcard.tags || "");
+    setEditPairs(flashcard.pairs || []);
   }
 
   function handleToFlashcard() {

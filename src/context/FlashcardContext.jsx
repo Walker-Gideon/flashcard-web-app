@@ -34,8 +34,6 @@ function FlashcardProvider({ children }) {
   const [flashcardNotify, setFlashcardNotify] = useState(false);
   const [flashcardToDelete, setFlashcardToDelete] = useState(null);
 
-  console.log("Flashcard ID want to delete", flashcardToDelete);
-
   // Display the created flashcard
   const [displayCreatedFlashcard, setDisplayCreatedFlashcard] = useState([]);
   const [filteredFlashcard, setFilteredFlashcard] = useState([]);
@@ -43,9 +41,23 @@ function FlashcardProvider({ children }) {
   // This will check if the user want to display already created flashcard
   const [readAlredyFlashcard, setReadAlredyFlashcard] = useState(false);
 
+  // Editing flashcard
+  const [editMode, setEditMode] = useState(false);
+  const [editTags, setEditTags] = useState("");
+  const [editPairs, setEditPairs] = useState([]);
+  const [editFlashcardId, setEditFlashcardId] = useState("");
+
   const MAX_PAIRS = 100;
 
   const value = {
+    editFlashcardId,
+    setEditFlashcardId,
+    editPairs,
+    setEditPairs,
+    editMode,
+    setEditMode,
+    editTags,
+    setEditTags,
     showCreateFlashcard,
     setShowCreateFlashcard,
     showPreview,
