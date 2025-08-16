@@ -8,8 +8,8 @@ import {
 } from "firebase/firestore";
 import { db } from "../../../firebase";
 import { motion, AnimatePresence } from "motion/react";
-import { LuChevronRight } from "react-icons/lu";
-import { LuChevronLeft } from "react-icons/lu";
+import { LuArrowRight } from "react-icons/lu";
+import { LuArrowLeft } from "react-icons/lu";
 import Button from "../../../ui/Button";
 import CreatedHeader from "./CreatedHeader";
 import { useFlash } from "../../../context/FlashcardContext";
@@ -82,20 +82,17 @@ export default function CreatedLayout() {
   };
 
   const styling = {
-    buttons: `button w-20 bg-slate-500 border-0 text-white hover:bg-slate-600 focus:ring-slate-300 p-2 rounded-full`,
-    icons: "h-6 w-6",
+    buttons: `button w-20 bg-slate-500 border-0 text-white hover:bg-slate-600 focus:ring-slate-300 p-3 medium:p-4 justify-center flex items-center rounded-full`,
+    icons: "h-7 w-7",
     isDisabled: "opacity-50 disabled:cursor-not-allowed",
   };
 
   return (
-    <div className="medium:p-8 medium:max-w-xl mx-auto flex h-screen flex-col items-center px-5 lg:max-w-5xl">
+    <div className="medium:p-8 flex h-screen flex-col items-center px-5 lg:mx-auto lg:max-w-5xl">
       <CreatedHeader />
 
-      <div className="medium:mt-20 mx-auto mt-15 max-w-3xl">
-        <div
-          className="perspective medium:w-100 h-60 w-80 lg:w-150"
-          onClick={flipCard}
-        >
+      <div className="medium:mt-10 mt-15 w-full md:mx-auto md:max-w-3xl">
+        <div className="perspective medium:h-85 h-70 w-full" onClick={flipCard}>
           <AnimatePresence custom={direction} mode="wait">
             <motion.div
               key={index}
@@ -117,12 +114,12 @@ export default function CreatedLayout() {
                     transformStyle: "preserve-3d",
                     position: "relative",
                   }}
-                  animate={{ rotateY: showFront ? 0 : 180 }}
+                  animate={{ rotateX: showFront ? 0 : 180 }}
                   transition={{ duration: 0.6 }}
                 >
                   {/* Front Side */}
                   <div
-                    className="absolute inset-0 flex h-full flex-col items-center justify-center px-6 py-4 text-xl font-semibold"
+                    className="absolute inset-0 flex h-full flex-col items-center justify-center px-6 py-4 text-xl font-semibold md:px-10"
                     style={{ backfaceVisibility: "hidden" }}
                   >
                     {currentPairs[index]?.term}
@@ -133,10 +130,10 @@ export default function CreatedLayout() {
 
                   {/* Back Side */}
                   <div
-                    className="absolute inset-0 flex items-center justify-center px-6 py-4"
+                    className="absolute inset-0 flex items-center justify-center px-6 py-4 md:px-10"
                     style={{
                       backfaceVisibility: "hidden",
-                      transform: "rotateY(180deg)",
+                      transform: "rotateX(180deg)",
                     }}
                   >
                     {currentPairs[index]?.definition}
@@ -158,7 +155,7 @@ export default function CreatedLayout() {
           disabled={index === 0}
           onClick={prevCard}
         >
-          <LuChevronLeft className={styling.icons} />
+          <LuArrowLeft className={styling.icons} />
         </Button>
 
         <div className="font-bold dark:text-white">
@@ -173,7 +170,7 @@ export default function CreatedLayout() {
           disabled={index === currentPairs.length - 1}
           onClick={nextCard}
         >
-          <LuChevronRight className={styling.icons} />
+          <LuArrowRight className={styling.icons} />
         </Button>
       </div>
     </div>

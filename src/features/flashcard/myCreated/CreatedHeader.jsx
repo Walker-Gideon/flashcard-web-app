@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { LuEllipsis } from "react-icons/lu";
-import HeaderText from "../../../ui/HeaderText";
 import CreateBtn from "./CreateBtn";
 import { useFlash } from "../../../context/FlashcardContext";
 
@@ -11,13 +10,15 @@ export default function CreatedHeader() {
 
   return (
     <header className="medium:mt-0 medium:mb-6 mt-15 flex w-full items-center justify-between gap-2">
-      <HeaderText>
+      <h1
+        className={`middle:max-w-full max-w-xs truncate overflow-hidden text-3xl font-bold text-ellipsis whitespace-nowrap text-slate-900 dark:text-white`}
+      >
         {readAlredyFlashcard
           ? currentFlashcard.tags
           : tags
             ? tags[0].tags
             : "Untitled Flashcard"}
-      </HeaderText>
+      </h1>
 
       <div className="relative">
         <motion.button
