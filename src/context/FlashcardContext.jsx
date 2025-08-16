@@ -13,7 +13,17 @@ function FlashcardProvider({ children }) {
     { term: "", definition: "" },
     { term: "", definition: "" },
   ]);
+
+  // For currently reading flashcard
   const [currentFlashcard, setCurrentFlashcard] = useState({
+    id: "",
+    tags: "",
+    pairs: [],
+    createdAt: null,
+  });
+
+  // For newly created flashcard
+  const [newlyFlashcard, setNewlyFlashcard] = useState({
     id: "",
     tags: "",
     pairs: [],
@@ -63,6 +73,8 @@ function FlashcardProvider({ children }) {
     setFlashcardToDelete,
     flashcardNotify,
     setFlashcardNotify,
+    newlyFlashcard,
+    setNewlyFlashcard,
   };
 
   return (

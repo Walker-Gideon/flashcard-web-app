@@ -21,6 +21,7 @@ export default function CreateFlashcard() {
     loadingCard,
     setLoadingCard,
     setReadAlredyFlashcard,
+    setNewlyFlashcard,
   } = useFlash();
 
   // Handler for Create Flashcard button
@@ -44,6 +45,11 @@ export default function CreateFlashcard() {
       pairs: filteredPairs,
       createdAt: serverTimestamp(),
     };
+
+    setNewlyFlashcard({
+      id: flashcardId,
+      ...flashcardData,
+    });
 
     try {
       await setDoc(

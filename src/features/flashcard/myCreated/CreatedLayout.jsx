@@ -17,7 +17,13 @@ import { useAuth } from "../../../context/AuthContext";
 
 export default function CreatedLayout() {
   const { user } = useAuth();
-  const { pairs, currentFlashcard, readAlredyFlashcard, setTags } = useFlash();
+  const {
+    pairs,
+    currentFlashcard,
+    readAlredyFlashcard,
+    setTags,
+    newlyFlashcard,
+  } = useFlash();
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(0);
   const [showFront, setShowFront] = useState(true);
@@ -46,15 +52,20 @@ export default function CreatedLayout() {
     return () => unsubscribe();
   }, [user, setTags]);
 
+  const currentPairs = newlyFlashcard.pairs;
+  console.log(currentPairs.length);
+
   function nextCard() {
     setDirection(1);
-    setIndex((prev) => (prev + 1) % pairs.length);
+    setIndex((prev) => (prev + 1) % currentPairs.length);
+    // setIndex((prev) => (prev + 1) % pairs.length);
     setShowFront(true);
   }
 
   function prevCard() {
     setDirection(-1);
-    setIndex((prev) => (prev - 1 + pairs.length) % pairs.length);
+    setIndex((prev) => (prev - 1 + currentPairs.length) % currentPairs.length);
+    // setIndex((prev) => (prev - 1 + pairs.length) % pairs.length);
     setShowFront(true);
   }
 
@@ -78,7 +89,7 @@ export default function CreatedLayout() {
   };
 
   const styling = {
-    buttons: `button bg-slate-500 border-0 text-white hover:bg-slate-600 focus:ring-slate-300 p-2 rounded-full`,
+    buttons: `button w-20 bg-slate-500 border-0 text-white hover:bg-slate-600 focus:ring-slate-300 p-2 rounded-full`,
     icons: "h-6 w-6",
     isDisabled: "opacity-50 disabled:cursor-not-allowed",
   };
@@ -123,7 +134,7 @@ export default function CreatedLayout() {
                   >
                     {readAlredyFlashcard
                       ? currentFlashcard?.pairs[index]?.term
-                      : flashcard[0]?.pairs[index]?.term}
+                      : newlyFlashcard.pairs[index]?.term}
                     <span className="absolute bottom-4 text-xs text-gray-400 italic">
                       Tap to view answer
                     </span>
@@ -139,7 +150,7 @@ export default function CreatedLayout() {
                   >
                     {readAlredyFlashcard
                       ? currentFlashcard?.pairs[index]?.definition
-                      : flashcard[0]?.pairs[index]?.definition}
+                      : newlyFlashcard.pairs[index]?.definition}
                     <span className="absolute bottom-4 text-xs text-gray-400 italic">
                       Tap to view question
                     </span>
@@ -151,7 +162,7 @@ export default function CreatedLayout() {
         </div>
       </div>
 
-      <div className="mt-8 space-x-4">
+      <div className="mt-8 flex items-center space-x-8">
         <Button
           variant="outline"
           classname={`${styling.buttons} ${index === 0 ? `${styling.isDisabled}` : ""}`}
@@ -160,10 +171,17 @@ export default function CreatedLayout() {
         >
           <LuChevronLeft className={styling.icons} />
         </Button>
+
+        <div className="font-bold dark:text-white">
+          <p className="text-xl">
+            {index + 1} / {currentPairs.length}
+          </p>
+        </div>
+
         <Button
           variant="outline"
-          classname={`${styling.buttons}  ${index === pairs.length - 1 ? `${styling.isDisabled}` : ""}`}
-          disabled={index === pairs.length - 1}
+          classname={`${styling.buttons}  ${index === currentPairs.length - 1 ? `${styling.isDisabled}` : ""}`}
+          disabled={index === currentPairs.length - 1}
           onClick={nextCard}
         >
           <LuChevronRight className={styling.icons} />
