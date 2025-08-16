@@ -8,7 +8,6 @@ import ActionButton from "./createFlashcard/ActionButton";
 import AddFlashcard from "./createFlashcard/AddFlashcard";
 import FlashcardInput from "./createFlashcard/FlashcardInput";
 import { useFlash } from "../../context/FlashcardContext";
-import { LuLoader } from "react-icons/lu";
 import Loader from "../../ui/Loader";
 
 export default function CreateFlashcard() {
@@ -27,14 +26,13 @@ export default function CreateFlashcard() {
   // Handler for Create Flashcard button
   const handleCreateFlashcard = async (e) => {
     e.preventDefault();
+
     const user = auth.currentUser;
-    if (!user) {
-      console.log("User not logged in");
-      return;
-    }
+    if (!user) return;
 
     setLoadingCard(true);
-    const flashcardId = uuidv4(); // unique ID for each flashcard
+
+    const flashcardId = uuidv4();
 
     // Filter out empty pairs
     const filteredPairs = pairs.filter(
@@ -53,7 +51,6 @@ export default function CreateFlashcard() {
         flashcardData,
       );
 
-      // clear form after a delay to show preview or feedback
       setTimeout(() => {
         setShowPreview(true);
         setReadAlredyFlashcard(false);
@@ -118,15 +115,7 @@ export default function CreateFlashcard() {
         </CardOverview>
       </div>
 
-      {loadingCard && (
-        // <div className="absolute inset-0 z-50 flex h-screen items-center justify-center">
-        //   <div className="rounded-full bg-slate-800/50 p-2 shadow-sm dark:bg-slate-400/50">
-        //     <LuLoader className="for spinning medium:h-6 medium:w-6 h-5 w-5 animate-spin text-white" />
-        //   </div>
-        // </div>
-
-        <Loader loadingSpin={true} />
-      )}
+      {loadingCard && <Loader loadingSpin={true} />}
     </div>
   );
 }
