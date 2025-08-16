@@ -62,9 +62,6 @@ export default function UserCreatedFCLayout() {
         setShowPreview(true);
         setShowCreateFlashcard(true);
         setReadAlredyFlashcard(true);
-
-        // Will use this id so that the user can edit their flashcard incase
-        // setSelectedNoteId(flashcardId);
       }
 
       setQueryFlashcard("");

@@ -12,29 +12,23 @@ export default function FlashcardLayout() {
     showCreateFlashcard,
     setFlashcardNotify,
     flashcardNotify,
-    setDisplayCreatedFlashcard,
     setReadAlredyFlashcard,
     flashcardToDelete,
   } = useFlash();
 
-  const handleDeleteNote = async (flashcardsId) => {
+  const handleDeleteFlashcard = async (flashcardsId) => {
     const user = auth.currentUser;
     if (!user) return;
 
     try {
       await deleteDoc(doc(db, "users", user.uid, "flashcards", flashcardsId));
 
-      // Delete and Update flashcard without refetching
-      setDisplayCreatedFlashcard((prevNotes) =>
-        prevNotes.filter((note) => note.id !== flashcardsId),
-      );
-
       setFlashcardNotify(false);
       setTimeout(() => {
         setReadAlredyFlashcard(false);
       }, 500);
     } catch (error) {
-      console.error("Error deleting note:", error);
+      console.error("Error deleting card:", error);
       return error;
     }
   };
@@ -54,7 +48,7 @@ export default function FlashcardLayout() {
             btnFirstText="Cancel"
             onClickFirst={() => setFlashcardNotify((show) => !show)}
             btnSecondText="Delete"
-            onClickSecond={() => handleDeleteNote(flashcardToDelete)}
+            onClickSecond={() => handleDeleteFlashcard(flashcardToDelete)}
           />
         )}
       </AnimatePresence>
