@@ -26,9 +26,8 @@ export default function CreatedLayout() {
 
   // Display flashcard on mount
   useEffect(() => {
-    if (!user?.uid) return; // wait for login
+    if (!user?.uid) return;
 
-    // const flashcardRef = collection(db, "users", user.uid, "flashcards");
     const flashcardRef = query(
       collection(db, "users", user.uid, "flashcards"),
       orderBy("createdAt", "desc"),
@@ -45,7 +44,7 @@ export default function CreatedLayout() {
       setTags(fetchedFlashcard);
     });
 
-    return () => unsubscribe(); // cleanup
+    return () => unsubscribe();
   }, [user, setTags]);
 
   function nextCard() {
