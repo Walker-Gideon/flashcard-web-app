@@ -42,10 +42,15 @@ function FlashcardProvider({ children }) {
   const [readAlredyFlashcard, setReadAlredyFlashcard] = useState(false);
 
   // Editing flashcard
+  const [editFlashcardData, SetEditFlashcardData] = useState({});
   const [editMode, setEditMode] = useState(false);
   const [editTags, setEditTags] = useState("");
   const [editPairs, setEditPairs] = useState([]);
   const [editFlashcardId, setEditFlashcardId] = useState("");
+  console.log(`Compare user flashcard data:`, editFlashcardData);
+  console.log(`Compare user flashcard editFlashcardId:`, editFlashcardId);
+  console.log(`Compare user flashcard editTags:`, editTags);
+  console.log(`Compare user flashcard editPairs:`, editPairs);
 
   const MAX_PAIRS = 100;
 
@@ -87,6 +92,8 @@ function FlashcardProvider({ children }) {
     setFlashcardNotify,
     newlyFlashcard,
     setNewlyFlashcard,
+    editFlashcardData,
+    SetEditFlashcardData,
   };
 
   return (

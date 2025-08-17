@@ -12,6 +12,7 @@ export default function CreateBtn({ isVisible, setIsVisible }) {
     setEditFlashcardId,
     setEditTags,
     setEditPairs,
+    editFlashcardData,
   } = useFlash();
 
   const lazyLoading = useLazyLoading(setShowPreview, 1000);
@@ -21,17 +22,18 @@ export default function CreateBtn({ isVisible, setIsVisible }) {
     setIsVisible(!isVisible);
   }
 
-  // const handleEditClick = (flashcard) => {};
-
-  function handleBackToEdit(flashcard) {
+  function handleBackToEdit() {
     lazyLoading(false);
     isButtonVisible();
 
     // State to manage the editing flashcard
-    setEditMode(true);
-    setEditFlashcardId(flashcard.id);
-    setEditTags(flashcard.tags || "");
-    setEditPairs(flashcard.pairs || []);
+    if (Object.keys(editFlashcardData).length !== 0) {
+      console.log(`Flashcard data in edit button`, editFlashcardData);
+      setEditMode(true);
+      setEditFlashcardId(editFlashcardData.id);
+      setEditTags(editFlashcardData.tags || "");
+      setEditPairs(editFlashcardData.pairs || []);
+    }
   }
 
   function handleToFlashcard() {

@@ -19,6 +19,7 @@ export default function UserCreatedFCLayout() {
     setShowCreateFlashcard,
     setShowPreview,
     setReadAlredyFlashcard,
+    SetEditFlashcardData,
   } = useFlash();
   const [loadingFC, setLoadingFC] = useState(false);
 
@@ -44,6 +45,8 @@ export default function UserCreatedFCLayout() {
   async function handleFlashcardsClick(flashcardId) {
     setLoadingFC(true);
 
+    console.log(`Flashcard click id is : ${flashcardId}`);
+
     try {
       const flashcardsRef = doc(
         db,
@@ -62,6 +65,9 @@ export default function UserCreatedFCLayout() {
         setShowPreview(true);
         setShowCreateFlashcard(true);
         setReadAlredyFlashcard(true);
+
+        // Set the id for the case a user want to edit
+        SetEditFlashcardData({ id: flashcardId, ...flashcardData });
       }
 
       setQueryFlashcard("");
