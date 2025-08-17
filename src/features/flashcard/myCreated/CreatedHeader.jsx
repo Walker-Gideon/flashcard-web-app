@@ -7,7 +7,6 @@ import { useFlash } from "../../../context/FlashcardContext";
 export default function CreatedHeader() {
   const { readAlredyFlashcard, currentFlashcard, newlyFlashcard } = useFlash();
   const [isVisible, setIsVisible] = useState(false);
-  console.log("Newly created flashcard ", newlyFlashcard);
 
   return (
     <header className="medium:mt-0 medium:mb-6 mt-15 flex w-full items-center justify-between gap-2">

@@ -47,7 +47,6 @@ function FlashcardProvider({ children }) {
   const [editTags, setEditTags] = useState("");
   const [editPairs, setEditPairs] = useState([]);
   const [editFlashcardId, setEditFlashcardId] = useState("");
-  console.log("edit data is ", editFlashcardData);
 
   const MAX_PAIRS = 100;
 
