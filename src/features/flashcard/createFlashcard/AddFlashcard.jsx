@@ -3,14 +3,27 @@ import Button from "../../../ui/Button";
 import { LuPlus } from "react-icons/lu";
 
 export default function AddFlashcard() {
-  const { pairs, MAX_PAIRS, setPairs } = useFlash();
+  const { pairs, MAX_PAIRS, setPairs, editMode, editPairs, setEditPairs } =
+    useFlash();
 
   // Handler to add a new empty pair (if under max)
+  const handleAddPair = () => {
+    const currentPairs = editMode ? editPairs : pairs;
+    const newPair = { term: "", definition: "" };
+
+    if (currentPairs.length < MAX_PAIRS) {
+      const updated = [...currentPairs, newPair];
+      editMode ? setEditPairs(updated) : setPairs(updated);
+    }
+  };
+
+  /*
   const handleAddPair = () => {
     if (pairs.length < MAX_PAIRS) {
       setPairs([...pairs, { term: "", definition: "" }]);
     }
   };
+  */
 
   return (
     <div className="mt-5 flex items-center justify-end gap-2">
