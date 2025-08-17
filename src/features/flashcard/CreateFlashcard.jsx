@@ -31,58 +31,8 @@ export default function CreateFlashcard() {
     editFlashcardId,
     editFlashcardData,
     SetEditFlashcardData,
+    setCurrentFlashcard,
   } = useFlash();
-
-  /*
-  // Handler for Create Flashcard button
-  const handleCreateFlashcard = async (e) => {
-    e.preventDefault();
-
-    const user = auth.currentUser;
-    if (!user) return;
-
-    setLoadingCard(true);
-
-    const flashcardId = uuidv4();
-
-    // Filter out empty pairs
-    const filteredPairs = pairs.filter(
-      (pair) => pair.term.trim() !== "" || pair.definition.trim() !== "",
-    );
-
-    const flashcardData = {
-      tags: tags.trim() === "" ? "Untitled Deck" : tags.trim(),
-      pairs: filteredPairs,
-      createdAt: serverTimestamp(),
-    };
-
-    setNewlyFlashcard({
-      id: flashcardId,
-      ...flashcardData,
-    });
-
-    try {
-      await setDoc(
-        doc(db, "users", user.uid, "flashcards", flashcardId),
-        flashcardData,
-      );
-
-      setTimeout(() => {
-        setShowPreview(true);
-        setReadAlredyFlashcard(false);
-        setPairs([
-          { term: "", definition: "" },
-          { term: "", definition: "" },
-        ]);
-        setTags("");
-      }, 1000);
-    } catch (error) {
-      console.error("Error saving flashcard: ", error.message);
-    } finally {
-      setLoadingCard(false);
-    }
-  };
-  */
 
   const handleSaveFlashcard = async (e) => {
     e.preventDefault();
@@ -111,14 +61,17 @@ export default function CreateFlashcard() {
     try {
       await setDoc(doc(db, "users", user.uid, "flashcards", id), flashcardData);
 
-      if (!isEditing) {
+      if (isEditing) {
+        setCurrentFlashcard({ id, ...flashcardData });
+        setReadAlredyFlashcard(true);
+      } else {
         setNewlyFlashcard({ id, ...flashcardData });
+        setReadAlredyFlashcard(false);
       }
 
       // Reset state for both create/edit
       setTimeout(() => {
         setShowPreview(true);
-        setReadAlredyFlashcard(false);
         setEditMode(false);
         setEditPairs([]);
         setEditTags("");

@@ -1,11 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  collection,
-  onSnapshot,
-  query,
-  orderBy,
-  limit,
-} from "firebase/firestore";
+import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
 import { db } from "../../../firebase";
 import { motion, AnimatePresence } from "motion/react";
 import { LuArrowRight } from "react-icons/lu";
@@ -29,7 +23,6 @@ export default function CreatedLayout() {
   const [showFront, setShowFront] = useState(true);
 
   // Display flashcard on mount
-  /*
   useEffect(() => {
     if (!user?.uid || !editFlashcardId) return;
 
@@ -59,29 +52,6 @@ export default function CreatedLayout() {
 
     return () => unsubscribe();
   }, [user, editFlashcardId, setTags]);
-*/
-  console.log(editFlashcardId);
-
-  useEffect(() => {
-    if (!user?.uid) return;
-
-    const flashcardRef = query(
-      collection(db, "users", user.uid, "flashcards"),
-      orderBy("createdAt", "desc"),
-      limit(1),
-    );
-
-    // Real-time listener
-    const unsubscribe = onSnapshot(flashcardRef, (snapshot) => {
-      const fetchedFlashcard = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      setTags(fetchedFlashcard);
-    });
-
-    return () => unsubscribe();
-  }, [user, setTags]);
 
   const currentPairs = readAlredyFlashcard
     ? currentFlashcard.pairs

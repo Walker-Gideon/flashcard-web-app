@@ -1,4 +1,4 @@
-import { createContext, useContext, useMemo, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
 const FlashcardContext = createContext();
 
@@ -47,8 +47,6 @@ function FlashcardProvider({ children }) {
   const [editTags, setEditTags] = useState("");
   const [editPairs, setEditPairs] = useState([]);
   const [editFlashcardId, setEditFlashcardId] = useState("");
-  console.log(`Compare user flashcard data:`, editFlashcardData);
-  console.log(`Compare user flashcard editFlashcardId:`, editFlashcardId);
 
   const MAX_PAIRS = 100;
 
