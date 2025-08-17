@@ -3,39 +3,46 @@ import Button from "../../../ui/Button";
 import useLazyLoading from "../../../ui/LazyLoading";
 
 export default function ActionButton() {
-  const { setShowCreateFlashcard, setPairs, pairs, setTags, editMode } =
-    useFlash();
+  const {
+    setShowCreateFlashcard,
+    setPairs,
+    pairs,
+    setTags,
+    editMode,
+    setEditTags,
+    setEditPairs,
+    setEditFlashcardId,
+    setShowPreview,
+  } = useFlash();
   const lazyLoading = useLazyLoading(setShowCreateFlashcard, 1000);
+  const lazyLoadingPreview = useLazyLoading(setShowPreview, 1000);
 
   const isButtonDisabled = pairs.some(
     (pair) => pair.term.trim() === "" || pair.definition.trim() === "",
   );
 
-  function handelClearFleids() {
-    setPairs([
-      { term: "", definition: "" },
-      { term: "", definition: "" },
-    ]);
-    setTags("");
-  }
-
   // on edit the cancle button will take you back to the flashcard set
   function handleCancel(e) {
     e.preventDefault();
-    lazyLoading(false);
 
-    // if (editMode) {
-    // } else {
-    // }
+    if (editMode) {
+      lazyLoadingPreview(true);
 
-    handelClearFleids();
-  }
+      setEditPairs([
+        { term: "", definition: "" },
+        { term: "", definition: "" },
+      ]);
+      setEditTags("");
+      setEditFlashcardId("");
+    } else {
+      lazyLoading(false);
 
-  // Save on edit
-  async function handleEditFlashcards(e) {
-    e.preventDefault();
-
-    handelClearFleids();
+      setPairs([
+        { term: "", definition: "" },
+        { term: "", definition: "" },
+      ]);
+      setTags("");
+    }
   }
 
   return (
@@ -50,9 +57,8 @@ export default function ActionButton() {
 
       <Button
         variant="outline"
-        type={editMode ? null : "submit"}
+        type="submit"
         disabled={editMode ? null : isButtonDisabled}
-        onClick={editMode ? handleEditFlashcards : null}
         classname="primaryButton sm:py-1 sm:px-3 disable: disabled:bg-gray-400 disabled:cursor-not-allowed"
       >
         Create Flashcard
