@@ -29,7 +29,6 @@ export default function CreateFlashcard() {
     editPairs,
     setEditPairs,
     editFlashcardId,
-    setEditFlashcardId,
     editFlashcardData,
     SetEditFlashcardData,
   } = useFlash();
@@ -123,7 +122,6 @@ export default function CreateFlashcard() {
         setEditMode(false);
         setEditPairs([]);
         setEditTags("");
-        setEditFlashcardId("");
         setPairs([
           { term: "", definition: "" },
           { term: "", definition: "" },

@@ -40,6 +40,8 @@ export default function CreateBtn({ isVisible, setIsVisible }) {
     lazyLoadingFlashcard(false);
     isButtonVisible();
     handleBackToEdit();
+    setEditFlashcardId("");
+    setEditMode(false);
   }
 
   const styling = {

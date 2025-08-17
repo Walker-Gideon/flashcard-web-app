@@ -29,6 +29,7 @@ export default function CreatedLayout() {
   const [showFront, setShowFront] = useState(true);
 
   // Display flashcard on mount
+  /*
   useEffect(() => {
     if (!user?.uid || !editFlashcardId) return;
 
@@ -50,7 +51,7 @@ export default function CreatedLayout() {
 
       // Display only that card
       if (selectedCard) {
-        setTags([selectedCard]); // or setCurrentFlashcard([selectedCard])
+        setTags([selectedCard]);
       } else {
         setTags([]); // fallback
       }
@@ -58,8 +59,9 @@ export default function CreatedLayout() {
 
     return () => unsubscribe();
   }, [user, editFlashcardId, setTags]);
+*/
+  console.log(editFlashcardId);
 
-  /*
   useEffect(() => {
     if (!user?.uid) return;
 
@@ -80,7 +82,6 @@ export default function CreatedLayout() {
 
     return () => unsubscribe();
   }, [user, setTags]);
-  */
 
   const currentPairs = readAlredyFlashcard
     ? currentFlashcard.pairs

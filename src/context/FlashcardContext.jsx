@@ -49,8 +49,6 @@ function FlashcardProvider({ children }) {
   const [editFlashcardId, setEditFlashcardId] = useState("");
   console.log(`Compare user flashcard data:`, editFlashcardData);
   console.log(`Compare user flashcard editFlashcardId:`, editFlashcardId);
-  console.log(`Compare user flashcard editTags:`, editTags);
-  console.log(`Compare user flashcard editPairs:`, editPairs);
 
   const MAX_PAIRS = 100;
 
