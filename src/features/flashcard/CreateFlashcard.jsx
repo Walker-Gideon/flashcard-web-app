@@ -23,10 +23,17 @@ export default function CreateFlashcard() {
     setReadAlredyFlashcard,
     setNewlyFlashcard,
     editMode,
+    setEditMode,
     editTags,
     setEditTags,
+    editPairs,
+    setEditPairs,
+    editFlashcardId,
+    setEditFlashcardId,
+    SetEditFlashcardData,
   } = useFlash();
 
+  /*
   // Handler for Create Flashcard button
   const handleCreateFlashcard = async (e) => {
     e.preventDefault();
@@ -75,6 +82,58 @@ export default function CreateFlashcard() {
       setLoadingCard(false);
     }
   };
+  */
+
+  const handleSaveFlashcard = async (e) => {
+    e.preventDefault();
+    const user = auth.currentUser;
+    if (!user) return;
+
+    setLoadingCard(true);
+
+    const isEditing = editMode;
+    const id = isEditing ? editFlashcardId : uuidv4();
+    const currentTags = isEditing ? editTags.trim() : tags.trim();
+    const currentPairs = isEditing ? editPairs : pairs;
+
+    const filteredPairs = currentPairs.filter(
+      (pair) => pair.term.trim() !== "" || pair.definition.trim() !== "",
+    );
+
+    const flashcardData = {
+      tags: currentTags === "" ? "Untitled Deck" : currentTags,
+      pairs: filteredPairs,
+      ...(isEditing ? {} : { createdAt: serverTimestamp() }),
+    };
+
+    try {
+      await setDoc(doc(db, "users", user.uid, "flashcards", id), flashcardData);
+
+      if (!isEditing) {
+        setNewlyFlashcard({ id, ...flashcardData });
+      }
+
+      // Reset state for both create/edit
+      setTimeout(() => {
+        setShowPreview(true);
+        setReadAlredyFlashcard(false);
+        setEditMode(false);
+        setEditPairs([]);
+        setEditTags("");
+        setEditFlashcardId("");
+        setPairs([
+          { term: "", definition: "" },
+          { term: "", definition: "" },
+        ]);
+        setTags("");
+        SetEditFlashcardData({});
+      }, 1000);
+    } catch (error) {
+      console.error("Error saving flashcard:", error.message);
+    } finally {
+      setLoadingCard(false);
+    }
+  };
 
   const styling = {
     label:
@@ -91,7 +150,7 @@ export default function CreateFlashcard() {
         />
 
         <CardOverview classname="medium:h-[70vh] mx-auto max-w-3xl medium:mt-8 mt-14">
-          <form className="space-y-2" onSubmit={handleCreateFlashcard}>
+          <form className="space-y-2" onSubmit={handleSaveFlashcard}>
             <FlashcardInput />
             <AddFlashcard />
 

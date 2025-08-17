@@ -61,7 +61,7 @@ export default function ActionButton() {
         disabled={editMode ? null : isButtonDisabled}
         classname="primaryButton sm:py-1 sm:px-3 disable: disabled:bg-gray-400 disabled:cursor-not-allowed"
       >
-        Create Flashcard
+        {editMode ? "Save" : "Create"} Flashcard
       </Button>
     </div>
   );

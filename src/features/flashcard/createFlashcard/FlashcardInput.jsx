@@ -8,9 +8,12 @@ export default function FlashcardInput() {
   const { pairs, setPairs, editMode, editPairs, setEditPairs } = useFlash();
   const [index, setIndex] = useState(0);
 
+  const cards = editMode ? editPairs : pairs;
+
   // Handler to update term or definition in a specific pair
   const handlePairChange = (index, field, value) => {
-    const updatedPairs = [...pairs];
+    const currentPairs = editMode ? editPairs : pairs;
+    const updatedPairs = [...currentPairs];
     updatedPairs[index][field] = value;
 
     if (editMode) {
@@ -39,28 +42,11 @@ export default function FlashcardInput() {
     }
   };
 
-  /*
-  const handleRemovePair = () => {
-    if (pairs.length > 2) {
-      const updatedPairs = pairs.filter((_, i) => i !== index);
-      setPairs(updatedPairs);
-
-      // Adjust index to avoid going out of bounds
-      setIndex((prev) =>
-        prev >= updatedPairs.length ? updatedPairs.length - 1 : prev,
-      );
-    }
-  };
-  */
-
   const styling = {
     label:
       "mb-1 block medium:text-xs text-sm font-medium text-slate-500 dark:text-slate-400",
     inputArea: "w-full input text-slate-900 dark:text-white",
   };
-
-  // handle the mapping
-  const cards = editMode ? editPairs : pairs;
 
   return (
     <div className="medium:h-[41vh] medium:px-4 h-[36vh] space-y-6 overflow-y-scroll">
