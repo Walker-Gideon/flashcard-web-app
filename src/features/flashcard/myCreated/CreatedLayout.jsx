@@ -17,13 +17,49 @@ import { useAuth } from "../../../context/AuthContext";
 
 export default function CreatedLayout() {
   const { user } = useAuth();
-  const { currentFlashcard, readAlredyFlashcard, setTags, newlyFlashcard } =
-    useFlash();
+  const {
+    currentFlashcard,
+    readAlredyFlashcard,
+    setTags,
+    newlyFlashcard,
+    editFlashcardId,
+  } = useFlash();
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(0);
   const [showFront, setShowFront] = useState(true);
 
   // Display flashcard on mount
+  useEffect(() => {
+    if (!user?.uid || !editFlashcardId) return;
+
+    const flashcardRef = query(
+      collection(db, "users", user.uid, "flashcards"),
+      orderBy("createdAt", "desc"),
+    );
+
+    const unsubscribe = onSnapshot(flashcardRef, (snapshot) => {
+      const allFlashcards = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+
+      // Find the one that was just created or edited
+      const selectedCard = allFlashcards.find(
+        (card) => card.id === editFlashcardId,
+      );
+
+      // Display only that card
+      if (selectedCard) {
+        setTags([selectedCard]); // or setCurrentFlashcard([selectedCard])
+      } else {
+        setTags([]); // fallback
+      }
+    });
+
+    return () => unsubscribe();
+  }, [user, editFlashcardId, setTags]);
+
+  /*
   useEffect(() => {
     if (!user?.uid) return;
 
@@ -44,6 +80,7 @@ export default function CreatedLayout() {
 
     return () => unsubscribe();
   }, [user, setTags]);
+  */
 
   const currentPairs = readAlredyFlashcard
     ? currentFlashcard.pairs

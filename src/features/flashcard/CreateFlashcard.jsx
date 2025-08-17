@@ -30,6 +30,7 @@ export default function CreateFlashcard() {
     setEditPairs,
     editFlashcardId,
     setEditFlashcardId,
+    editFlashcardData,
     SetEditFlashcardData,
   } = useFlash();
 
@@ -103,7 +104,9 @@ export default function CreateFlashcard() {
     const flashcardData = {
       tags: currentTags === "" ? "Untitled Deck" : currentTags,
       pairs: filteredPairs,
-      ...(isEditing ? {} : { createdAt: serverTimestamp() }),
+      ...(isEditing
+        ? { createdAt: editFlashcardData.createdAt }
+        : { createdAt: serverTimestamp() }),
     };
 
     try {
