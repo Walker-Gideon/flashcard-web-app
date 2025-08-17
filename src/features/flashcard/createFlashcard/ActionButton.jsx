@@ -3,17 +3,15 @@ import Button from "../../../ui/Button";
 import useLazyLoading from "../../../ui/LazyLoading";
 
 export default function ActionButton() {
-  const { setShowCreateFlashcard, setPairs, pairs, setTags } = useFlash();
+  const { setShowCreateFlashcard, setPairs, pairs, setTags, editMode } =
+    useFlash();
   const lazyLoading = useLazyLoading(setShowCreateFlashcard, 1000);
 
   const isButtonDisabled = pairs.some(
     (pair) => pair.term.trim() === "" || pair.definition.trim() === "",
   );
 
-  function handleCreateFlashcard(e) {
-    e.preventDefault();
-    lazyLoading(false);
-
+  function handelClearFleids() {
     setPairs([
       { term: "", definition: "" },
       { term: "", definition: "" },
@@ -21,20 +19,40 @@ export default function ActionButton() {
     setTags("");
   }
 
+  // on edit the cancle button will take you back to the flashcard set
+  function handleCancel(e) {
+    e.preventDefault();
+    lazyLoading(false);
+
+    // if (editMode) {
+    // } else {
+    // }
+
+    handelClearFleids();
+  }
+
+  // Save on edit
+  async function handleEditFlashcards(e) {
+    e.preventDefault();
+
+    handelClearFleids();
+  }
+
   return (
     <div className="medium:pt-10 medium:justify-end flex justify-center gap-3 pt-7">
       <Button
         variant="outline"
         classname="primaryButton px-12"
-        onClick={handleCreateFlashcard}
+        onClick={handleCancel}
       >
         Cancel
       </Button>
 
       <Button
         variant="outline"
-        type="submit"
-        disabled={isButtonDisabled}
+        type={editMode ? null : "submit"}
+        disabled={editMode ? null : isButtonDisabled}
+        onClick={editMode ? handleEditFlashcards : null}
         classname="primaryButton sm:py-1 sm:px-3 disable: disabled:bg-gray-400 disabled:cursor-not-allowed"
       >
         Create Flashcard

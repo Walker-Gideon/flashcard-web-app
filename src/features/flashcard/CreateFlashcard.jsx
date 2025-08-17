@@ -22,6 +22,7 @@ export default function CreateFlashcard() {
     setLoadingCard,
     setReadAlredyFlashcard,
     setNewlyFlashcard,
+    editMode,
   } = useFlash();
 
   // Handler for Create Flashcard button
@@ -83,7 +84,7 @@ export default function CreateFlashcard() {
     <div className="medium:overflow-hidden h-screen w-full overflow-y-scroll px-8">
       <div>
         <FlashcardHeader
-          text="Create a new flashcard set"
+          text={editMode ? "Edit Flashcard Set" : "Create a new flashcard set"}
           classname="medium:my-4"
         />
 
