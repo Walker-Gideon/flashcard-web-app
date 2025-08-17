@@ -74,7 +74,7 @@ export default function FlashcardInput() {
             <div className="flex w-full items-center justify-between">
               <label htmlFor={`term-${idx}`} className={styling.label}>
                 Term{" "}
-                {pairs.length > 2 ? `#${idx + 1}` : idx === 0 ? "One" : "Two"}
+                {cards.length > 2 ? `#${idx + 1}` : idx === 0 ? "One" : "Two"}
               </label>
 
               <Button
@@ -82,7 +82,7 @@ export default function FlashcardInput() {
                 type="button"
                 onClick={handleRemovePair}
                 classname="mb-1.5 text-slate-500 dark:text-slate-200 disabled:cursor-not-allowed disabled:opacity-80"
-                disabled={pairs.length <= 2}
+                disabled={cards.length <= 2}
               >
                 <RiDeleteBin5Line className="h-4 w-4" />
               </Button>
@@ -102,7 +102,7 @@ export default function FlashcardInput() {
           <div>
             <label htmlFor={`definition-${idx}`} className={styling.label}>
               Definition{" "}
-              {pairs.length > 2 ? `#${idx + 1}` : idx === 0 ? "One" : "Two"}
+              {cards.length > 2 ? `#${idx + 1}` : idx === 0 ? "One" : "Two"}
             </label>
             <textarea
               id={`definition-${idx}`}
