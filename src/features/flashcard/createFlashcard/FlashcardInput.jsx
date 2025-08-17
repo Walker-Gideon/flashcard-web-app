@@ -5,17 +5,41 @@ import Input from "../../../ui/Input";
 import { RiDeleteBin5Line } from "react-icons/ri";
 
 export default function FlashcardInput() {
-  const { pairs, setPairs } = useFlash();
+  const { pairs, setPairs, editMode, editPairs, setEditPairs } = useFlash();
   const [index, setIndex] = useState(0);
 
   // Handler to update term or definition in a specific pair
   const handlePairChange = (index, field, value) => {
     const updatedPairs = [...pairs];
     updatedPairs[index][field] = value;
-    setPairs(updatedPairs);
+
+    if (editMode) {
+      setEditPairs(updatedPairs);
+    } else {
+      setPairs(updatedPairs);
+    }
   };
 
   // Remove current card
+  const handleRemovePair = () => {
+    const currentPairs = editMode ? editPairs : pairs;
+
+    if (currentPairs.length > 2) {
+      const updatedPairs = currentPairs.filter((_, i) => i !== index);
+
+      if (editMode) {
+        setEditPairs(updatedPairs);
+      } else {
+        setPairs(updatedPairs);
+      }
+
+      setIndex((prev) =>
+        prev >= updatedPairs.length ? updatedPairs.length - 1 : prev,
+      );
+    }
+  };
+
+  /*
   const handleRemovePair = () => {
     if (pairs.length > 2) {
       const updatedPairs = pairs.filter((_, i) => i !== index);
@@ -27,6 +51,7 @@ export default function FlashcardInput() {
       );
     }
   };
+  */
 
   const styling = {
     label:
@@ -34,9 +59,12 @@ export default function FlashcardInput() {
     inputArea: "w-full input text-slate-900 dark:text-white",
   };
 
+  // handle the mapping
+  const cards = editMode ? editPairs : pairs;
+
   return (
     <div className="medium:h-[41vh] medium:px-4 h-[36vh] space-y-6 overflow-y-scroll">
-      {pairs.map((pair, idx) => (
+      {cards.map((pair, idx) => (
         <div
           key={idx}
           className="flex flex-col gap-4 rounded-lg bg-slate-50 p-4 dark:bg-slate-600"

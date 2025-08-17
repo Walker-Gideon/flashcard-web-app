@@ -23,6 +23,8 @@ export default function CreateFlashcard() {
     setReadAlredyFlashcard,
     setNewlyFlashcard,
     editMode,
+    editTags,
+    setEditTags,
   } = useFlash();
 
   // Handler for Create Flashcard button
@@ -96,14 +98,18 @@ export default function CreateFlashcard() {
             {/* Tags Input (Optional) */}
             <div>
               <label htmlFor="tags" className={styling.label}>
-                Tags (optional)
+                {editMode ? "Rename Tags" : "Tags"} (optional)
               </label>
               <Input
                 id="tags"
                 name="tags"
                 type="text"
-                value={tags}
-                onChange={(e) => setTags(e.target.value)}
+                value={editMode ? editTags : tags}
+                onChange={
+                  editMode
+                    ? (e) => setEditTags(e.target.value)
+                    : (e) => setTags(e.target.value)
+                }
                 classname={styling.inputArea}
                 placeholder="e.g. Biology, Chapter 2"
               />
