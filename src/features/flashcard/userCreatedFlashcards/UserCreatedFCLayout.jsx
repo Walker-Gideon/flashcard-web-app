@@ -45,8 +45,6 @@ export default function UserCreatedFCLayout() {
   async function handleFlashcardsClick(flashcardId) {
     setLoadingFC(true);
 
-    console.log(`Flashcard click id is : ${flashcardId}`);
-
     try {
       const flashcardsRef = doc(
         db,

@@ -5,8 +5,9 @@ import CreateBtn from "./CreateBtn";
 import { useFlash } from "../../../context/FlashcardContext";
 
 export default function CreatedHeader() {
-  const { tags, readAlredyFlashcard, currentFlashcard } = useFlash();
+  const { readAlredyFlashcard, currentFlashcard, newlyFlashcard } = useFlash();
   const [isVisible, setIsVisible] = useState(false);
+  console.log("Newly created flashcard ", newlyFlashcard);
 
   return (
     <header className="medium:mt-0 medium:mb-6 mt-15 flex w-full items-center justify-between gap-2">
@@ -15,9 +16,7 @@ export default function CreatedHeader() {
       >
         {readAlredyFlashcard
           ? currentFlashcard.tags
-          : tags
-            ? tags[0].tags
-            : "Untitled Flashcard"}
+          : newlyFlashcard.tags || "Untitled Flashcard"}
       </h1>
 
       <div className="relative">
