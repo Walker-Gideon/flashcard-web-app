@@ -46,10 +46,10 @@ function AuthProvider({ children }) {
           photoURL: data.photoURL || null,
           uid: data.uid || uid,
         });
-        console.log("Fetched user data:", data);
       }
     } catch (error) {
       console.error("Error fetching user data:", error);
+      return error;
     }
   };
 
@@ -132,75 +132,8 @@ function AuthProvider({ children }) {
     }
   };
 
-  /*
-  // Function to update username
-  const updateUsername = async (newUsername) => {
-    return await updateUserData({ username: newUsername });
-  };
-
-  // Function to update profile image
-  const updateProfileImage = async (photoURL) => {
-    return await updateUserData({ photoURL });
-  };
-
-  function loginAndSignup() {
-    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-      setUser(currentUser);
-
-      if (currentUser) {
-        // Fetch user data when user is authenticated
-        await fetchUserData(currentUser.uid);
-      } else {
-        // Clear user data when user is not authenticated
-        setUserData({
-          email: "",
-          username: "",
-          photoURL: null,
-          uid: "",
-        });
-      }
-
-      setLoading(false);
-    });
-    return () => unsubscribe();
-  }
-
-  const logoutUser = async () => {
-    try {
-      await signOut(auth);
-      setUser(null);
-      setIsAuthenticated(false);
-      setIsVerify(false);
-      // Reset all auth states to ensure clean logout
-      setLoading(false);
-      setIsSigningUp(false);
-      // Clear user data
-      setUserData({
-        email: "",
-        username: "",
-        photoURL: null,
-        uid: "",
-      });
-    } catch (error) {
-      console.error("Logout failed:", error);
-      // Even if Firebase logout fails, reset local state
-      setUser(null);
-      setIsAuthenticated(false);
-      setIsVerify(false);
-      setUserData({
-        email: "",
-        username: "",
-        photoURL: null,
-        uid: "",
-      });
-    }
-  };
-  */
-
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-      console.log("Auth changed:", currentUser); // ✅ Check this logs when user signs in/out
-
       setUser(currentUser);
 
       if (currentUser) {
@@ -213,10 +146,6 @@ function AuthProvider({ children }) {
     return () => unsubscribe();
   }, []);
 
-  useEffect(() => {
-    console.log("User data updated:", userData);
-  }, [userData]);
-
   const value = {
     user,
     setUser,
@@ -224,15 +153,12 @@ function AuthProvider({ children }) {
     setImage,
     loading,
     setLoading,
-    // logoutUser,
     isAuthenticated,
     setIsAuthenticated,
-    // loginAndSignup,
     isVerify,
     setIsVerify,
     isSigningUp,
     setIsSigningUp,
-    // User data
     userData,
     setUserData,
     fetchUserData,

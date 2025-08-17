@@ -48,7 +48,6 @@ export default function CreatedLayout() {
   const currentPairs = readAlredyFlashcard
     ? currentFlashcard.pairs
     : newlyFlashcard.pairs;
-  console.log(currentFlashcard);
 
   function nextCard() {
     setDirection(1);
