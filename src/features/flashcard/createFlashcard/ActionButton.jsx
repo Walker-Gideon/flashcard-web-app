@@ -21,27 +21,30 @@ export default function ActionButton() {
     (pair) => pair.term.trim() === "" || pair.definition.trim() === "",
   );
 
-  // on edit the cancle button will take you back to the flashcard set
   function handleCancel(e) {
     e.preventDefault();
 
     if (editMode) {
       lazyLoadingPreview(true);
 
-      setEditPairs([
-        { term: "", definition: "" },
-        { term: "", definition: "" },
-      ]);
-      setEditTags("");
-      setEditFlashcardId("");
+      setTimeout(() => {
+        setEditPairs([
+          { term: "", definition: "" },
+          { term: "", definition: "" },
+        ]);
+        setEditTags("");
+        setEditFlashcardId("");
+      }, 1000);
     } else {
       lazyLoading(false);
 
-      setPairs([
-        { term: "", definition: "" },
-        { term: "", definition: "" },
-      ]);
-      setTags("");
+      setTimeout(() => {
+        setPairs([
+          { term: "", definition: "" },
+          { term: "", definition: "" },
+        ]);
+        setTags("");
+      }, 1000);
     }
   }
 

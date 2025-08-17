@@ -23,7 +23,6 @@ export default function CreateFlashcard() {
     setReadAlredyFlashcard,
     setNewlyFlashcard,
     editMode,
-    setEditMode,
     editTags,
     setEditTags,
     editPairs,
@@ -69,10 +68,8 @@ export default function CreateFlashcard() {
         setReadAlredyFlashcard(false);
       }
 
-      // Reset state for both create/edit
       setTimeout(() => {
         setShowPreview(true);
-        setEditMode(false);
         setEditPairs([]);
         setEditTags("");
         setPairs([
@@ -80,7 +77,7 @@ export default function CreateFlashcard() {
           { term: "", definition: "" },
         ]);
         setTags("");
-        SetEditFlashcardData({});
+        SetEditFlashcardData({ id, ...flashcardData });
       }, 1000);
     } catch (error) {
       console.error("Error saving flashcard:", error.message);

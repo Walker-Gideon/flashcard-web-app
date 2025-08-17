@@ -28,7 +28,6 @@ export default function CreateBtn({ isVisible, setIsVisible }) {
 
     // State to manage the editing flashcard
     if (Object.keys(editFlashcardData).length !== 0) {
-      console.log(`Flashcard data in edit button`, editFlashcardData);
       setEditMode(true);
       setEditFlashcardId(editFlashcardData.id);
       setEditTags(editFlashcardData.tags || "");
