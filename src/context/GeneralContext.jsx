@@ -8,6 +8,7 @@ function GeneralProvider({ children }) {
   const [quotes, setQuotes] = useState([]);
   const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
 
+  //   Fetch the quotes
   useEffect(() => {
     const quoteRef = collection(db, "quotes");
 

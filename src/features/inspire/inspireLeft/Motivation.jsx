@@ -5,7 +5,6 @@ import { useGen } from "../../../context/GeneralContext";
 
 export default function Motivation() {
   const { quotes, currentQuoteIndex } = useGen();
-
   const currentQuote = quotes[currentQuoteIndex];
 
   return (

@@ -1,18 +1,22 @@
-import { LuStar } from "react-icons/lu";
+import { LuLightbulb } from "react-icons/lu";
 import { LuFlame } from "react-icons/lu";
 import CardOverview from "../../../../ui/CardOverview";
+import { useGen } from "../../../../context/GeneralContext";
 
 export default function Motivation({ mockData }) {
+  const { quotes, currentQuoteIndex } = useGen();
+  const currentQuote = quotes[currentQuoteIndex];
+
   const styling = "text-slate-900 dark:text-white";
 
   return (
     <CardOverview>
       <div className="mb-3 flex items-center space-x-2">
-        <LuStar className="h-5 w-5 text-slate-600 dark:text-slate-300" />
+        <LuLightbulb className="h-5 w-5 text-slate-600 dark:text-slate-300" />
         <h3 className={`font-semibold ${styling}`}>Daily Inspiration</h3>
       </div>
       <blockquote className="mb-4 text-sm text-slate-500 italic dark:text-slate-400">
-        "{mockData.quote}"
+        "{currentQuote ? currentQuote.text : "Loading quote..."}"
       </blockquote>
       <div className="flex items-center space-x-2">
         <LuFlame className="h-4 w-4 text-slate-600 dark:text-slate-300" />
