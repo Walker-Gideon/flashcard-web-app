@@ -109,9 +109,9 @@ export default function SignupForm() {
         isGoogleSignIn: false,
         createdAt: serverTimestamp(),
 
-        // 🟢 Streak Fields
+        // Streak Fields
         streakCount: 0,
-        lastActiveDate: null, // or you can use getTodayDate() if you want to start right away
+        lastActiveDate: null,
       });
 
       setIsAuthenticated(true);

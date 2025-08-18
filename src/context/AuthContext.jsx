@@ -45,6 +45,10 @@ function AuthProvider({ children }) {
           username: data.username || "",
           photoURL: data.photoURL || null,
           uid: data.uid || uid,
+
+          // New streak fields
+          streakCount: data.streakCount || 0,
+          lastActiveDate: data.lastActiveDate || null,
         });
       }
     } catch (error) {
