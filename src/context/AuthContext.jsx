@@ -17,6 +17,8 @@ function AuthProvider({ children }) {
     username: "",
     photoURL: null,
     uid: "",
+    streakCount: 0,
+    lastActiveDate: null,
   });
 
   // Check for user change
