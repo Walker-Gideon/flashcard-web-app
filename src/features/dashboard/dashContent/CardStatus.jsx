@@ -8,6 +8,7 @@ import CardContent from "../../../ui/CardContent";
 import CardBadge from "../../../ui/CardBadge";
 import CardDiscription from "../../../ui/CardDiscription";
 import TargetCardStatus from "./TargetCardStatus";
+import DailyStreak from "../../../ui/DailyStreak";
 
 const cardData = [
   {
@@ -30,7 +31,7 @@ const cardData = [
   },
   {
     icon: LuFlame,
-    data: mockData.stats.streakDays,
+    data: <DailyStreak />,
     text: "Day Streak",
     styling: "mb-6",
   },

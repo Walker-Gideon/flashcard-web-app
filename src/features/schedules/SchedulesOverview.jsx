@@ -8,6 +8,7 @@ import CardOverview from "../../ui/CardOverview.jsx";
 import CardContent from "../../ui/CardContent.jsx";
 import CardBadge from "../../ui/CardBadge.jsx";
 import CardDiscription from "../../ui/CardDiscription.jsx";
+import DailyStreak from "../../ui/DailyStreak.jsx";
 
 const cardData = [
   {
@@ -26,7 +27,7 @@ const cardData = [
   },
   {
     icon: LuFlame,
-    data: schedulesMockData.todayStats.streak,
+    data: <DailyStreak />,
     text: "Day Streak",
     styling: "mb-6",
   },
