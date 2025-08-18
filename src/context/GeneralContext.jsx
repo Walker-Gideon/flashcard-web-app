@@ -5,7 +5,7 @@ import { db } from "../firebase";
 const GeneralContext = createContext();
 
 function GeneralProvider({ children }) {
-  const [quote, setQuote] = useState("");
+  const [quote, setQuote] = useState({});
 
   useEffect(() => {
     const quoteRef = collection(db, "quotes");

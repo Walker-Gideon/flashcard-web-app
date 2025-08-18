@@ -6,18 +6,7 @@ import InspireLeftLayout from "./inspireLeft/InspireLeftLayout";
 import InspireRightLAyout from "./inspireRight/InspireRightLAyout";
 
 export default function InspireLayout() {
-  const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
   const [currentPraiseIndex, setCurrentPraiseIndex] = useState(0);
-
-  // Rotate quote every 10 seconds
-  useEffect(() => {
-    const quoteTimer = setInterval(() => {
-      setCurrentQuoteIndex(
-        (prevIndex) => (prevIndex + 1) % inspireMockData.quotes.length,
-      );
-    }, 10000);
-    return () => clearInterval(quoteTimer);
-  }, []);
 
   // Rotate praise every 15 seconds
   useEffect(() => {
@@ -30,7 +19,6 @@ export default function InspireLayout() {
     return () => clearInterval(praiseTimer);
   }, []);
 
-  const currentQuote = inspireMockData.quotes[currentQuoteIndex];
   const currentPraise = inspireMockData.personalizedPraise[currentPraiseIndex];
   const streakDays = mockData.stats.streakDays;
 
@@ -39,7 +27,7 @@ export default function InspireLayout() {
       <InspireHeader />
 
       <div className="medium:mt-0 mt-7 grid h-screen grid-cols-1 gap-8 space-y-6 overflow-scroll p-6 lg:grid-cols-3">
-        <InspireLeftLayout currentQuote={currentQuote} />
+        <InspireLeftLayout />
         <InspireRightLAyout
           streakDays={streakDays}
           currentPraise={currentPraise}
