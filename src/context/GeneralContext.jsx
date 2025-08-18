@@ -5,7 +5,7 @@ import { db } from "../firebase";
 const GeneralContext = createContext();
 
 function GeneralProvider({ children }) {
-  const [quote, setQuote] = useState({});
+  const [quotes, setQuotes] = useState([]);
 
   useEffect(() => {
     const quoteRef = collection(db, "quotes");
@@ -16,18 +16,15 @@ function GeneralProvider({ children }) {
         ...doc.data(),
       }));
 
-      // Example: pick one randomly
-      const randomQuote =
-        fetchedQuotes[Math.floor(Math.random() * fetchedQuotes.length)];
-      setQuote(randomQuote);
+      setQuotes(fetchedQuotes);
     });
 
     return () => unsubscribe();
   }, []);
 
-  console.log(quote);
+  console.log(quotes);
 
-  const value = { quote, setQuote };
+  const value = { quotes, setQuotes };
 
   return (
     <GeneralContext.Provider value={value}>{children}</GeneralContext.Provider>

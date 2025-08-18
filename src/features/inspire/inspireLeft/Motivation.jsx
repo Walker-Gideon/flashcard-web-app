@@ -5,23 +5,20 @@ import { useGen } from "../../../context/GeneralContext";
 import { useEffect, useState } from "react";
 
 export default function Motivation() {
-  const { quote } = useGen();
+  const { quotes } = useGen();
   const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
 
-  console.log(Object.keys(quote).length);
-  // Rotate quote every 10 seconds
   useEffect(() => {
+    if (quotes.length === 0) return; // wait until quotes are loaded
+
     const quoteTimer = setInterval(() => {
-      setCurrentQuoteIndex(
-        (prevIndex) => (prevIndex + 1) % Object.keys(quote).length,
-      );
-    }, 10000);
+      setCurrentQuoteIndex((prevIndex) => (prevIndex + 1) % quotes.length);
+    }, 10000); // every 10 seconds
+
     return () => clearInterval(quoteTimer);
-  }, [quote]);
+  }, [quotes]);
 
-  const currentQuote = quote[currentQuoteIndex];
-
-  console.log(currentQuote);
+  const currentQuote = quotes[currentQuoteIndex];
 
   return (
     <CardOverview classname={"text-slate-900 dark:text-white"}>
@@ -29,10 +26,19 @@ export default function Motivation() {
         <LuLightbulb className="h-6 w-6 text-slate-600 dark:text-slate-300" />
         <HeaderText>Daily Inspiration</HeaderText>
       </div>
-      <blockquote className="mb-4 text-lg text-slate-500 italic dark:text-slate-400">
-        "{quote.text}"
-      </blockquote>
-      <p className="text-right text-sm">- {quote.author}</p>
+
+      {currentQuote ? (
+        <>
+          <blockquote className="mb-4 text-lg text-slate-500 italic dark:text-slate-400">
+            "{currentQuote.text}"
+          </blockquote>
+          <p className="text-right text-sm">— {currentQuote.author}</p>
+        </>
+      ) : (
+        <>
+          <div className="italic dark:text-slate-400">Loading quote...</div>
+        </>
+      )}
     </CardOverview>
   );
 }
