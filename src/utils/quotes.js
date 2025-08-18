@@ -64,7 +64,7 @@ const localQuotes = [
   },
 ];
 
-const seedQuotes = async () => {
+export const seedQuotes = async () => {
   for (const quote of localQuotes) {
     console.log("Seeding quote:", quote.text);
     await addDoc(collection(db, "quotes"), {
@@ -74,4 +74,4 @@ const seedQuotes = async () => {
   }
 };
 
-seedQuotes();
+// seedQuotes();
