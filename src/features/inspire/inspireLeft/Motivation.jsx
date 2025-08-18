@@ -1,8 +1,10 @@
 import CardOverview from "../../../ui/CardOverview";
 import { LuLightbulb } from "react-icons/lu";
 import HeaderText from "../../../ui/HeaderText";
+import quotes from "../../../utils/quotes";
 
 export default function Motivation({ currentQuote }) {
+  console.log(quotes);
   return (
     <CardOverview classname={"text-slate-900 dark:text-white"}>
       <div className="mb-4 flex items-center space-x-3">
