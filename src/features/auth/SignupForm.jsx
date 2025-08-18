@@ -108,6 +108,10 @@ export default function SignupForm() {
         photoURL: null,
         isGoogleSignIn: false,
         createdAt: serverTimestamp(),
+
+        // 🟢 Streak Fields
+        streakCount: 0,
+        lastActiveDate: null, // or you can use getTodayDate() if you want to start right away
       });
 
       setIsAuthenticated(true);
