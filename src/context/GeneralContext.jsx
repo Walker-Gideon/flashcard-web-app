@@ -6,6 +6,7 @@ const GeneralContext = createContext();
 
 function GeneralProvider({ children }) {
   const [quotes, setQuotes] = useState([]);
+  const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
 
   useEffect(() => {
     const quoteRef = collection(db, "quotes");
@@ -22,9 +23,18 @@ function GeneralProvider({ children }) {
     return () => unsubscribe();
   }, []);
 
-  console.log(quotes);
+  //   Effect to display the quote one at a time
+  useEffect(() => {
+    if (quotes.length === 0) return;
 
-  const value = { quotes, setQuotes };
+    const quoteTimer = setInterval(() => {
+      setCurrentQuoteIndex((prevIndex) => (prevIndex + 1) % quotes.length);
+    }, 10000);
+
+    return () => clearInterval(quoteTimer);
+  }, [quotes]);
+
+  const value = { quotes, setQuotes, currentQuoteIndex };
 
   return (
     <GeneralContext.Provider value={value}>{children}</GeneralContext.Provider>

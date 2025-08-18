@@ -2,21 +2,9 @@ import CardOverview from "../../../ui/CardOverview";
 import { LuLightbulb } from "react-icons/lu";
 import HeaderText from "../../../ui/HeaderText";
 import { useGen } from "../../../context/GeneralContext";
-import { useEffect, useState } from "react";
 
 export default function Motivation() {
-  const { quotes } = useGen();
-  const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
-
-  useEffect(() => {
-    if (quotes.length === 0) return; // wait until quotes are loaded
-
-    const quoteTimer = setInterval(() => {
-      setCurrentQuoteIndex((prevIndex) => (prevIndex + 1) % quotes.length);
-    }, 10000); // every 10 seconds
-
-    return () => clearInterval(quoteTimer);
-  }, [quotes]);
+  const { quotes, currentQuoteIndex } = useGen();
 
   const currentQuote = quotes[currentQuoteIndex];
 
