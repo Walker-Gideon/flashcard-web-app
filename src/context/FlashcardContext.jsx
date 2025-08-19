@@ -4,6 +4,7 @@ const FlashcardContext = createContext();
 
 function FlashcardProvider({ children }) {
   const [showCreateFlashcard, setShowCreateFlashcard] = useState(false);
+  const [reviewComplete, setReviewComplete] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
   const [loadingCard, setLoadingCard] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
@@ -90,6 +91,8 @@ function FlashcardProvider({ children }) {
     setNewlyFlashcard,
     editFlashcardData,
     SetEditFlashcardData,
+    reviewComplete,
+    setReviewComplete,
   };
 
   return (

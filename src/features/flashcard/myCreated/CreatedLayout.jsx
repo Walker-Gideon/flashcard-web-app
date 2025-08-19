@@ -17,6 +17,7 @@ export default function CreatedLayout() {
     setTags,
     newlyFlashcard,
     editFlashcardId,
+    setReviewComplete,
   } = useFlash();
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(0);
@@ -61,6 +62,12 @@ export default function CreatedLayout() {
     setDirection(1);
     setIndex((prev) => (prev + 1) % currentPairs.length);
     setShowFront(true);
+
+    if (index === currentPairs.length - 1) {
+      setTimeout(() => {
+        setReviewComplete((show) => !show);
+      }, 500);
+    }
   }
 
   function prevCard() {
@@ -173,8 +180,10 @@ export default function CreatedLayout() {
 
         <Button
           variant="outline"
-          classname={`${styling.buttons}  ${index === currentPairs.length - 1 ? `${styling.isDisabled}` : ""}`}
-          disabled={index === currentPairs.length - 1}
+          // ${index === currentPairs.length - 1 ? `${styling.isDisabled}` : ""}
+          classname={`${styling.buttons}  `}
+          disabled={index === currentPairs.length}
+          // disabled={index === currentPairs.length - 1}
           onClick={nextCard}
         >
           <LuArrowRight className={styling.icons} />
