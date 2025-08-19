@@ -5,17 +5,37 @@ import Button from "../../ui/Button";
 import HeaderText from "../../ui/HeaderText";
 import { LuCheck } from "react-icons/lu";
 import { LuArrowLeft } from "react-icons/lu";
+import useLazyLoading from "../../ui/LazyLoading";
 
 export default function ReviewSummary() {
   const { userData } = useAuth();
-  const { setReviewComplete } = useFlash();
+  const {
+    setReviewComplete,
+    readAlredyFlashcard,
+    currentFlashcard,
+    newlyFlashcard,
+    setShowCreateFlashcard,
+  } = useFlash();
+  const lazyLoadingFlashcard = useLazyLoading(setShowCreateFlashcard, 1000);
 
   useEffect(() => {
     //    updateStreak(); // only runs once when this screen loads
   }, []);
 
+  function HandleBackToFlashcard() {
+    lazyLoadingFlashcard(false);
+
+    setTimeout(() => {
+      setReviewComplete(false);
+    }, 3000);
+  }
+
+  const currentPairs = readAlredyFlashcard
+    ? currentFlashcard.pairs
+    : newlyFlashcard.pairs;
+
   return (
-    <div className="medium:mt-10 mt-15 w-full p-6 md:mx-auto md:max-w-3xl">
+    <div className="mt-10 w-full p-6 md:mx-auto md:max-w-3xl">
       <div className="flex w-full items-center justify-between">
         <div className="">
           <HeaderText className="text-2xl font-bold">
@@ -45,11 +65,11 @@ export default function ReviewSummary() {
         <div className="flex flex-col gap-3">
           <p className="medium:w-60 flex w-full items-center justify-between rounded-full bg-green-200 px-3 py-2 text-sm font-bold text-green-900 dark:bg-green-300/30 dark:text-white">
             <span>Completed</span>
-            <span>X</span>
+            <span>{currentPairs.length}</span>
           </p>
           <p className="medium:w-60 flex w-full items-center justify-between rounded-full bg-slate-500 px-3 py-2 text-sm font-bold text-white">
             <span>Terms left</span>
-            <span>X</span>
+            <span>0</span>
           </p>
           <p className="text-sm text-slate-500 dark:text-slate-400">
             🔥 Current Streak: {userData.streakCount}-day
@@ -74,7 +94,7 @@ export default function ReviewSummary() {
         <Button
           variant="outline"
           classname="primaryButton"
-          onClick={() => {}}
+          onClick={HandleBackToFlashcard}
           className="btn-primary"
         >
           Back to Flashcard

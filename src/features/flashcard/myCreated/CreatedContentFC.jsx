@@ -181,10 +181,7 @@ export default function CreatedContentFC() {
 
         <Button
           variant="outline"
-          // ${index === currentPairs.length - 1 ? `${styling.isDisabled}` : ""}
           classname={`${styling.buttons}  `}
-          disabled={index === currentPairs.length}
-          // disabled={index === currentPairs.length - 1}
           onClick={nextCard}
         >
           <LuArrowRight className={styling.icons} />
