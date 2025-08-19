@@ -7,6 +7,7 @@ import { LuCheck } from "react-icons/lu";
 import { LuArrowLeft } from "react-icons/lu";
 import useLazyLoading from "../../ui/LazyLoading";
 import { useGen } from "../../context/GeneralContext";
+import { LuFlame } from "react-icons/lu";
 
 export default function ReviewSummary() {
   const { userData } = useAuth();
@@ -73,8 +74,11 @@ export default function ReviewSummary() {
             <span>Terms left</span>
             <span>0</span>
           </p>
-          <p className="text-sm text-slate-500 dark:text-slate-400">
-            🔥 Current Streak: {userData.streakCount}-day
+          <p className="flex items-center gap-1 text-sm text-slate-500 dark:text-slate-400">
+            <LuFlame />
+            <span className="mt-0.5">
+              Current Streak : {userData.streakCount}-day
+            </span>
           </p>
         </div>
       </div>
