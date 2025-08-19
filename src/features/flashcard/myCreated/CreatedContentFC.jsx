@@ -58,13 +58,11 @@ export default function CreatedContentFC() {
     : newlyFlashcard.pairs;
 
   function nextCard() {
-    // Check if we're on the last card
     if (index === currentPairs.length - 1) {
-      // Delay and then show summary
       setTimeout(() => {
         setReviewComplete(true);
       }, 500);
-      return; // 🛑 Exit early to prevent moving to index 0
+      return;
     }
 
     setDirection(1);
