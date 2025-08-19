@@ -6,9 +6,11 @@ import HeaderText from "../../ui/HeaderText";
 import { LuCheck } from "react-icons/lu";
 import { LuArrowLeft } from "react-icons/lu";
 import useLazyLoading from "../../ui/LazyLoading";
+import { useGen } from "../../context/GeneralContext";
 
 export default function ReviewSummary() {
   const { userData } = useAuth();
+  const { updateStreak } = useGen();
   const {
     setReviewComplete,
     readAlredyFlashcard,
@@ -19,8 +21,8 @@ export default function ReviewSummary() {
   const lazyLoadingFlashcard = useLazyLoading(setShowCreateFlashcard, 1000);
 
   useEffect(() => {
-    //    updateStreak(); // only runs once when this screen loads
-  }, []);
+    updateStreak(); // only runs once when this screen loads
+  }, [updateStreak]);
 
   function HandleBackToFlashcard() {
     lazyLoadingFlashcard(false);
