@@ -2,6 +2,7 @@ import { LuFlame } from "react-icons/lu";
 import UserWelcome from "../user/UserWelcome";
 import { mockData } from "../../data/mockData";
 import { useAuth } from "../../context/AuthContext";
+import DailyStreak from "../../ui/DailyStreak";
 
 export default function DashHeader() {
   const { userData } = useAuth();
@@ -22,8 +23,8 @@ export default function DashHeader() {
           <div className="medium:flex hidden items-center space-x-2 rounded-full bg-slate-50 px-3 py-2 whitespace-nowrap dark:bg-slate-700">
             <LuFlame className="h-4 w-4 text-slate-600 dark:text-slate-300" />
             <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
-              {/* number of streak  */}
-              {mockData.stats.streakDays} day streak
+              {" "}
+              <DailyStreak /> day streak
             </span>
           </div>
         </div>
