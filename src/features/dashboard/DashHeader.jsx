@@ -24,7 +24,7 @@ export default function DashHeader() {
             <LuFlame className="h-4 w-4 text-slate-600 dark:text-slate-300" />
             <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
               {" "}
-              <DailyStreak /> day streak
+              <DailyStreak classname={true} /> day streak
             </span>
           </div>
         </div>
