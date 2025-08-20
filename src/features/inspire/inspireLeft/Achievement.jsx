@@ -1,4 +1,3 @@
-import { inspireMockData } from "../../../data/inspireMockData";
 import { LuFlame } from "react-icons/lu";
 import { LuTarget } from "react-icons/lu";
 import { LuBookOpen } from "react-icons/lu";
@@ -7,6 +6,44 @@ import { LuSun } from "react-icons/lu";
 import { LuAward } from "react-icons/lu";
 import CardOverview from "../../../ui/CardOverview";
 import HeaderText from "../../../ui/HeaderText";
+
+const achievements = [
+  {
+    id: 1,
+    name: "7-Day Streak",
+    description: "Maintained a study streak for 7 consecutive days.",
+    unlocked: true,
+    icon: "FlameIcon",
+  },
+  {
+    id: 2,
+    name: "First 100 Cards",
+    description: "Mastered 100 flashcards.",
+    unlocked: true,
+    icon: "BookOpen",
+  },
+  {
+    id: 3,
+    name: "Early Bird",
+    description: "Completed a study session before 8 AM.",
+    unlocked: false,
+    icon: "Sun",
+  },
+  {
+    id: 4,
+    name: "Night Owl",
+    description: "Completed a study session after 10 PM.",
+    unlocked: false,
+    icon: "Moon",
+  },
+  {
+    id: 5,
+    name: "Subject Master",
+    description: "Achieved 90% mastery in a subject.",
+    unlocked: false,
+    icon: "Target",
+  },
+];
 
 export default function Achievement() {
   const iconStyling = "h-5 w-5";
@@ -32,7 +69,7 @@ export default function Achievement() {
       <HeaderText classname="mb-6">Your Achievements</HeaderText>
 
       <div className="medium:grid-cols-3 grid grid-cols-2 gap-4 md:grid-cols-4">
-        {inspireMockData.achievements.map((badge) => (
+        {achievements.map((badge) => (
           <div
             key={badge.id}
             className={`flex flex-col items-center rounded-xl p-4 transition-all duration-200 ${
