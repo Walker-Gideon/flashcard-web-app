@@ -13,6 +13,16 @@ const GeneralContext = createContext();
 function GeneralProvider({ children }) {
   const [quotes, setQuotes] = useState([]);
   const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
+  const [progress, setProgress] = useState({
+    streakCount: 0,
+    lastActiveDate: null,
+    masteredFlashcards: 0,
+    earlyBird: false,
+    nightOwl: false,
+    subjectMastery: {}, // or null if unused
+    overallMastery: 0, // new idea
+  });
+  const [loadingProgress, setLoadingProgress] = useState(true);
 
   //   Fetch the quotes
   useEffect(() => {
@@ -82,10 +92,56 @@ function GeneralProvider({ children }) {
       lastActiveDate: today,
     });
 
+    // Update the user progress
+    setProgress((prev) => ({
+      ...prev,
+      streakCount: streak,
+      lastActiveDate: today,
+    }));
+
     console.log("🔥 Streak updated:", streak);
   };
 
-  const value = { quotes, setQuotes, currentQuoteIndex, updateStreak };
+  // updat the flashcard mastery achievement
+  const updateFlashcardMastery = async (count) => {
+    const user = auth.currentUser;
+    if (!user) return;
+
+    const userRef = doc(db, "users", user.uid);
+    await updateDoc(userRef, { masteredFlashcards: count });
+
+    setProgress((prev) => ({ ...prev, masteredFlashcards: count }));
+  };
+
+  // used to determine earlyBird or nightOwl achievement
+  const updateStudyTime = async (hour) => {
+    const user = auth.currentUser;
+    if (!user) return;
+
+    const earlyBird = hour < 8;
+    const nightOwl = hour >= 22;
+
+    const userRef = doc(db, "users", user.uid);
+    await updateDoc(userRef, { earlyBird, nightOwl });
+
+    setProgress((prev) => ({
+      ...prev,
+      earlyBird,
+      nightOwl,
+    }));
+  };
+
+  const value = {
+    quotes,
+    setQuotes,
+    currentQuoteIndex,
+    progress,
+    loadingProgress,
+    // functions
+    updateStreak,
+    updateFlashcardMastery,
+    updateStudyTime,
+  };
 
   return (
     <GeneralContext.Provider value={value}>{children}</GeneralContext.Provider>
