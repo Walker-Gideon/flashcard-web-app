@@ -7,9 +7,10 @@ import { LuArrowLeft } from "react-icons/lu";
 import Button from "../../../ui/Button";
 import { useAuth } from "../../../context/AuthContext";
 import { useFlash } from "../../../context/FlashcardContext";
+import { useGen } from "../../../context/GeneralContext";
 
 export default function CreatedContentFC() {
-  const { user } = useAuth();
+  const { user, fetchUserData } = useAuth();
   const {
     currentFlashcard,
     readAlredyFlashcard,
@@ -18,6 +19,7 @@ export default function CreatedContentFC() {
     editFlashcardId,
     setReviewComplete,
   } = useFlash();
+  const { updateStreak } = useGen();
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(0);
   const [showFront, setShowFront] = useState(true);
@@ -57,9 +59,15 @@ export default function CreatedContentFC() {
     ? currentFlashcard.pairs
     : newlyFlashcard.pairs;
 
-  function nextCard() {
+  const handleReviewComplete = async () => {
+    await updateStreak();
+    await fetchUserData(user.uid);
+  };
+
+  const nextCard = async () => {
     if (index === currentPairs.length - 1) {
-      setTimeout(() => {
+      setTimeout(async () => {
+        await handleReviewComplete();
         setReviewComplete(true);
       }, 500);
       return;
@@ -69,7 +77,7 @@ export default function CreatedContentFC() {
     // setIndex((prev) => (prev + 1) % currentPairs.length);
     setIndex((prev) => prev + 1);
     setShowFront(true);
-  }
+  };
 
   function prevCard() {
     setDirection(-1);
