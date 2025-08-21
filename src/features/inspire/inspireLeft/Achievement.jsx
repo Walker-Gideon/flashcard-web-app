@@ -3,6 +3,7 @@ import CardOverview from "../../../ui/CardOverview";
 import HeaderText from "../../../ui/HeaderText";
 import { useEffect, useState } from "react";
 import { useGen } from "../../../context/GeneralContext";
+import { useAuth } from "../../../context/AuthContext";
 
 const initialAchievements = [
   {

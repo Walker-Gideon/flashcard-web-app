@@ -5,6 +5,7 @@ import {
   doc,
   getDoc,
   updateDoc,
+  setDoc,
 } from "firebase/firestore";
 import { auth, db } from "../firebase";
 
@@ -131,7 +132,40 @@ function GeneralProvider({ children }) {
     }));
   };
 
-  console.log("progresee is ", progress);
+  //   updating the user progress
+  const createInitialProgress = async (uid) => {
+    if (!uid) return;
+
+    const progressRef = doc(db, "users", uid, "progress", "metrics");
+    const progressSnap = await getDoc(progressRef);
+
+    if (!progressSnap.exists()) {
+      await setDoc(progressRef, {
+        streakCount: 0,
+        lastActiveDate: null,
+        masteredFlashcards: 0,
+        earlyBird: false,
+        nightOwl: false,
+        subjectMastery: {},
+        overallMastery: 0,
+      });
+    }
+  };
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        await createInitialProgress(user.uid);
+        await fetchProgress(user.uid); // Fetch into local state
+      } else {
+        setProgress(null); // Clear on logout
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  //   console.log("progresee is ", progress);
 
   const value = {
     quotes,
@@ -143,6 +177,7 @@ function GeneralProvider({ children }) {
     updateStreak,
     updateFlashcardMastery,
     updateStudyTime,
+    createInitialProgress,
   };
 
   return (
