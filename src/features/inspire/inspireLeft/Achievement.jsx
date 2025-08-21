@@ -3,21 +3,20 @@ import CardOverview from "../../../ui/CardOverview";
 import HeaderText from "../../../ui/HeaderText";
 import { useEffect, useState } from "react";
 import { useGen } from "../../../context/GeneralContext";
-import { useAuth } from "../../../context/AuthContext";
 
 const initialAchievements = [
   {
     id: 1,
     name: "7-Day Streak",
     description: "Maintained a study streak for 7 consecutive days.",
-    unlocked: false,
+    unlocked: (progress) => progress?.streakCount >= 7,
     icon: LuFlame,
   },
   {
     id: 2,
     name: "First 100 Cards",
     description: "Mastered 100 flashcards.",
-    unlocked: false,
+    unlocked: (progress) => progress?.masteredFlashcards >= 100,
     icon: LuBookOpen,
   },
   {
@@ -47,6 +46,7 @@ export default function Achievement() {
   const { progress, loadingProgress } = useGen();
   const [achievements, setAchievements] = useState(initialAchievements);
 
+  /* 
   useEffect(() => {
     if (!loadingProgress && progress) {
       const updated = initialAchievements.map((badge) => {
@@ -58,6 +58,17 @@ export default function Achievement() {
         return badge;
       });
 
+      setAchievements(updated);
+    }
+  }, [progress, loadingProgress]);
+  */
+
+  useEffect(() => {
+    if (!loadingProgress && progress) {
+      const updated = initialAchievements.map((badge) => ({
+        ...badge,
+        unlocked: badge.unlockCondition?.(progress),
+      }));
       setAchievements(updated);
     }
   }, [progress, loadingProgress]);
