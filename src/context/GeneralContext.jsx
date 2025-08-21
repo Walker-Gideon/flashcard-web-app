@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { onAuthStateChanged } from "firebase/auth";
 import {
   collection,
   onSnapshot,
@@ -58,10 +59,11 @@ function GeneralProvider({ children }) {
 
   //   Update user progress
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(async (user) => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         await createInitialProgress(user.uid);
         await fetchProgress(user.uid); // Fetch into local state
+        updateStreak();
       } else {
         setProgress(null); // Clear on logout
       }
@@ -85,6 +87,7 @@ function GeneralProvider({ children }) {
   const updateStreak = async () => {
     const user = auth.currentUser;
     if (!user) return;
+    console.log("current user is ", user);
 
     const today = getTodayDate();
     const yesterday = getYesterdayDate();
@@ -93,18 +96,24 @@ function GeneralProvider({ children }) {
 
     if (!userSnap.exists()) return;
 
-    const progressRef = doc(db, "users", user.uid, "progress", "metrics");
     const userData = userSnap.data();
     const lastActive = userData.lastActiveDate;
     let streak = userData.streakCount || 0;
 
+    console.log("📆 lastActive:", lastActive);
+    console.log("📆 today:", today);
+    console.log("📆 yesterday:", yesterday);
+
     if (lastActive === today) {
       // Already updated today
+      console.log("✅ Already updated today.");
       return;
     } else if (lastActive === yesterday) {
       streak += 1;
+      console.log("📈 Continuing streak:", streak);
     } else {
       streak = 1;
+      console.log("🔁 Resetting streak to 1");
     }
 
     await updateDoc(userRef, {
@@ -112,11 +121,21 @@ function GeneralProvider({ children }) {
       lastActiveDate: today,
     });
 
-    // Update the user progress
-    setProgress(progressRef, {
+    const progressRef = doc(db, "users", user.uid, "progress", "inspire");
+    await updateDoc(progressRef, {
       streakCount: streak,
       lastActiveDate: today,
     });
+
+    // Update the user progress
+    setProgress((prev) => ({
+      ...prev,
+      streakCount: streak,
+      lastActiveDate: today,
+    }));
+
+    console.log("🔥 Streak updated and saved:", streak);
+    await fetchProgress(user.uid);
   };
 
   // updat the flashcard mastery achievement
@@ -124,7 +143,7 @@ function GeneralProvider({ children }) {
     const user = auth.currentUser;
     if (!user) return;
 
-    const progressRef = doc(db, "users", user.uid, "progress", "metrics");
+    const progressRef = doc(db, "users", user.uid, "progress", "inspire");
     await updateDoc(progressRef, { masteredFlashcards: count });
 
     setProgress((prev) => ({ ...prev, masteredFlashcards: count }));
@@ -138,7 +157,7 @@ function GeneralProvider({ children }) {
     const earlyBird = hour < 8;
     const nightOwl = hour >= 22;
 
-    const progressRef = doc(db, "users", user.uid, "progress", "metrics");
+    const progressRef = doc(db, "users", user.uid, "progress", "inspire");
     await updateDoc(progressRef, { earlyBird, nightOwl });
 
     setProgress((prev) => ({
@@ -152,7 +171,7 @@ function GeneralProvider({ children }) {
   const createInitialProgress = async (uid) => {
     if (!uid) return;
 
-    const progressRef = doc(db, "users", uid, "progress", "metrics");
+    const progressRef = doc(db, "users", uid, "progress", "inspire");
     const progressSnap = await getDoc(progressRef);
 
     if (!progressSnap.exists()) {
@@ -169,11 +188,15 @@ function GeneralProvider({ children }) {
   };
 
   //   Fetch function to update the user progress
+  useEffect(() => {
+    fetchProgress();
+  }, []);
+
   const fetchProgress = async (uid) => {
     if (!uid) return;
 
     try {
-      const progressRef = doc(db, "users", uid, "progress", "metrics");
+      const progressRef = doc(db, "users", uid, "progress", "inspire");
       const progressSnap = await getDoc(progressRef);
 
       if (progressSnap.exists()) {

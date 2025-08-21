@@ -21,6 +21,9 @@ function AuthProvider({ children }) {
     lastActiveDate: null,
   });
 
+  // General uses
+  const [general, setGeneral] = useState(userData);
+
   // Check for user change
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
@@ -172,6 +175,8 @@ function AuthProvider({ children }) {
     updateUsername,
     updateUserData,
     updateProfileImage,
+    general,
+    setGeneral,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
