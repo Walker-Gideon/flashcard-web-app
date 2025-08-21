@@ -14,15 +14,19 @@ const GeneralContext = createContext();
 function GeneralProvider({ children }) {
   const [quotes, setQuotes] = useState([]);
   const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
+
+  //   NB on logout set this setProgress(null);
+  const [progress, setProgress] = useState(null);
+  /*
   const [progress, setProgress] = useState({
     streakCount: 0,
     lastActiveDate: null,
     masteredFlashcards: 0,
     earlyBird: false,
     nightOwl: false,
-    subjectMastery: {}, // or null if unused
-    overallMastery: 0, // new idea
-  });
+    subjectMastery: {},
+    overallMastery: 0,
+  }); */
   const [loadingProgress, setLoadingProgress] = useState(true);
 
   //   Fetch the quotes
@@ -52,6 +56,20 @@ function GeneralProvider({ children }) {
     return () => clearInterval(quoteTimer);
   }, [quotes]);
 
+  //   Update user progress
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        await createInitialProgress(user.uid);
+        await fetchProgress(user.uid); // Fetch into local state
+      } else {
+        setProgress(null); // Clear on logout
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
+
   // For the STREAK
   // Get "YYYY-MM-DD" formatted date
   const getTodayDate = () => {
@@ -75,6 +93,7 @@ function GeneralProvider({ children }) {
 
     if (!userSnap.exists()) return;
 
+    const progressRef = doc(db, "users", user.uid, "progress", "metrics");
     const userData = userSnap.data();
     const lastActive = userData.lastActiveDate;
     let streak = userData.streakCount || 0;
@@ -94,13 +113,10 @@ function GeneralProvider({ children }) {
     });
 
     // Update the user progress
-    setProgress((prev) => ({
-      ...prev,
+    setProgress(progressRef, {
       streakCount: streak,
       lastActiveDate: today,
-    }));
-
-    console.log("🔥 Streak updated:", streak);
+    });
   };
 
   // updat the flashcard mastery achievement
@@ -108,8 +124,8 @@ function GeneralProvider({ children }) {
     const user = auth.currentUser;
     if (!user) return;
 
-    const userRef = doc(db, "users", user.uid);
-    await updateDoc(userRef, { masteredFlashcards: count });
+    const progressRef = doc(db, "users", user.uid, "progress", "metrics");
+    await updateDoc(progressRef, { masteredFlashcards: count });
 
     setProgress((prev) => ({ ...prev, masteredFlashcards: count }));
   };
@@ -122,8 +138,8 @@ function GeneralProvider({ children }) {
     const earlyBird = hour < 8;
     const nightOwl = hour >= 22;
 
-    const userRef = doc(db, "users", user.uid);
-    await updateDoc(userRef, { earlyBird, nightOwl });
+    const progressRef = doc(db, "users", user.uid, "progress", "metrics");
+    await updateDoc(progressRef, { earlyBird, nightOwl });
 
     setProgress((prev) => ({
       ...prev,
@@ -132,7 +148,7 @@ function GeneralProvider({ children }) {
     }));
   };
 
-  //   updating the user progress
+  //  updating the user progress
   const createInitialProgress = async (uid) => {
     if (!uid) return;
 
@@ -152,20 +168,27 @@ function GeneralProvider({ children }) {
     }
   };
 
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(async (user) => {
-      if (user) {
-        await createInitialProgress(user.uid);
-        await fetchProgress(user.uid); // Fetch into local state
+  //   Fetch function to update the user progress
+  const fetchProgress = async (uid) => {
+    if (!uid) return;
+
+    try {
+      const progressRef = doc(db, "users", uid, "progress", "metrics");
+      const progressSnap = await getDoc(progressRef);
+
+      if (progressSnap.exists()) {
+        const data = progressSnap.data();
+        setProgress(data);
+        console.log("📥 Progress loaded:", data);
       } else {
-        setProgress(null); // Clear on logout
+        console.warn("⚠️ Progress document does not exist.");
       }
-    });
-
-    return () => unsubscribe();
-  }, []);
-
-  //   console.log("progresee is ", progress);
+    } catch (error) {
+      console.error("❌ Error fetching progress:", error);
+    } finally {
+      setLoadingProgress(false);
+    }
+  };
 
   const value = {
     quotes,
@@ -178,6 +201,7 @@ function GeneralProvider({ children }) {
     updateFlashcardMastery,
     updateStudyTime,
     createInitialProgress,
+    fetchProgress,
   };
 
   return (
@@ -195,18 +219,3 @@ function useGen() {
 }
 
 export { GeneralProvider, useGen };
-
-/*
-Function to update the user streak
-
-const handleReviewComplete = async () => {
-  await updateStreak();
-  // other logic: show success screen, reset state, etc.
-};
-
-// SOmthing about it condition
-if (currentCardIndex === totalCards - 1) {
-  await handleReviewComplete();
-}
-
-*/
