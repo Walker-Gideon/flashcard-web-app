@@ -13,57 +13,39 @@ const achievements = [
     name: "7-Day Streak",
     description: "Maintained a study streak for 7 consecutive days.",
     unlocked: true,
-    icon: "FlameIcon",
+    icon: LuFlame,
   },
   {
     id: 2,
     name: "First 100 Cards",
     description: "Mastered 100 flashcards.",
     unlocked: true,
-    icon: "BookOpen",
+    icon: LuBookOpen,
   },
   {
     id: 3,
     name: "Early Bird",
     description: "Completed a study session before 8 AM.",
     unlocked: false,
-    icon: "Sun",
+    icon: LuSun,
   },
   {
     id: 4,
     name: "Night Owl",
     description: "Completed a study session after 10 PM.",
     unlocked: false,
-    icon: "Moon",
+    icon: LuMoon,
   },
   {
     id: 5,
     name: "Subject Master",
     description: "Achieved 90% mastery in a subject.",
     unlocked: false,
-    icon: "Target",
+    icon: LuTarget,
   },
 ];
 
 export default function Achievement() {
-  const iconStyling = "h-5 w-5";
-  const getIconComponent = (iconName) => {
-    switch (iconName) {
-      case "FlameIcon":
-        return <LuFlame className={iconStyling} />;
-      case "BookOpen":
-        return <LuBookOpen className={iconStyling} />;
-      case "Sun":
-        return <LuSun className={iconStyling} />;
-      case "Moon":
-        return <LuMoon className={iconStyling} />;
-      case "Target":
-        return <LuTarget className={iconStyling} />;
-      default:
-        return <LuAward className={iconStyling} />;
-    }
-  };
-
   return (
     <CardOverview>
       <HeaderText classname="mb-6">Your Achievements</HeaderText>
@@ -85,7 +67,8 @@ export default function Achievement() {
                   : "bg-slate-200 text-slate-500 dark:bg-slate-600 dark:text-slate-400"
               }`}
             >
-              {getIconComponent(badge.icon)}
+              {/* {getIconComponent(badge.icon)} */}
+              <badge.icon className="h-5 w-5" />
             </div>
             <p className="mb-1 text-center text-sm font-medium">{badge.name}</p>
             <p className="text-center text-xs">{badge.description}</p>

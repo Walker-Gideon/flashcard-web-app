@@ -131,6 +131,8 @@ function GeneralProvider({ children }) {
     }));
   };
 
+  console.log("progresee is ", progress);
+
   const value = {
     quotes,
     setQuotes,
