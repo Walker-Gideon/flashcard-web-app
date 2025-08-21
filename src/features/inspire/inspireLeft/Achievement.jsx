@@ -51,7 +51,9 @@ export default function Achievement() {
     if (!loadingProgress && progress) {
       const updated = initialAchievements.map((badge) => {
         if (badge.name === "7-Day Streak") {
-          return { ...badge, unlocked: progress.streakCount >= 7 };
+          // For testing purpose we will test for 2 days and see our result
+          return { ...badge, unlocked: progress.streakCount >= 2 };
+          // return { ...badge, unlocked: progress.streakCount >= 7 };
         }
         return badge;
       });
