@@ -18,16 +18,6 @@ function GeneralProvider({ children }) {
 
   //   NB on logout set this setProgress(null);
   const [progress, setProgress] = useState(null);
-  /*
-  const [progress, setProgress] = useState({
-    streakCount: 0,
-    lastActiveDate: null,
-    masteredFlashcards: 0,
-    earlyBird: false,
-    nightOwl: false,
-    subjectMastery: {},
-    overallMastery: 0,
-  }); */
   const [loadingProgress, setLoadingProgress] = useState(true);
 
   //   Fetch the quotes
@@ -126,7 +116,6 @@ function GeneralProvider({ children }) {
       lastActiveDate: today,
     }));
 
-    console.log("🔥 Streak updated and saved:", streak);
     await fetchProgress(user.uid);
   };
 
@@ -196,10 +185,10 @@ function GeneralProvider({ children }) {
         setProgress(data);
         console.log("📥 Progress loaded:", data);
       } else {
-        console.warn("⚠️ Progress document does not exist.");
+        console.warn("Progress document does not exist.");
       }
     } catch (error) {
-      console.error("❌ Error fetching progress:", error);
+      console.error("Error fetching progress:", error);
     } finally {
       setLoadingProgress(false);
     }
