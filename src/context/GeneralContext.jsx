@@ -87,7 +87,6 @@ function GeneralProvider({ children }) {
   const updateStreak = async () => {
     const user = auth.currentUser;
     if (!user) return;
-    console.log("current user is ", user);
 
     const today = getTodayDate();
     const yesterday = getYesterdayDate();
@@ -100,20 +99,13 @@ function GeneralProvider({ children }) {
     const lastActive = userData.lastActiveDate;
     let streak = userData.streakCount || 0;
 
-    console.log("📆 lastActive:", lastActive);
-    console.log("📆 today:", today);
-    console.log("📆 yesterday:", yesterday);
-
     if (lastActive === today) {
       // Already updated today
-      console.log("✅ Already updated today.");
       return;
     } else if (lastActive === yesterday) {
       streak += 1;
-      console.log("📈 Continuing streak:", streak);
     } else {
       streak = 1;
-      console.log("🔁 Resetting streak to 1");
     }
 
     await updateDoc(userRef, {
