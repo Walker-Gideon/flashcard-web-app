@@ -17,7 +17,6 @@ const initialAchievements = [
     name: "First 100 Cards",
     description: "Mastered 100 flashcards.",
     unlocked: false,
-    // unlocked: (progress) => progress?.masteredFlashcards >= 100,
     icon: LuBookOpen,
   },
   {
@@ -52,6 +51,13 @@ export default function Achievement() {
       const updated = initialAchievements.map((badge) => {
         if (badge.name === "7-Day Streak") {
           return { ...badge, unlocked: progress?.streakCount >= 7 };
+        }
+
+        if (badge.name === "First 100 Cards") {
+          return {
+            ...badge,
+            unlocked: progress?.masteredFlashcards >= 100,
+          };
         }
         return badge;
       });
