@@ -9,14 +9,15 @@ const initialAchievements = [
     id: 1,
     name: "7-Day Streak",
     description: "Maintained a study streak for 7 consecutive days.",
-    unlocked: (progress) => progress?.streakCount >= 7,
+    unlocked: false,
     icon: LuFlame,
   },
   {
     id: 2,
     name: "First 100 Cards",
     description: "Mastered 100 flashcards.",
-    unlocked: (progress) => progress?.masteredFlashcards >= 100,
+    unlocked: false,
+    // unlocked: (progress) => progress?.masteredFlashcards >= 100,
     icon: LuBookOpen,
   },
   {
@@ -46,29 +47,15 @@ export default function Achievement() {
   const { progress, loadingProgress } = useGen();
   const [achievements, setAchievements] = useState(initialAchievements);
 
-  /* 
   useEffect(() => {
     if (!loadingProgress && progress) {
       const updated = initialAchievements.map((badge) => {
         if (badge.name === "7-Day Streak") {
-          // For testing purpose we will test for 2 days and see our result
-          return { ...badge, unlocked: progress.streakCount >= 2 };
-          // return { ...badge, unlocked: progress.streakCount >= 7 };
+          return { ...badge, unlocked: progress?.streakCount >= 7 };
         }
         return badge;
       });
 
-      setAchievements(updated);
-    }
-  }, [progress, loadingProgress]);
-  */
-
-  useEffect(() => {
-    if (!loadingProgress && progress) {
-      const updated = initialAchievements.map((badge) => ({
-        ...badge,
-        unlocked: badge.unlockCondition?.(progress),
-      }));
       setAchievements(updated);
     }
   }, [progress, loadingProgress]);
