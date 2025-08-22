@@ -4,19 +4,9 @@ import Overlay from "./ui/Overlay";
 import { useNav } from "./context/NavigateContext";
 import Loader from "./ui/Loader";
 import ChatLayout from "./features/chat/ChatLayout";
-import { useAuth } from "./context/AuthContext";
-import { auth } from "./firebase";
 
 export default function AppLayout() {
-  const { general, setGeneral, fetchUserData } = useAuth;
   const { navShowOverLay } = useNav();
-
-  const users = auth.currentUser;
-  console.log(users.uid);
-  const userData = async () => {
-    await fetchUserData(users.uid);
-  };
-  console.log(userData());
 
   return (
     <div className="defaultColor overflow-hidden">
