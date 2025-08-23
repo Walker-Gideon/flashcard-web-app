@@ -3,8 +3,10 @@ import { db } from "../../../firebase";
 import { useEffect, useState } from "react";
 import { LuAward } from "react-icons/lu";
 import HeaderText from "../../../ui/HeaderText";
+import { useGen } from "../../../context/GeneralContext";
 
 export default function Praise() {
+  const { progress } = useGen();
   const [praises, setPraises] = useState([]);
   const [currentPraiseIndex, setCurrentPraiseIndex] = useState(0);
 
@@ -33,6 +35,47 @@ export default function Praise() {
     return () => clearInterval(quoteTimer);
   }, [praises]);
 
+  const fillTemplate = (template, data) => {
+    let isValid = true;
+
+    const filled = template.replace(/{(\w+)}/g, (_, key) => {
+      if (data[key] === undefined || data[key] === null) {
+        isValid = false;
+        return ""; // Or leave as-is to debug
+      }
+      return data[key];
+    });
+
+    return isValid ? filled : null;
+  };
+
+  const getTopSubject = () => {
+    const entries = Object.entries(progress?.subjectMastery || {});
+    if (entries.length === 0) return null;
+    return entries.sort((a, b) => b[1] - a[1])[0][0];
+  };
+
+  const getStudyMinutesToday = () => {
+    const today = new Date().toISOString().split("T")[0];
+    return progress?.studyLogs?.[today] || null;
+  };
+
+  const placeholderData = {
+    ...progress,
+    topSubject: getTopSubject(),
+    studyMinutesToday: getStudyMinutesToday(),
+  };
+
+  let displayedPraise = null;
+  let attempts = 0;
+
+  while (!displayedPraise && attempts < praises.length) {
+    const rawPraise = praises[(currentPraiseIndex + attempts) % praises.length];
+    const filled = fillTemplate(rawPraise.text, placeholderData);
+    if (filled) displayedPraise = filled;
+    else attempts++;
+  }
+
   const currentPraise = praises[currentPraiseIndex];
 
   return (
@@ -43,7 +86,7 @@ export default function Praise() {
       </div>
       {currentPraise ? (
         <p className="mb-4 text-lg text-slate-500 italic dark:text-slate-400">
-          "{currentPraise.text}"
+          {displayedPraise ? `"${displayedPraise}"` : "Loading praise..."}
         </p>
       ) : (
         <div className="italic dark:text-slate-400">Loading praise...</div>
