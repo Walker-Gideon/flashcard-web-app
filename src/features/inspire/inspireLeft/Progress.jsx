@@ -2,6 +2,18 @@ import { inspireMockData } from "../../../data/inspireMockData";
 import CardOverview from "../../../ui/CardOverview";
 import HeaderText from "../../../ui/HeaderText";
 
+const progressDays = [
+  { day: "Mon", minutes: 60 },
+  { day: "Tue", minutes: 45 },
+  { day: "Wed", minutes: 90 },
+  { day: "Thu", minutes: 30 },
+  { day: "Fri", minutes: 0 },
+  { day: "Sat", minutes: 75 },
+  { day: "Sun", minutes: 0 },
+];
+
+const consistencyScore = 90;
+
 export default function Progress() {
   const styling = {
     subHeader: "mb-3 text-lg font-medium text-slate-800 dark:text-white",
@@ -15,7 +27,7 @@ export default function Progress() {
         <h4 className={styling.subHeader}>Weekly Study Heatmap</h4>
 
         <div className="medium:gap-2 grid grid-cols-7 gap-1">
-          {inspireMockData.progress.weeklyStudyData.map((data, index) => (
+          {progressDays.map((data, index) => (
             <div key={index} className="flex flex-col items-center">
               <span className="mb-1 text-xs text-slate-500 dark:text-slate-400">
                 {data.day}
@@ -47,14 +59,14 @@ export default function Progress() {
         <div className="flex items-center space-x-4">
           <div className="h-4 w-full rounded-full bg-slate-200 dark:bg-slate-700">
             <div
-              className="h-4 rounded-full bg-slate-500 transition-all duration-500"
+              className="h-4 rounded-full bg-emerald-600 transition-all duration-500"
               style={{
-                width: `${inspireMockData.progress.consistencyScore}%`,
+                width: `${consistencyScore}%`,
               }}
             ></div>
           </div>
           <span className="text-lg font-bold text-slate-900 dark:text-white">
-            {inspireMockData.progress.consistencyScore}%
+            {consistencyScore}%
           </span>
         </div>
         <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
