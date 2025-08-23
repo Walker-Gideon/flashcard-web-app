@@ -61,7 +61,42 @@ function GeneralProvider({ children }) {
     return () => unsubscribe();
   }, []);
 
-  // For the STREAK
+  //   Fetch function to update the user progress
+  useEffect(() => {
+    fetchProgress();
+  }, []);
+
+  //   Fetching all flashcards
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (!user) return;
+
+      const flashcardsRef = collection(db, "users", user.uid, "flashcards");
+
+      const unsubscribeFlashcards = onSnapshot(flashcardsRef, (snapshot) => {
+        const fetchedFlashcards = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+
+        const tagCount = {};
+
+        fetchedFlashcards.forEach((card) => {
+          const tag = card.tags?.trim() || "untagged";
+          const count = card.pairs?.length || 0;
+
+          tagCount[tag] = (tagCount[tag] || 0) + count;
+        });
+
+        setTotalCardsPerTag(tagCount);
+      });
+
+      return () => unsubscribeFlashcards();
+    });
+
+    return () => unsubscribe();
+  }, []);
+
   // Get "YYYY-MM-DD" formatted date
   const getTodayDate = () => {
     return new Date().toISOString().split("T")[0];
@@ -73,6 +108,7 @@ function GeneralProvider({ children }) {
     return yesterday.toISOString().split("T")[0];
   };
 
+  // For the STREAK
   const updateStreak = async () => {
     const user = auth.currentUser;
     if (!user) return;
@@ -184,42 +220,7 @@ function GeneralProvider({ children }) {
     }
   };
 
-  //   Fetch function to update the user progress
-  useEffect(() => {
-    fetchProgress();
-  }, []);
-
-  //   Fetching all flashcards
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (!user) return;
-
-      const flashcardsRef = collection(db, "users", user.uid, "flashcards");
-
-      const unsubscribeFlashcards = onSnapshot(flashcardsRef, (snapshot) => {
-        const fetchedFlashcards = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-
-        const tagCount = {};
-
-        fetchedFlashcards.forEach((card) => {
-          const tag = card.tags?.trim() || "untagged";
-          const count = card.pairs?.length || 0;
-
-          tagCount[tag] = (tagCount[tag] || 0) + count;
-        });
-
-        setTotalCardsPerTag(tagCount);
-      });
-
-      return () => unsubscribeFlashcards();
-    });
-
-    return () => unsubscribe();
-  }, []);
-
+  //   Tag Master function
   const incrementSubjecMaster = async (tag) => {
     const user = auth.currentUser;
     if (!user || !tag) return;
@@ -240,6 +241,7 @@ function GeneralProvider({ children }) {
     }));
   };
 
+  // For fetching user progress
   const fetchProgress = async (uid) => {
     if (!uid) return;
 

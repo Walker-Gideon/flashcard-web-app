@@ -1,4 +1,3 @@
-import { inspireMockData } from "../../../data/inspireMockData";
 import CardOverview from "../../../ui/CardOverview";
 import HeaderText from "../../../ui/HeaderText";
 
