@@ -19,10 +19,12 @@ export default function CreatedContentFC() {
     editFlashcardId,
     setReviewComplete,
   } = useFlash();
-  const { updateStreak, incrementStudiedFlashcards } = useGen();
+  const { updateStreak, incrementStudiedFlashcards, updateStudyTime } =
+    useGen();
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(0);
   const [showFront, setShowFront] = useState(true);
+  const [hasUpdatedStudyTime, setHasUpdatedStudyTime] = useState(false);
 
   // Display flashcard on mount
   useEffect(() => {
@@ -65,6 +67,9 @@ export default function CreatedContentFC() {
   };
 
   const nextCard = async () => {
+    const now = new Date();
+    const hour = now.getHours();
+
     if (index === currentPairs.length - 1) {
       setTimeout(async () => {
         await handleReviewComplete();
@@ -72,7 +77,13 @@ export default function CreatedContentFC() {
       }, 500);
       return;
     }
+
     await incrementStudiedFlashcards();
+
+    if (!hasUpdatedStudyTime) {
+      await updateStudyTime(hour);
+      setHasUpdatedStudyTime(true);
+    }
 
     setDirection(1);
     // setIndex((prev) => (prev + 1) % currentPairs.length);

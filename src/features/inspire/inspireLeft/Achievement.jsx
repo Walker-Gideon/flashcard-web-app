@@ -46,6 +46,9 @@ export default function Achievement() {
   const { progress, loadingProgress } = useGen();
   const [achievements, setAchievements] = useState(initialAchievements);
 
+  const now = new Date();
+  const hour = now.getHours();
+
   useEffect(() => {
     if (!loadingProgress && progress) {
       const updated = initialAchievements.map((badge) => {
@@ -59,6 +62,21 @@ export default function Achievement() {
             unlocked: progress?.masteredFlashcards >= 100,
           };
         }
+
+        if (badge.name === "Early Bird") {
+          return {
+            ...badge,
+            unlocked: progress?.earlyBird === true,
+          };
+        }
+
+        if (badge.name === "Night Owl") {
+          return {
+            ...badge,
+            unlocked: progress?.nightOwl === true,
+          };
+        }
+
         return badge;
       });
 
