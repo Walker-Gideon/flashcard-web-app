@@ -4,7 +4,7 @@ import Progress from "./Progress";
 
 export default function InspireLeftLayout() {
   return (
-    <div className="medium:mb-19 mb-0 space-y-6 lg:col-span-2">
+    <div className="mb-0 space-y-6 lg:col-span-2 lg:mb-19">
       <Motivation />
       <Achievement />
       <Progress />
