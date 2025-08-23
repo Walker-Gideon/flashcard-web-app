@@ -53,7 +53,6 @@ function GeneralProvider({ children }) {
       if (user) {
         await createInitialProgress(user.uid);
         await fetchProgress(user.uid); // Fetch into local state
-        updateStreak();
       } else {
         setProgress(null); // Clear on logout
       }
@@ -119,17 +118,6 @@ function GeneralProvider({ children }) {
     await fetchProgress(user.uid);
   };
 
-  // updat the flashcard mastery achievement
-  const updateFlashcardMastery = async (count) => {
-    const user = auth.currentUser;
-    if (!user) return;
-
-    const progressRef = doc(db, "users", user.uid, "progress", "inspire");
-    await updateDoc(progressRef, { masteredFlashcards: count });
-
-    setProgress((prev) => ({ ...prev, masteredFlashcards: count }));
-  };
-
   // used to determine earlyBird or nightOwl achievement
   const updateStudyTime = async (hour) => {
     const user = auth.currentUser;
@@ -146,6 +134,27 @@ function GeneralProvider({ children }) {
       earlyBird,
       nightOwl,
     }));
+  };
+
+  const incrementStudiedFlashcards = async () => {
+    const user = auth.currentUser;
+    if (!user) return;
+
+    const progressRef = doc(db, "users", user.uid, "progress", "inspire");
+    const incremented = (progress?.masteredFlashcards || 0) + 1;
+
+    try {
+      await updateDoc(progressRef, {
+        masteredFlashcards: incremented,
+      });
+
+      setProgress((prev) => ({
+        ...prev,
+        masteredFlashcards: incremented,
+      }));
+    } catch (error) {
+      console.error("Failed to update masteredFlashcards:", error);
+    }
   };
 
   //  updating the user progress
@@ -196,16 +205,16 @@ function GeneralProvider({ children }) {
 
   const value = {
     quotes,
-    setQuotes,
-    currentQuoteIndex,
     progress,
+    setQuotes,
     loadingProgress,
+    currentQuoteIndex,
     // functions
     updateStreak,
-    updateFlashcardMastery,
+    fetchProgress,
     updateStudyTime,
     createInitialProgress,
-    fetchProgress,
+    incrementStudiedFlashcards,
   };
 
   return (

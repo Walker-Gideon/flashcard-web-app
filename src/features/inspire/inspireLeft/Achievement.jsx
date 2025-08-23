@@ -14,8 +14,8 @@ const initialAchievements = [
   },
   {
     id: 2,
-    name: "First 100 Cards",
-    description: "Mastered 100 flashcards.",
+    name: "100 Cards Studied",
+    description: "Studied 100 flashcards across any sessions.",
     unlocked: false,
     icon: LuBookOpen,
   },
@@ -53,7 +53,7 @@ export default function Achievement() {
           return { ...badge, unlocked: progress?.streakCount >= 7 };
         }
 
-        if (badge.name === "First 100 Cards") {
+        if (badge.name === "100 Cards Studied") {
           return {
             ...badge,
             unlocked: progress?.masteredFlashcards >= 100,

@@ -19,7 +19,7 @@ export default function CreatedContentFC() {
     editFlashcardId,
     setReviewComplete,
   } = useFlash();
-  const { updateStreak } = useGen();
+  const { updateStreak, incrementStudiedFlashcards } = useGen();
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(0);
   const [showFront, setShowFront] = useState(true);
@@ -72,6 +72,7 @@ export default function CreatedContentFC() {
       }, 500);
       return;
     }
+    await incrementStudiedFlashcards();
 
     setDirection(1);
     // setIndex((prev) => (prev + 1) % currentPairs.length);
