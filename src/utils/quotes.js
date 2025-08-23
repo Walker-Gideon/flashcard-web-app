@@ -1,74 +1,46 @@
 import { db } from "../firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
-const localQuotes = [
-  {
-    text: "Learning is a treasure that follows its owner everywhere.",
-    author: "Chinese Proverb",
-  },
-  {
-    text: "The beautiful thing about learning is that no one can take it away from you.",
-    author: "B.B. King",
-  },
-  {
-    text: "Education is the most powerful weapon which you can use to change the world.",
-    author: "Nelson Mandela",
-  },
-  {
-    text: "Live as if you were to die tomorrow. Learn as if you were to live forever.",
-    author: "Mahatma Gandhi",
-  },
-  {
-    text: "The mind is not a vessel to be filled, but a fire to be kindled.",
-    author: "Plutarch",
-  },
-  {
-    text: "An investment in knowledge pays the best interest.",
-    author: "Benjamin Franklin",
-  },
-  {
-    text: "The roots of education are bitter, but the fruit is sweet.",
-    author: "Aristotle",
-  },
-  {
-    text: "The more that you read, the more things you will know. The more that you learn, the more places you’ll go.",
-    author: "Dr. Seuss",
-  },
-  {
-    text: "Education is not preparation for life; education is life itself.",
-    author: "John Dewey",
-  },
-  {
-    text: "It is not that I'm so smart. But I stay with the questions much longer.",
-    author: "Albert Einstein",
-  },
-  {
-    text: "The only person who is educated is the one who has learned how to learn and change.",
-    author: "Carl Rogers",
-  },
-  {
-    text: "Develop a passion for learning. If you do, you will never cease to grow.",
-    author: "Anthony J. D'Angelo",
-  },
-  {
-    text: "Education opens the door to freedom and opportunity.",
-    author: "Oprah Winfrey",
-  },
-  {
-    text: "Change is the end result of all true learning.",
-    author: "Leo Buscaglia",
-  },
-  {
-    text: "Education’s purpose is to replace an empty mind with an open one.",
-    author: "Malcolm Forbes",
-  },
+const personalizedPraise = [
+  `You're on a {streakCount}-day streak! Your consistency is unmatched.`,
+  `{streakCount} days of learning in a row — you're unstoppable.`,
+  `That {streakCount}-day streak shows your true commitment.`,
+  `One more day and you'll hit a new streak record! Stay focused.`,
+  `Early bird alert! Studying before 8AM shows real dedication.`,
+  `Burning the midnight oil? Night owls like you thrive in silence.`,
+  `Studying late into the night — your effort won’t go unnoticed.`,
+  `Morning sessions are tough, but you're making them look easy.`,
+  `You've mastered {masteredFlashcards} flashcards — your memory is sharp.`,
+  `{masteredFlashcards} cards down, so many concepts conquered.`,
+  `Every flashcard you master brings you closer to your goal.`,
+  `Flashcard mastery is your superpower — keep it up.`,
+  `You've achieved 90% mastery in "{topSubject}" — excellent progress.`,
+  `Your progress in "{topSubject}" is exceptional. Keep dominating.`,
+  `"{topSubject}" is clearly your strongest subject — impressive work.`,
+  `You're turning "{topSubject}" into your specialty.`,
+  `You're {consistencyScore}% consistent this week — that's real discipline.`,
+  `You've studied 5 out of 7 days — you're making it a true habit.`,
+  `Your study rhythm is strong — this kind of consistency leads to success.`,
+  `Weekly progress like this builds long-term achievement.`,
+  `You studied {studyMinutesToday} minutes today — that's strong focus.`,
+  `You've studied over an hour today — great concentration.`,
+  `Every minute counts, and today’s session proved that.`,
+  `Your study time today shows real dedication.`,
+  `Your "{largestDeck}" deck has the most cards — impressive effort.`,
+  `The "{largestDeck}" set is growing fast. Keep going.`,
+  `Your biggest deck shows real dedication to that topic.`,
+  `Every session makes you better — today was no exception.`,
+  `Logging in and learning is how progress is made.`,
+  `Your journey is inspiring. Small steps add up to big results.`,
+  `You're building a powerful habit, and it shows in your progress.`,
+  `Stay consistent. Your future self will thank you.`,
 ];
 
 export const seedQuotes = async () => {
-  for (const quote of localQuotes) {
-    console.log("Seeding quote:", quote.text);
-    await addDoc(collection(db, "quotes"), {
-      ...quote,
+  for (const praise of personalizedPraise) {
+    console.log("Seeding praise:", praise);
+    await addDoc(collection(db, "praise"), {
+      text: praise,
       createdAt: serverTimestamp(),
     });
   }

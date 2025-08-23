@@ -1,7 +1,7 @@
 import { LuAward } from "react-icons/lu";
 import HeaderText from "../../../ui/HeaderText";
 
-export default function Praise({ currentPraise }) {
+export default function Praise() {
   return (
     <div className="rounded-2xl bg-gradient-to-r from-slate-200 to-slate-300 p-6 shadow-lg dark:from-slate-600 dark:to-slate-700">
       <div className="mb-4 flex items-center space-x-3">
@@ -9,7 +9,7 @@ export default function Praise({ currentPraise }) {
         <HeaderText>Your Encouragement</HeaderText>
       </div>
       <p className="mb-4 text-lg text-slate-500 italic dark:text-slate-400">
-        "{currentPraise}"
+        "X"
       </p>
       <p className="text-right text-sm text-slate-900 dark:text-white">
         - FlashMaster AI
