@@ -127,12 +127,19 @@ function GeneralProvider({ children }) {
     const nightOwl = hour >= 22;
 
     const progressRef = doc(db, "users", user.uid, "progress", "inspire");
-    await updateDoc(progressRef, { earlyBird, nightOwl });
+    await updateDoc(progressRef, {
+      earlyBird,
+      nightOwl,
+      studyTimeHour: hour,
+      lastStudyDate: getTodayDate(),
+    });
 
     setProgress((prev) => ({
       ...prev,
       earlyBird,
       nightOwl,
+      studyTimeHour: hour,
+      lastStudyDate: getTodayDate(),
     }));
   };
 

@@ -46,8 +46,7 @@ export default function Achievement() {
   const { progress, loadingProgress } = useGen();
   const [achievements, setAchievements] = useState(initialAchievements);
 
-  const now = new Date();
-  const hour = now.getHours();
+  const today = new Date().toISOString().split("T")[0];
 
   useEffect(() => {
     if (!loadingProgress && progress) {
@@ -66,14 +65,17 @@ export default function Achievement() {
         if (badge.name === "Early Bird") {
           return {
             ...badge,
-            unlocked: progress?.earlyBird === true,
+            unlocked:
+              progress?.studyTimeHour < 8 && progress?.lastStudyDate === today,
           };
         }
 
         if (badge.name === "Night Owl") {
           return {
             ...badge,
-            unlocked: progress?.nightOwl === true,
+            unlocked:
+              progress?.studyTimeHour >= 22 &&
+              progress?.lastStudyDate === today,
           };
         }
 
@@ -82,7 +84,7 @@ export default function Achievement() {
 
       setAchievements(updated);
     }
-  }, [progress, loadingProgress]);
+  }, [progress, loadingProgress, today]);
 
   return (
     <CardOverview>
