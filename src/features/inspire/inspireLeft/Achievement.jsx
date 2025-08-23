@@ -35,15 +35,15 @@ const initialAchievements = [
   },
   {
     id: 5,
-    name: "Subject Master",
-    description: "Achieved 90% mastery in a subject.",
+    name: "Tag Master",
+    description: "Achieved 90% mastery in any tag category.",
     unlocked: false,
     icon: LuTarget,
   },
 ];
 
 export default function Achievement() {
-  const { progress, loadingProgress } = useGen();
+  const { progress, loadingProgress, totalCardsPerTag } = useGen();
   const [achievements, setAchievements] = useState(initialAchievements);
 
   const today = new Date().toISOString().split("T")[0];
@@ -79,12 +79,22 @@ export default function Achievement() {
           };
         }
 
+        if (badge.name === "Tag Master") {
+          const entries = Object.entries(progress?.subjectMastery || {});
+          const cardsPercentage = entries.some(([tag, count]) => {
+            const total = totalCardsPerTag[tag] || 0;
+            return total > 0 && (count / total) * 100 >= 90;
+          });
+
+          return { ...badge, unlocked: cardsPercentage };
+        }
+
         return badge;
       });
 
       setAchievements(updated);
     }
-  }, [progress, loadingProgress, today]);
+  }, [progress, loadingProgress, today, totalCardsPerTag]);
 
   return (
     <CardOverview>
@@ -117,30 +127,3 @@ export default function Achievement() {
     </CardOverview>
   );
 }
-
-/*  
-      <div className="medium:grid-cols-3 grid grid-cols-2 gap-4 md:grid-cols-4">
-        {achievements.map((badge) => (
-          <div
-            key={badge.id}
-            className={`flex flex-col items-center rounded-xl p-4 transition-all duration-200 ${
-              badge.unlocked
-                ? "bg-slate-200 text-slate-700 shadow-md hover:scale-105 dark:bg-slate-900 dark:text-slate-300"
-                : "bg-slate-50 text-slate-400 opacity-60 dark:bg-slate-700/50 dark:text-slate-600"
-            }`}
-          >
-            <div
-              className={`mb-2 rounded-full p-3 ${
-                badge.unlocked
-                  ? "bg-slate-500 text-white"
-                  : "bg-slate-200 text-slate-500 dark:bg-slate-600 dark:text-slate-400"
-              }`}
-            >
-              <badge.icon className="h-5 w-5" />
-            </div>
-            <p className="mb-1 text-center text-sm font-medium">{badge.name}</p>
-            <p className="text-center text-xs">{badge.description}</p>
-          </div>
-        ))}
-      </div>
-       */

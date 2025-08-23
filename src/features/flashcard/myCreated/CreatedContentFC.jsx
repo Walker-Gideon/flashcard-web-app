@@ -19,8 +19,12 @@ export default function CreatedContentFC() {
     editFlashcardId,
     setReviewComplete,
   } = useFlash();
-  const { updateStreak, incrementStudiedFlashcards, updateStudyTime } =
-    useGen();
+  const {
+    updateStreak,
+    incrementStudiedFlashcards,
+    updateStudyTime,
+    incrementSubjecMaster,
+  } = useGen();
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(0);
   const [showFront, setShowFront] = useState(true);
@@ -61,6 +65,10 @@ export default function CreatedContentFC() {
     ? currentFlashcard.pairs
     : newlyFlashcard.pairs;
 
+  const currentTags = readAlredyFlashcard
+    ? currentFlashcard.tags
+    : newlyFlashcard.tags;
+
   const handleReviewComplete = async () => {
     await updateStreak();
     await fetchUserData(user.uid);
@@ -79,6 +87,7 @@ export default function CreatedContentFC() {
     }
 
     await incrementStudiedFlashcards();
+    await incrementSubjecMaster(currentTags);
 
     if (!hasUpdatedStudyTime) {
       await updateStudyTime(hour);

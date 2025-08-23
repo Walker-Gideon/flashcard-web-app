@@ -15,7 +15,7 @@ const GeneralContext = createContext();
 function GeneralProvider({ children }) {
   const [quotes, setQuotes] = useState([]);
   const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
-
+  const [totalCardsPerTag, setTotalCardsPerTag] = useState({});
   //   NB on logout set this setProgress(null);
   const [progress, setProgress] = useState(null);
   const [loadingProgress, setLoadingProgress] = useState(true);
@@ -189,6 +189,57 @@ function GeneralProvider({ children }) {
     fetchProgress();
   }, []);
 
+  //   Fetching all flashcards
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (!user) return;
+
+      const flashcardsRef = collection(db, "users", user.uid, "flashcards");
+
+      const unsubscribeFlashcards = onSnapshot(flashcardsRef, (snapshot) => {
+        const fetchedFlashcards = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+
+        const tagCount = {};
+
+        fetchedFlashcards.forEach((card) => {
+          const tag = card.tags?.trim() || "untagged";
+          const count = card.pairs?.length || 0;
+
+          tagCount[tag] = (tagCount[tag] || 0) + count;
+        });
+
+        setTotalCardsPerTag(tagCount);
+      });
+
+      return () => unsubscribeFlashcards();
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  const incrementSubjecMaster = async (tag) => {
+    const user = auth.currentUser;
+    if (!user || !tag) return;
+
+    const progressRef = doc(db, "users", user.uid, "progress", "inspire");
+    const current = progress?.subjectMastery?.[tag] || 0;
+
+    const updatedSubjectMastery = {
+      ...progress.subjectMastery,
+      [tag]: current + 1,
+    };
+
+    await updateDoc(progressRef, { subjectMastery: updatedSubjectMastery });
+
+    setProgress((prev) => ({
+      ...prev,
+      subjectMastery: updatedSubjectMastery,
+    }));
+  };
+
   const fetchProgress = async (uid) => {
     if (!uid) return;
 
@@ -215,11 +266,13 @@ function GeneralProvider({ children }) {
     progress,
     setQuotes,
     loadingProgress,
+    totalCardsPerTag,
     currentQuoteIndex,
     // functions
     updateStreak,
     fetchProgress,
     updateStudyTime,
+    incrementSubjecMaster,
     createInitialProgress,
     incrementStudiedFlashcards,
   };
