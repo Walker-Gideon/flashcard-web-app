@@ -1,19 +1,37 @@
+import { useEffect, useState } from "react";
+import { useGen } from "../../../context/GeneralContext";
 import CardOverview from "../../../ui/CardOverview";
 import HeaderText from "../../../ui/HeaderText";
-
-const progressDays = [
-  { day: "Mon", minutes: 60 },
-  { day: "Tue", minutes: 45 },
-  { day: "Wed", minutes: 90 },
-  { day: "Thu", minutes: 30 },
-  { day: "Fri", minutes: 0 },
-  { day: "Sat", minutes: 75 },
-  { day: "Sun", minutes: 0 },
-];
-
-const consistencyScore = 90;
+import { format, subDays, getDay, addDays } from "date-fns";
 
 export default function Progress() {
+  const { progress } = useGen();
+  const [weeklyData, setWeeklyData] = useState([]);
+  const [consistencyScore, setConsistencyScore] = useState(0);
+
+  useEffect(() => {
+    const today = new Date();
+    const startOfWeek = subDays(today, getDay(today));
+    const thisWeek = [];
+
+    for (let i = 0; i < 7; i++) {
+      const date = addDays(startOfWeek, i);
+      const dateStr = format(date, "yyyy-MM-dd");
+      const weekday = format(date, "EEE");
+
+      thisWeek.push({
+        day: weekday,
+        minutes: progress?.studyLogs?.[dateStr] || 0,
+      });
+    }
+
+    setWeeklyData(thisWeek);
+
+    const studiedDays = thisWeek.filter((day) => day.minutes > 0).length;
+    const score = Math.round((studiedDays / 7) * 100);
+    setConsistencyScore(score);
+  }, [progress?.studyLogs]);
+
   const styling = {
     subHeader: "mb-3 text-lg font-medium text-slate-800 dark:text-white",
   };
@@ -26,7 +44,7 @@ export default function Progress() {
         <h4 className={styling.subHeader}>Weekly Study Heatmap</h4>
 
         <div className="medium:gap-2 grid grid-cols-7 gap-1">
-          {progressDays.map((data, index) => (
+          {weeklyData.map((data, index) => (
             <div key={index} className="flex flex-col items-center">
               <span className="mb-1 text-xs text-slate-500 dark:text-slate-400">
                 {data.day}
