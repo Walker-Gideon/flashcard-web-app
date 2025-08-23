@@ -12,9 +12,9 @@ export default function ScheduleWeeks({ schedulesMockData, activeView }) {
     icon: "h-4 w-4 text-slate-600 dark:text-slate-400",
   };
   return (
-    <div>
+    <div className={`${activeView === "week" ? `` : `hidden`}`}>
       {activeView === "week" && (
-        <CardOverview classname="lg:absolute w-full lg:top-0">
+        <CardOverview classname="lg:absolute w-full top-0">
           <CardHeader title="This Week">
             <div className="flex items-center space-x-2">
               <Button

@@ -11,10 +11,12 @@ export default function SchedulesHeader({ activeView, setActiveView }) {
           subText="Plan and track your learning sessions"
         />
 
-        <ScheduleHeaderButtons
-          activeView={activeView}
-          setActiveView={setActiveView}
-        />
+        <div className="hidden md:flex">
+          <ScheduleHeaderButtons
+            activeView={activeView}
+            setActiveView={setActiveView}
+          />
+        </div>
       </div>
     </header>
   );

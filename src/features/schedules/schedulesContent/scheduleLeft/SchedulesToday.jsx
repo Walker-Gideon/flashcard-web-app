@@ -29,9 +29,9 @@ export default function SchedulesToday({ schedulesMockData, activeView }) {
   };
 
   return (
-    <div>
+    <div className={`${activeView === "today" ? `` : `hidden`}`}>
       {activeView === "today" && (
-        <CardOverview classname={"lg:col-span-2 w-full"}>
+        <CardOverview classname={`lg:col-span-2 w-full `}>
           <CardHeader title="Today's Sessions">
             <Button
               variant="outline"

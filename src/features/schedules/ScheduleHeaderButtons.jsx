@@ -1,4 +1,3 @@
-import { LuSettings2 } from "react-icons/lu";
 import Button from "../../ui/Button";
 
 const schedules = ["today", "week", "month"];
@@ -6,7 +5,6 @@ const schedules = ["today", "week", "month"];
 export default function ScheduleHeaderButtons({ activeView, setActiveView }) {
   return (
     <div className="flex items-center space-x-4">
-      {/* View Toggle */}
       <div className="rounded-sm border border-slate-200 bg-white p-1 shadow-sm dark:border-slate-700 dark:bg-slate-800">
         {schedules.map((view) => (
           <Button
@@ -19,10 +17,6 @@ export default function ScheduleHeaderButtons({ activeView, setActiveView }) {
           </Button>
         ))}
       </div>
-
-      <Button variant="outline" classname="primaryButton p-2">
-        <LuSettings2 className="h-5 w-5 text-white" />
-      </Button>
     </div>
   );
 }

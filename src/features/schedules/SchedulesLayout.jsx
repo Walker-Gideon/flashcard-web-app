@@ -15,7 +15,7 @@ export default function SchedulesLayout() {
       <main className="medium:mt-0 mt-7 h-screen space-y-6 overflow-scroll p-6">
         <SchedulesOverview />
 
-        <div className="medium:hidden flex items-center justify-end">
+        <div className="flex items-center justify-end md:hidden">
           <ScheduleHeaderButtons
             activeView={activeView}
             setActiveView={setActiveView}
