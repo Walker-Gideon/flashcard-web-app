@@ -241,6 +241,7 @@ function GeneralProvider({ children }) {
     }));
   };
 
+  //   Weekly heap
   const logStudyTime = async (minutes) => {
     const user = auth.currentUser;
     if (!user || !minutes) return;
@@ -261,16 +262,8 @@ function GeneralProvider({ children }) {
         ...prev,
         studyLogs: updatedLogs,
       }));
-
-      console.log(
-        "🕒 Study time logged for",
-        today,
-        "->",
-        updatedLogs[today],
-        "min",
-      );
     } catch (error) {
-      console.error("❌ Failed to log study time:", error);
+      console.error(" Failed to log study time:", error);
     }
   };
 
