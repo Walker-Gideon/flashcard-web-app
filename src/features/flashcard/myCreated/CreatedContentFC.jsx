@@ -24,6 +24,7 @@ export default function CreatedContentFC() {
     incrementStudiedFlashcards,
     updateStudyTime,
     incrementSubjecMaster,
+    logStudyTime,
   } = useGen();
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(0);
@@ -88,6 +89,8 @@ export default function CreatedContentFC() {
 
     await incrementStudiedFlashcards();
     await incrementSubjecMaster(currentTags);
+    const timeSpent = Math.ceil(currentPairs.length * 0.5);
+    await logStudyTime(timeSpent);
 
     if (!hasUpdatedStudyTime) {
       await updateStudyTime(hour);

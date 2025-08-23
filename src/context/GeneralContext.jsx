@@ -241,6 +241,39 @@ function GeneralProvider({ children }) {
     }));
   };
 
+  const logStudyTime = async (minutes) => {
+    const user = auth.currentUser;
+    if (!user || !minutes) return;
+
+    const today = getTodayDate();
+    const progressRef = doc(db, "users", user.uid, "progress", "inspire");
+
+    const prevLogs = progress?.studyLogs || {};
+    const updatedLogs = {
+      ...prevLogs,
+      [today]: (prevLogs[today] || 0) + minutes,
+    };
+
+    try {
+      await updateDoc(progressRef, { studyLogs: updatedLogs });
+
+      setProgress((prev) => ({
+        ...prev,
+        studyLogs: updatedLogs,
+      }));
+
+      console.log(
+        "🕒 Study time logged for",
+        today,
+        "->",
+        updatedLogs[today],
+        "min",
+      );
+    } catch (error) {
+      console.error("❌ Failed to log study time:", error);
+    }
+  };
+
   // For fetching user progress
   const fetchProgress = async (uid) => {
     if (!uid) return;
@@ -271,6 +304,7 @@ function GeneralProvider({ children }) {
     totalCardsPerTag,
     currentQuoteIndex,
     // functions
+    logStudyTime,
     updateStreak,
     fetchProgress,
     updateStudyTime,
