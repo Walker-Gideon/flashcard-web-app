@@ -16,6 +16,7 @@ function GeneralProvider({ children }) {
   const [quotes, setQuotes] = useState([]);
   const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
   const [totalCardsPerTag, setTotalCardsPerTag] = useState({});
+  const [cardsStudiedToday, setCardsStudiedToday] = useState(0);
   //   NB on logout set this setProgress(null);
   const [progress, setProgress] = useState(null);
   const [loadingProgress, setLoadingProgress] = useState(true);
@@ -79,6 +80,17 @@ function GeneralProvider({ children }) {
           ...doc.data(),
         }));
 
+        let todayCount = 0;
+        fetchedFlashcards.forEach((card) => {
+          const rawDate = card.lastStudied?.toDate();
+          const formattedDate = rawDate?.toISOString().split("T")[0];
+
+          if (formattedDate === today) {
+            todayCount += card.pairs.length;
+          }
+        });
+        setCardsStudiedToday(todayCount);
+
         const tagCount = {};
 
         fetchedFlashcards.forEach((card) => {
@@ -107,6 +119,8 @@ function GeneralProvider({ children }) {
     yesterday.setDate(yesterday.getDate() - 1);
     return yesterday.toISOString().split("T")[0];
   };
+
+  const today = getTodayDate();
 
   // For the STREAK
   const updateStreak = async () => {
@@ -295,6 +309,7 @@ function GeneralProvider({ children }) {
     setQuotes,
     loadingProgress,
     totalCardsPerTag,
+    cardsStudiedToday,
     currentQuoteIndex,
     // functions
     logStudyTime,

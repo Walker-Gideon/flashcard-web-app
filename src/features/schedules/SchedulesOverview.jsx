@@ -44,7 +44,14 @@ export default function SchedulesOverview() {
 
   useEffect(() => {
     if (!loadingProgress && progress) {
+      const today = new Date().toISOString().split("T")[0];
+      const todayCards = progress.studyLogs?.[today] || 0;
+
       const updated = initialCardData.map((card) => {
+        if (card.text === "Cards Today") {
+          return { ...card, data: todayCards + 1 };
+        }
+
         if (card.text === "Day Streak") {
           return { ...card, data: progress?.streakCount };
         }
