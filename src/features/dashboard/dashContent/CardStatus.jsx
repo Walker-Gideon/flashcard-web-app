@@ -19,19 +19,16 @@ const initialCardData = [
     icon: LuBookOpen,
     data: 0,
     text: "Cards Today",
-    styling: "mb-6",
   },
   {
     icon: LuClock,
     data: 0 + "m",
     text: "Study Time",
-    styling: "mb-6",
   },
   {
     icon: LuFlame,
     data: 0,
     text: "Day Streak",
-    styling: "mb-6",
   },
 ];
 
@@ -73,9 +70,7 @@ export default function CardStatus() {
       {cardData.map((data, index) => (
         <div key={index}>
           <CardOverview showShadow={true}>
-            <CardContent
-              classname={`flex items-center justify-between mb-4 ${data.styling}`}
-            >
+            <CardContent classname={`flex items-center justify-between mb-4 `}>
               <CardBadge
                 classname={`rounded-xl p-3 bg-gradient-to-r from-slate-200 to-slate-300 dark:from-slate-600 dark:to-slate-700`}
               >
