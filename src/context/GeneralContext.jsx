@@ -62,7 +62,7 @@ function GeneralProvider({ children }) {
     });
 
     return () => unsubscribe();
-  }, []);
+  }, [progress]);
 
   //   Fetch function to update the user progress
   useEffect(() => {
@@ -305,6 +305,7 @@ function GeneralProvider({ children }) {
       if (progressSnap.exists()) {
         const data = progressSnap.data();
         setProgress(data);
+
         console.log("📥 Progress loaded:", data);
       } else {
         console.warn("Progress document does not exist.");

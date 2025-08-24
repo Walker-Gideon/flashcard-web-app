@@ -1,4 +1,5 @@
-import { mockData } from "../../../data/mockData";
+import { useEffect, useState } from "react";
+import { useGen } from "../../../context/GeneralContext";
 import { LuTarget } from "react-icons/lu";
 import { LuBookOpen } from "react-icons/lu";
 import { LuClock } from "react-icons/lu";
@@ -7,37 +8,66 @@ import CardOverview from "../../../ui/CardOverview";
 import CardContent from "../../../ui/CardContent";
 import CardBadge from "../../../ui/CardBadge";
 import CardDiscription from "../../../ui/CardDiscription";
-import TargetCardStatus from "./TargetCardStatus";
-import DailyStreak from "../../../ui/DailyStreak";
 
-const cardData = [
+const initialCardData = [
   {
     icon: LuTarget,
-    data: mockData.stats.todaysMastery + "%",
-    text: "Mastery",
-    other: <TargetCardStatus dashboard={true} />,
+    data: 0,
+    text: "Mastery Cards",
   },
   {
     icon: LuBookOpen,
-    data: mockData.stats.flashcardsReviewed,
+    data: 0,
     text: "Cards Today",
     styling: "mb-6",
   },
   {
     icon: LuClock,
-    data: mockData.stats.timeSpent + "m",
+    data: 0 + "m",
     text: "Study Time",
     styling: "mb-6",
   },
   {
     icon: LuFlame,
-    data: <DailyStreak />,
+    data: 0,
     text: "Day Streak",
     styling: "mb-6",
   },
 ];
 
 export default function CardStatus() {
+  const { progress, loadingProgress } = useGen();
+  const [cardData, setCardData] = useState(initialCardData);
+
+  useEffect(() => {
+    if (!loadingProgress && progress) {
+      const today = new Date().toISOString().split("T")[0];
+      const todayCards = progress.studyLogs?.[today] || 0;
+
+      const updated = initialCardData.map((card) => {
+        if (card.text === "Cards Today") {
+          return { ...card, data: todayCards + 1 };
+        }
+
+        if (card.text === "Day Streak") {
+          return { ...card, data: progress?.streakCount };
+        }
+
+        if (card.text === "Study Time") {
+          return { ...card, data: todayCards + "m" };
+        }
+
+        if (card.text === "Mastery Cards") {
+          return { ...card, data: progress?.masteredFlashcards };
+        }
+
+        return card;
+      });
+
+      setCardData(updated);
+    }
+  }, [loadingProgress, progress]);
+
   return (
     <div className="medium:grid-cols-2 grid grid-cols-1 gap-6 lg:grid-cols-4">
       {cardData.map((data, index) => (
@@ -60,7 +90,6 @@ export default function CardStatus() {
                 textTwo={data.text}
               />
             </CardContent>
-            {data.other}
           </CardOverview>
         </div>
       ))}
