@@ -15,7 +15,7 @@ const initialCardData = [
     icon: LuTarget,
     data: 0,
     text: "Cards Today",
-    other: <TargetCardStatus />,
+    other: <TargetCardStatus dashboard={false} />,
   },
   {
     icon: LuClock,
