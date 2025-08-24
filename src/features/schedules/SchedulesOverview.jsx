@@ -1,4 +1,3 @@
-import { schedulesMockData } from "../../data/schedulesMockData.js";
 import { LuTarget } from "react-icons/lu";
 import { LuClock } from "react-icons/lu";
 import { LuFlame } from "react-icons/lu";
@@ -39,7 +38,7 @@ const initialCardData = [
 ];
 
 export default function SchedulesOverview() {
-  const { progress, loadingProgress, totalCardsPerTag } = useGen();
+  const { progress, loadingProgress } = useGen();
   const [cardData, setCardData] = useState(initialCardData);
 
   useEffect(() => {
@@ -54,6 +53,10 @@ export default function SchedulesOverview() {
 
         if (card.text === "Day Streak") {
           return { ...card, data: progress?.streakCount };
+        }
+
+        if (card.text === "Study Time") {
+          return { ...card, data: todayCards + "m" };
         }
 
         return card;
