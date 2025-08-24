@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+import { useGen } from "../../context/GeneralContext.jsx";
 import { LuTarget } from "react-icons/lu";
 import { LuClock } from "react-icons/lu";
 import { LuFlame } from "react-icons/lu";
@@ -7,8 +9,6 @@ import CardOverview from "../../ui/CardOverview.jsx";
 import CardContent from "../../ui/CardContent.jsx";
 import CardBadge from "../../ui/CardBadge.jsx";
 import CardDiscription from "../../ui/CardDiscription.jsx";
-import { useEffect, useState } from "react";
-import { useGen } from "../../context/GeneralContext.jsx";
 
 const initialCardData = [
   {
@@ -38,7 +38,7 @@ const initialCardData = [
 ];
 
 export default function SchedulesOverview() {
-  const { progress, loadingProgress } = useGen();
+  const { progress, loadingProgress, consistencyScore } = useGen();
   const [cardData, setCardData] = useState(initialCardData);
 
   useEffect(() => {
@@ -59,12 +59,16 @@ export default function SchedulesOverview() {
           return { ...card, data: todayCards + "m" };
         }
 
+        if (card.text === "Success Rate") {
+          return { ...card, data: consistencyScore + "%" };
+        }
+
         return card;
       });
 
       setCardData(updated);
     }
-  }, [loadingProgress, progress]);
+  }, [loadingProgress, progress, consistencyScore]);
 
   return (
     <div className="medium:grid-cols-2 grid grid-cols-1 gap-6 lg:grid-cols-4">

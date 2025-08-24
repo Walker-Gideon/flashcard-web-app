@@ -1,36 +1,9 @@
-import { useEffect, useState } from "react";
 import { useGen } from "../../../context/GeneralContext";
 import CardOverview from "../../../ui/CardOverview";
 import HeaderText from "../../../ui/HeaderText";
-import { format, subDays, getDay, addDays } from "date-fns";
 
 export default function Progress() {
-  const { progress } = useGen();
-  const [weeklyData, setWeeklyData] = useState([]);
-  const [consistencyScore, setConsistencyScore] = useState(0);
-
-  useEffect(() => {
-    const today = new Date();
-    const startOfWeek = subDays(today, getDay(today));
-    const thisWeek = [];
-
-    for (let i = 0; i < 7; i++) {
-      const date = addDays(startOfWeek, i);
-      const dateStr = format(date, "yyyy-MM-dd");
-      const weekday = format(date, "EEE");
-
-      thisWeek.push({
-        day: weekday,
-        minutes: progress?.studyLogs?.[dateStr] || 0,
-      });
-    }
-
-    setWeeklyData(thisWeek);
-
-    const studiedDays = thisWeek.filter((day) => day.minutes > 0).length;
-    const score = Math.round((studiedDays / 7) * 100);
-    setConsistencyScore(score);
-  }, [progress?.studyLogs]);
+  const { consistencyScore, weeklyData } = useGen();
 
   const styling = {
     subHeader: "mb-3 text-lg font-medium text-slate-800 dark:text-white",

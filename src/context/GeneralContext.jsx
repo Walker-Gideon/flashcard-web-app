@@ -9,6 +9,7 @@ import {
   setDoc,
 } from "firebase/firestore";
 import { auth, db } from "../firebase";
+import { format, subDays, getDay, addDays } from "date-fns";
 
 const GeneralContext = createContext();
 
@@ -16,7 +17,8 @@ function GeneralProvider({ children }) {
   const [quotes, setQuotes] = useState([]);
   const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
   const [totalCardsPerTag, setTotalCardsPerTag] = useState({});
-  const [cardsStudiedToday, setCardsStudiedToday] = useState(0);
+  const [consistencyScore, setConsistencyScore] = useState(0);
+  const [weeklyData, setWeeklyData] = useState([]);
   //   NB on logout set this setProgress(null);
   const [progress, setProgress] = useState(null);
   const [loadingProgress, setLoadingProgress] = useState(true);
@@ -80,17 +82,6 @@ function GeneralProvider({ children }) {
           ...doc.data(),
         }));
 
-        let todayCount = 0;
-        fetchedFlashcards.forEach((card) => {
-          const rawDate = card.lastStudied?.toDate();
-          const formattedDate = rawDate?.toISOString().split("T")[0];
-
-          if (formattedDate === today) {
-            todayCount += card.pairs.length;
-          }
-        });
-        setCardsStudiedToday(todayCount);
-
         const tagCount = {};
 
         fetchedFlashcards.forEach((card) => {
@@ -109,6 +100,30 @@ function GeneralProvider({ children }) {
     return () => unsubscribe();
   }, []);
 
+  //   updating user weekely progress
+  useEffect(() => {
+    const today = new Date();
+    const startOfWeek = subDays(today, getDay(today));
+    const thisWeek = [];
+
+    for (let i = 0; i < 7; i++) {
+      const date = addDays(startOfWeek, i);
+      const dateStr = format(date, "yyyy-MM-dd");
+      const weekday = format(date, "EEE");
+
+      thisWeek.push({
+        day: weekday,
+        minutes: progress?.studyLogs?.[dateStr] || 0,
+      });
+    }
+
+    setWeeklyData(thisWeek);
+
+    const studiedDays = thisWeek.filter((day) => day.minutes > 0).length;
+    const score = Math.round((studiedDays / 7) * 100);
+    setConsistencyScore(score);
+  }, [progress?.studyLogs, setConsistencyScore]);
+
   // Get "YYYY-MM-DD" formatted date
   const getTodayDate = () => {
     return new Date().toISOString().split("T")[0];
@@ -119,8 +134,6 @@ function GeneralProvider({ children }) {
     yesterday.setDate(yesterday.getDate() - 1);
     return yesterday.toISOString().split("T")[0];
   };
-
-  const today = getTodayDate();
 
   // For the STREAK
   const updateStreak = async () => {
@@ -307,10 +320,13 @@ function GeneralProvider({ children }) {
     quotes,
     progress,
     setQuotes,
+    weeklyData,
+    setWeeklyData,
     loadingProgress,
+    consistencyScore,
     totalCardsPerTag,
-    cardsStudiedToday,
     currentQuoteIndex,
+    setConsistencyScore,
     // functions
     logStudyTime,
     updateStreak,
