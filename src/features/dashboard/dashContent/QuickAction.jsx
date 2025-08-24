@@ -5,17 +5,16 @@ import { LuZap } from "react-icons/lu";
 import { LuCalendar } from "react-icons/lu";
 import useLoaderAction from "../../../utils/LoaderAction";
 
-const actionsData = [
+const initialActionData = [
   {
     icon: LuPlus,
-    text: "New Card",
-    to: "flashcards",
+    text: "Add Note",
+    to: "notes",
   },
   {
     icon: LuPlay,
     text: "Study Now",
-    // will chnage this later in the course of time
-    to: "notes",
+    to: "flashcards",
   },
   {
     icon: LuZap,
@@ -39,10 +38,17 @@ export default function QuickAction() {
       </h3>
 
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-        {actionsData.map((data, index) => (
+        {initialActionData.map((data, index) => (
           <button
             key={index}
-            onClick={() => navigate(data.to)}
+            onClick={() => {
+              if (data.popAction) {
+                navigate("/flashcards");
+                data.popAction();
+              } else if (data.to) {
+                navigate(data.to);
+              }
+            }}
             className="group flex cursor-pointer flex-col items-center space-y-3 rounded-xl bg-slate-50 p-6 transition-all duration-300 hover:scale-105 hover:bg-slate-100 hover:shadow-md dark:bg-slate-700/50 dark:hover:bg-slate-700"
           >
             <div className="rounded-xl bg-slate-300 p-3 transition-colors group-hover:bg-slate-200 dark:bg-slate-500">
