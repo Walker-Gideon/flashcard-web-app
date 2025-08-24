@@ -8,38 +8,54 @@ import CardOverview from "../../ui/CardOverview.jsx";
 import CardContent from "../../ui/CardContent.jsx";
 import CardBadge from "../../ui/CardBadge.jsx";
 import CardDiscription from "../../ui/CardDiscription.jsx";
-import DailyStreak from "../../ui/DailyStreak.jsx";
+import { useEffect, useState } from "react";
+import { useGen } from "../../context/GeneralContext.jsx";
 
-const cardData = [
+const initialCardData = [
   {
     icon: LuTarget,
-    data:
-      schedulesMockData.todayStats.completedCards /
-      schedulesMockData.todayStats.dueCards,
+    data: 0,
     text: "Cards Today",
     other: <TargetCardStatus />,
   },
   {
     icon: LuClock,
-    data: schedulesMockData.todayStats.studyTime + "m",
+    data: 0 + "m",
     text: "Study Time",
     styling: "mb-6",
   },
   {
     icon: LuFlame,
-    data: <DailyStreak />,
+    data: 0,
     text: "Day Streak",
     styling: "mb-6",
   },
   {
     icon: LuTrendingUp,
-    data: schedulesMockData.todayStats.completionRate + "%",
+    data: 0 + "%",
     text: "Success Rate",
     styling: "mb-6",
   },
 ];
 
 export default function SchedulesOverview() {
+  const { progress, loadingProgress, totalCardsPerTag } = useGen();
+  const [cardData, setCardData] = useState(initialCardData);
+
+  useEffect(() => {
+    if (!loadingProgress && progress) {
+      const updated = initialCardData.map((card) => {
+        if (card.text === "Day Streak") {
+          return { ...card, data: progress?.streakCount };
+        }
+
+        return card;
+      });
+
+      setCardData(updated);
+    }
+  }, [loadingProgress, progress]);
+
   return (
     <div className="medium:grid-cols-2 grid grid-cols-1 gap-6 lg:grid-cols-4">
       {cardData.map((data, index) => (
