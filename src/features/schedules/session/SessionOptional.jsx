@@ -22,7 +22,13 @@ export default function SessionOptional() {
           value={formData.estimatedTime}
           onChange={(e) => {
             const value = parseInt(e.target.value);
-            if (isNaN(value) || value < 1 || value > 180) return;
+            if (isNaN(value) || value < 1 || value > 180) {
+              setFormData((prev) => ({
+                ...prev,
+                estimatedTime: "",
+              }));
+              return;
+            }
 
             setFormData((prev) => ({
               ...prev,
