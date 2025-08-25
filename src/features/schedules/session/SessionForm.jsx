@@ -100,7 +100,7 @@ export default function SessionForm({ isSubmitting }) {
       </div>
 
       {/* Action Buttons */}
-      <div className="flex space-x-3 pt-4">
+      <div className="flex w-full justify-between space-x-3 pt-4">
         <Button
           type="button"
           variant="outline"
@@ -109,7 +109,7 @@ export default function SessionForm({ isSubmitting }) {
               setSessionModel((show) => !show);
             }, 500)
           }
-          classname="flex-1 button"
+          classname="button dark:border-stone-300 border-slate-500 w-full dark:text-white"
           disabled={isSubmitting}
         >
           Cancel
@@ -117,7 +117,7 @@ export default function SessionForm({ isSubmitting }) {
         <Button
           type="submit"
           variant="outline"
-          classname="primaryButton flex-1"
+          classname="primaryButton w-full flex items-center justify-center"
           disabled={isSubmitting}
         >
           {isSubmitting ? (

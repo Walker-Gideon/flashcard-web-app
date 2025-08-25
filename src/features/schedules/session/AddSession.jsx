@@ -4,7 +4,7 @@ import SessionHeader from "./SessionHeader";
 import SessionForm from "./SessionForm";
 
 export default function AddSession() {
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(true);
 
   return (
     <Overlay model={true} type={"model"}>
