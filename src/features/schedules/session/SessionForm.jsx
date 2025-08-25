@@ -7,7 +7,7 @@ import Button from "../../../ui/Button";
 import { useGen } from "../../../context/GeneralContext";
 
 export default function SessionForm({ isSubmitting }) {
-  const { setSessionModel, formData, setFormData } = useGen();
+  const { setSessionModel, formData, setFormData, flashcards } = useGen();
 
   const inputStyling = `w-full dark:text-white pl-10  disabled:cursor-not-allowed`;
 
@@ -18,16 +18,35 @@ export default function SessionForm({ isSubmitting }) {
           Select Tag *
         </label>
         <select
+          value={formData.tag}
+          onChange={(e) => {
+            const selectedTag = e.target.value;
+
+            // Find the flashcard that matches this tag
+            const selectedCard = flashcards.find(
+              (card) => card.tags?.trim() === selectedTag,
+            );
+
+            const cardCount = selectedCard?.pairs?.length || 0;
+
+            setFormData((prev) => ({
+              ...prev,
+              tag: selectedTag,
+              count: cardCount,
+            }));
+          }}
           className="input w-full disabled:cursor-not-allowed dark:bg-slate-700 dark:text-white"
           disabled={isSubmitting}
         >
-          <option value="" disabled selected hidden>
-            e.g., Biology, French Verbs
+          <option value="" disabled hidden>
+            Select a flashcard tag
           </option>
-          <option value="easy">Easy</option>
-          <option value="medium">Medium</option>
-          <option value="hard">Hard</option>
-          <option value="mixed">Mixed</option>
+
+          {flashcards.map((card) => (
+            <option key={card.id} value={card.tags?.trim()}>
+              {card.tags || "Untitled"}
+            </option>
+          ))}
         </select>
       </div>
 

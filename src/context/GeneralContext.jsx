@@ -26,6 +26,7 @@ function GeneralProvider({ children }) {
 
   // Schedules
   const [sessionModel, setSessionModel] = useState(false);
+  const [flashcards, setFlashcards] = useState([]);
   const [formData, setFormData] = useState({
     tag: "",
     count: "",
@@ -92,6 +93,10 @@ function GeneralProvider({ children }) {
           id: doc.id,
           ...doc.data(),
         }));
+
+        console.log(fetchedFlashcards);
+        // For the add session in the schedule section
+        setFlashcards(fetchedFlashcards);
 
         const tagCount = {};
 
@@ -334,6 +339,7 @@ function GeneralProvider({ children }) {
     progress,
     setQuotes,
     weeklyData,
+    flashcards,
     setFormData,
     sessionModel,
     setWeeklyData,
