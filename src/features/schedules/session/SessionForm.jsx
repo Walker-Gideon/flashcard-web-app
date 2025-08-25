@@ -29,7 +29,8 @@ export default function SessionForm() {
             type="number"
             placeholder="e.g., 15"
             classname={inputStyling}
-            disabled={isSubmitting}
+            disabled={true}
+            value={formData.count}
           />
         </div>
       </div>
@@ -47,6 +48,10 @@ export default function SessionForm() {
               type="date"
               classname={inputStyling}
               disabled={isSubmitting}
+              value={formData.date}
+              onChange={(e) =>
+                setFormData((prev) => ({ ...prev, date: e.target.value }))
+              }
             />
           </div>
         </div>
@@ -62,6 +67,10 @@ export default function SessionForm() {
               type="time"
               classname={inputStyling}
               disabled={isSubmitting}
+              value={formData.time}
+              onChange={(e) =>
+                setFormData((prev) => ({ ...prev, time: e.target.value }))
+              }
             />
           </div>
         </div>
@@ -81,6 +90,13 @@ export default function SessionForm() {
             placeholder="Auto-calculated if empty"
             classname={inputStyling}
             disabled={isSubmitting}
+            value={formData.estimatedTime}
+            onChange={(e) =>
+              setFormData((prev) => ({
+                ...prev,
+                estimatedTime: e.target.value,
+              }))
+            }
           />
         </div>
         <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
