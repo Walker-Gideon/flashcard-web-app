@@ -1,3 +1,12 @@
+import {
+  collection,
+  onSnapshot,
+  doc,
+  getDoc,
+  updateDoc,
+  setDoc,
+} from "firebase/firestore";
+import { db } from "../../../../firebase";
 import { LuPlay } from "react-icons/lu";
 import { LuPlus } from "react-icons/lu";
 import { LuClock } from "react-icons/lu";
@@ -11,9 +20,34 @@ import CardContent from "../../../../ui/CardContent";
 import CardDiscription from "../../../../ui/CardDiscription";
 import CardOverview from "../../../../ui/CardOverview";
 import { useGen } from "../../../../context/GeneralContext";
+import { useEffect, useState } from "react";
+import { useAuth } from "../../../../context/AuthContext";
 
 export default function SchedulesToday({ schedulesMockData, activeView }) {
+  const { user } = useAuth();
   const { setSessionModel } = useGen();
+  const [sessions, setSessions] = useState([]);
+
+  useEffect(() => {
+    if (!user?.uid) return;
+
+    const sessionsRef = collection(db, "users", user.uid, "schedules");
+
+    const unsubscribe = onSnapshot(sessionsRef, (snapshot) => {
+      const fetchedSessions = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setSessions(fetchedSessions);
+    });
+
+    return () => unsubscribe();
+  }, [user]);
+  console.log(sessions);
+
+  console.log(
+    "4fa47390-8e81-4d56-b652-682747485830" === "jOSWigpOFbDkqbRO7MyA",
+  );
 
   const sizing = "h-4 w-4";
   const getStatusIcon = (status) => {
