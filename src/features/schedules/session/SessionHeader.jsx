@@ -3,8 +3,8 @@ import HeaderText from "../../../ui/HeaderText";
 import Button from "../../../ui/Button";
 import { useGen } from "../../../context/GeneralContext";
 
-export default function SessionHeader({ isSubmitting }) {
-  const { setSessionModel } = useGen();
+export default function SessionHeader() {
+  const { setSessionModel, isSubmitting } = useGen();
 
   return (
     <header className="mb-6 flex items-center justify-between">

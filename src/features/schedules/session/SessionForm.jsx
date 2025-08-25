@@ -5,50 +5,18 @@ import { LuPlus } from "react-icons/lu";
 import Input from "../../../ui/Input";
 import Button from "../../../ui/Button";
 import { useGen } from "../../../context/GeneralContext";
+import SessionSelectTag from "./SessionSelectTag";
 
-export default function SessionForm({ isSubmitting }) {
-  const { setSessionModel, formData, setFormData, flashcards } = useGen();
+export default function SessionForm() {
+  const { setSessionModel, formData, setFormData, flashcards, isSubmitting } =
+    useGen();
 
   const inputStyling = `w-full dark:text-white pl-10  disabled:cursor-not-allowed`;
 
   return (
     <form onSubmit={() => {}} className="space-y-4">
-      <div>
-        <label className="mb-2 block text-sm font-medium text-slate-700 dark:text-slate-300">
-          Select Tag *
-        </label>
-        <select
-          value={formData.tag}
-          onChange={(e) => {
-            const selectedTag = e.target.value;
-
-            // Find the flashcard that matches this tag
-            const selectedCard = flashcards.find(
-              (card) => card.tags?.trim() === selectedTag,
-            );
-
-            const cardCount = selectedCard?.pairs?.length || 0;
-
-            setFormData((prev) => ({
-              ...prev,
-              tag: selectedTag,
-              count: cardCount,
-            }));
-          }}
-          className="input w-full disabled:cursor-not-allowed dark:bg-slate-700 dark:text-white"
-          disabled={isSubmitting}
-        >
-          <option value="" disabled hidden>
-            Select a flashcard tag
-          </option>
-
-          {flashcards.map((card) => (
-            <option key={card.id} value={card.tags?.trim()}>
-              {card.tags || "Untitled"}
-            </option>
-          ))}
-        </select>
-      </div>
+      {/* Select Tag */}
+      <SessionSelectTag />
 
       {/* Card Count */}
       <div>

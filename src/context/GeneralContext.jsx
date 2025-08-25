@@ -25,6 +25,7 @@ function GeneralProvider({ children }) {
   const [loadingProgress, setLoadingProgress] = useState(true);
 
   // Schedules
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [sessionModel, setSessionModel] = useState(false);
   const [flashcards, setFlashcards] = useState([]);
   const [formData, setFormData] = useState({
@@ -342,7 +343,9 @@ function GeneralProvider({ children }) {
     flashcards,
     setFormData,
     sessionModel,
+    isSubmitting,
     setWeeklyData,
+    setIsSubmitting,
     loadingProgress,
     setSessionModel,
     consistencyScore,
