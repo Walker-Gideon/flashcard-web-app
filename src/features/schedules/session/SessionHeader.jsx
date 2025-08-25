@@ -3,7 +3,7 @@ import HeaderText from "../../../ui/HeaderText";
 import Button from "../../../ui/Button";
 import { useGen } from "../../../context/GeneralContext";
 
-export default function SessionHeader() {
+export default function SessionHeader({ setError }) {
   const { setSessionModel, isSubmitting, setFormData } = useGen();
 
   return (
@@ -23,6 +23,7 @@ export default function SessionHeader() {
               time: "",
               estimatedTime: "",
             });
+            setError("");
           }, 500)
         }
         disabled={isSubmitting}
