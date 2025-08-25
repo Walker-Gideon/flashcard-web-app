@@ -9,7 +9,7 @@ export default function AddSession() {
   return (
     <Overlay model={true} type={"model"}>
       <div className="w-full max-w-md rounded-2xl border border-slate-200 bg-white p-6 shadow-2xl dark:border-slate-700 dark:bg-slate-800">
-        <SessionHeader />
+        <SessionHeader isSubmitting={isSubmitting} />
         <SessionForm isSubmitting={isSubmitting} />
       </div>
     </Overlay>

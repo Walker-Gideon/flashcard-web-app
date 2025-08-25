@@ -3,7 +3,7 @@ import HeaderText from "../../../ui/HeaderText";
 import Button from "../../../ui/Button";
 import { useGen } from "../../../context/GeneralContext";
 
-export default function SessionHeader() {
+export default function SessionHeader({ isSubmitting }) {
   const { setSessionModel } = useGen();
 
   return (
@@ -18,7 +18,8 @@ export default function SessionHeader() {
             setSessionModel((show) => !show);
           }, 500)
         }
-        classname="rounded-lg p-1 text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-700 dark:text-slate-400 dark:hover:bg-slate-700 dark:hover:text-slate-200"
+        disabled={isSubmitting}
+        classname="rounded-lg p-1 text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-700 dark:text-slate-400 dark:hover:bg-slate-700 dark:hover:text-slate-200 disabled:cursor-not-allowed"
       >
         <LuX className="h-5 w-5" />
       </Button>
