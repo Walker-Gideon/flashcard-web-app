@@ -18,6 +18,7 @@ export default function SessionHeader({ setError }) {
             setSessionModel((show) => !show);
             setFormData({
               tag: "",
+              tagId: "",
               count: "",
               date: "",
               time: "",

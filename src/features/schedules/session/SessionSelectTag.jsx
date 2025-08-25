@@ -12,17 +12,15 @@ export default function SessionSelectTag() {
         value={formData.tag}
         onChange={(e) => {
           const selectedTag = e.target.value;
-
-          // Find the flashcard that matches this tag
           const selectedCard = flashcards.find(
             (card) => card.tags?.trim() === selectedTag,
           );
-
           const cardCount = selectedCard?.pairs?.length || 0;
 
           setFormData((prev) => ({
             ...prev,
             tag: selectedTag,
+            tagId: selectedCard?.id || "",
             count: cardCount,
           }));
         }}
@@ -33,11 +31,15 @@ export default function SessionSelectTag() {
           Select a flashcard tag
         </option>
 
-        {flashcards.map((card) => (
-          <option key={card.id} value={card.tags?.trim()}>
-            {card.tags || "Untitled"}
-          </option>
-        ))}
+        {flashcards.length === 0 ? (
+          <option disabled>No flashcards found</option>
+        ) : (
+          flashcards.map((card) => (
+            <option key={card.id} value={card.tags?.trim()}>
+              {card.tags || "Untitled"}
+            </option>
+          ))
+        )}
       </select>
     </div>
   );

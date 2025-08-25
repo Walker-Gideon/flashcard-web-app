@@ -23,7 +23,7 @@ export default function SessionForm({ error, setError }) {
     const user = auth.currentUser;
     if (!user) return;
 
-    const { tag, count, date, time, estimatedTime } = formData;
+    const { tag, tagId, count, date, time, estimatedTime } = formData;
 
     // 1. Validation
     if (!tag || !count || !date || !time) {
@@ -42,6 +42,7 @@ export default function SessionForm({ error, setError }) {
     // 4. Prepare session data
     const sessionData = {
       tag: tag.trim(),
+      tagId: tagId,
       count: Number(count),
       scheduledAt: scheduleTimestamp,
       estimatedTime: finalTime,
@@ -56,6 +57,7 @@ export default function SessionForm({ error, setError }) {
       // 5. Reset form and close modal
       setFormData({
         tag: "",
+        tagId: "",
         count: "",
         date: "",
         time: "",
@@ -90,6 +92,7 @@ export default function SessionForm({ error, setError }) {
                 setSessionModel((show) => !show);
                 setFormData({
                   tag: "",
+                  tagId: "",
                   count: "",
                   date: "",
                   time: "",

@@ -30,6 +30,7 @@ function GeneralProvider({ children }) {
   const [flashcards, setFlashcards] = useState([]);
   const [formData, setFormData] = useState({
     tag: "",
+    tagId: "",
     count: "",
     date: "",
     time: "",

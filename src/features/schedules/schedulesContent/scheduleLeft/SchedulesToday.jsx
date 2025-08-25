@@ -1,11 +1,4 @@
-import {
-  collection,
-  onSnapshot,
-  doc,
-  getDoc,
-  updateDoc,
-  setDoc,
-} from "firebase/firestore";
+import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "../../../../firebase";
 import { LuPlay } from "react-icons/lu";
 import { LuPlus } from "react-icons/lu";
@@ -44,10 +37,6 @@ export default function SchedulesToday({ schedulesMockData, activeView }) {
     return () => unsubscribe();
   }, [user]);
   console.log(sessions);
-
-  console.log(
-    "4fa47390-8e81-4d56-b652-682747485830" === "jOSWigpOFbDkqbRO7MyA",
-  );
 
   const sizing = "h-4 w-4";
   const getStatusIcon = (status) => {
