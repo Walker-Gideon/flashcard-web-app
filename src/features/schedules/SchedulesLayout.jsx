@@ -3,6 +3,7 @@ import SchedulesOverview from "./SchedulesOverview";
 import SchedulesMainContent from "./SchedulesMainContent";
 import { useState } from "react";
 import ScheduleHeaderButtons from "./ScheduleHeaderButtons";
+import AddSession from "./session/AddSession";
 
 export default function SchedulesLayout() {
   const [activeView, setActiveView] = useState("today"); // today, week, month
@@ -24,6 +25,8 @@ export default function SchedulesLayout() {
 
         <SchedulesMainContent activeView={activeView} />
       </main>
+
+      <AddSession />
     </div>
   );
 }
