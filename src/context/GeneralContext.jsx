@@ -14,6 +14,7 @@ import { format, subDays, getDay, addDays } from "date-fns";
 const GeneralContext = createContext();
 
 function GeneralProvider({ children }) {
+  // Inspire
   const [quotes, setQuotes] = useState([]);
   const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
   const [totalCardsPerTag, setTotalCardsPerTag] = useState({});
@@ -25,6 +26,13 @@ function GeneralProvider({ children }) {
 
   // Schedules
   const [sessionModel, setSessionModel] = useState(false);
+  const [formData, setFormData] = useState({
+    tag: "",
+    count: "",
+    date: "",
+    time: "",
+    estimatedTime: "",
+  });
 
   //   Fetch the quotes
   useEffect(() => {
@@ -322,9 +330,11 @@ function GeneralProvider({ children }) {
 
   const value = {
     quotes,
+    formData,
     progress,
     setQuotes,
     weeklyData,
+    setFormData,
     sessionModel,
     setWeeklyData,
     loadingProgress,

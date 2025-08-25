@@ -7,7 +7,7 @@ import Button from "../../../ui/Button";
 import { useGen } from "../../../context/GeneralContext";
 
 export default function SessionForm({ isSubmitting }) {
-  const { setSessionModel } = useGen();
+  const { setSessionModel, formData, setFormData } = useGen();
 
   const inputStyling = `w-full dark:text-white pl-10  disabled:cursor-not-allowed`;
 
