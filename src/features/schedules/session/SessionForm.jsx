@@ -9,6 +9,8 @@ import { useGen } from "../../../context/GeneralContext";
 export default function SessionForm({ isSubmitting }) {
   const { setSessionModel } = useGen();
 
+  const inputStyling = `w-full dark:text-white pl-10  disabled:cursor-not-allowed`;
+
   return (
     <form onSubmit={() => {}} className="space-y-4">
       <div>
@@ -16,7 +18,7 @@ export default function SessionForm({ isSubmitting }) {
           Select Tag *
         </label>
         <select
-          className="input w-full dark:bg-slate-700 dark:text-white"
+          className="input w-full disabled:cursor-not-allowed dark:bg-slate-700 dark:text-white"
           disabled={isSubmitting}
         >
           <option value="" disabled selected hidden>
@@ -39,7 +41,7 @@ export default function SessionForm({ isSubmitting }) {
           <Input
             type="number"
             placeholder="e.g., 15"
-            classname={`w-full dark:text-white pl-10`}
+            classname={inputStyling}
             disabled={isSubmitting}
           />
         </div>
@@ -56,7 +58,7 @@ export default function SessionForm({ isSubmitting }) {
             <LuCalendar className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-slate-400" />
             <Input
               type="date"
-              classname={`w-full pl-10 dark:text-white`}
+              classname={inputStyling}
               disabled={isSubmitting}
             />
           </div>
@@ -71,7 +73,7 @@ export default function SessionForm({ isSubmitting }) {
             <LuClock className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-slate-400" />
             <Input
               type="time"
-              classname={`w-full pl-10 dark:text-white`}
+              classname={inputStyling}
               disabled={isSubmitting}
             />
           </div>
@@ -90,7 +92,7 @@ export default function SessionForm({ isSubmitting }) {
             min="1"
             max="180"
             placeholder="Auto-calculated if empty"
-            classname="pl-10 w-full dark:text-white"
+            classname={inputStyling}
             disabled={isSubmitting}
           />
         </div>
@@ -109,7 +111,7 @@ export default function SessionForm({ isSubmitting }) {
               setSessionModel((show) => !show);
             }, 500)
           }
-          classname="button dark:border-stone-300 border-slate-500 w-full dark:text-white"
+          classname="button dark:border-stone-300 border-slate-500 w-full dark:text-white disabled:cursor-not-allowed"
           disabled={isSubmitting}
         >
           Cancel
@@ -117,7 +119,7 @@ export default function SessionForm({ isSubmitting }) {
         <Button
           type="submit"
           variant="outline"
-          classname="primaryButton w-full flex items-center justify-center"
+          classname="primaryButton w-full flex items-center justify-center disabled:bg-gray-400 disabled:cursor-not-allowed"
           disabled={isSubmitting}
         >
           {isSubmitting ? (
