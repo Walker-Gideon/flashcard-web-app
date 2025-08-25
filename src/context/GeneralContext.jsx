@@ -23,6 +23,9 @@ function GeneralProvider({ children }) {
   const [progress, setProgress] = useState(null);
   const [loadingProgress, setLoadingProgress] = useState(true);
 
+  // Schedules
+  const [sessionModel, setSessionModel] = useState(false);
+
   //   Fetch the quotes
   useEffect(() => {
     const quoteRef = collection(db, "quotes");
@@ -322,8 +325,10 @@ function GeneralProvider({ children }) {
     progress,
     setQuotes,
     weeklyData,
+    sessionModel,
     setWeeklyData,
     loadingProgress,
+    setSessionModel,
     consistencyScore,
     totalCardsPerTag,
     currentQuoteIndex,

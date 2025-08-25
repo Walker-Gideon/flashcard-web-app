@@ -10,8 +10,11 @@ import CardHeader from "../../../../ui/CardHeader";
 import CardContent from "../../../../ui/CardContent";
 import CardDiscription from "../../../../ui/CardDiscription";
 import CardOverview from "../../../../ui/CardOverview";
+import { useGen } from "../../../../context/GeneralContext";
 
 export default function SchedulesToday({ schedulesMockData, activeView }) {
+  const { setSessionModel } = useGen();
+
   const sizing = "h-4 w-4";
   const getStatusIcon = (status) => {
     switch (status) {
@@ -35,6 +38,11 @@ export default function SchedulesToday({ schedulesMockData, activeView }) {
           <CardHeader title="Today's Sessions">
             <Button
               variant="outline"
+              onClick={() =>
+                setTimeout(() => {
+                  setSessionModel((show) => !show);
+                }, 500)
+              }
               classname="button flex items-center border-0 space-x-2 px-4 py-2 bg-slate-500 text-white hover:bg-slate-600 focus:ring-slate-300"
             >
               <LuPlus className="h-4 w-4" />

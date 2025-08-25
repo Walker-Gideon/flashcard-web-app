@@ -4,8 +4,10 @@ import SchedulesMainContent from "./SchedulesMainContent";
 import { useState } from "react";
 import ScheduleHeaderButtons from "./ScheduleHeaderButtons";
 import AddSession from "./session/AddSession";
+import { useGen } from "../../context/GeneralContext";
 
 export default function SchedulesLayout() {
+  const { sessionModel } = useGen();
   const [activeView, setActiveView] = useState("today"); // today, week, month
   // const [selectedDate, setSelectedDate] = useState(new Date());
 
@@ -26,7 +28,7 @@ export default function SchedulesLayout() {
         <SchedulesMainContent activeView={activeView} />
       </main>
 
-      <AddSession />
+      {sessionModel && <AddSession />}
     </div>
   );
 }
