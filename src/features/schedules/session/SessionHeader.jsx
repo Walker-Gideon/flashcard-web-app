@@ -4,7 +4,7 @@ import Button from "../../../ui/Button";
 import { useGen } from "../../../context/GeneralContext";
 
 export default function SessionHeader() {
-  const { setSessionModel, isSubmitting } = useGen();
+  const { setSessionModel, isSubmitting, setFormData } = useGen();
 
   return (
     <header className="mb-6 flex items-center justify-between">
@@ -16,6 +16,13 @@ export default function SessionHeader() {
         onClick={() =>
           setTimeout(() => {
             setSessionModel((show) => !show);
+            setFormData({
+              tag: "",
+              count: "",
+              date: "",
+              time: "",
+              estimatedTime: "",
+            });
           }, 500)
         }
         disabled={isSubmitting}

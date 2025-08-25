@@ -7,7 +7,7 @@ import SessionDate from "./SessionDate";
 import SessionCardCount from "./SessionCardCount";
 
 export default function SessionForm() {
-  const { setSessionModel, isSubmitting } = useGen();
+  const { setSessionModel, isSubmitting, setFormData } = useGen();
 
   return (
     <form onSubmit={() => {}} className="space-y-4">
@@ -23,6 +23,13 @@ export default function SessionForm() {
           onClick={() =>
             setTimeout(() => {
               setSessionModel((show) => !show);
+              setFormData({
+                tag: "",
+                count: "",
+                date: "",
+                time: "",
+                estimatedTime: "",
+              });
             }, 500)
           }
           classname="button dark:border-stone-300 border-slate-500 w-full dark:text-white disabled:cursor-not-allowed"
