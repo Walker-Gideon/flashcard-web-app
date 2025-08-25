@@ -1,47 +1,21 @@
-import { LuTarget } from "react-icons/lu";
-
 import { LuPlus } from "react-icons/lu";
-import Input from "../../../ui/Input";
 import Button from "../../../ui/Button";
 import { useGen } from "../../../context/GeneralContext";
 import SessionSelectTag from "./SessionSelectTag";
 import SessionOptional from "./SessionOptional";
 import SessionDate from "./SessionDate";
+import SessionCardCount from "./SessionCardCount";
 
 export default function SessionForm() {
-  const { setSessionModel, formData, isSubmitting } = useGen();
-
-  const inputStyling = `w-full dark:text-white pl-10  disabled:cursor-not-allowed`;
+  const { setSessionModel, isSubmitting } = useGen();
 
   return (
     <form onSubmit={() => {}} className="space-y-4">
-      {/* Select Tag */}
       <SessionSelectTag />
-
-      {/* Card Count */}
-      <div>
-        <label className="mb-2 block text-sm font-medium text-slate-700 dark:text-slate-300">
-          Number of Cards
-        </label>
-        <div className="relative">
-          <LuTarget className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-slate-400" />
-          <Input
-            type="number"
-            placeholder="e.g., 15"
-            classname={inputStyling}
-            disabled={true}
-            value={formData.count}
-          />
-        </div>
-      </div>
-
-      {/* Date and Time Row */}
+      <SessionCardCount />
       <SessionDate />
-
-      {/* Estimated Time (Optional) */}
       <SessionOptional />
 
-      {/* Action Buttons */}
       <div className="flex w-full justify-between space-x-3 pt-4">
         <Button
           type="button"
