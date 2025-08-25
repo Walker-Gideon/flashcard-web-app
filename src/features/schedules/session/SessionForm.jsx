@@ -6,10 +6,10 @@ import Input from "../../../ui/Input";
 import Button from "../../../ui/Button";
 import { useGen } from "../../../context/GeneralContext";
 import SessionSelectTag from "./SessionSelectTag";
+import SessionOptional from "./SessionOptional";
 
 export default function SessionForm() {
-  const { setSessionModel, formData, setFormData, flashcards, isSubmitting } =
-    useGen();
+  const { setSessionModel, formData, setFormData, isSubmitting } = useGen();
 
   const inputStyling = `w-full dark:text-white pl-10  disabled:cursor-not-allowed`;
 
@@ -77,32 +77,7 @@ export default function SessionForm() {
       </div>
 
       {/* Estimated Time (Optional) */}
-      <div>
-        <label className="mb-2 block text-sm font-medium text-slate-700 dark:text-slate-300">
-          Estimated Time (minutes)
-        </label>
-        <div className="relative">
-          <LuClock className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-slate-400" />
-          <Input
-            type="number"
-            min="1"
-            max="180"
-            placeholder="Auto-calculated if empty"
-            classname={inputStyling}
-            disabled={isSubmitting}
-            value={formData.estimatedTime}
-            onChange={(e) =>
-              setFormData((prev) => ({
-                ...prev,
-                estimatedTime: e.target.value,
-              }))
-            }
-          />
-        </div>
-        <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
-          Leave empty for auto-calculation (~2 min per card)
-        </p>
-      </div>
+      <SessionOptional />
 
       {/* Action Buttons */}
       <div className="flex w-full justify-between space-x-3 pt-4">
