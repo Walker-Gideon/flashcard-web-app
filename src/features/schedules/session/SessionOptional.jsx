@@ -20,12 +20,15 @@ export default function SessionOptional() {
           classname={`w-full dark:text-white pl-10  disabled:cursor-not-allowed`}
           disabled={isSubmitting}
           value={formData.estimatedTime}
-          onChange={(e) =>
+          onChange={(e) => {
+            const value = parseInt(e.target.value);
+            if (isNaN(value) || value < 1 || value > 180) return;
+
             setFormData((prev) => ({
               ...prev,
-              estimatedTime: e.target.value,
-            }))
-          }
+              estimatedTime: value,
+            }));
+          }}
         />
       </div>
       <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
