@@ -1,7 +1,3 @@
-import { collection, onSnapshot } from "firebase/firestore";
-import { db } from "../../../../firebase";
-import { useEffect, useState } from "react";
-import { useAuth } from "../../../../context/AuthContext";
 import { useGen } from "../../../../context/GeneralContext";
 import { format, isSameDay } from "date-fns";
 import { LuPlay } from "react-icons/lu";
@@ -15,26 +11,7 @@ import CardDiscription from "../../../../ui/CardDiscription";
 import CardOverview from "../../../../ui/CardOverview";
 
 export default function SchedulesToday({ activeView }) {
-  const { user } = useAuth();
-  const { setSessionModel } = useGen();
-  const [sessions, setSessions] = useState([]);
-
-  useEffect(() => {
-    if (!user?.uid) return;
-
-    const sessionsRef = collection(db, "users", user.uid, "schedules");
-
-    const unsubscribe = onSnapshot(sessionsRef, (snapshot) => {
-      const fetchedSessions = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      setSessions(fetchedSessions);
-    });
-
-    return () => unsubscribe();
-  }, [user]);
-  console.log("Here is all the sessions in my database", sessions);
+  const { setSessionModel, sessions } = useGen();
 
   function getScheduleStatus(schedule) {
     const now = new Date();

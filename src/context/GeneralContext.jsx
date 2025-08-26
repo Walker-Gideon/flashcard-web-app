@@ -28,6 +28,7 @@ function GeneralProvider({ children }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [sessionModel, setSessionModel] = useState(false);
   const [flashcards, setFlashcards] = useState([]);
+  const [sessions, setSessions] = useState([]);
   const [formData, setFormData] = useState({
     tag: "",
     tagId: "",
@@ -112,6 +113,26 @@ function GeneralProvider({ children }) {
       });
 
       return () => unsubscribeFlashcards();
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  // Fetching Schedule sessions
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (!user?.uid) return;
+
+      const sessionsRef = collection(db, "users", user.uid, "schedules");
+
+      const unsubscribeSchedule = onSnapshot(sessionsRef, (snapshot) => {
+        const fetchedSessions = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setSessions(fetchedSessions);
+      });
+      return () => unsubscribeSchedule();
     });
 
     return () => unsubscribe();
@@ -337,6 +358,7 @@ function GeneralProvider({ children }) {
   const value = {
     quotes,
     formData,
+    sessions,
     progress,
     setQuotes,
     weeklyData,
