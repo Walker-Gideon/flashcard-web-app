@@ -1,3 +1,11 @@
+import { useGen } from "../../../../context/GeneralContext";
+import {
+  format,
+  startOfWeek,
+  endOfWeek,
+  isWithinInterval,
+  addDays,
+} from "date-fns";
 import { LuChevronRight } from "react-icons/lu";
 import { LuChevronLeft } from "react-icons/lu";
 import CardHeader from "../../../../ui/CardHeader";
@@ -7,6 +15,43 @@ import CardDiscription from "../../../../ui/CardDiscription";
 import CardOverview from "../../../../ui/CardOverview";
 
 export default function ScheduleWeeks({ schedulesMockData, activeView }) {
+  const { sessions } = useGen();
+
+  // Step 1: Get sessions within the current week
+  const weekSessions = sessions.filter((session) => {
+    const scheduledDate = session.scheduledAt?.toDate?.();
+    const now = new Date();
+    const start = startOfWeek(now, { weekStartsOn: 1 }); // Monday
+    const end = endOfWeek(now, { weekStartsOn: 1 }); // Sunday
+
+    return scheduledDate && isWithinInterval(scheduledDate, { start, end });
+  });
+
+  // Step 2: Static days to display (guaranteed order)
+  const now = new Date();
+  const start = startOfWeek(now, { weekStartsOn: 1 }); // Monday
+
+  const weekDays = Array.from({ length: 7 }, (_, index) => {
+    const date = addDays(start, index);
+    return {
+      label: format(date, "EEE"), // e.g., "Mon"
+      date: format(date, "yyyy-MM-dd"), // e.g., "2025-08-25"
+      dayNumber: date.getDate(), // e.g., 25
+    };
+  });
+
+  // Step 3: Group sessions by day
+  const sessionsByDay = {};
+  weekSessions.forEach((session) => {
+    const date = session.scheduledAt?.toDate();
+    const day = format(date, "EEE"); // "Mon", "Tue", etc.
+    if (!sessionsByDay[day]) sessionsByDay[day] = [];
+    sessionsByDay[day].push(session);
+  });
+
+  // console.log("Session for the same week are ", weekSessions);
+  console.log("Session for the same week are ", weekDays);
+
   const styling = {
     btnStling: "rounded-sm p-2 hover:bg-slate-100 dark:hover:bg-slate-600",
     icon: "h-4 w-4 text-slate-600 dark:text-slate-400",
@@ -35,8 +80,9 @@ export default function ScheduleWeeks({ schedulesMockData, activeView }) {
             </div>
           </CardHeader>
 
-          <div className="space-y-4">
-            {schedulesMockData.weeklySchedule.map((day, index) => (
+          <div className="scroll-container h-170 space-y-4 overflow-y-scroll">
+            {weekDays.map((day, index) => (
+              // {schedulesMockData.weeklySchedule.map((day, index) => (
               <CardContent
                 key={day.date}
                 classname={`rounded-xl border p-4 transition-all duration-200 ${
@@ -51,18 +97,18 @@ export default function ScheduleWeeks({ schedulesMockData, activeView }) {
                       classOverall="text-center"
                       classnameFirst="text-xs tracking-wide text-slate-500 uppercase dark:text-slate-400"
                       classnameSecond="text-lg font-bold text-slate-900 dark:text-white"
-                      textOne={day.dayName}
-                      textTwo={new Date(day.date).getDate()}
+                      textOne={day.label}
+                      textTwo={day.dayNumber}
                     />
-                    <CardDiscription
+                    {/* <CardDiscription
                       classnameFirst="font-medium text-slate-900 dark:text-white"
                       classnameSecond="text-sm text-slate-500 dark:text-slate-400"
                       textOne={`${day.totalCards} cards scheduled`}
                       textTwo={`${day.sessions.length} sessions`}
-                    />
+                    /> */}
                   </div>
 
-                  <div className="text-right">
+                  {/* <div className="text-right">
                     <div className="mb-1 h-2 w-16 rounded-full bg-slate-200 dark:bg-slate-700">
                       <div
                         className="h-2 rounded-full bg-slate-500 transition-all duration-300"
@@ -72,10 +118,10 @@ export default function ScheduleWeeks({ schedulesMockData, activeView }) {
                     <p className="text-xs text-slate-500 dark:text-slate-400">
                       {day.completionRate}% done
                     </p>
-                  </div>
+                  </div> */}
                 </CardContent>
 
-                <div className="flex flex-wrap gap-2">
+                {/* <div className="flex flex-wrap gap-2">
                   {day.sessions.map((session, sessionIndex) => (
                     <div
                       key={sessionIndex}
@@ -86,8 +132,8 @@ export default function ScheduleWeeks({ schedulesMockData, activeView }) {
                       <span>•</span>
                       <span>{session.time}</span>
                     </div>
-                  ))}
-                </div>
+                  ))} 
+                </div>*/}
               </CardContent>
             ))}
           </div>
