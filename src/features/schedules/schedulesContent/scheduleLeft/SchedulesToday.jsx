@@ -16,7 +16,7 @@ import { useGen } from "../../../../context/GeneralContext";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../../../context/AuthContext";
 
-export default function SchedulesToday({ schedulesMockData, activeView }) {
+export default function SchedulesToday({ activeView }) {
   const { user } = useAuth();
   const { setSessionModel } = useGen();
   const [sessions, setSessions] = useState([]);
@@ -36,7 +36,7 @@ export default function SchedulesToday({ schedulesMockData, activeView }) {
 
     return () => unsubscribe();
   }, [user]);
-  console.log(sessions);
+  console.log("Here is all the sessions in my database", sessions);
 
   const sizing = "h-4 w-4";
   const getStatusIcon = (status) => {
@@ -73,10 +73,12 @@ export default function SchedulesToday({ schedulesMockData, activeView }) {
             </Button>
           </CardHeader>
 
+          {/* Working here */}
+
           <div className="space-y-4">
-            {schedulesMockData.upcomingSchedules.map((schedule) => (
+            {sessions.map((schedule) => (
               <CardContent
-                key={schedule.id}
+                key={schedule.tagId}
                 role="button"
                 type="innerCard"
                 onClick={() => {}}
@@ -88,8 +90,8 @@ export default function SchedulesToday({ schedulesMockData, activeView }) {
                   <CardDiscription
                     classnameFirst="font-medium text-slate-900 dark:text-white"
                     classnameSecond="text-sm text-slate-500 dark:text-slate-400"
-                    textOne={schedule.subject}
-                    textTwo={`${schedule.cardCount} cards • ${schedule.estimatedTime} min`}
+                    textOne={schedule.tag}
+                    textTwo={`${schedule.count} cards • ${schedule.estimatedTime} min`}
                   />
                 </CardContent>
 
