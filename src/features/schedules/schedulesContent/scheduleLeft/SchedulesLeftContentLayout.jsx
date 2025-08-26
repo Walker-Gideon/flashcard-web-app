@@ -8,10 +8,7 @@ export default function SchedulesLeftContentLayout({ activeView }) {
     <div className="relative space-y-6 lg:col-span-2">
       <SchedulesToday activeView={activeView} />
 
-      <ScheduleWeeks
-        schedulesMockData={schedulesMockData}
-        activeView={activeView}
-      />
+      <ScheduleWeeks activeView={activeView} />
 
       <SchedulesMonth
         schedulesMockData={schedulesMockData}
