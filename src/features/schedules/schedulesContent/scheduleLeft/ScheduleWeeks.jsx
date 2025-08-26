@@ -49,7 +49,6 @@ export default function ScheduleWeeks({ schedulesMockData, activeView }) {
   });
 
   console.log("Session for the same week are ", sessionsByDay);
-  console.log("Session for the day are ", weekDays);
 
   const styling = {
     btnStling: "rounded-sm p-2 hover:bg-slate-100 dark:hover:bg-slate-600",
@@ -81,7 +80,7 @@ export default function ScheduleWeeks({ schedulesMockData, activeView }) {
 
           <div className="scroll-container h-170 space-y-4 overflow-y-scroll">
             {weekDays.map((day) => (
-              /* {schedulesMockData.weeklySchedule.map((day, index) => ( */
+              /*{schedulesMockData.weeklySchedule.map((day, index) => (*/
               <CardContent
                 key={day.date}
                 classname={`rounded-xl border p-4 transition-all duration-200 ${
@@ -92,19 +91,31 @@ export default function ScheduleWeeks({ schedulesMockData, activeView }) {
               >
                 <CardContent classname="mb-3 flex items-center justify-between">
                   <div className="flex items-center space-x-3">
-                    {/* <CardDiscription
+                    <CardDiscription
                       classOverall="text-center"
                       classnameFirst="text-xs tracking-wide text-slate-500 uppercase dark:text-slate-400"
                       classnameSecond="text-lg font-bold text-slate-900 dark:text-white"
                       textOne={day.label}
                       textTwo={day.dayNumber}
-                    /> */}
-                    {/* <CardDiscription
-                      classnameFirst="font-medium text-slate-900 dark:text-white"
-                      classnameSecond="text-sm text-slate-500 dark:text-slate-400"
-                      textOne={`${day.totalCards} cards scheduled`}
-                      textTwo={`${day.sessions.length} sessions`}
-                    /> */}
+                    />
+                    {(() => {
+                      const sessionsForDay = sessionsByDay[day.date] || [];
+
+                      const totalSessions = sessionsForDay.length;
+                      const totalCards = sessionsForDay.reduce(
+                        (sum, session) => sum + Number(session.count || 0),
+                        0,
+                      );
+
+                      return (
+                        <CardDiscription
+                          classnameFirst="font-medium text-slate-900 dark:text-white"
+                          classnameSecond="text-sm text-slate-500 dark:text-slate-400"
+                          textOne={`${totalCards} cards scheduled`}
+                          textTwo={`${totalSessions} session${totalSessions > 1 ? "s" : ""}`}
+                        />
+                      );
+                    })()}
                   </div>
 
                   {/* <div className="text-right">
