@@ -7,10 +7,7 @@ import { format, isSameDay } from "date-fns";
 import { LuPlay } from "react-icons/lu";
 import { LuPlus } from "react-icons/lu";
 import { LuClock } from "react-icons/lu";
-import { LuCalendar } from "react-icons/lu";
-import { LuCircleCheck } from "react-icons/lu";
-import { LuCircleX } from "react-icons/lu";
-import { LuCircleAlert } from "react-icons/lu";
+import { LuZap } from "react-icons/lu";
 import Button from "../../../../ui/Button";
 import CardHeader from "../../../../ui/CardHeader";
 import CardContent from "../../../../ui/CardContent";
@@ -86,10 +83,10 @@ export default function SchedulesToday({ activeView }) {
 
           {/* Working here */}
 
-          <div className="space-y-4">
+          <div className="scroll-container h-170 space-y-4 overflow-y-scroll">
             {todaySessions.map((schedule) => (
               <CardContent
-                key={schedule.tagId}
+                key={schedule.id}
                 role="button"
                 type="innerCard"
                 onClick={() => {}}
