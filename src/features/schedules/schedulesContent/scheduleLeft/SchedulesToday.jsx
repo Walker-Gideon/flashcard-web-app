@@ -1,5 +1,9 @@
 import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "../../../../firebase";
+import { useEffect, useState } from "react";
+import { useAuth } from "../../../../context/AuthContext";
+import { useGen } from "../../../../context/GeneralContext";
+import { format, isSameDay } from "date-fns";
 import { LuPlay } from "react-icons/lu";
 import { LuPlus } from "react-icons/lu";
 import { LuClock } from "react-icons/lu";
@@ -12,9 +16,6 @@ import CardHeader from "../../../../ui/CardHeader";
 import CardContent from "../../../../ui/CardContent";
 import CardDiscription from "../../../../ui/CardDiscription";
 import CardOverview from "../../../../ui/CardOverview";
-import { useGen } from "../../../../context/GeneralContext";
-import { useEffect, useState } from "react";
-import { useAuth } from "../../../../context/AuthContext";
 
 export default function SchedulesToday({ activeView }) {
   const { user } = useAuth();
@@ -38,21 +39,31 @@ export default function SchedulesToday({ activeView }) {
   }, [user]);
   console.log("Here is all the sessions in my database", sessions);
 
-  const sizing = "h-4 w-4";
-  const getStatusIcon = (status) => {
-    switch (status) {
-      case "completed":
-        return <LuCircleCheck className={sizing} />;
-      case "pending":
-        return <LuClock className={sizing} />;
-      case "scheduled":
-        return <LuCalendar className={sizing} />;
-      case "skipped":
-        return <LuCircleX className={sizing} />;
-      default:
-        return <LuCircleAlert className={sizing} />;
+  function getScheduleStatus(schedule) {
+    const now = new Date();
+    const scheduledTime = schedule.scheduledAt?.toDate();
+
+    if (!scheduledTime) return "Invalid";
+
+    if (now < scheduledTime) {
+      return "Pending";
     }
-  };
+
+    return "Scheduled";
+  }
+
+  function getStatusIcon(status) {
+    if (status === "Pending") return <LuClock className="h-3.5 w-3.5" />;
+    if (status === "Scheduled")
+      return <LuZap className="h-3.5 w-3.5 text-red-500" />;
+    if (status === "Completed")
+      return <LuCheck className="h-3.5 w-3.5 text-green-500" />;
+    return null;
+  }
+
+  const todaySessions = sessions
+    .filter((session) => isSameDay(session.scheduledAt.toDate(), new Date()))
+    .sort((a, b) => a.scheduledAt.toDate() - b.scheduledAt.toDate());
 
   return (
     <div className={`${activeView === "today" ? `` : `hidden`}`}>
@@ -76,7 +87,7 @@ export default function SchedulesToday({ activeView }) {
           {/* Working here */}
 
           <div className="space-y-4">
-            {sessions.map((schedule) => (
+            {todaySessions.map((schedule) => (
               <CardContent
                 key={schedule.tagId}
                 role="button"
@@ -98,11 +109,13 @@ export default function SchedulesToday({ activeView }) {
                 <CardContent classname="flex items-center space-x-4">
                   <div className="text-right">
                     <p className="text-sm font-medium text-slate-900 dark:text-white">
-                      {schedule.scheduledTime}
+                      {schedule.scheduledAt?.toDate
+                        ? format(schedule.scheduledAt.toDate(), "HH:mm")
+                        : "Invalid Time"}
                     </p>
                     <span className="inline-flex items-center space-x-1 rounded-full bg-slate-200 px-2 py-1 text-xs font-medium text-slate-700 dark:bg-slate-900/30 dark:text-slate-300">
-                      {getStatusIcon(schedule.status)}
-                      <span>{schedule.status}</span>
+                      {getStatusIcon(getScheduleStatus(schedule))}
+                      <span>{getScheduleStatus(schedule)}</span>
                     </span>
                   </div>
 
