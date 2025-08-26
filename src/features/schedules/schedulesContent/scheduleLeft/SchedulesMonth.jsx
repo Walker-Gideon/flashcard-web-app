@@ -16,7 +16,7 @@ import CardOverview from "../../../../ui/CardOverview";
 import { useState } from "react";
 import Button from "../../../../ui/Button";
 
-export default function SchedulesMonth({ schedulesMockData, activeView }) {
+export default function SchedulesMonth({ activeView }) {
   const [currentMonth, setCurrentMonth] = useState(new Date());
 
   const handlePrevMonth = () => {
@@ -47,8 +47,8 @@ export default function SchedulesMonth({ schedulesMockData, activeView }) {
     return days;
   };
 
+  // Set generatedCalendar to map
   const calendarDays = generateCalendarDays();
-  console.log(calendarDays);
 
   return (
     <div className="mb-8">
@@ -88,31 +88,25 @@ export default function SchedulesMonth({ schedulesMockData, activeView }) {
             ))}
 
             {/* Calendar Days */}
-            {Array.from({ length: 31 }, (_, i) => i + 1).map((day) => {
-              const hasStudy =
-                schedulesMockData.monthlyCalendar.studyDays.includes(day);
-              const isIntense =
-                schedulesMockData.monthlyCalendar.intenseDays.includes(day);
-              const isCompleted =
-                schedulesMockData.monthlyCalendar.completedDays.includes(day);
-              const isToday = day === 17;
+            {calendarDays.map((day) => {
+              const dayNum = day.getDate();
+              const isCurrentMonth = isSameMonth(day, currentMonth);
+              const isTodayDate = isToday(day);
+
+              // 🔁 Later we'll map sessions here
 
               return (
                 <div
-                  key={day}
+                  key={day.toISOString()}
                   className={`flex aspect-square cursor-pointer items-center justify-center rounded-lg text-sm transition-all duration-200 ${
-                    isToday
+                    isTodayDate
                       ? "bg-emerald-500 text-white shadow-md"
-                      : isCompleted
-                        ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300"
-                        : isIntense
-                          ? "bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-300"
-                          : hasStudy
-                            ? "bg-yellow-100 text-yellow-700 hover:bg-yellow-200 dark:bg-yellow-900/30 dark:text-yellow-300 dark:hover:bg-yellow-900/50"
-                            : "text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-700"
+                      : isCurrentMonth
+                        ? "text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-700"
+                        : "text-slate-400 dark:text-slate-600"
                   }`}
                 >
-                  {day}
+                  {dayNum}
                 </div>
               );
             })}
