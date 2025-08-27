@@ -7,6 +7,7 @@ export default function MessageInput({
   isTyping,
 }) {
   return (
+    <div className="absolute w-full -bottom-20 left-0 bg-yellow-500">
     <form onSubmit={handleSubmit} className="mt-6 flex items-center space-x-2">
       <textarea
         value={inputMessage}
@@ -30,5 +31,6 @@ export default function MessageInput({
         <LuSendHorizontal className="h-6 w-6" />
       </button>
     </form>
+    </div>
   );
 }

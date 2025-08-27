@@ -61,7 +61,7 @@ export default function SchedulesToday({ activeView }) {
           {/* Working here */}
 
           <div className="scroll-container h-170 space-y-4 overflow-y-scroll">
-            {sessions.length > 0 ? (
+            {todaySessions.length !== 0 ? (
               todaySessions.map((schedule) => (
                 <CardContent
                   key={schedule.id}

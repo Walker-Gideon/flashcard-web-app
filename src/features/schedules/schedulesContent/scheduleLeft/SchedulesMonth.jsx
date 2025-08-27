@@ -15,9 +15,13 @@ import { LuChevronLeft } from "react-icons/lu";
 import CardOverview from "../../../../ui/CardOverview";
 import { useState } from "react";
 import Button from "../../../../ui/Button";
+import { useGen } from "../../../../context/GeneralContext";
 
 export default function SchedulesMonth({ activeView }) {
+  const { sessions } = useGen();
   const [currentMonth, setCurrentMonth] = useState(new Date());
+
+  console.log(sessions);
 
   const handlePrevMonth = () => {
     setCurrentMonth((prev) => subMonths(prev, 1));

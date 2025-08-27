@@ -12,11 +12,12 @@ export default function ChatMain({
 }) {
   return (
     // flex-1
-    <main className="flex h-full flex-col overflow-hidden bg-red-500 p-1">
+    <div className="flex-1 h-screen flex-col overflow-hidden p-1 bg-red-500 relative overflow-hidden">
       {/* chat-scrollbar overflow-y-auto */}
-      <div className="h-[50vh] flex-1 overflow-y-scroll bg-green-500 pr-2">
-        {/* <RenderMessage messages={messages} /> */}
-        {/* <TypingIndicator isTyping={isTyping} /> */}
+      {/* flex-1 overflow-y-scroll h-[50] */}
+      <div className="pr-2 bg-green-500 h-100">
+        <RenderMessage messages={messages} />
+        <TypingIndicator isTyping={isTyping} />
 
         {/* Invisible div for auto-scroll */}
         <div ref={messagesEndRef} />
@@ -28,6 +29,6 @@ export default function ChatMain({
         inputMessage={inputMessage}
         handleSubmit={handleSubmit}
       />
-    </main>
+    </div>
   );
 }
