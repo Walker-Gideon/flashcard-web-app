@@ -8,6 +8,7 @@ export default function ChatLayout() {
   const { isChatShow } = useChat();
 
   // State for managing chat messages
+  
   const [messages, setMessages] = useState([
     {
       id: 1,
@@ -35,6 +36,13 @@ export default function ChatLayout() {
     scrollToBottom();
   }, [messages]);
 
+  // Prompt message for wrong message
+  const createPrompt = (userInput) => {
+    return `You are a helpful study assistant. Respond to the following message:\n"${userInput}"`
+  }
+
+  const apiKey = import.meta.env.VITE_CHAT_API_KEY;
+
   // Handle form submission for sending messages
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -45,38 +53,42 @@ export default function ChatLayout() {
       id: messages.length + 1,
       text: inputMessage,
       sender: "user",
-    };
+      };
+      
+      // Add user message to chat
+      setMessages((prevMessages) => [...prevMessages, newUserMessage]);
+      setInputMessage("");
+      setIsTyping(true);
+     
+     const response = await fetch(
+       `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
+       {
+         method: "POST",
+         headers: { "Content-Type": "application/json" },
+         body: JSON.stringify({
+           contents: [{ parts: [{ text: createPrompt(inputMessage) }] }],
+         }),
+         
+       }
+     );
 
-    // Add user message to chat
-    setMessages((prevMessages) => [...prevMessages, newUserMessage]);
-    setInputMessage("");
-    setIsTyping(true);
-
-    // Simulate AI response delay
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-
-    // Mock AI response (replace with actual AI integration later)
-    const aiResponses = [
-      "That's a great question! Let me help you understand that better.",
-      "I can see you're working hard on your studies. Here's what I think...",
-      "Based on your question, here's a helpful explanation...",
-      "Great progress! Here's some additional information...",
-      "I understand your query. Let me break this down for you...",
-    ];
-
-    const randomResponse =
-      aiResponses[Math.floor(Math.random() * aiResponses.length)];
+     const responseData = await response.json()
 
     const newAiMessage = {
       id: messages.length + 2,
-      text: randomResponse,
+      text: responseData.candidates?.[0]?.content?.parts?.[0]?.text || "Model not working now!!!!!!",
       sender: "ai",
     };
 
     // Add AI message to chat
     setMessages((prevMessages) => [...prevMessages, newAiMessage]);
     setIsTyping(false);
-  };
+
+
+
+   }
+
+
 
   return (
     <div

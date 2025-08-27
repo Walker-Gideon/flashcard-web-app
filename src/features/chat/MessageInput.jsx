@@ -7,7 +7,7 @@ export default function MessageInput({
   isTyping,
 }) {
   return (
-    <div className="absolute w-full -bottom-20 left-0 bg-yellow-500">
+    <div className="absolute w-full bottom-0 left-0 bg-yellow-500">
     <form onSubmit={handleSubmit} className="mt-6 flex items-center space-x-2">
       <textarea
         value={inputMessage}
