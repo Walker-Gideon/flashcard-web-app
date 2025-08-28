@@ -1,12 +1,5 @@
-import {
-  collection,
-  query,
-  where,
-  getDocs,
-  doc,
-  getDoc,
-} from "firebase/firestore";
-import { auth, db } from "../../../../firebase";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../../../../firebase";
 import { useGen } from "../../../../context/GeneralContext";
 import { format, isSameDay } from "date-fns";
 import { LuPlay } from "react-icons/lu";
@@ -20,10 +13,21 @@ import CardDiscription from "../../../../ui/CardDiscription";
 import CardOverview from "../../../../ui/CardOverview";
 import { useAuth } from "../../../../context/AuthContext";
 import useLoaderAction from "../../../../utils/LoaderAction";
+import { useFlash } from "../../../../context/FlashcardContext";
 
 export default function SchedulesToday({ activeView }) {
   const { user } = useAuth();
   const { setSessionModel, sessions, flashcards } = useGen();
+  const {
+    displayCreatedFlashcard,
+    setQueryFlashcard,
+    setFilteredFlashcard,
+    setCurrentFlashcard,
+    setShowCreateFlashcard,
+    setShowPreview,
+    setReadAlredyFlashcard,
+    SetEditFlashcardData,
+  } = useFlash();
   const navigate = useLoaderAction(1000);
 
   function getScheduleStatus(schedule) {
@@ -52,9 +56,6 @@ export default function SchedulesToday({ activeView }) {
     .filter((session) => isSameDay(session.scheduledAt.toDate(), new Date()))
     .sort((a, b) => a.scheduledAt.toDate() - b.scheduledAt.toDate());
 
-  // console.log(todaySessions);
-  // console.log("sessions is this ", sessions);
-
   async function handleScheduleSession(sessionId) {
     // 1. Get full session from sessions array
     const fullSessionToday = sessions.find(
@@ -72,9 +73,6 @@ export default function SchedulesToday({ activeView }) {
       console.log("No sessionTodayId in session");
       return;
     }
-
-    // const sessionsRef = collection(db, "users", user.uid, "schedules");
-    // const q = query(sessionsRef, where("tagId", "==", tagId));
 
     try {
       // 2. Fetch flashcards related to that tagId
@@ -97,16 +95,22 @@ export default function SchedulesToday({ activeView }) {
           if (element.id === sessionData.tagId) {
             console.log("The flashcards deatils is this ", element);
             navigate("/dashboard/flashcards");
+
+            setCurrentFlashcard({ id: sessionData.tagId, ...element });
+
+            // Display the flashcard on click
+            setShowPreview(true);
+            setShowCreateFlashcard(true);
+            setReadAlredyFlashcard(true);
+
+            // Set the id for the case a user want to edit
+            SetEditFlashcardData({ id: sessionData.tagId, ...element });
           }
         });
       }
 
-      /*
-      
-      console.log("Fetched flashcards:", cards);
-*/
-      // 3. You can now show them on a new screen or modal
-      // E.g., setFlashcards(cards) or navigate("/study", { state: { cards } })
+      setQueryFlashcard("");
+      setFilteredFlashcard(displayCreatedFlashcard);
     } catch (error) {
       console.error("Error fetching flashcards:", error);
     }
