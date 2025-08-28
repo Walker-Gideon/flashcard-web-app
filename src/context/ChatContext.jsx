@@ -6,6 +6,7 @@ function ChatProvider({ children }) {
   const [isChatShow, setIsChatShow] = useState(false);
   const [inputMessage, setInputMessage] = useState("");
   const [isTyping, setIsTyping] = useState(false);
+  const [isRefreshing, setIsRefreshing] = useState(false);
   const [messages, setMessages] = useState([
     {
       id: 1,
@@ -14,7 +15,18 @@ function ChatProvider({ children }) {
     },
   ]);
 
-  const value = { isChatShow, setIsChatShow,inputMessage, setInputMessage,isTyping, setIsTyping,messages, setMessages };
+  const value = {
+    isChatShow,
+    setIsChatShow,
+    inputMessage,
+    setInputMessage,
+    isTyping,
+    setIsTyping,
+    messages,
+    setMessages,
+    isRefreshing,
+    setIsRefreshing,
+  };
 
   return <ChatContext.Provider value={value}>{children}</ChatContext.Provider>;
 }
@@ -29,4 +41,3 @@ function useChat() {
 }
 
 export { ChatProvider, useChat };
-
