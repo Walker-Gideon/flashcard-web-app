@@ -1,3 +1,5 @@
+import { collection, query, where, getDocs } from "firebase/firestore";
+import { auth, db } from "../../../../firebase";
 import { useGen } from "../../../../context/GeneralContext";
 import { format, isSameDay } from "date-fns";
 import { LuPlay } from "react-icons/lu";
@@ -9,8 +11,10 @@ import CardHeader from "../../../../ui/CardHeader";
 import CardContent from "../../../../ui/CardContent";
 import CardDiscription from "../../../../ui/CardDiscription";
 import CardOverview from "../../../../ui/CardOverview";
+import { useAuth } from "../../../../context/AuthContext";
 
 export default function SchedulesToday({ activeView }) {
+  const { user } = useAuth();
   const { setSessionModel, sessions } = useGen();
 
   function getScheduleStatus(schedule) {
@@ -39,23 +43,56 @@ export default function SchedulesToday({ activeView }) {
     .filter((session) => isSameDay(session.scheduledAt.toDate(), new Date()))
     .sort((a, b) => a.scheduledAt.toDate() - b.scheduledAt.toDate());
 
-  console.log(todaySessions);
+  // console.log(todaySessions);
   // console.log("sessions is this ", sessions);
 
   async function handleScheduleSession(sessionId) {
-    const session = sessions.find((s) => s.id === sessionId);
+    // 1. Get full session from sessions array
+    const fullSessionToday = sessions.find(
+      (session) => session.id === sessionId,
+    );
 
-    let sessionToUSe = [];
-    if (session) {
-      sessions.forEach((element) => {
-        if (element.id === session.id) {
-          sessionToUSe.push();
-        }
-      });
-      console.log("Found session:", session);
-    } else {
+    if (!fullSessionToday) {
       console.log("Session not found");
+      return;
     }
+
+    const sessionTodayId = fullSessionToday.id;
+
+    if (!sessionTodayId) {
+      console.log("No sessionTodayId in session");
+      return;
+    }
+
+    console.log("Found session:", fullSessionToday);
+    console.log("Fetching flashcards with tagId:", sessionTodayId);
+
+    console.log("This is a try ", sessions);
+
+    sessions.forEach((element) => {
+      if (element.id === sessionTodayId) console.log(element);
+    });
+
+    // 2. Fetch flashcards related to that tagId
+    // const sessionsRef = collection(db, "users", user.uid, "schedules");
+    // const q = query(sessionsRef, where("tagId", "==", tagId));
+    // console.log("card from firebase ", sessionsRef);
+    /*
+    try {
+      const snapshot = await getDocs(q);
+      const cards = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+
+      console.log("Fetched flashcards:", cards);
+
+      // 3. You can now show them on a new screen or modal
+      // E.g., setFlashcards(cards) or navigate("/study", { state: { cards } })
+    } catch (error) {
+      console.error("Error fetching flashcards:", error);
+    }
+      */
   }
 
   return (

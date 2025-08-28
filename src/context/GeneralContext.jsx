@@ -10,7 +10,6 @@ import {
 } from "firebase/firestore";
 import { auth, db } from "../firebase";
 import { format, subDays, getDay, addDays } from "date-fns";
-import { data } from "react-router-dom";
 
 const GeneralContext = createContext();
 

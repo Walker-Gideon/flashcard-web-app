@@ -26,13 +26,13 @@ export default function SessionForm({ error, setError }) {
     const { tag, tagId, count, date, time, estimatedTime } = formData;
 
     // 1. Validation
-    if (!tag || !count || !date || !time) {
+    if (!tag || !tagId || !count || !date || !time) {
       setError("Please fill all required fields.");
       return;
     }
 
     // 2. Auto-calculate estimated time (if empty)
-    const autoEstimatedTime = Math.ceil(Number(count) * 0.5); // 2 cards/min
+    const autoEstimatedTime = Math.ceil(Number(count) * 2);
     const finalTime = estimatedTime ? Number(estimatedTime) : autoEstimatedTime;
 
     // 3. Merge date and time into a JS Date
