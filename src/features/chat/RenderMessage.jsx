@@ -1,7 +1,10 @@
 import { LuUser } from "react-icons/lu";
 import { LuBrain } from "react-icons/lu";
+import { useChat } from "../../context/ChatContext";
 
-export default function RenderMessage({ messages }) {
+export default function RenderMessage() {
+  const { messages } = useChat();
+
   return (
     <div>
       {messages.map((message) => (

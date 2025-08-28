@@ -1,6 +1,9 @@
 import { LuBrain } from "react-icons/lu";
+import { useChat } from "../../context/ChatContext";
 
-export default function TypingIndicator({ isTyping }) {
+export default function TypingIndicator() {
+  const { isTyping } = useChat();
+
   return (
     <div>
       {isTyping && (
