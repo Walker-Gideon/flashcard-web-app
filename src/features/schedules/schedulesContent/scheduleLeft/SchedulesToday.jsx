@@ -57,25 +57,21 @@ export default function SchedulesToday({ activeView }) {
     .sort((a, b) => a.scheduledAt.toDate() - b.scheduledAt.toDate());
 
   async function handleScheduleSession(sessionId) {
-    // 1. Get full session from sessions array
     const fullSessionToday = sessions.find(
       (session) => session.id === sessionId,
     );
 
     if (!fullSessionToday) {
-      console.log("Session not found");
       return;
     }
 
     const sessionTodayId = fullSessionToday.id;
 
     if (!sessionTodayId) {
-      console.log("No sessionTodayId in session");
       return;
     }
 
     try {
-      // 2. Fetch flashcards related to that tagId
       const sessionRef = doc(
         db,
         "users",
@@ -84,29 +80,23 @@ export default function SchedulesToday({ activeView }) {
         sessionTodayId,
       );
       const sessionsSnap = await getDoc(sessionRef);
-      console.log("card from firebase ", sessionsSnap.data());
 
       if (sessionsSnap.exists()) {
         const sessionData = sessionsSnap.data();
-        console.log("Fetched flashcard tagID:", sessionData.tagId);
-        console.log("Fetched flashcards:", flashcards);
 
-        flashcards.forEach((element) => {
-          if (element.id === sessionData.tagId) {
-            console.log("The flashcards deatils is this ", element);
-            navigate("/dashboard/flashcards");
+        const matchedFlashcard = flashcards.find(
+          (f) => f.id === sessionData.tagId,
+        );
+        if (matchedFlashcard) {
+          setCurrentFlashcard({ id: sessionData.tagId, ...matchedFlashcard });
 
-            setCurrentFlashcard({ id: sessionData.tagId, ...element });
+          setShowPreview(true);
+          setShowCreateFlashcard(true);
+          setReadAlredyFlashcard(true);
 
-            // Display the flashcard on click
-            setShowPreview(true);
-            setShowCreateFlashcard(true);
-            setReadAlredyFlashcard(true);
-
-            // Set the id for the case a user want to edit
-            SetEditFlashcardData({ id: sessionData.tagId, ...element });
-          }
-        });
+          SetEditFlashcardData({ id: sessionData.tagId, ...matchedFlashcard });
+          navigate("/dashboard/flashcards");
+        }
       }
 
       setQueryFlashcard("");
