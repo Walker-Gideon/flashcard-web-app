@@ -21,6 +21,7 @@ function FlashcardProvider({ children }) {
     tags: "",
     pairs: [],
     createdAt: null,
+    completed: null,
   });
 
   // For newly created flashcard
@@ -29,6 +30,7 @@ function FlashcardProvider({ children }) {
     tags: "",
     pairs: [],
     createdAt: null,
+    completed: null,
   });
 
   // for notify the note on delete

@@ -55,6 +55,7 @@ export default function CreateFlashcard() {
       ...(isEditing
         ? { createdAt: editFlashcardData.createdAt }
         : { createdAt: serverTimestamp() }),
+      completed: false,
     };
 
     try {
