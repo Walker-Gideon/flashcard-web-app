@@ -1,4 +1,11 @@
-import { collection, query, where, getDocs } from "firebase/firestore";
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  doc,
+  getDoc,
+} from "firebase/firestore";
 import { auth, db } from "../../../../firebase";
 import { useGen } from "../../../../context/GeneralContext";
 import { format, isSameDay } from "date-fns";
@@ -12,10 +19,12 @@ import CardContent from "../../../../ui/CardContent";
 import CardDiscription from "../../../../ui/CardDiscription";
 import CardOverview from "../../../../ui/CardOverview";
 import { useAuth } from "../../../../context/AuthContext";
+import useLoaderAction from "../../../../utils/LoaderAction";
 
 export default function SchedulesToday({ activeView }) {
   const { user } = useAuth();
-  const { setSessionModel, sessions } = useGen();
+  const { setSessionModel, sessions, flashcards } = useGen();
+  const navigate = useLoaderAction(1000);
 
   function getScheduleStatus(schedule) {
     const now = new Date();
@@ -64,35 +73,43 @@ export default function SchedulesToday({ activeView }) {
       return;
     }
 
-    console.log("Found session:", fullSessionToday);
-    console.log("Fetching flashcards with tagId:", sessionTodayId);
-
-    console.log("This is a try ", sessions);
-
-    sessions.forEach((element) => {
-      if (element.id === sessionTodayId) console.log(element);
-    });
-
-    // 2. Fetch flashcards related to that tagId
     // const sessionsRef = collection(db, "users", user.uid, "schedules");
     // const q = query(sessionsRef, where("tagId", "==", tagId));
-    // console.log("card from firebase ", sessionsRef);
-    /*
+
     try {
-      const snapshot = await getDocs(q);
-      const cards = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
+      // 2. Fetch flashcards related to that tagId
+      const sessionRef = doc(
+        db,
+        "users",
+        user.uid,
+        "schedules",
+        sessionTodayId,
+      );
+      const sessionsSnap = await getDoc(sessionRef);
+      console.log("card from firebase ", sessionsSnap.data());
 
+      if (sessionsSnap.exists()) {
+        const sessionData = sessionsSnap.data();
+        console.log("Fetched flashcard tagID:", sessionData.tagId);
+        console.log("Fetched flashcards:", flashcards);
+
+        flashcards.forEach((element) => {
+          if (element.id === sessionData.tagId) {
+            console.log("The flashcards deatils is this ", element);
+            navigate("/dashboard/flashcards");
+          }
+        });
+      }
+
+      /*
+      
       console.log("Fetched flashcards:", cards);
-
+*/
       // 3. You can now show them on a new screen or modal
       // E.g., setFlashcards(cards) or navigate("/study", { state: { cards } })
     } catch (error) {
       console.error("Error fetching flashcards:", error);
     }
-      */
   }
 
   return (
