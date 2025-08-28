@@ -1,21 +1,16 @@
+import { useChat } from "../../context/ChatContext";
 import MessageInput from "./MessageInput";
 import RenderMessage from "./RenderMessage";
 import TypingIndicator from "./TypingIndicator";
 
-export default function ChatMain({
-  messages,
-  isTyping,
-  messagesEndRef,
-  setInputMessage,
-  inputMessage,
-  handleSubmit,
-}) {
+export default function ChatMain({ messagesEndRef, handleSubmit }) {
+  const { messages, isTyping } = useChat();
+
   return (
-    // flex-1
-    <div className="flex-1 h-screen flex-col overflow-hidden p-1 bg-red-500 relative overflow-hidden">
+    <div className="relative h-screen flex-1 flex-col overflow-hidden p-1">
       {/* chat-scrollbar overflow-y-auto */}
       {/* flex-1 overflow-y-scroll h-[50] */}
-      <div className="pr-2 bg-green-500 h-100 overflow-y-scroll">
+      <div className="scroll-container h-100 overflow-y-scroll bg-green-500 pr-2">
         <RenderMessage messages={messages} />
         <TypingIndicator isTyping={isTyping} />
 
@@ -23,12 +18,7 @@ export default function ChatMain({
         <div ref={messagesEndRef} />
       </div>
 
-      <MessageInput
-        isTyping={isTyping}
-        setInputMessage={setInputMessage}
-        inputMessage={inputMessage}
-        handleSubmit={handleSubmit}
-      />
+      <MessageInput handleSubmit={handleSubmit} />
     </div>
   );
 }

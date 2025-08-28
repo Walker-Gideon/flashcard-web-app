@@ -74,7 +74,6 @@ export default function ChatLayout() {
     <div
       className={`medium:w-90 defaultColor absolute top-0 right-0 z-50 w-full transform border-l border-stone-300 shadow-2xl transition-transform duration-500 dark:border-slate-700 dark:shadow-slate-700 ${!isChatShow ? `hidden translate-x-100` : `translate-0`}`}
     >
-      {/* min-h-screen */}
       <div className="flex min-h-screen flex-col px-4 py-2">
         <ChatHeader />
         {/* 
@@ -86,8 +85,7 @@ export default function ChatLayout() {
               </p>
                   */}
 
-        {/* Chat Messages Area */}
-        <ChatMain handleSubmit={handleSubmit} />
+        <ChatMain handleSubmit={handleSubmit} messagesEndRef={messagesEndRef} />
       </div>
     </div>
   );
