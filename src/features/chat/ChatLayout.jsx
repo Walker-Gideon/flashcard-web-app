@@ -3,12 +3,10 @@ import ChatHeader from "./ChatHeader";
 import ChatMain from "./ChatMain";
 import { useChat } from "../../context/ChatContext";
 
-// ChatLayout Component - AI Chat Interface
 export default function ChatLayout() {
   const { isChatShow } = useChat();
-
-  // State for managing chat messages
-  
+  const [inputMessage, setInputMessage] = useState("");
+  const [isTyping, setIsTyping] = useState(false);
   const [messages, setMessages] = useState([
     {
       id: 1,
@@ -16,77 +14,63 @@ export default function ChatLayout() {
       sender: "ai",
     },
   ]);
-
-  // State for input message
-  const [inputMessage, setInputMessage] = useState("");
-
-  // State for typing indicator
-  const [isTyping, setIsTyping] = useState(false);
-
-  // Ref for auto-scrolling to bottom
   const messagesEndRef = useRef(null);
 
-  // Function to scroll to bottom of messages
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
-  // Auto-scroll when messages change
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
 
-  // Prompt message for wrong message
   const createPrompt = (userInput) => {
     return `You are a helpful study assistant. Respond to the following message:\n"${userInput}"`
   }
 
   const apiKey = import.meta.env.VITE_CHAT_API_KEY;
 
-  // Handle form submission for sending messages
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (inputMessage.trim() === "") return;
 
-    // Create new user message
     const newUserMessage = {
       id: messages.length + 1,
       text: inputMessage,
       sender: "user",
-      };
-      
-      // Add user message to chat
-      setMessages((prevMessages) => [...prevMessages, newUserMessage]);
-      setInputMessage("");
-      setIsTyping(true);
-     
-     const response = await fetch(
-       `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
-       {
-         method: "POST",
-         headers: { "Content-Type": "application/json" },
-         body: JSON.stringify({
-           contents: [{ parts: [{ text: createPrompt(inputMessage) }] }],
-         }),
-         
-       }
-     );
-
-     const responseData = await response.json()
-
-    const newAiMessage = {
-      id: messages.length + 2,
-      text: responseData.candidates?.[0]?.content?.parts?.[0]?.text || "Model not working now!!!!!!",
-      sender: "ai",
     };
+      
+    setMessages((prevMessages) => [...prevMessages, newUserMessage]);
+    setInputMessage("");
+    setIsTyping(true);
+     
+    try {
+      const response = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            contents: [{ parts: [{ text: createPrompt(inputMessage) }] }],
+          }),
+        }
+      );
 
-    // Add AI message to chat
-    setMessages((prevMessages) => [...prevMessages, newAiMessage]);
-    setIsTyping(false);
+      const responseData = await response.json()
 
+      const newAiMessage = {
+        id: messages.length + 2,
+        text: responseData.candidates?.[0]?.content?.parts?.[0]?.text || "",
+        sender: "ai",
+      };
 
-
-   }
+      setMessages((prevMessages) => [...prevMessages, newAiMessage]);
+    } catch(error) {
+      console.error("Error talking to Gemini:", error)
+    } finally {
+      setIsTyping(false);
+    }
+  }
 
 
 
