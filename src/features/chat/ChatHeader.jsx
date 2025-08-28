@@ -1,5 +1,5 @@
 import { LuChevronsRight } from "react-icons/lu";
-import { LuPlus } from "react-icons/lu";
+import { LuRefreshCw } from "react-icons/lu";
 import HeaderText from "../../ui/HeaderText";
 import Button from "../../ui/Button";
 import { useChat } from "../../context/ChatContext";
@@ -7,9 +7,9 @@ import { useChat } from "../../context/ChatContext";
 export default function ChatHeader() {
   const { setIsChatShow } = useChat();
 
-  const styling = {
-    icon: "h-6 w-6 text-slate-400 dark:text-slate-500",
-  };
+  function handleRefreshChat() {
+    console.log("refresh click");
+  }
 
   return (
     <header className="mb-4 flex w-full items-center justify-between">
@@ -18,13 +18,13 @@ export default function ChatHeader() {
           variant="outline"
           onClick={() => setIsChatShow((show) => !show)}
         >
-          <LuChevronsRight className={styling.icon} />
+          <LuChevronsRight className="h-6 w-6 text-slate-400 dark:text-slate-500" />
         </Button>
-        <HeaderText classname="sm:text-base">AI Chat</HeaderText>
+        <HeaderText classname="sm:text-base">Study Assistant</HeaderText>
       </div>
 
-      <Button variant="outline">
-        <LuPlus className={styling.icon} />
+      <Button variant="outline" onClick={handleRefreshChat}>
+        <LuRefreshCw className="h-5 w-5 text-slate-400 dark:text-slate-500" />
       </Button>
     </header>
   );
