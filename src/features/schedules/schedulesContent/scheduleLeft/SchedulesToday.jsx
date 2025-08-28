@@ -30,6 +30,7 @@ export default function SchedulesToday({ activeView }) {
   } = useFlash();
   const navigate = useLoaderAction(1000);
 
+  console.log("sessions ", sessions);
   function getScheduleStatus(schedule) {
     const now = new Date();
     const scheduledTime = schedule.scheduledAt?.toDate();

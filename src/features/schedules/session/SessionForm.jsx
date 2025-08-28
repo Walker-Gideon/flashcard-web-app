@@ -23,7 +23,8 @@ export default function SessionForm({ error, setError }) {
     const user = auth.currentUser;
     if (!user) return;
 
-    const { tag, tagId, count, date, time, estimatedTime } = formData;
+    const { tag, tagId, count, date, time, estimatedTime, completed } =
+      formData;
 
     // 1. Validation
     if (!tag || !tagId || !count || !date || !time) {
@@ -47,6 +48,7 @@ export default function SessionForm({ error, setError }) {
       scheduledAt: scheduleTimestamp,
       estimatedTime: finalTime,
       createdAt: Timestamp.now(),
+      completed: completed,
     };
 
     setIsSubmitting(true);
