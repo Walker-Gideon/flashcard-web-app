@@ -21,16 +21,12 @@ export default function SchedulesMonth({ activeView }) {
   const { sessions } = useGen();
   const [currentMonth, setCurrentMonth] = useState(new Date());
 
-  console.log(sessions);
-
   const handlePrevMonth = () => {
     setCurrentMonth((prev) => subMonths(prev, 1));
-    console.log("Click previous");
   };
 
   const handleNextMonth = () => {
     setCurrentMonth((prev) => addMonths(prev, 1));
-    console.log("Click next");
   };
 
   // The Current month and year

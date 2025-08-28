@@ -10,6 +10,7 @@ import {
 } from "firebase/firestore";
 import { auth, db } from "../firebase";
 import { format, subDays, getDay, addDays } from "date-fns";
+import { data } from "react-router-dom";
 
 const GeneralContext = createContext();
 
@@ -344,7 +345,7 @@ function GeneralProvider({ children }) {
         const data = progressSnap.data();
         setProgress(data);
 
-        console.log("📥 Progress loaded:", data);
+        // console.log("📥 Progress loaded:", data);
       } else {
         console.warn("Progress document does not exist.");
       }

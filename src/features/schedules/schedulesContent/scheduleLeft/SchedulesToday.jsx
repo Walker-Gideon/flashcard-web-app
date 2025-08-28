@@ -39,6 +39,25 @@ export default function SchedulesToday({ activeView }) {
     .filter((session) => isSameDay(session.scheduledAt.toDate(), new Date()))
     .sort((a, b) => a.scheduledAt.toDate() - b.scheduledAt.toDate());
 
+  console.log(todaySessions);
+  // console.log("sessions is this ", sessions);
+
+  async function handleScheduleSession(sessionId) {
+    const session = sessions.find((s) => s.id === sessionId);
+
+    let sessionToUSe = [];
+    if (session) {
+      sessions.forEach((element) => {
+        if (element.id === session.id) {
+          sessionToUSe.push();
+        }
+      });
+      console.log("Found session:", session);
+    } else {
+      console.log("Session not found");
+    }
+  }
+
   return (
     <div className={`${activeView === "today" ? `` : `hidden`}`}>
       {activeView === "today" && (
@@ -63,12 +82,7 @@ export default function SchedulesToday({ activeView }) {
           <div className="scroll-container h-170 space-y-4 overflow-y-scroll">
             {todaySessions.length !== 0 ? (
               todaySessions.map((schedule) => (
-                <CardContent
-                  key={schedule.id}
-                  role="button"
-                  type="innerCard"
-                  onClick={() => {}}
-                >
+                <CardContent key={schedule.id} role="button" type="innerCard">
                   <CardContent classname="flex items-center space-x-4">
                     <div
                       className={`h-4 w-4 rounded-full bg-gradient-to-r from-slate-200 to-slate-300 dark:from-slate-600 dark:to-slate-700`}
@@ -96,6 +110,7 @@ export default function SchedulesToday({ activeView }) {
 
                     <Button
                       variant="outline"
+                      onClick={() => handleScheduleSession(schedule.id)}
                       classname="rounded-sm bg-slate-500 p-2 text-white opacity-0 transition-colors group-hover:opacity-100 hover:bg-slate-600"
                     >
                       <LuPlay className="h-4 w-4" />

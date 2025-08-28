@@ -8,8 +8,7 @@ import { useGen } from "../../context/GeneralContext";
 
 export default function SchedulesLayout() {
   const { sessionModel } = useGen();
-  const [activeView, setActiveView] = useState("today"); // today, week, month
-  // const [selectedDate, setSelectedDate] = useState(new Date());
+  const [activeView, setActiveView] = useState("today");
 
   return (
     <div className="defaultColor h-screen overflow-hidden">
