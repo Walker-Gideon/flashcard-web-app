@@ -27,6 +27,11 @@ function GeneralProvider({ children }) {
   // Schedules
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [sessionModel, setSessionModel] = useState(false);
+  const [sessionComplete, setSessionComplete] = useState({
+    id: "",
+    tagId: "",
+    isComplete: false,
+  });
   const [flashcards, setFlashcards] = useState([]);
   const [sessions, setSessions] = useState([]);
   const [formData, setFormData] = useState({
@@ -36,7 +41,6 @@ function GeneralProvider({ children }) {
     date: "",
     time: "",
     estimatedTime: "",
-    completed: false,
   });
 
   //   Fetch the quotes
@@ -369,12 +373,14 @@ function GeneralProvider({ children }) {
     sessionModel,
     isSubmitting,
     setWeeklyData,
+    sessionComplete,
     setIsSubmitting,
     loadingProgress,
     setSessionModel,
     consistencyScore,
     totalCardsPerTag,
     currentQuoteIndex,
+    setSessionComplete,
     setConsistencyScore,
     // functions
     logStudyTime,

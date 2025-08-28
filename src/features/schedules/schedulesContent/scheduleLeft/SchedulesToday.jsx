@@ -17,7 +17,13 @@ import { useFlash } from "../../../../context/FlashcardContext";
 
 export default function SchedulesToday({ activeView }) {
   const { user } = useAuth();
-  const { setSessionModel, sessions, flashcards } = useGen();
+  const {
+    setSessionModel,
+    sessions,
+    flashcards,
+    sessionComplete,
+    setSessionComplete,
+  } = useGen();
   const {
     displayCreatedFlashcard,
     setQueryFlashcard,
@@ -30,7 +36,7 @@ export default function SchedulesToday({ activeView }) {
   } = useFlash();
   const navigate = useLoaderAction(1000);
 
-  console.log("sessions ", sessions);
+  console.log("sessions complete ", sessionComplete);
   function getScheduleStatus(schedule) {
     const now = new Date();
     const scheduledTime = schedule.scheduledAt?.toDate();
@@ -89,7 +95,11 @@ export default function SchedulesToday({ activeView }) {
           (f) => f.id === sessionData.tagId,
         );
         if (matchedFlashcard) {
-          setCurrentFlashcard({ id: sessionData.tagId, ...matchedFlashcard });
+          setCurrentFlashcard({
+            id: sessionData.tagId,
+            completed: true,
+            ...matchedFlashcard,
+          });
 
           setShowPreview(true);
           setShowCreateFlashcard(true);
@@ -97,6 +107,14 @@ export default function SchedulesToday({ activeView }) {
 
           SetEditFlashcardData({ id: sessionData.tagId, ...matchedFlashcard });
           navigate("/dashboard/flashcards");
+        }
+
+        if (sessionTodayId) {
+          setSessionComplete({
+            id: sessionTodayId,
+            tagId: sessionData.tagId,
+            isComplete: false,
+          });
         }
       }
 

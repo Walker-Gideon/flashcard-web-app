@@ -25,6 +25,7 @@ export default function CreatedContentFC() {
     updateStudyTime,
     incrementSubjecMaster,
     logStudyTime,
+    setSessionComplete,
   } = useGen();
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(0);
@@ -83,6 +84,10 @@ export default function CreatedContentFC() {
       setTimeout(async () => {
         await handleReviewComplete();
         setReviewComplete(true);
+        setSessionComplete((prev) => ({
+          ...prev,
+          isComplete: true,
+        }));
       }, 500);
       return;
     }
