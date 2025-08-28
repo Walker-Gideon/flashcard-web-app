@@ -1,19 +1,17 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import ChatHeader from "./ChatHeader";
 import ChatMain from "./ChatMain";
 import { useChat } from "../../context/ChatContext";
 
 export default function ChatLayout() {
-  const { isChatShow } = useChat();
-  const [inputMessage, setInputMessage] = useState("");
-  const [isTyping, setIsTyping] = useState(false);
-  const [messages, setMessages] = useState([
-    {
-      id: 1,
-      text: "Hello! How can I assist you with your studies today?",
-      sender: "ai",
-    },
-  ]);
+  const {
+    isChatShow,
+    messages,
+    inputMessage,
+    setMessages,
+    setInputMessage,
+    setIsTyping,
+  } = useChat();
   const messagesEndRef = useRef(null);
 
   const scrollToBottom = () => {
@@ -25,8 +23,8 @@ export default function ChatLayout() {
   }, [messages]);
 
   const createPrompt = (userInput) => {
-    return `You are a helpful study assistant. Respond to the following message:\n"${userInput}"`
-  }
+    return `You are a helpful study assistant. Respond to the following message:\n"${userInput}"`;
+  };
 
   const apiKey = import.meta.env.VITE_CHAT_API_KEY;
 
@@ -39,11 +37,11 @@ export default function ChatLayout() {
       text: inputMessage,
       sender: "user",
     };
-      
+
     setMessages((prevMessages) => [...prevMessages, newUserMessage]);
     setInputMessage("");
     setIsTyping(true);
-     
+
     try {
       const response = await fetch(
         `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
@@ -53,10 +51,10 @@ export default function ChatLayout() {
           body: JSON.stringify({
             contents: [{ parts: [{ text: createPrompt(inputMessage) }] }],
           }),
-        }
+        },
       );
 
-      const responseData = await response.json()
+      const responseData = await response.json();
 
       const newAiMessage = {
         id: messages.length + 2,
@@ -65,14 +63,12 @@ export default function ChatLayout() {
       };
 
       setMessages((prevMessages) => [...prevMessages, newAiMessage]);
-    } catch(error) {
-      console.error("Error talking to Gemini:", error)
+    } catch (error) {
+      console.error("Error talking to Gemini:", error);
     } finally {
       setIsTyping(false);
     }
-  }
-
-
+  };
 
   return (
     <div
@@ -91,14 +87,7 @@ export default function ChatLayout() {
                   */}
 
         {/* Chat Messages Area */}
-        <ChatMain
-          messages={messages}
-          isTyping={isTyping}
-          messagesEndRef={messagesEndRef}
-          handleSubmit={handleSubmit}
-          inputMessage={inputMessage}
-          setInputMessage={setInputMessage}
-        />
+        <ChatMain handleSubmit={handleSubmit} />
       </div>
     </div>
   );
