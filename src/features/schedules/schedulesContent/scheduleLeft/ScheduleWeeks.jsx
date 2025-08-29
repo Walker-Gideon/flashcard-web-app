@@ -12,7 +12,7 @@ import CardDiscription from "../../../../ui/CardDiscription";
 import CardOverview from "../../../../ui/CardOverview";
 
 export default function ScheduleWeeks({ activeView }) {
-  const { sessions } = useGen();
+  const { sessions, todaySessions } = useGen();
 
   const now = new Date();
   const start = startOfWeek(now, { weekStartsOn: 1 }); // Monday
@@ -46,12 +46,16 @@ export default function ScheduleWeeks({ activeView }) {
   });
 
   return (
-    <div className={`${activeView === "week" ? `` : `hidden`}`}>
+    <div
+      className={`${activeView === "week" ? `` : `hidden`} ${todaySessions.length === 0 ? `lg:h-131` : ``}`}
+    >
       {activeView === "week" && (
-        <CardOverview classname="lg:absolute w-full top-0">
+        <CardOverview classname={`lg:absolute w-full top-0 overflow-hidden`}>
           <CardHeader title="This Week"></CardHeader>
 
-          <div className="scroll-container h-170 space-y-4 overflow-y-scroll">
+          <div
+            className={`scroll-container space-y-4 overflow-y-scroll ${todaySessions.length === 0 ? `h-170 lg:h-147` : `h-170`}`}
+          >
             {weekDays.map((day) => (
               <CardContent
                 key={day.date}
@@ -123,6 +127,10 @@ export default function ScheduleWeeks({ activeView }) {
           </div>
         </CardOverview>
       )}
+
+      <div
+        className={`${todaySessions.length === 0 ? `w-10 bg-amber-800 lg:my-40 lg:h-10` : ``}`}
+      ></div>
     </div>
   );
 }

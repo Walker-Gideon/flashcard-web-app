@@ -18,7 +18,7 @@ import Button from "../../../../ui/Button";
 import { useGen } from "../../../../context/GeneralContext";
 
 export default function SchedulesMonth({ activeView }) {
-  const { sessions } = useGen();
+  const { sessions, todaySessions } = useGen();
   const [currentMonth, setCurrentMonth] = useState(new Date());
 
   const handlePrevMonth = () => {
@@ -51,9 +51,11 @@ export default function SchedulesMonth({ activeView }) {
   const calendarDays = generateCalendarDays();
 
   return (
-    <div className="mb-8">
+    <div
+      className={`mb-8 ${activeView === "month" ? `` : `hidden`} ${todaySessions.length === 0 ? `lg:h-169` : ``}`}
+    >
       {activeView === "month" && (
-        <CardOverview classname="lg:absolute w-full top-0">
+        <CardOverview classname={`lg:absolute w-full top-0`}>
           <div className="mb-6 flex items-center justify-between">
             <h3 className="text-xl font-semibold text-slate-900 dark:text-white">
               {monthLabel}
@@ -76,71 +78,73 @@ export default function SchedulesMonth({ activeView }) {
             </div>
           </div>
 
-          {/* Calendar Grid */}
-          <div className="mb-4 grid grid-cols-7 gap-2">
-            {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
-              <div
-                key={day}
-                className="py-2 text-center text-xs font-medium text-slate-500 dark:text-slate-400"
-              >
-                {day}
-              </div>
-            ))}
-
-            {/* Calendar Days */}
-            {calendarDays.map((day) => {
-              const dayNum = day.getDate();
-              const isCurrentMonth = isSameMonth(day, currentMonth);
-              const isTodayDate = isToday(day);
-
-              // 🔁 Later we'll map sessions here
-
-              return (
+          <div className={`${todaySessions.length === 0 ? `lg:h-144` : ``}`}>
+            {/* Calendar Grid */}
+            <div className="mb-4 grid grid-cols-7 gap-2">
+              {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
                 <div
-                  key={day.toISOString()}
-                  className={`flex aspect-square cursor-pointer items-center justify-center rounded-lg text-sm transition-all duration-200 ${
-                    isTodayDate
-                      ? "bg-emerald-500 text-white shadow-md"
-                      : isCurrentMonth
-                        ? "text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-700"
-                        : "text-slate-400 dark:text-slate-600"
-                  }`}
+                  key={day}
+                  className="py-2 text-center text-xs font-medium text-slate-500 dark:text-slate-400"
                 >
-                  {dayNum}
+                  {day}
                 </div>
-              );
-            })}
-          </div>
+              ))}
 
-          {/* Calendar Legend */}
-          <div className="flex items-center justify-end space-x-6 text-xs">
-            <div className="space-y-2 space-x-6 md:flex md:items-center md:justify-center">
-              <div className="flex items-center space-x-2">
-                <div className="h-3 w-3 rounded-full bg-emerald-500"></div>
-                <span className="text-slate-600 dark:text-slate-400">
-                  Today
-                </span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <div className="h-3 w-3 rounded-full bg-emerald-100 dark:bg-emerald-900/30"></div>
-                <span className="text-slate-600 dark:text-slate-400">
-                  Completed
-                </span>
-              </div>
+              {/* Calendar Days */}
+              {calendarDays.map((day) => {
+                const dayNum = day.getDate();
+                const isCurrentMonth = isSameMonth(day, currentMonth);
+                const isTodayDate = isToday(day);
+
+                // 🔁 Later we'll map sessions here
+
+                return (
+                  <div
+                    key={day.toISOString()}
+                    className={`flex aspect-square cursor-pointer items-center justify-center rounded-lg text-sm transition-all duration-200 ${
+                      isTodayDate
+                        ? "bg-emerald-500 text-white shadow-md"
+                        : isCurrentMonth
+                          ? "text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-700"
+                          : "text-slate-400 dark:text-slate-600"
+                    }`}
+                  >
+                    {dayNum}
+                  </div>
+                );
+              })}
             </div>
 
-            <div className="space-y-2 space-x-6 md:flex md:items-center md:justify-center">
-              <div className="flex items-center space-x-2">
-                <div className="h-3 w-3 rounded-full bg-yellow-100 dark:bg-yellow-900/30"></div>
-                <span className="text-slate-600 dark:text-slate-400">
-                  Scheduled
-                </span>
+            {/* Calendar Legend */}
+            <div className="flex items-center justify-end space-x-6 text-xs">
+              <div className="space-y-2 space-x-6 md:flex md:items-center md:justify-center">
+                <div className="flex items-center space-x-2">
+                  <div className="h-3 w-3 rounded-full bg-emerald-500"></div>
+                  <span className="text-slate-600 dark:text-slate-400">
+                    Today
+                  </span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <div className="h-3 w-3 rounded-full bg-emerald-100 dark:bg-emerald-900/30"></div>
+                  <span className="text-slate-600 dark:text-slate-400">
+                    Completed
+                  </span>
+                </div>
               </div>
-              <div className="flex items-center space-x-2">
-                <div className="h-3 w-3 rounded-full bg-rose-100 dark:bg-rose-900/30"></div>
-                <span className="text-slate-600 dark:text-slate-400">
-                  Heavy load
-                </span>
+
+              <div className="space-y-2 space-x-6 md:flex md:items-center md:justify-center">
+                <div className="flex items-center space-x-2">
+                  <div className="h-3 w-3 rounded-full bg-yellow-100 dark:bg-yellow-900/30"></div>
+                  <span className="text-slate-600 dark:text-slate-400">
+                    Scheduled
+                  </span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <div className="h-3 w-3 rounded-full bg-rose-100 dark:bg-rose-900/30"></div>
+                  <span className="text-slate-600 dark:text-slate-400">
+                    Heavy load
+                  </span>
+                </div>
               </div>
             </div>
           </div>

@@ -135,7 +135,7 @@ export default function SchedulesToday({ activeView }) {
   return (
     <div className={`${activeView === "today" ? `` : `hidden`}`}>
       {activeView === "today" && (
-        <CardOverview classname={`h-full w-full lg:col-span-2`}>
+        <CardOverview classname={`w-full h-full lg:col-span-2`}>
           <CardHeader title="Today's Sessions">
             <Button
               variant="outline"
@@ -151,7 +151,9 @@ export default function SchedulesToday({ activeView }) {
             </Button>
           </CardHeader>
 
-          <div className="scroll-container h-170 space-y-4 overflow-y-scroll">
+          <div
+            className={`scroll-container space-y-4 overflow-y-scroll ${todaySessions.length === 0 ? `h-170 lg:h-146` : `h-170`}`}
+          >
             {todaySessions.length !== 0 ? (
               todaySessions.map((schedule) => (
                 <CardContent key={schedule.id} role="button" type="innerCard">
