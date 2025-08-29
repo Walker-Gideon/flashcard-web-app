@@ -9,7 +9,7 @@ import {
   setDoc,
 } from "firebase/firestore";
 import { auth, db } from "../firebase";
-import { format, subDays, getDay, addDays } from "date-fns";
+import { format, subDays, getDay, addDays, isSameDay } from "date-fns";
 
 const GeneralContext = createContext();
 
@@ -361,6 +361,11 @@ function GeneralProvider({ children }) {
     }
   };
 
+  // Session created today
+  const todaySessions = sessions
+    .filter((session) => isSameDay(session.scheduledAt.toDate(), new Date()))
+    .sort((a, b) => a.scheduledAt.toDate() - b.scheduledAt.toDate());
+
   const value = {
     quotes,
     formData,
@@ -385,6 +390,7 @@ function GeneralProvider({ children }) {
     // functions
     logStudyTime,
     updateStreak,
+    todaySessions,
     fetchProgress,
     updateStudyTime,
     incrementSubjecMaster,

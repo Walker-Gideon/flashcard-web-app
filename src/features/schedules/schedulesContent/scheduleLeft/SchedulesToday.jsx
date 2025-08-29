@@ -1,7 +1,7 @@
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../../../firebase";
 import { useGen } from "../../../../context/GeneralContext";
-import { format, isSameDay } from "date-fns";
+import { format } from "date-fns";
 import { LuPlay } from "react-icons/lu";
 import { LuPlus } from "react-icons/lu";
 import { LuClock } from "react-icons/lu";
@@ -19,9 +19,10 @@ import { useFlash } from "../../../../context/FlashcardContext";
 export default function SchedulesToday({ activeView }) {
   const { user } = useAuth();
   const {
-    setSessionModel,
     sessions,
     flashcards,
+    todaySessions,
+    setSessionModel,
     sessionComplete,
     setSessionComplete,
   } = useGen();
@@ -68,10 +69,6 @@ export default function SchedulesToday({ activeView }) {
       return <LuCheck className="h-3.5 w-3.5 text-green-500" />;
     return null;
   }
-
-  const todaySessions = sessions
-    .filter((session) => isSameDay(session.scheduledAt.toDate(), new Date()))
-    .sort((a, b) => a.scheduledAt.toDate() - b.scheduledAt.toDate());
 
   async function handleScheduleSession(sessionId) {
     const fullSessionToday = sessions.find(
