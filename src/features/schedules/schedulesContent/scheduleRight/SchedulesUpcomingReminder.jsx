@@ -1,10 +1,83 @@
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../../../../firebase";
 import { LuClock } from "react-icons/lu";
 import CardOverview from "../../../../ui/CardOverview";
 import Button from "../../../../ui/Button";
 import { useGen } from "../../../../context/GeneralContext";
+import { useFlash } from "../../../../context/FlashcardContext";
+import { useAuth } from "../../../../context/AuthContext";
+import useLoaderAction from "../../../../utils/LoaderAction";
 
 export default function SchedulesUpcomingReminder() {
-  const { todaySessions } = useGen();
+  const { user } = useAuth();
+  const { todaySessions, sessions, flashcards } = useGen();
+  const {
+    displayCreatedFlashcard,
+    setQueryFlashcard,
+    setFilteredFlashcard,
+    setCurrentFlashcard,
+    setShowCreateFlashcard,
+    setShowPreview,
+    setReadAlredyFlashcard,
+    SetEditFlashcardData,
+  } = useFlash();
+  const navigate = useLoaderAction(1000);
+
+  async function handleScheduleSession(sessionId) {
+    const fullSessionToday = sessions.find(
+      (session) => session.id === sessionId,
+    );
+
+    if (!fullSessionToday) {
+      return;
+    }
+
+    const sessionTodayId = fullSessionToday.id;
+
+    if (!sessionTodayId) {
+      return;
+    }
+
+    try {
+      const sessionRef = doc(
+        db,
+        "users",
+        user.uid,
+        "schedules",
+        sessionTodayId,
+      );
+      const sessionsSnap = await getDoc(sessionRef);
+
+      if (sessionsSnap.exists()) {
+        const sessionData = sessionsSnap.data();
+
+        const matchedFlashcard = flashcards.find(
+          (f) => f.id === sessionData.tagId,
+        );
+        if (matchedFlashcard) {
+          setCurrentFlashcard({
+            id: sessionData.tagId,
+            completed: true,
+            ...matchedFlashcard,
+          });
+
+          setShowPreview(true);
+          setShowCreateFlashcard(true);
+          setReadAlredyFlashcard(true);
+
+          SetEditFlashcardData({ id: sessionData.tagId, ...matchedFlashcard });
+          navigate("/dashboard/flashcards");
+        }
+      }
+
+      setQueryFlashcard("");
+      setFilteredFlashcard(displayCreatedFlashcard);
+    } catch (error) {
+      console.error("Error fetching flashcards:", error);
+    }
+  }
+
+  console.log(todaySessions);
 
   return (
     <div>
