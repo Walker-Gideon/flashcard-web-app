@@ -1,6 +1,6 @@
 import Button from "./Button";
 
-export default function QuickAction({ onClick, icon, text, styling }) {
+export default function QuickActionButton({ onClick, icon, text, styling }) {
   return (
     <Button
       onClick={onClick}
