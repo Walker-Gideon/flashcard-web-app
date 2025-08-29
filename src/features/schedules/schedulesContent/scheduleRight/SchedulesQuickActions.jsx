@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { LuPlay } from "react-icons/lu";
 import { LuPlus } from "react-icons/lu";
 import { LuZap } from "react-icons/lu";
@@ -5,6 +6,7 @@ import CardOverview from "../../../../ui/CardOverview";
 import CardHeader from "../../../../ui/CardHeader";
 import Button from "../../../../ui/Button";
 import useLoaderAction from "../../../../utils/LoaderAction";
+import { useGen } from "../../../../context/GeneralContext";
 
 const actionsData = [
   {
@@ -15,7 +17,7 @@ const actionsData = [
   {
     icon: LuPlus,
     text: "Schedule Session",
-    popAction: "",
+    popAction: false,
   },
   {
     icon: LuZap,
@@ -25,13 +27,33 @@ const actionsData = [
 ];
 
 export default function SchedulesQuickActions() {
+  const { setSessionModel } = useGen();
+  const [actions, setActions] = useState(actionsData);
   const navigate = useLoaderAction(1000);
+
+  useEffect(() => {
+    const updateActions = actionsData.map((data) => {
+      console.log(data);
+
+      if (data.text === "Schedule Session") {
+        console.log("After clicking ", data);
+        setTimeout(() => {
+          setSessionModel((show) => !show);
+        }, 500);
+        return { ...data, popAction: true };
+      }
+
+      return data;
+    });
+
+    setActions(updateActions);
+  }, [setSessionModel]);
 
   return (
     <CardOverview>
       <CardHeader title="Quick Actions"></CardHeader>
       <div className="space-y-3">
-        {actionsData.map((data, index) => (
+        {actions.map((data, index) => (
           <Button
             key={index}
             onClick={() => {

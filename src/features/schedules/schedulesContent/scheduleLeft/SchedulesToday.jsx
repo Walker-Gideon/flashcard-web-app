@@ -6,6 +6,7 @@ import { LuPlay } from "react-icons/lu";
 import { LuPlus } from "react-icons/lu";
 import { LuClock } from "react-icons/lu";
 import { LuZap } from "react-icons/lu";
+import { LuCheck } from "react-icons/lu";
 import Button from "../../../../ui/Button";
 import CardHeader from "../../../../ui/CardHeader";
 import CardContent from "../../../../ui/CardContent";
@@ -36,16 +37,25 @@ export default function SchedulesToday({ activeView }) {
   } = useFlash();
   const navigate = useLoaderAction(1000);
 
-  console.log("sessions complete ", sessionComplete);
   function getScheduleStatus(schedule) {
     const now = new Date();
     const scheduledTime = schedule.scheduledAt?.toDate();
 
     if (!scheduledTime) return "Invalid";
 
+    if (sessionComplete.isComplete === true) {
+      return "Completed";
+    }
+
     if (now < scheduledTime) {
       return "Pending";
     }
+
+    /*
+     if (!scheduledTime) return "Invalid";
+  if (schedule.completed) return "Completed";
+  if (now < scheduledTime) return "Pending";
+    */
 
     return "Scheduled";
   }
@@ -143,8 +153,6 @@ export default function SchedulesToday({ activeView }) {
               <span>Add Session</span>
             </Button>
           </CardHeader>
-
-          {/* Working here */}
 
           <div className="scroll-container h-170 space-y-4 overflow-y-scroll">
             {todaySessions.length !== 0 ? (
