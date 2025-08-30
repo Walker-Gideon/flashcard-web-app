@@ -11,7 +11,7 @@ export default function SchedulesRightContentLayout() {
       className={`medium:grid-cols-2 grid grid-cols-1 space-y-6 gap-x-6 gap-y-2 lg:grid-cols-1 ${todaySessions.length === 0 ? `mb-10 lg:mb-0` : `mb-0`}`}
     >
       <SchedulesQuickActions />
-      <SchedulesStudyInsights />
+      {/* <SchedulesStudyInsights /> */}
       <SchedulesUpcomingReminder />
     </div>
   );
