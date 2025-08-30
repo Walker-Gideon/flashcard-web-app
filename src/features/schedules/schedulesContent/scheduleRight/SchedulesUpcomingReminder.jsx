@@ -3,30 +3,7 @@ import CardOverview from "../../../../ui/CardOverview";
 import { useGen } from "../../../../context/GeneralContext";
 
 export default function SchedulesUpcomingReminder() {
-  const { todaySessions } = useGen();
-
-  const now = new Date();
-  let nearestSessions = [];
-
-  if (todaySessions.length > 0) {
-    const futureSessions = todaySessions.filter(
-      (session) => session.scheduledAt?.toDate() > now && !session.completed,
-    );
-
-    const sessionsWithTimeDiff = futureSessions.map((session) => {
-      const sessionTime = session.scheduledAt.toDate();
-      const timeDiff = sessionTime - now;
-      return { ...session, timeDiff };
-    });
-
-    const minTimeDiff = Math.min(
-      ...sessionsWithTimeDiff.map((s) => s.timeDiff),
-    );
-
-    nearestSessions = sessionsWithTimeDiff.filter(
-      (s) => s.timeDiff === minTimeDiff,
-    );
-  }
+  const { todaySessions, nearestSessions } = useGen();
 
   function getTimeRemaining(scheduledAt) {
     const now = new Date();

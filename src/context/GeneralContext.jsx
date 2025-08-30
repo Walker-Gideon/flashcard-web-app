@@ -366,6 +366,31 @@ function GeneralProvider({ children }) {
     .filter((session) => isSameDay(session.scheduledAt.toDate(), new Date()))
     .sort((a, b) => a.scheduledAt.toDate() - b.scheduledAt.toDate());
 
+  // Schedule upcoming
+  const now = new Date();
+  let nearestSessions = [];
+
+  // Closest schedule session
+  if (todaySessions.length > 0) {
+    const futureSessions = todaySessions.filter(
+      (session) => session.scheduledAt?.toDate() > now && !session.completed,
+    );
+
+    const sessionsWithTimeDiff = futureSessions.map((session) => {
+      const sessionTime = session.scheduledAt.toDate();
+      const timeDiff = sessionTime - now;
+      return { ...session, timeDiff };
+    });
+
+    const minTimeDiff = Math.min(
+      ...sessionsWithTimeDiff.map((s) => s.timeDiff),
+    );
+
+    nearestSessions = sessionsWithTimeDiff.filter(
+      (s) => s.timeDiff === minTimeDiff,
+    );
+  }
+
   const value = {
     quotes,
     formData,
@@ -393,6 +418,7 @@ function GeneralProvider({ children }) {
     todaySessions,
     fetchProgress,
     updateStudyTime,
+    nearestSessions,
     incrementSubjecMaster,
     createInitialProgress,
     incrementStudiedFlashcards,
