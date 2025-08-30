@@ -22,57 +22,30 @@ export default function SchedulesUpcomingReminder() {
     SetEditFlashcardData,
   } = useFlash();
   const navigate = useLoaderAction(1000);
-
   const now = new Date();
-  let nearestSessions;
+  let nearestSessions = [];
 
   if (todaySessions.length > 0) {
-    // Step 1: Convert all scheduledAt values to Date
-    const sessionsWithTimeDiff = todaySessions.map((session) => {
+    const futureSessions = todaySessions.filter(
+      (session) => session.scheduledAt?.toDate() > now && !session.completed,
+    );
+
+    const sessionsWithTimeDiff = futureSessions.map((session) => {
       const sessionTime = session.scheduledAt.toDate();
-      const timeDiff = Math.abs(sessionTime - now); // absolute time difference from now
+      const timeDiff = sessionTime - now;
       return { ...session, timeDiff };
     });
 
-    // Step 2: Find the smallest time difference
     const minTimeDiff = Math.min(
       ...sessionsWithTimeDiff.map((s) => s.timeDiff),
     );
 
-    // Step 3: Filter sessions with that exact minTimeDiff
     nearestSessions = sessionsWithTimeDiff.filter(
       (s) => s.timeDiff === minTimeDiff,
     );
   }
+
   console.log("Nearest session(s):", nearestSessions.at(0));
-
-  /*
-  const now = new Date();
-let nextSession = null;
-
-if (todaySessions.length > 0) {
-  // Step 1: Filter uncompleted sessions
-  const uncompletedSessions = todaySessions.filter(
-    (s) => s.completed !== true
-  );
-
-  // Step 2: Sort by scheduledAt time (ascending)
-  const sorted = uncompletedSessions.sort(
-    (a, b) => a.scheduledAt.toDate() - b.scheduledAt.toDate()
-  );
-
-  // Step 3: Pick the earliest that is either:
-  // - in the future, OR
-  // - in the past but not completed
-  nextSession = sorted.find((s) => {
-    const scheduledTime = s.scheduledAt.toDate();
-    return scheduledTime >= now || scheduledTime < now;
-  });
-}
-
-console.log("Next session to show:", nextSession);
-
-  */
 
   function getTimeRemaining(scheduledAt) {
     const now = new Date();
