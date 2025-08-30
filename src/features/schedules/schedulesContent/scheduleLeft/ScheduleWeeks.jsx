@@ -47,7 +47,7 @@ export default function ScheduleWeeks({ activeView }) {
 
   return (
     <div
-      className={`${activeView === "week" ? `` : `hidden`} ${todaySessions.length === 0 ? `lg:h-131` : ``}`}
+      className={`${activeView === "week" ? `` : `hidden`} ${todaySessions.length === 0 ? `lg:h-131` : `lg:mb-19 lg:h-180`}`}
     >
       {activeView === "week" && (
         <CardOverview classname={`lg:absolute w-full top-0 overflow-hidden`}>

@@ -8,7 +8,7 @@ export default function SchedulesLeftContentLayout({ activeView }) {
 
   return (
     <div
-      className={`relative space-y-6 lg:col-span-2 ${todaySessions.length === 0 ? `lg:mb-10` : ``}`}
+      className={`relative space-y-6 lg:col-span-2 ${todaySessions.length === 0 ? `lg:mb-16` : `lg:mb-16`}`}
     >
       <SchedulesToday activeView={activeView} />
       <ScheduleWeeks activeView={activeView} />

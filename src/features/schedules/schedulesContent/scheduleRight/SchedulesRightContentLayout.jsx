@@ -8,11 +8,11 @@ export default function SchedulesRightContentLayout() {
 
   return (
     <div
-      className={`medium:grid-cols-2 grid grid-cols-1 space-y-6 gap-x-6 gap-y-2 lg:grid-cols-1 ${todaySessions.length === 0 ? `mb-10 lg:mb-0` : `mb-0`}`}
+      className={`medium:grid-cols-2 mb-18 grid grid-cols-1 space-y-6 gap-x-6 gap-y-2 lg:grid-cols-1 ${todaySessions.length === 0 ? `lg:h-50` : `lg:h-100`}`}
     >
       <SchedulesQuickActions />
-      {/* <SchedulesStudyInsights /> */}
       <SchedulesUpcomingReminder />
+      {/* <SchedulesStudyInsights /> */}
     </div>
   );
 }

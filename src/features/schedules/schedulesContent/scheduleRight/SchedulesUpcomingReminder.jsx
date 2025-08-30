@@ -22,7 +22,10 @@ export default function SchedulesUpcomingReminder() {
   return (
     <>
       {todaySessions.length !== 0 && (
-        <CardOverview classname="medium:col-span-2 mb-18 rounded-2xl dark:text-white lg:col-span-1 bg-slate-500">
+        // medium:col-span-2 mb-18 lg:col-span-1
+        <CardOverview
+          classname={`rounded-2xl dark:text-white  bg-slate-500 medium:mb-25 ${todaySessions.length === 0 ? `` : `h-`}`}
+        >
           <div className="mb-3 flex items-center space-x-2">
             <LuClock className="h-5 w-5" />
             <h3 className="font-semibold">Next Session</h3>
