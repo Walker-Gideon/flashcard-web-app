@@ -23,6 +23,71 @@ export default function SchedulesUpcomingReminder() {
   } = useFlash();
   const navigate = useLoaderAction(1000);
 
+  const now = new Date();
+  let nearestSessions;
+
+  if (todaySessions.length > 0) {
+    // Step 1: Convert all scheduledAt values to Date
+    const sessionsWithTimeDiff = todaySessions.map((session) => {
+      const sessionTime = session.scheduledAt.toDate();
+      const timeDiff = Math.abs(sessionTime - now); // absolute time difference from now
+      return { ...session, timeDiff };
+    });
+
+    // Step 2: Find the smallest time difference
+    const minTimeDiff = Math.min(
+      ...sessionsWithTimeDiff.map((s) => s.timeDiff),
+    );
+
+    // Step 3: Filter sessions with that exact minTimeDiff
+    nearestSessions = sessionsWithTimeDiff.filter(
+      (s) => s.timeDiff === minTimeDiff,
+    );
+  }
+  console.log("Nearest session(s):", nearestSessions.at(0));
+
+  /*
+  const now = new Date();
+let nextSession = null;
+
+if (todaySessions.length > 0) {
+  // Step 1: Filter uncompleted sessions
+  const uncompletedSessions = todaySessions.filter(
+    (s) => s.completed !== true
+  );
+
+  // Step 2: Sort by scheduledAt time (ascending)
+  const sorted = uncompletedSessions.sort(
+    (a, b) => a.scheduledAt.toDate() - b.scheduledAt.toDate()
+  );
+
+  // Step 3: Pick the earliest that is either:
+  // - in the future, OR
+  // - in the past but not completed
+  nextSession = sorted.find((s) => {
+    const scheduledTime = s.scheduledAt.toDate();
+    return scheduledTime >= now || scheduledTime < now;
+  });
+}
+
+console.log("Next session to show:", nextSession);
+
+  */
+
+  function getTimeRemaining(scheduledAt) {
+    const now = new Date();
+    const targetTime = scheduledAt.toDate(); // assuming Firebase Timestamp
+    const diffMs = targetTime - now;
+
+    if (diffMs <= 0) return "Starting now";
+
+    const diffMinutes = Math.floor(diffMs / 1000 / 60);
+    const hours = Math.floor(diffMinutes / 60);
+    const minutes = diffMinutes % 60;
+
+    return `${hours > 0 ? hours + "h " : ""}${minutes}m remaining`;
+  }
+
   async function handleScheduleSession(sessionId) {
     const fullSessionToday = sessions.find(
       (session) => session.id === sessionId,
@@ -89,12 +154,19 @@ export default function SchedulesUpcomingReminder() {
           </div>
 
           {/* This data will come for the user */}
-          <p className="mb-4 font-medium">Biology review starts in 2 hours</p>
+          <p className="mb-4 font-medium">
+            {nearestSessions?.at(0)?.tag} starts in{" "}
+            {getTimeRemaining(nearestSessions?.at(0)?.scheduledAt)}
+          </p>
 
           <div className="flex items-center justify-between">
             <div>
               {/* This data will come for the user */}
-              <p className="text-sm">12 cards • 25 min</p>
+              <p className="text-sm">
+                {nearestSessions?.at(0)?.count}{" "}
+                {nearestSessions?.at(0)?.count === 1 ? "card" : "cards"} •{" "}
+                {nearestSessions?.at(0)?.estimatedTime} min
+              </p>
             </div>
 
             <Button variant="outline" classname="primaryButton">
