@@ -16,12 +16,12 @@ export default function SchedulesUpcomingReminder() {
     const hours = Math.floor(diffMinutes / 60);
     const minutes = diffMinutes % 60;
 
-    return `${hours > 0 ? hours + "h " : ""}${minutes}m remaining`;
+    return `${hours > 0 ? hours + "h " : ""}${minutes + 1}m remaining`;
   }
 
   return (
     <>
-      {todaySessions.length !== 0 && (
+      {todaySessions.length !== 0 && nearestSessions.length !== 0 && (
         // medium:col-span-2 mb-18 lg:col-span-1
         <CardOverview
           classname={`rounded-2xl dark:text-white  bg-slate-500 medium:mb-25 ${todaySessions.length === 0 ? `` : `h-`}`}
