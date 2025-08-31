@@ -51,10 +51,7 @@ export default function SchedulesMonth({ activeView }) {
   const calendarDays = generateCalendarDays();
 
   return (
-    <div
-      // lg:h-169
-      className={`mb-8 ${activeView === "month" ? `` : `hidden`} ${todaySessions.length === 0 ? `lg:h-159` : `lg:mb-10 lg:h-180`}`}
-    >
+    <div className={`mb-5 lg:h-210 ${activeView === "month" ? `` : `hidden`}`}>
       {activeView === "month" && (
         <CardOverview classname={`lg:absolute w-full top-0`}>
           <div className="mb-6 flex items-center justify-between">
@@ -79,9 +76,7 @@ export default function SchedulesMonth({ activeView }) {
             </div>
           </div>
 
-          <div
-            className={`${todaySessions.length === 0 ? `lg:h-138` : `lg:h-138`}`}
-          >
+          <div className={`lg:h-auto`}>
             {/* Calendar Grid */}
             <div className="mb-4 grid grid-cols-7 gap-2">
               {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (

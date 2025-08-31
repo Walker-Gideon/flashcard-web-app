@@ -87,7 +87,9 @@ export default function SchedulesQuickActions() {
   }
 
   return (
-    <CardOverview>
+    <CardOverview
+      classname={`${todaySessions.length === 0 ? `medium:col-span-2 lg:col-span-1` : ``}`}
+    >
       <CardHeader title="Quick Actions"></CardHeader>
       <div className="space-y-3">
         {todaySessions.length !== 0 && (
