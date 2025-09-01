@@ -114,7 +114,6 @@ function GeneralProvider({ children }) {
           id: doc.id,
           ...doc.data(),
         }));
-        console.log(fetchedFlashcards);
 
         // For the add session in the schedule section
         setFlashcards(fetchedFlashcards);

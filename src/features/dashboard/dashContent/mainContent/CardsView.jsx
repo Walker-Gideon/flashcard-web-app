@@ -1,19 +1,31 @@
+import { isSameDay } from "date-fns";
+import { useGen } from "../../../../context/GeneralContext";
 import { LuBookOpen } from "react-icons/lu";
 import { LuChevronRight } from "react-icons/lu";
 import CardOverview from "../../../../ui/CardOverview";
 import CardHeader from "../../../../ui/CardHeader";
 import CardContent from "../../../../ui/CardContent";
 import CardDiscription from "../../../../ui/CardDiscription";
+import { useMemo } from "react";
 
 export default function CardsView({
   mockData,
   setShowReviewModal,
   setSelectedFlashcard,
 }) {
+  const { flashcards } = useGen();
   const handleFlashcardClick = (flashcard) => {
     setSelectedFlashcard(flashcard);
     setShowReviewModal(true);
   };
+
+  const todayFlashcards = useMemo(() => {
+    return flashcards
+      .filter((card) => isSameDay(card.createdAt.toDate(), new Date()))
+      .sort((a, b) => a.createdAt.toDate() - b.createdAt.toDate());
+  }, [flashcards]);
+
+  console.log("all today's card ", todayFlashcards);
 
   const getDifficultyColor = (difficulty) => {
     switch (difficulty) {
@@ -66,6 +78,12 @@ export default function CardsView({
             </CardContent>
           </CardContent>
         ))}
+
+        <div className="flex h-full w-full items-center justify-center">
+          <p className="text-sm text-slate-500 dark:text-slate-50">
+            No card created for today.
+          </p>
+        </div>
       </div>
     </CardOverview>
   );
