@@ -49,41 +49,43 @@ export default function CardsView({
         </span>
       </CardHeader>
 
-      <div className="space-y-3">
-        {mockData.flashcardsDue.slice(0, 5).map((flashcard) => (
-          <CardContent
-            key={flashcard.id}
-            role="button"
-            type="innerCard"
-            onClick={() => handleFlashcardClick(flashcard)}
-          >
-            <CardContent classname="flex items-center space-x-4">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-r from-slate-200 to-slate-300 dark:from-slate-600 dark:to-slate-700">
-                <LuBookOpen className="h-5 w-5 text-slate-600 dark:text-slate-300" />
-              </div>
-              <CardDiscription
-                classnameFirst="font-medium text-slate-900 dark:text-white"
-                classnameSecond="text-sm text-slate-500 dark:text-slate-400"
-                textOne={flashcard.term}
-                textTwo={flashcard.subject}
-              />
+      <div className="scroll-container h-190 space-y-3 overflow-y-scroll">
+        {todayFlashcards.length !== 0 ? (
+          mockData.flashcardsDue.slice(0, 5).map((flashcard) => (
+            <CardContent
+              key={flashcard.id}
+              role="button"
+              type="innerCard"
+              onClick={() => handleFlashcardClick(flashcard)}
+            >
+              <CardContent classname="flex items-center space-x-4">
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-r from-slate-200 to-slate-300 dark:from-slate-600 dark:to-slate-700">
+                  <LuBookOpen className="h-5 w-5 text-slate-600 dark:text-slate-300" />
+                </div>
+                <CardDiscription
+                  classnameFirst="font-medium text-slate-900 dark:text-white"
+                  classnameSecond="text-sm text-slate-500 dark:text-slate-400"
+                  textOne={flashcard.term}
+                  textTwo={flashcard.subject}
+                />
+              </CardContent>
+              <CardContent classname="flex items-center space-x-3">
+                <span
+                  className={`rounded-full px-2 py-1 text-xs font-medium ${getDifficultyColor(flashcard.difficulty)}`}
+                >
+                  {flashcard.difficulty}
+                </span>
+                <LuChevronRight className="h-4 w-4 text-slate-400 transition-colors group-hover:text-slate-600 dark:group-hover:text-slate-300" />
+              </CardContent>
             </CardContent>
-            <CardContent classname="flex items-center space-x-3">
-              <span
-                className={`rounded-full px-2 py-1 text-xs font-medium ${getDifficultyColor(flashcard.difficulty)}`}
-              >
-                {flashcard.difficulty}
-              </span>
-              <LuChevronRight className="h-4 w-4 text-slate-400 transition-colors group-hover:text-slate-600 dark:group-hover:text-slate-300" />
-            </CardContent>
-          </CardContent>
-        ))}
-
-        <div className="flex h-full w-full items-center justify-center">
-          <p className="text-sm text-slate-500 dark:text-slate-50">
-            No card created for today.
-          </p>
-        </div>
+          ))
+        ) : (
+          <div className="flex h-full w-full items-center justify-center">
+            <p className="text-sm text-slate-500 dark:text-slate-50">
+              No card created today!.
+            </p>
+          </div>
+        )}
       </div>
     </CardOverview>
   );
