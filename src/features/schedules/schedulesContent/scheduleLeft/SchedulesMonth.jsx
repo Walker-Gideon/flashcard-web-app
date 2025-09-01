@@ -104,7 +104,7 @@ export default function SchedulesMonth({ activeView }) {
                 return (
                   <div
                     key={day.toISOString()}
-                    className={`flex aspect-square cursor-pointer items-center justify-center rounded-lg text-sm ${bgColor}`}
+                    className={`flex aspect-square items-center justify-center rounded-lg text-sm ${bgColor}`}
                   >
                     {dayNum}
                   </div>

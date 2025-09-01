@@ -19,7 +19,7 @@ export default function MainContent({
         />
 
         <div className="space-y-6">
-          <MiniCalendar studyDates={mockData.studyDates} />
+          <MiniCalendar />
           <WeakAreas mockData={mockData} />
           <Motivation />
         </div>
