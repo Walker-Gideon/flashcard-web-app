@@ -2,8 +2,10 @@ import { LuLightbulb } from "react-icons/lu";
 import { LuFlame } from "react-icons/lu";
 import CardOverview from "../../../../ui/CardOverview";
 import { useGen } from "../../../../context/GeneralContext";
+import { useAuth } from "../../../../context/AuthContext"
 
-export default function Motivation({ mockData }) {
+export default function Motivation() {
+  const { userData } = useAuth();
   const { quotes, currentQuoteIndex } = useGen();
   const currentQuote = quotes[currentQuoteIndex];
 
@@ -21,7 +23,7 @@ export default function Motivation({ mockData }) {
       <div className="flex items-center space-x-2">
         <LuFlame className="h-4 w-4 text-slate-600 dark:text-slate-300" />
         <span className={`text-sm font-medium ${styling}`}>
-          Keep your {mockData.stats.streakDays}-day streak alive!
+          Keep your {userData.streakCount}-day streak alive!
         </span>
       </div>
     </CardOverview>
