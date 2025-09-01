@@ -8,6 +8,7 @@ import {
   subMonths,
   format,
   isSameMonth,
+  isSameDay,
   isToday,
 } from "date-fns";
 import { LuChevronRight } from "react-icons/lu";
@@ -18,7 +19,7 @@ import Button from "../../../../ui/Button";
 import { useGen } from "../../../../context/GeneralContext";
 
 export default function SchedulesMonth({ activeView }) {
-  const { sessions, todaySessions } = useGen();
+  const { sessions } = useGen();
   const [currentMonth, setCurrentMonth] = useState(new Date());
 
   const handlePrevMonth = () => {
@@ -94,18 +95,44 @@ export default function SchedulesMonth({ activeView }) {
                 const isCurrentMonth = isSameMonth(day, currentMonth);
                 const isTodayDate = isToday(day);
 
-                // 🔁 Later we'll map sessions here
+                const matchingSessions = sessions.filter((session) =>
+                  isSameDay(session.scheduledAt.toDate(), day),
+                );
+
+                console.log("All sessions same day", matchingSessions);
+
+                let dayStatus = null;
+                if (matchingSessions.length > 0) {
+                  const isCompleted = matchingSessions.every(
+                    (s) => s.completed,
+                  );
+                  const isHeavyLoad = matchingSessions.some(
+                    (s) => s.count >= 20,
+                  );
+
+                  console.log("All sessions completed", isCompleted);
+                  console.log("All sessions HeavyLoad", isHeavyLoad);
+                  if (isCompleted) dayStatus = "completed";
+                  else if (isHeavyLoad) dayStatus = "heavy";
+                  else dayStatus = "scheduled";
+                }
+
+                const bgColor = isTodayDate
+                  ? "bg-emerald-500 text-white"
+                  : dayStatus === "completed"
+                    ? "bg-emerald-100 dark:bg-emerald-900/30 dark:text-slate-400 text-slate-600"
+                    : dayStatus === "scheduled"
+                      ? "bg-yellow-100 dark:bg-yellow-900/30 dark:text-slate-400 text-slate-600"
+                      : dayStatus === "heavy"
+                        ? "bg-rose-100 dark:bg-rose-900/30 dark:text-slate-400 text-slate-600"
+                        : isCurrentMonth
+                          ? "hover:bg-slate-100 text-slate-600 dark:hover:bg-slate-700 dark:text-slate-400"
+                          : "text-slate-400 dark:text-slate-600";
 
                 return (
                   <div
                     key={day.toISOString()}
-                    className={`flex aspect-square cursor-pointer items-center justify-center rounded-lg text-sm transition-all duration-200 ${
-                      isTodayDate
-                        ? "bg-emerald-500 text-white shadow-md"
-                        : isCurrentMonth
-                          ? "text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-700"
-                          : "text-slate-400 dark:text-slate-600"
-                    }`}
+                    className={`flex aspect-square cursor-pointer items-center justify-center rounded-lg text-sm ${bgColor}`}
                   >
                     {dayNum}
                   </div>
