@@ -1,12 +1,6 @@
 import {
-  startOfMonth,
-  endOfMonth,
-  startOfWeek,
-  endOfWeek,
-  addDays,
   addMonths,
   subMonths,
-  format,
   isSameMonth,
   isSameDay,
   isToday,
@@ -14,13 +8,12 @@ import {
 import { LuChevronRight } from "react-icons/lu";
 import { LuChevronLeft } from "react-icons/lu";
 import CardOverview from "../../../../ui/CardOverview";
-import { useState } from "react";
 import Button from "../../../../ui/Button";
 import { useGen } from "../../../../context/GeneralContext";
 
 export default function SchedulesMonth({ activeView }) {
-  const { sessions } = useGen();
-  const [currentMonth, setCurrentMonth] = useState(new Date());
+  const { sessions, currentMonth, setCurrentMonth, monthLabel, calendarDays } =
+    useGen();
 
   const handlePrevMonth = () => {
     setCurrentMonth((prev) => subMonths(prev, 1));
@@ -29,27 +22,6 @@ export default function SchedulesMonth({ activeView }) {
   const handleNextMonth = () => {
     setCurrentMonth((prev) => addMonths(prev, 1));
   };
-
-  // The Current month and year
-  const monthLabel = format(currentMonth, "MMMM yyyy");
-
-  const generateCalendarDays = () => {
-    const start = startOfWeek(startOfMonth(currentMonth), { weekStartsOn: 0 });
-    const end = endOfWeek(endOfMonth(currentMonth), { weekStartsOn: 0 });
-
-    const days = [];
-    let day = start;
-
-    while (day <= end) {
-      days.push(day);
-      day = addDays(day, 1);
-    }
-
-    return days;
-  };
-
-  // Set generatedCalendar to map
-  const calendarDays = generateCalendarDays();
 
   return (
     <div className={`mb-5 lg:h-210 ${activeView === "month" ? `` : `hidden`}`}>

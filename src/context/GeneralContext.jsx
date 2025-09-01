@@ -9,7 +9,17 @@ import {
   setDoc,
 } from "firebase/firestore";
 import { auth, db } from "../firebase";
-import { format, subDays, getDay, addDays, isSameDay } from "date-fns";
+import {
+  format,
+  subDays,
+  getDay,
+  addDays,
+  isSameDay,
+  startOfMonth,
+  endOfMonth,
+  startOfWeek,
+  endOfWeek,
+} from "date-fns";
 
 const GeneralContext = createContext();
 
@@ -42,6 +52,9 @@ function GeneralProvider({ children }) {
     time: "",
     estimatedTime: "",
   });
+
+  // Claendar
+  const [currentMonth, setCurrentMonth] = useState(new Date());
 
   //   Fetch the quotes
   useEffect(() => {
@@ -391,6 +404,28 @@ function GeneralProvider({ children }) {
     );
   }
 
+  // Calendar
+  // The Current month and year
+  const monthLabel = format(currentMonth, "MMMM yyyy");
+
+  const generateCalendarDays = () => {
+    const start = startOfWeek(startOfMonth(currentMonth), { weekStartsOn: 0 });
+    const end = endOfWeek(endOfMonth(currentMonth), { weekStartsOn: 0 });
+
+    const days = [];
+    let day = start;
+
+    while (day <= end) {
+      days.push(day);
+      day = addDays(day, 1);
+    }
+
+    return days;
+  };
+
+  // Set generatedCalendar to map
+  const calendarDays = generateCalendarDays();
+
   const value = {
     quotes,
     formData,
@@ -401,10 +436,12 @@ function GeneralProvider({ children }) {
     flashcards,
     setFormData,
     sessionModel,
+    currentMonth,
     isSubmitting,
     setWeeklyData,
     sessionComplete,
     setIsSubmitting,
+    setCurrentMonth,
     loadingProgress,
     setSessionModel,
     consistencyScore,
@@ -413,8 +450,10 @@ function GeneralProvider({ children }) {
     setSessionComplete,
     setConsistencyScore,
     // functions
+    monthLabel,
     logStudyTime,
     updateStreak,
+    calendarDays,
     todaySessions,
     fetchProgress,
     updateStudyTime,
