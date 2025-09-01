@@ -1,22 +1,10 @@
-import {
-  addMonths,
-  subMonths,
-  isSameMonth,
-  isSameDay,
-  isToday,
-} from "date-fns";
+import { isSameMonth, isToday } from "date-fns";
 import { LuCalendar } from "react-icons/lu";
 import CardOverview from "../../../../ui/CardOverview";
 import { useGen } from "../../../../context/GeneralContext";
 
 export default function MiniCalendar() {
   const { currentMonth, monthLabel, calendarDays } = useGen();
-
-  const styling = {
-    daysOverview: "flex items-center space-x-2",
-    cycle: "h-3 w-3 rounded-full",
-    text: "text-slate-600 dark:text-slate-400",
-  };
 
   return (
     <CardOverview>
@@ -54,17 +42,9 @@ export default function MiniCalendar() {
         })}
       </div>
 
-      <div className="mt-4 flex items-center space-x-4 text-xs">
-        <div className={styling.daysOverview}>
-          <div className={`bg-emerald-500 ${styling.cycle}`}></div>
-          <span className={styling.text}>Today</span>
-        </div>
-        <div className={styling.daysOverview}>
-          <div
-            className={`bg-slate-200 dark:bg-slate-900/30 ${styling.cycle}`}
-          ></div>
-          <span className={styling.text}>Study day</span>
-        </div>
+      <div className="mt-4 flex items-center justify-end space-x-2 text-xs">
+        <div className="h-3 w-3 rounded-full bg-emerald-500"></div>
+        <span className="text-slate-600 dark:text-slate-400">Today</span>
       </div>
     </CardOverview>
   );
