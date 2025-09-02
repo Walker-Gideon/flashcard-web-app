@@ -9,7 +9,6 @@ import CardDiscription from "../../../../ui/CardDiscription";
 import { useMemo } from "react";
 
 export default function CardsView({
-  mockData,
   setShowReviewModal,
   setSelectedFlashcard,
 }) {
@@ -27,31 +26,20 @@ export default function CardsView({
 
   console.log("all today's card ", todayFlashcards);
 
-  const getDifficultyColor = (difficulty) => {
-    switch (difficulty) {
-      case "easy":
-        return "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300";
-      case "medium":
-        return "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300";
-      case "hard":
-        return "bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-300";
-      default:
-        return "bg-slate-100 text-slate-700 dark:bg-slate-700 dark:text-slate-300";
-    }
-  };
-
   return (
     <CardOverview classname={"lg:col-span-2"}>
       <CardHeader title="Cards Due Today">
-        <span className="rounded-full bg-emerald-100 px-3 py-1 text-sm font-medium text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300">
-          {mockData.flashcardsDue.filter((card) => card.due === "Today").length}{" "}
-          cards
-        </span>
+        {todayFlashcards.length !== 0 && (
+          <span className="rounded-full bg-slate-100 px-3 py-1 text-sm font-medium text-slate-700 dark:bg-slate-900/30 dark:text-slate-300">
+            {todayFlashcards.length} card
+            {todayFlashcards.length <= 1 ? "" : "s"}
+          </span>
+        )}
       </CardHeader>
 
       <div className="scroll-container h-190 space-y-3 overflow-y-scroll">
         {todayFlashcards.length !== 0 ? (
-          mockData.flashcardsDue.slice(0, 5).map((flashcard) => (
+          todayFlashcards.map((flashcard) => (
             <CardContent
               key={flashcard.id}
               role="button"
@@ -59,22 +47,15 @@ export default function CardsView({
               onClick={() => handleFlashcardClick(flashcard)}
             >
               <CardContent classname="flex items-center space-x-4">
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-r from-slate-200 to-slate-300 dark:from-slate-600 dark:to-slate-700">
-                  <LuBookOpen className="h-5 w-5 text-slate-600 dark:text-slate-300" />
-                </div>
+                <div className="flex h-4 w-4 items-center justify-center rounded-full bg-gradient-to-r from-slate-200 to-slate-300 dark:from-slate-600 dark:to-slate-700"></div>
                 <CardDiscription
                   classnameFirst="font-medium text-slate-900 dark:text-white"
                   classnameSecond="text-sm text-slate-500 dark:text-slate-400"
-                  textOne={flashcard.term}
-                  textTwo={flashcard.subject}
+                  textOne={flashcard.tags}
+                  textTwo={`${flashcard.pairs.length} card${flashcard.pairs.length <= 1 ? "" : "s"}`}
                 />
               </CardContent>
               <CardContent classname="flex items-center space-x-3">
-                <span
-                  className={`rounded-full px-2 py-1 text-xs font-medium ${getDifficultyColor(flashcard.difficulty)}`}
-                >
-                  {flashcard.difficulty}
-                </span>
                 <LuChevronRight className="h-4 w-4 text-slate-400 transition-colors group-hover:text-slate-600 dark:group-hover:text-slate-300" />
               </CardContent>
             </CardContent>

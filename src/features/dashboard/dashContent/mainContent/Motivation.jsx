@@ -2,7 +2,7 @@ import { LuLightbulb } from "react-icons/lu";
 import { LuFlame } from "react-icons/lu";
 import CardOverview from "../../../../ui/CardOverview";
 import { useGen } from "../../../../context/GeneralContext";
-import { useAuth } from "../../../../context/AuthContext"
+import { useAuth } from "../../../../context/AuthContext";
 
 export default function Motivation() {
   const { userData } = useAuth();
@@ -23,7 +23,7 @@ export default function Motivation() {
       <div className="flex items-center space-x-2">
         <LuFlame className="h-4 w-4 text-slate-600 dark:text-slate-300" />
         <span className={`text-sm font-medium ${styling}`}>
-          Keep your {userData.streakCount}-day streak alive!
+          Keep your {userData.streakCount} day streak alive!
         </span>
       </div>
     </CardOverview>

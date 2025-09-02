@@ -13,7 +13,6 @@ export default function MainContent({
     <>
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
         <CardsView
-          mockData={mockData}
           setShowReviewModal={setShowReviewModal}
           setSelectedFlashcard={setSelectedFlashcard}
         />
