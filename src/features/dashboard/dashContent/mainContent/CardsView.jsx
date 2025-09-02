@@ -1,17 +1,13 @@
+import { useMemo } from "react";
 import { isSameDay } from "date-fns";
 import { useGen } from "../../../../context/GeneralContext";
-import { LuChevronRight } from "react-icons/lu";
 import CardOverview from "../../../../ui/CardOverview";
 import CardHeader from "../../../../ui/CardHeader";
 import CardContent from "../../../../ui/CardContent";
 import CardDiscription from "../../../../ui/CardDiscription";
-import { useMemo } from "react";
 
 export default function CardsView() {
   const { flashcards } = useGen();
-  const handleFlashcardClick = (id) => {
-    console.log("Flashcard id", id);
-  };
 
   const todayFlashcards = useMemo(() => {
     return flashcards
@@ -33,11 +29,9 @@ export default function CardsView() {
       <div className="scroll-container h-190 space-y-3 overflow-y-scroll">
         {todayFlashcards.length !== 0 ? (
           todayFlashcards.map((flashcard) => (
-            <CardContent
+            <div
               key={flashcard.id}
-              role="button"
-              type="innerCard"
-              onClick={() => handleFlashcardClick(flashcard.id)}
+              className="group flex items-center justify-between rounded-xl bg-slate-50 p-4 dark:bg-slate-700/50"
             >
               <CardContent classname="flex items-center space-x-4">
                 <div className="flex h-4 w-4 items-center justify-center rounded-full bg-gradient-to-r from-slate-200 to-slate-300 dark:from-slate-600 dark:to-slate-700"></div>
@@ -48,10 +42,7 @@ export default function CardsView() {
                   textTwo={`${flashcard.pairs.length} card${flashcard.pairs.length <= 1 ? "" : "s"}`}
                 />
               </CardContent>
-              <CardContent classname="flex items-center space-x-3">
-                <LuChevronRight className="h-4 w-4 text-slate-400 transition-colors group-hover:text-slate-600 dark:group-hover:text-slate-300" />
-              </CardContent>
-            </CardContent>
+            </div>
           ))
         ) : (
           <div className="flex h-full w-full items-center justify-center">
