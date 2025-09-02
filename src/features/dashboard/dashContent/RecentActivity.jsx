@@ -35,7 +35,7 @@ const initialActivity = [
   },
   {
     id: 4,
-    action: "Achieved 7-day streak!",
+    action: "",
     time: "",
     type: "achievement",
     icon: LuAward,
@@ -58,14 +58,17 @@ export default function RecentActivity() {
   useEffect(() => {
     const update = initialActivity.map((data) => {
       if (data.type === "achievement") {
-        return {...data};
+        return {...data, action: `Achieved ${userData.streakCount} day streak`, visible: userData.streakCount >= 1, time: userData.streakCount >= 1
+          ? new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", hour12: true })
+          : "",
+        };
       }
 
       return data;
     });
 
     setRecentActivity(update);
-  }, []);
+  }, [userData.streakCount]);
 
   return (
     <CardOverview classname={"mb-18"}>
