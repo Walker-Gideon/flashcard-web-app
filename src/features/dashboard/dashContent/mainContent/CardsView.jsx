@@ -1,6 +1,5 @@
 import { isSameDay } from "date-fns";
 import { useGen } from "../../../../context/GeneralContext";
-import { LuBookOpen } from "react-icons/lu";
 import { LuChevronRight } from "react-icons/lu";
 import CardOverview from "../../../../ui/CardOverview";
 import CardHeader from "../../../../ui/CardHeader";
@@ -13,9 +12,8 @@ export default function CardsView({
   setSelectedFlashcard,
 }) {
   const { flashcards } = useGen();
-  const handleFlashcardClick = (flashcard) => {
-    setSelectedFlashcard(flashcard);
-    setShowReviewModal(true);
+  const handleFlashcardClick = (id) => {
+    console.log("Flashcard id", id);
   };
 
   const todayFlashcards = useMemo(() => {
@@ -24,11 +22,9 @@ export default function CardsView({
       .sort((a, b) => a.createdAt.toDate() - b.createdAt.toDate());
   }, [flashcards]);
 
-  console.log("all today's card ", todayFlashcards);
-
   return (
     <CardOverview classname={"lg:col-span-2"}>
-      <CardHeader title="Cards Due Today">
+      <CardHeader title="Cards Created Today">
         {todayFlashcards.length !== 0 && (
           <span className="rounded-full bg-slate-100 px-3 py-1 text-sm font-medium text-slate-700 dark:bg-slate-900/30 dark:text-slate-300">
             {todayFlashcards.length} card
@@ -44,7 +40,7 @@ export default function CardsView({
               key={flashcard.id}
               role="button"
               type="innerCard"
-              onClick={() => handleFlashcardClick(flashcard)}
+              onClick={() => handleFlashcardClick(flashcard.id)}
             >
               <CardContent classname="flex items-center space-x-4">
                 <div className="flex h-4 w-4 items-center justify-center rounded-full bg-gradient-to-r from-slate-200 to-slate-300 dark:from-slate-600 dark:to-slate-700"></div>
