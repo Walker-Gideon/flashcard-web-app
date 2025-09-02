@@ -1,7 +1,5 @@
-import { mockData } from "../../../../data/mockData";
 import MiniCalendar from "./MiniCalendar";
 import CardsView from "./CardsView";
-import WeakAreas from "./WeakAreas";
 import Motivation from "./Motivation";
 
 export default function MainContent() {
@@ -12,7 +10,6 @@ export default function MainContent() {
 
         <div className="space-y-6">
           <MiniCalendar />
-          <WeakAreas mockData={mockData} />
           <Motivation />
         </div>
       </div>
