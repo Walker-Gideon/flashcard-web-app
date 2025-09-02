@@ -15,6 +15,7 @@ const initialActivity = [
     time: "",
     type: "edit",
     icon: LuPenLine,
+    visible: false,
   },
   {
     id: 2,
@@ -22,6 +23,7 @@ const initialActivity = [
     time: "",
     type: "review",
     icon: LuBrain,
+    visible: false,
   },
   {
     id: 3,
@@ -29,6 +31,7 @@ const initialActivity = [
     time: "",
     type: "create",
     icon: LuPlus,
+    visible: false,
   },
   {
     id: 4,
@@ -36,6 +39,7 @@ const initialActivity = [
     time: "",
     type: "achievement",
     icon: LuAward,
+    visible: false,
   },
   {
     id: 5,
@@ -43,6 +47,7 @@ const initialActivity = [
     time: "",
     type: "schedule",
     icon: LuCalendarPlus,
+    visible: false,
   },
 ];
 
@@ -67,26 +72,30 @@ export default function RecentActivity() {
       <h3 className="mb-4 text-lg font-semibold text-slate-900 dark:text-white">
         Recent Activity
       </h3>
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {recentActivity.map((activity) => (
-          <div
-            key={activity.id}
-            className="flex items-center space-x-3 rounded-xl bg-slate-50 p-4 dark:bg-slate-700/50"
-          >
-            <div className="flex-shrink-0 rounded-lg bg-gradient-to-r from-slate-200 to-slate-300 p-2 dark:from-slate-600 dark:to-slate-700">
-              <activity.icon className="h-4 w-4 text-slate-600 dark:text-slate-300" />
+
+      {recentActivity.filter(a => a.visible).length > 0 ? (
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {recentActivity.filter((activity) => activity.visible).map((activity) => (
+            <div key={activity.id} className="flex items-center space-x-3 rounded-xl bg-slate-50 p-4 dark:bg-slate-700/50">
+              <div className="flex-shrink-0 rounded-lg bg-gradient-to-r from-slate-200 to-slate-300 p-2 dark:from-slate-600 dark:to-slate-700">
+                <activity.icon className="h-4 w-4 text-slate-600 dark:text-slate-300" />
+              </div>
+              <div className="min-w-0 flex-1">
+                <p className="truncate text-sm font-medium text-slate-900 dark:text-white">
+                  {activity.action}
+                </p>
+                <p className="text-xs text-slate-500 dark:text-slate-400">
+                  {activity.time}
+                </p>
+              </div>
             </div>
-            <div className="min-w-0 flex-1">
-              <p className="truncate text-sm font-medium text-slate-900 dark:text-white">
-                {activity.action}
-              </p>
-              <p className="text-xs text-slate-500 dark:text-slate-400">
-                {activity.time}
-              </p>
-            </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      ): (
+        <div className="w-full h-full flex items-center justify-center">
+          <p className="text-sm text-slate-500 dark:text-slate-50">No recent activity yet.</p>
+        </div>
+      )}
     </CardOverview>
   );
 }
