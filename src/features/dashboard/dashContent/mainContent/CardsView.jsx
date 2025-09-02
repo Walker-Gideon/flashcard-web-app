@@ -7,10 +7,7 @@ import CardContent from "../../../../ui/CardContent";
 import CardDiscription from "../../../../ui/CardDiscription";
 import { useMemo } from "react";
 
-export default function CardsView({
-  setShowReviewModal,
-  setSelectedFlashcard,
-}) {
+export default function CardsView() {
   const { flashcards } = useGen();
   const handleFlashcardClick = (id) => {
     console.log("Flashcard id", id);
