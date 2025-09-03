@@ -57,6 +57,7 @@ export default function RecentActivity() {
   const { userData } = useAuth();
   const [recentActivity, setRecentActivity] = useState(initialActivity);
   const [now, setNow] = useState(Date.now());
+  // updateReview, setUpdateReview
 
   useEffect(() => {
     const id = setInterval(() => setNow(Date.now()), 60_000); // update every minute

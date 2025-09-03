@@ -26,11 +26,13 @@ export default function CreatedContentFC() {
     incrementSubjecMaster,
     logStudyTime,
     setSessionComplete,
+    setUpdateReview,
   } = useGen();
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(0);
   const [showFront, setShowFront] = useState(true);
   const [hasUpdatedStudyTime, setHasUpdatedStudyTime] = useState(false);
+
 
   // Display flashcard on mount
   useEffect(() => {
@@ -88,6 +90,10 @@ export default function CreatedContentFC() {
           ...prev,
           isComplete: true,
         }));
+        setUpdateReview((prev) => ({
+          ...prev,
+          completed: true,
+        }))
       }, 500);
       return;
     }

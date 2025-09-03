@@ -58,6 +58,10 @@ function GeneralProvider({ children }) {
 
   // Dashboard recent activity
   const [updateSchedule, setUpdateSchedule] = useState(false)
+  const [updateReview, setUpdateReview] = useState({
+    cardTag: "",
+    completed: false,
+  })
 
   //   Fetch the quotes
   useEffect(() => {
@@ -439,12 +443,14 @@ function GeneralProvider({ children }) {
     setFormData,
     sessionModel,
     currentMonth,
+    updateReview, 
     isSubmitting,
     setWeeklyData,
     updateSchedule, 
     sessionComplete,
     setIsSubmitting,
     setCurrentMonth,
+    setUpdateReview,
     loadingProgress,
     setSessionModel,
     consistencyScore,
