@@ -13,7 +13,7 @@ const initialActivity = [
   {
     id: 1,
     action: "Edited 'French Verbs' note",
-    timestamp: null
+    timestamp: null,
     type: "edit",
     icon: LuPenLine,
     visible: false,
@@ -21,7 +21,7 @@ const initialActivity = [
   {
     id: 2,
     action: "Completed Biology review session",
-    timestamp: null
+    timestamp: null,
     type: "review",
     icon: LuBrain,
     visible: false,
@@ -29,7 +29,7 @@ const initialActivity = [
   {
     id: 3,
     action: "Added 5 new flashcards to Math deck",
-    timestamp: null
+    timestamp: null,
     type: "create",
     icon: LuPlus,
     visible: false,
@@ -37,7 +37,7 @@ const initialActivity = [
   {
     id: 4,
     action: "",
-    timestamp: null
+    timestamp: null,
     type: "achievement",
     icon: LuAward,
     visible: false,
@@ -45,7 +45,7 @@ const initialActivity = [
   {
     id: 5,
     action: "Updated study schedule",
-    timestamp: null
+    timestamp: null,
     type: "schedule",
     icon: LuCalendarPlus,
     visible: false,
@@ -56,23 +56,29 @@ export default function RecentActivity() {
   const { updateSchedule } = useGen()
   const { userData } = useAuth();
   const [recentActivity, setRecentActivity] = useState(initialActivity);
+  const [now, setNow] = useState(Date.now());
 
-  console.log("Check if a session is created", updateSchedule)
+  useEffect(() => {
+    const id = setInterval(() => setNow(Date.now()), 60_000); // update every minute
+    return () => clearInterval(id);
+  }, []);
 
   useEffect(() => {
     const update = initialActivity.map((data) => {
       if (data.type === "achievement") {
-        return {...data, action: `Achieved ${userData.streakCount} day streak`, visible: userData.streakCount >= 1, time: userData.streakCount >= 1
-          ? new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", hour12: true })
-          : "",
+        const shouldShow = userData.streakCount >= 1;
+        return {
+          ...data, action: `Achieved ${userData.streakCount} day streak`, 
+          visible: shouldShow || data.visible, 
+          timestamp: shouldShow && !data.timestamp ? Date.now() : data.timestamp,
         };
       }
 
       if(data.type === "schedule") {
-        return {...data, visible: updateSchedule, time: 
-          updateSchedule
-          ? new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", hour12: true })
-          : "",
+        return {
+          ...data, 
+          visible: updateSchedule || data.visible, 
+          timestamp: updateSchedule && !data.timestamp ? Date.now() : data.timestamp,
         }
       }
 
@@ -81,6 +87,31 @@ export default function RecentActivity() {
 
     setRecentActivity(update);
   }, [userData.streakCount, updateSchedule]);
+
+  function timeAgo(ts, now = Date.now()) {
+    const s = Math.floor((now - ts) / 1000);
+    if (s < 5) return "just now";
+    if (s < 60) return `${s} second${s === 1 ? "" : "s"} ago`;
+
+    const m = Math.floor(s / 60);
+    if (m < 60) return `${m} minute${m === 1 ? "" : "s"} ago`;
+
+    const h = Math.floor(m / 60);
+    if (h < 24) return `${h} hour${h === 1 ? "" : "s"} ago`;
+
+    const d = Math.floor(h / 24);
+    if (d < 7) return `${d} day${d === 1 ? "" : "s"} ago`;
+     
+    const w = Math.floor(d / 7);
+    if (w < 5) return `${w} week${w === 1 ? "" : "s"} ago`;
+
+    const mo = Math.floor(d / 30);
+    if (mo < 12) return `${mo} month${mo === 1 ? "" : "s"} ago`;
+
+    const y = Math.floor(d / 365);
+    return `${y} year${y === 1 ? "" : "s"} ago`;
+  }
+
 
   return (
     <CardOverview classname={"mb-18"}>
@@ -100,7 +131,7 @@ export default function RecentActivity() {
                   {activity.action}
                 </p>
                 <p className="text-xs text-slate-500 dark:text-slate-400">
-                  {activity.time}
+                  {activity.timestamp ? timeAgo(activity.timestamp, now) : ""}
                 </p>
               </div>
             </div>
