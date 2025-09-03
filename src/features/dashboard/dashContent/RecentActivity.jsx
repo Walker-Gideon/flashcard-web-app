@@ -20,7 +20,7 @@ const initialActivity = [
   },
   {
     id: 2,
-    action: "Completed Biology review session",
+    action: "",
     timestamp: null,
     type: "review",
     icon: LuBrain,
@@ -53,11 +53,10 @@ const initialActivity = [
 ];
 
 export default function RecentActivity() {
-  const { updateSchedule } = useGen()
+  const { updateSchedule, updateReview } = useGen()
   const { userData } = useAuth();
   const [recentActivity, setRecentActivity] = useState(initialActivity);
   const [now, setNow] = useState(Date.now());
-  // updateReview, setUpdateReview
 
   useEffect(() => {
     const id = setInterval(() => setNow(Date.now()), 60_000); // update every minute
@@ -83,11 +82,20 @@ export default function RecentActivity() {
         }
       }
 
+      if(data.type === "review") {
+        return {
+          ...data, 
+          action: `Completed ${updateReview.cardTag} review session`,
+          visible: updateReview.completed || data.visible, 
+          timestamp: updateReview && !data.timestamp ? Date.now() : data.timestamp,
+        }
+      }
+
       return data;
     });
 
     setRecentActivity(update);
-  }, [userData.streakCount, updateSchedule]);
+  }, [userData.streakCount, updateSchedule, updateReview]);
 
   function timeAgo(ts, now = Date.now()) {
     const s = Math.floor((now - ts) / 1000);

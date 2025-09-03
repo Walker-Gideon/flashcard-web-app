@@ -31,7 +31,9 @@ import { LuLoader } from "react-icons/lu";
  */
 
 /*
- 
+
+"truncate" and add a width "min-w-0"
+
  This will prevent the animation from jumping
  import { AnimatePresence } from "motion/react";
   */
