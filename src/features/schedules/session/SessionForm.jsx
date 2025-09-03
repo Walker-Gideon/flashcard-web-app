@@ -15,6 +15,7 @@ export default function SessionForm({ error, setError }) {
     formData,
     setFormData,
     setIsSubmitting,
+    setUpdateSchedule,
   } = useGen();
 
   const handleSubmit = async (e) => {
@@ -66,6 +67,9 @@ export default function SessionForm({ error, setError }) {
       setError("");
 
       setSessionModel(false);
+
+      // Update the recent activity when a schedule session is ceated
+      setUpdateSchedule(true);
     } catch (err) {
       console.error("Failed to add session:", err);
     } finally {

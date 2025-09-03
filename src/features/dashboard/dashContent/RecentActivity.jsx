@@ -7,12 +7,13 @@ import { LuPenLine } from "react-icons/lu";
 import { LuPlus } from "react-icons/lu";
 import { LuAward } from "react-icons/lu";
 import { useAuth } from "../../../context/AuthContext";
+import { useGen } from "../../../context/GeneralContext";
 
 const initialActivity = [
   {
     id: 1,
     action: "Edited 'French Verbs' note",
-    time: "",
+    timestamp: null
     type: "edit",
     icon: LuPenLine,
     visible: false,
@@ -20,7 +21,7 @@ const initialActivity = [
   {
     id: 2,
     action: "Completed Biology review session",
-    time: "",
+    timestamp: null
     type: "review",
     icon: LuBrain,
     visible: false,
@@ -28,7 +29,7 @@ const initialActivity = [
   {
     id: 3,
     action: "Added 5 new flashcards to Math deck",
-    time: "",
+    timestamp: null
     type: "create",
     icon: LuPlus,
     visible: false,
@@ -36,7 +37,7 @@ const initialActivity = [
   {
     id: 4,
     action: "",
-    time: "",
+    timestamp: null
     type: "achievement",
     icon: LuAward,
     visible: false,
@@ -44,7 +45,7 @@ const initialActivity = [
   {
     id: 5,
     action: "Updated study schedule",
-    time: "",
+    timestamp: null
     type: "schedule",
     icon: LuCalendarPlus,
     visible: false,
@@ -52,8 +53,11 @@ const initialActivity = [
 ];
 
 export default function RecentActivity() {
+  const { updateSchedule } = useGen()
   const { userData } = useAuth();
   const [recentActivity, setRecentActivity] = useState(initialActivity);
+
+  console.log("Check if a session is created", updateSchedule)
 
   useEffect(() => {
     const update = initialActivity.map((data) => {
@@ -64,11 +68,19 @@ export default function RecentActivity() {
         };
       }
 
+      if(data.type === "schedule") {
+        return {...data, visible: updateSchedule, time: 
+          updateSchedule
+          ? new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", hour12: true })
+          : "",
+        }
+      }
+
       return data;
     });
 
     setRecentActivity(update);
-  }, [userData.streakCount]);
+  }, [userData.streakCount, updateSchedule]);
 
   return (
     <CardOverview classname={"mb-18"}>

@@ -71,8 +71,6 @@ export default function SchedulesMonth({ activeView }) {
                   isSameDay(session.scheduledAt.toDate(), day),
                 );
 
-                console.log("All sessions same day", matchingSessions);
-
                 let dayStatus = null;
                 if (matchingSessions.length > 0) {
                   const isCompleted = matchingSessions.every(
@@ -81,9 +79,7 @@ export default function SchedulesMonth({ activeView }) {
                   const isHeavyLoad = matchingSessions.some(
                     (s) => s.count >= 20,
                   );
-
-                  console.log("All sessions completed", isCompleted);
-                  console.log("All sessions HeavyLoad", isHeavyLoad);
+                  
                   if (isCompleted) dayStatus = "completed";
                   else if (isHeavyLoad) dayStatus = "heavy";
                   else dayStatus = "scheduled";

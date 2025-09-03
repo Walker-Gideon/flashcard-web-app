@@ -56,6 +56,9 @@ function GeneralProvider({ children }) {
   // Claendar
   const [currentMonth, setCurrentMonth] = useState(new Date());
 
+  // Dashboard recent activity
+  const [updateSchedule, setUpdateSchedule] = useState(false)
+
   //   Fetch the quotes
   useEffect(() => {
     const quoteRef = collection(db, "quotes");
@@ -438,6 +441,7 @@ function GeneralProvider({ children }) {
     currentMonth,
     isSubmitting,
     setWeeklyData,
+    updateSchedule, 
     sessionComplete,
     setIsSubmitting,
     setCurrentMonth,
@@ -445,6 +449,7 @@ function GeneralProvider({ children }) {
     setSessionModel,
     consistencyScore,
     totalCardsPerTag,
+    setUpdateSchedule,
     currentQuoteIndex,
     setSessionComplete,
     setConsistencyScore,
