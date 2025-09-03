@@ -1,11 +1,6 @@
 import { useState, useEffect } from "react";
 import CardOverview from "../../../ui/CardOverview";
-import { LuBrain } from "react-icons/lu";
-import { LuCalendarPlus } from "react-icons/lu";
-import { LuBookOpen } from "react-icons/lu";
-import { LuPenLine } from "react-icons/lu";
-import { LuPlus } from "react-icons/lu";
-import { LuAward } from "react-icons/lu";
+import { LuAward, LuPlus, LuPenLine, LuBookOpen, LuCalendarPlus, LuBrain } from "react-icons/lu";
 import { useAuth } from "../../../context/AuthContext";
 import { useGen } from "../../../context/GeneralContext";
 
@@ -55,8 +50,15 @@ const initialActivity = [
 export default function RecentActivity() {
   const { updateSchedule, updateReview } = useGen()
   const { userData } = useAuth();
-  const [recentActivity, setRecentActivity] = useState(initialActivity);
+  const [recentActivity, setRecentActivity] = useState([]);
   const [now, setNow] = useState(Date.now());
+
+  useEffect(() => {
+    if (userData?.uid) {
+      const saved = loadActivities(userData.uid);
+      setRecentActivity(saved.length > 0 ? saved : initialActivity);
+    }
+  }, [userData?.uid]);
 
   useEffect(() => {
     const id = setInterval(() => setNow(Date.now()), 60_000); // update every minute
@@ -64,63 +66,78 @@ export default function RecentActivity() {
   }, []);
 
   useEffect(() => {
-    const update = initialActivity.map((data) => {
+    if (!userData?.uid) return;
+
+    const update = recentActivity.map((data) => {
       if (data.type === "achievement") {
         const shouldShow = userData.streakCount >= 1;
         return {
-          ...data, action: `Achieved ${userData.streakCount} day streak`, 
-          visible: shouldShow || data.visible, 
+          ...data,
+          action: `Achieved ${userData.streakCount} day streak`,
+          visible: shouldShow || data.visible,
           timestamp: shouldShow && !data.timestamp ? Date.now() : data.timestamp,
         };
       }
 
-      if(data.type === "schedule") {
+      if (data.type === "schedule") {
         return {
-          ...data, 
-          visible: updateSchedule || data.visible, 
+          ...data,
+          visible: updateSchedule || data.visible,
           timestamp: updateSchedule && !data.timestamp ? Date.now() : data.timestamp,
-        }
+        };
       }
 
-      if(data.type === "review") {
+      if (data.type === "review") {
         return {
-          ...data, 
+          ...data,
           action: `Completed ${updateReview.cardTag} review session`,
-          visible: updateReview.completed || data.visible, 
-          timestamp: updateReview && !data.timestamp ? Date.now() : data.timestamp,
-        }
+          visible: updateReview.completed || data.visible,
+          timestamp: updateReview.completed && !data.timestamp ? Date.now() : data.timestamp,
+        };
       }
 
       return data;
     });
 
-    setRecentActivity(update);
-  }, [userData.streakCount, updateSchedule, updateReview]);
+    // Only set state if changed
+    const isDifferent = JSON.stringify(update) !== JSON.stringify(recentActivity);
+    if (isDifferent) {
+      setRecentActivity(update);
+      saveActivities(userData.uid, update);
+    }
+  }, [userData.streakCount, updateSchedule, updateReview, recentActivity, userData?.uid]);
 
-  function timeAgo(ts, now = Date.now()) {
-    const s = Math.floor((now - ts) / 1000);
-    if (s < 5) return "just now";
-    if (s < 60) return `${s} second${s === 1 ? "" : "s"} ago`;
+  // Save whenever recentActivity changes
+  useEffect(() => {
+    localStorage.setItem(
+      `recentActivity_${userData.uid}`,
+      JSON.stringify(recentActivity)
+    );
+  }, [recentActivity, userData.uid]);
 
-    const m = Math.floor(s / 60);
-    if (m < 60) return `${m} minute${m === 1 ? "" : "s"} ago`;
-
-    const h = Math.floor(m / 60);
-    if (h < 24) return `${h} hour${h === 1 ? "" : "s"} ago`;
-
-    const d = Math.floor(h / 24);
-    if (d < 7) return `${d} day${d === 1 ? "" : "s"} ago`;
-     
-    const w = Math.floor(d / 7);
-    if (w < 5) return `${w} week${w === 1 ? "" : "s"} ago`;
-
-    const mo = Math.floor(d / 30);
-    if (mo < 12) return `${mo} month${mo === 1 ? "" : "s"} ago`;
-
-    const y = Math.floor(d / 365);
-    return `${y} year${y === 1 ? "" : "s"} ago`;
+  // storage helper
+  function loadActivities(userId) {
+    return JSON.parse(localStorage.getItem(`recentActivity_${userId}`)) || [];
   }
 
+   // storage helper
+  function saveActivities(userId, activities) {
+    localStorage.setItem(
+      `recentActivity_${userId}`,
+      JSON.stringify(activities)
+    );
+  }
+
+  function timeAgo(timestamp) {
+    if (!timestamp) return "";
+    const diff = Math.floor((Date.now() - timestamp) / 1000); // seconds
+
+    if (diff < 60) return "just now";
+    if (diff < 3600) return `${Math.floor(diff / 60)} min ago`;
+    if (diff < 86400) return `${Math.floor(diff / 3600)}h ago`;
+    if (diff < 604800) return `${Math.floor(diff / 86400)}d ago`;
+    return `${Math.floor(diff / 604800)}w ago`;
+  }
 
   return (
     <CardOverview classname={"mb-18"}>
@@ -140,7 +157,7 @@ export default function RecentActivity() {
                   {activity.action}
                 </p>
                 <p className="text-xs text-slate-500 dark:text-slate-400">
-                  {activity.timestamp ? timeAgo(activity.timestamp, now) : ""}
+                  {timeAgo(activity.timestamp)}
                 </p>
               </div>
             </div>
