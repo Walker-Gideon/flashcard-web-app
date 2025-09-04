@@ -23,7 +23,8 @@ export default function ThemeCom() {
   };
 
   return (
-    <div className="medium:hidden block">
+    // medium:hidden block
+    <div className="">
       <Button
         onClick={toggleDarkMode}
         variant="outline"
