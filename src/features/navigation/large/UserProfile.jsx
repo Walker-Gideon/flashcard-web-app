@@ -1,33 +1,12 @@
-import { useEffect, useState } from "react";
+
 import { useNav } from "../../../context/NavigateContext";
-import Button from "../../../ui/Button";
-import { LuMoon } from "react-icons/lu";
-import { LuSun } from "react-icons/lu";
-import User from "../../user/User";
 import { useAuth } from "../../../context/AuthContext";
+import ThemeCom from "../../../ui/ThemeCom";
+import User from "../../user/User";
 
 export default function UserProfile() {
   const { resize } = useNav();
   const { userData } = useAuth();
-
-  const [isDarkMode, setIsDarkMode] = useState(() => {
-    if (typeof window !== "undefined") {
-      const saved = localStorage.getItem("darkMode");
-      if (saved !== null) return JSON.parse(saved);
-      return window.matchMedia("(prefers-color-scheme: dark)").matches;
-    }
-    return false;
-  });
-
-  useEffect(() => {
-    document.documentElement.classList.toggle("dark", isDarkMode);
-  }, [isDarkMode]);
-
-  const toggleDarkMode = () => {
-    const newMode = !isDarkMode;
-    setIsDarkMode(newMode);
-    localStorage.setItem("darkMode", JSON.stringify(newMode));
-  };
 
   const displayName =
     userData.username &&
@@ -46,14 +25,7 @@ export default function UserProfile() {
           </p>
         </div>
 
-        
-          <Button
-            onClick={toggleDarkMode}
-            variant="outline"
-            classname="p-2 rounded-sm bg-slate-500 text-sm text-white hover:bg-slate-600 transition-colors"
-          >
-            {isDarkMode ? <LuSun /> : <LuMoon />}
-          </Button>
+        <ThemeCom />
       </div>
     </div>
   );
