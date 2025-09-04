@@ -40,15 +40,13 @@ export default function UserProfile() {
           <User />
 
           <p
-            className={`transitioning z-30 text-sm font-medium whitespace-nowrap text-slate-900 dark:text-white ${resize ? `translate-x-0 delay-75` : `medium:-translate-x-[250px]`} inline-block`}
+            className={`medium:hidden text-sm font-medium whitespace-nowrap text-slate-900 dark:text-white truncate w-30`}
           >
             {displayName ? displayName : "Username"}
           </p>
         </div>
 
-        <div
-          className={`transitioning z-30 ${resize ? `translate-x-0 delay-150` : `medium:-translate-x-[250px]`} inline-block`}
-        >
+        
           <Button
             onClick={toggleDarkMode}
             variant="outline"
@@ -56,7 +54,6 @@ export default function UserProfile() {
           >
             {isDarkMode ? <LuSun /> : <LuMoon />}
           </Button>
-        </div>
       </div>
     </div>
   );
