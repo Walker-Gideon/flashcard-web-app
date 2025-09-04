@@ -50,15 +50,8 @@ const initialActivity = [
 export default function RecentActivity() {
   const { updateSchedule, updateReview } = useGen()
   const { userData } = useAuth();
-  const [recentActivity, setRecentActivity] = useState([]);
+  const [recentActivity, setRecentActivity] = useState(initialActivity);
   const [now, setNow] = useState(Date.now());
-
-  useEffect(() => {
-    if (userData?.uid) {
-      const saved = loadActivities(userData.uid);
-      setRecentActivity(saved.length > 0 ? saved : initialActivity);
-    }
-  }, [userData?.uid]);
 
   useEffect(() => {
     const id = setInterval(() => setNow(Date.now()), 60_000); // update every minute
@@ -66,67 +59,41 @@ export default function RecentActivity() {
   }, []);
 
   useEffect(() => {
-    if (!userData?.uid) return;
+    setRecentActivity(prev => 
+      prev.map((data) => {
+        if (data.type === "achievement") {
+          const shouldShow = userData.streakCount >= 1;
+          return {
+            ...data,
+            action: `Achieved ${userData.streakCount} day streak`,
+            visible: shouldShow || data.visible,
+            timestamp: shouldShow && !data.timestamp ? Date.now() : data.timestamp,
+          };
+        }
 
-    const update = recentActivity.map((data) => {
-      if (data.type === "achievement") {
-        const shouldShow = userData.streakCount >= 1;
-        return {
-          ...data,
-          action: `Achieved ${userData.streakCount} day streak`,
-          visible: shouldShow || data.visible,
-          timestamp: shouldShow && !data.timestamp ? Date.now() : data.timestamp,
-        };
-      }
+        if (data.type === "schedule") {
+          return {
+            ...data,
+            visible: updateSchedule || data.visible,
+            timestamp: updateSchedule && !data.timestamp ? Date.now() : data.timestamp,
+          };
+        }
 
-      if (data.type === "schedule") {
-        return {
-          ...data,
-          visible: updateSchedule || data.visible,
-          timestamp: updateSchedule && !data.timestamp ? Date.now() : data.timestamp,
-        };
-      }
-
-      if (data.type === "review") {
-        return {
-          ...data,
-          action: `Completed ${updateReview.cardTag} review session`,
-          visible: updateReview.completed || data.visible,
-          timestamp: updateReview.completed && !data.timestamp ? Date.now() : data.timestamp,
-        };
-      }
+        if (data.type === "review") {
+          return {
+            ...data,
+            action: `Completed ${updateReview.cardTag} review session`,
+            visible: updateReview.completed || data.visible,
+            timestamp: updateReview.completed && !data.timestamp ? Date.now() : data.timestamp,
+          };
+        }
 
       return data;
-    });
+    })
+  );
+}, [userData?.streakCount, updateSchedule, updateReview]);
 
-    // Only set state if changed
-    const isDifferent = JSON.stringify(update) !== JSON.stringify(recentActivity);
-    if (isDifferent) {
-      setRecentActivity(update);
-      saveActivities(userData.uid, update);
-    }
-  }, [userData.streakCount, updateSchedule, updateReview, recentActivity, userData?.uid]);
-
-  // Save whenever recentActivity changes
-  useEffect(() => {
-    localStorage.setItem(
-      `recentActivity_${userData.uid}`,
-      JSON.stringify(recentActivity)
-    );
-  }, [recentActivity, userData.uid]);
-
-  // storage helper
-  function loadActivities(userId) {
-    return JSON.parse(localStorage.getItem(`recentActivity_${userId}`)) || [];
-  }
-
-   // storage helper
-  function saveActivities(userId, activities) {
-    localStorage.setItem(
-      `recentActivity_${userId}`,
-      JSON.stringify(activities)
-    );
-  }
+  
 
   function timeAgo(timestamp) {
     if (!timestamp) return "";
@@ -150,7 +117,7 @@ export default function RecentActivity() {
           {recentActivity.filter((activity) => activity.visible).map((activity) => (
             <div key={activity.id} className="flex items-center space-x-3 rounded-xl bg-slate-50 p-4 dark:bg-slate-700/50">
               <div className="flex-shrink-0 rounded-lg bg-gradient-to-r from-slate-200 to-slate-300 p-2 dark:from-slate-600 dark:to-slate-700">
-                <activity.icon className="h-4 w-4 text-slate-600 dark:text-slate-300" />
+                {<activity.icon className="h-4 w-4 text-slate-600 dark:text-slate-300" />}
               </div>
               <div className="min-w-0 flex-1">
                 <p className="truncate text-sm font-medium text-slate-900 dark:text-white">
