@@ -11,7 +11,12 @@ export default function UserWelcome({ title, subText, show, userDisplay }) {
   if (userDisplay)
     return (
       <div>
-        <HeaderText>{`Welcome, ${displayName ? displayName : "Username"}!`}</HeaderText>
+        <HeaderText>
+          Welcome,{" "}
+          <span className="truncate md:whitespace-normal md:overflow-visible md:text-ellipsis-none w-40 md:w-auto bg-red-500">
+            {displayName ? displayName : "Username"}!
+          </span>
+        </HeaderText>
         <p
           className={`text-sm text-slate-500 dark:text-slate-400 ${show ? "medium:block hidden" : ""}`}
         >

@@ -5,18 +5,12 @@ import { useAuth } from "../../context/AuthContext";
 import DailyStreak from "../../ui/DailyStreak";
 
 export default function DashHeader() {
-  const { userData } = useAuth();
-  const displayName =
-    userData.username &&
-    userData.username.charAt(0).toUpperCase() + userData.username.slice(1);
-
   return (
     <header className="medium:block sticky top-0 z-40 hidden border-b border-stone-300 bg-white/30 shadow-sm backdrop-blur-sm dark:border-slate-700 dark:bg-slate-800/80">
       <div className="flex items-center justify-between px-6 py-4">
         <UserWelcome
+          userDisplay={true}
           show={true}
-          title={`Welcome, ${displayName ? displayName : "Username"}!`}
-          subText={"Glad to have you on board."}
         />
 
         <div className="flex items-center space-x-3">
