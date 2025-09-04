@@ -1,4 +1,3 @@
-import { useAuth } from "../../context/AuthContext";
 import { useNav } from "../../context/NavigateContext";
 import Button from "../../ui/Button";
 import HeaderText from "../../ui/HeaderText";
@@ -8,16 +7,11 @@ import { LuMenu } from "react-icons/lu";
 
 export default function NavigateSmallScreen() {
   const { setNavShowOverLay, setShowSidebar, navigateTitle } = useNav();
-  const { userData } = useAuth();
 
   function handleClick() {
     setNavShowOverLay((show) => !show);
     setShowSidebar((show) => !show);
   }
-
-  const displayName =
-    userData.username &&
-    userData.username.charAt(0).toUpperCase() + userData.username.slice(1);
 
   return (
     <div className="medium:hidden sticky top-0 z-40 block h-15">
@@ -34,8 +28,8 @@ export default function NavigateSmallScreen() {
           <div className="flex w-full items-center justify-between pr-4">
             {navigateTitle === "Dashboard" ? (
               <UserWelcome
-                title={`Welcome, ${displayName ? displayName : "Username"}!`}
-                subText={"Glad to have you on board."}
+                userDisplay={true}
+                trubWidth="w-20"
               />
             ) : (
               <HeaderText>

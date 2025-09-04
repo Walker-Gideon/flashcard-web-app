@@ -1,7 +1,7 @@
 import { useAuth } from "../../context/AuthContext";
 import HeaderText from "../../ui/HeaderText";
 
-export default function UserWelcome({ title, subText, show, userDisplay }) {
+export default function UserWelcome({ title, subText, show, userDisplay, classname, trubWidth }) {
   const { userData } = useAuth();
 
   const displayName =
@@ -9,13 +9,13 @@ export default function UserWelcome({ title, subText, show, userDisplay }) {
     userData.username.charAt(0).toUpperCase() + userData.username.slice(1);
 
   return (
-    <div>
-      <HeaderText>
+    <div className={`whitespace-nowrap ${classname}`}>
+      <HeaderText classname="flex items-center">
         {userDisplay ? (
           <>
             Welcome,&nbsp;
             {displayName ? (
-              <span className="truncate md:whitespace-normal md:overflow-visible md:text-ellipsis-none w-40 md:w-auto">{displayName}</span> 
+              <span className={`truncate ${trubWidth ? `${trubWidth}` : `w-40`}`}>{displayName}</span> 
             ) : ( 
               "Username"
             )}
