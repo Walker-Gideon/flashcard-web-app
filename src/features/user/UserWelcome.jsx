@@ -8,30 +8,27 @@ export default function UserWelcome({ title, subText, show, userDisplay }) {
     userData.username &&
     userData.username.charAt(0).toUpperCase() + userData.username.slice(1);
 
-  if (userDisplay)
-    return (
-      <div>
-        <HeaderText>
-          Welcome,{" "}
-          <span className="truncate md:whitespace-normal md:overflow-visible md:text-ellipsis-none w-40 md:w-auto bg-red-500">
-            {displayName ? displayName : "Username"}!
-          </span>
-        </HeaderText>
-        <p
-          className={`text-sm text-slate-500 dark:text-slate-400 ${show ? "medium:block hidden" : ""}`}
-        >
-          Glad to have you on board.
-        </p>
-      </div>
-    );
-
   return (
     <div>
-      <HeaderText>{title}</HeaderText>
+      <HeaderText>
+        {userDisplay ? (
+          <>
+            Welcome,&nbsp;
+            {displayName ? (
+              <span className="truncate md:whitespace-normal md:overflow-visible md:text-ellipsis-none w-40 md:w-auto">{displayName}</span> 
+            ) : ( 
+              "Username"
+            )}
+            !
+          </>
+        ) : (
+          title
+        )}
+      </HeaderText>
       <p
         className={`text-sm text-slate-500 dark:text-slate-400 ${show ? "medium:block hidden" : ""}`}
       >
-        {subText}
+        {userDisplay ? "Glad to have you on board." : subText}
       </p>
     </div>
   );
