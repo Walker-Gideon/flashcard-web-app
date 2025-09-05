@@ -154,10 +154,10 @@ function AuthProvider({ children }) {
     return () => unsubscribe();
   }, []);
 
-  // logout 
+  // logout
   const logout = async () => {
     try {
-      await signOut(auth); // Firebase logout
+      await signOut(auth);
       setUser(null);
       setUserData({
         email: "",
