@@ -14,7 +14,7 @@ export default function LargeHeader() {
     <header
       className={`transitioningColors border-b border-stone-300 px-2 py-2 dark:border-slate-700`}
     >
-      <div className="transitioningColors medium:mt-0 medium:h-auto mt-0.5 flex h-13 flex-col gap-4 rounded-sm bg-slate-50 px-1 py-2 dark:bg-slate-700">
+      <div className="transitioningColors medium:mt-0 medium:h-auto mt-0.5 flex h-13 flex-col gap-4 rounded-sm bg-slate-50 p-2 dark:bg-slate-700">
         <div className={`flex items-center medium:justify-center justify-between`}>
           <Logo logo={true} classname="z-50" />
 

@@ -63,7 +63,7 @@ export default function NavigateLScreen() {
         <LargeHeader />
 
         <div
-          className={`medium:h-[80.5dvh] flex h-[86dvh] flex-col justify-between`}
+          className={`h-[86vh] flex flex-col justify-between`}
         >
           <div className="w-full px-2">
             <div className={`flex flex-col`}>
