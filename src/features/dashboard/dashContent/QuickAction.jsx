@@ -1,8 +1,5 @@
 import CardOverview from "../../../ui/CardOverview";
-import { LuPlus } from "react-icons/lu";
-import { LuPlay } from "react-icons/lu";
-import { LuLightbulb } from "react-icons/lu";
-import { LuCalendar } from "react-icons/lu";
+import { LuPlus, LuPlay, LuLightbulb, LuCalendar } from "react-icons/lu";
 import useLoaderAction from "../../../utils/LoaderAction";
 
 const initialActionData = [
