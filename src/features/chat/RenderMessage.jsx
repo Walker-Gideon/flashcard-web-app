@@ -9,10 +9,11 @@ export default function RenderMessage() {
   return (
     <>
       {isRefreshing ? (
-        <div className="flex h-full w-full items-center justify-center">
+        <div className="flex h-full w-full items-center justify-center gap-0.5 text-sm text-slate-500 dark:text-slate-400">
           <span>
             <LuRefreshCw className="for spinning h-6 w-6 animate-spin text-slate-400 dark:text-slate-500" />
           </span>
+          <p>Refreshing...</p>
         </div>
       ) : (
         <div>

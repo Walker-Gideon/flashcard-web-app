@@ -5,7 +5,7 @@ import TypingIndicator from "./TypingIndicator";
 export default function ChatMain({ messagesEndRef, handleSubmit }) {
   return (
     <div className="relative h-screen flex-1 flex-col overflow-hidden p-1">
-      <div className="scroll-container medium:h-120 h-118 overflow-y-scroll pr-2">
+      <div className="scroll-container medium:h-116 h-143 overflow-y-scroll pr-2">
         <RenderMessage />
         <TypingIndicator />
         <div ref={messagesEndRef} />

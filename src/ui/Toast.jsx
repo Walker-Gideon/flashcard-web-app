@@ -15,7 +15,6 @@ export default function Toast({
   const styling = {
     main: "fixed top-5 left-1/2 z-50 -translate-x-1/2 rounded-sm text-sm text-white shadow-lg",
   };
-  //"bg-green-600" : "bg-red-600"
 
   if (notify)
     return (

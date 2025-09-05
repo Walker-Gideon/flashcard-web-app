@@ -1,4 +1,5 @@
 import { Outlet } from "react-router-dom";
+import { AnimatePresence } from "motion/react";
 import { useNav } from "./context/NavigateContext";
 import { useChat } from "./context/ChatContext";
 import NavigationLayout from "./features/navigation/NavigationLayout";
@@ -8,12 +9,13 @@ import Button from "./ui/Button";
 import ChatLayout from "./features/chat/ChatLayout";
 import { LuMessageCircle } from "react-icons/lu";
 
+
 export default function AppLayout() {
   const { navShowOverLay } = useNav();
-  const { setIsChatShow } = useChat();
+  const { setIsChatShow  } = useChat();
 
   return (
-    <div className="defaultColor overflow-hidden">
+    <div className="relative defaultColor overflow-hidden">
       <div className="z-50 h-0.5">
         <Loader />
       </div>
@@ -33,7 +35,11 @@ export default function AppLayout() {
           </div>
         </div>
       </div>
-      <ChatLayout />
+
+      <AnimatePresence>
+        <ChatLayout />
+      </AnimatePresence>
+
 
       <Button
         variant="outline"

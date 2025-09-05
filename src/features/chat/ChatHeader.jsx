@@ -24,13 +24,13 @@ export default function ChatHeader() {
   }
 
   return (
-    <header className="mb-4 flex w-full items-center justify-between">
+    <header className="mb-4 flex w-full items-center justify-between h-10">
       <div className="flex items-center space-x-1">
         <Button
           variant="outline"
           onClick={() => {
             setIsChatShow((show) => !show);
-            setIsRefreshing(true);
+            setIsRefreshing(false);
           }}
         >
           <LuChevronsRight className="h-6 w-6 text-slate-400 dark:text-slate-500" />

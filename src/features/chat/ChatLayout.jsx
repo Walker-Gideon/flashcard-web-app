@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import ChatHeader from "./ChatHeader";
 import ChatMain from "./ChatMain";
 import { useChat } from "../../context/ChatContext";
+import { motion } from "motion/react";
 
 export default function ChatLayout() {
   const {
@@ -71,13 +72,16 @@ export default function ChatLayout() {
   };
 
   return (
-    <div
-      className={`medium:w-90 defaultColor absolute top-0 right-0 z-50 w-full transform border-l border-stone-300 shadow-2xl transition-transform duration-500 dark:border-slate-700 dark:shadow-slate-700 ${!isChatShow ? `hidden translate-x-100` : `translate-0`}`}
+    <motion.div
+      // initial={{ x: "100%" }}
+      animate={{ x: isChatShow ? 0 : "100%" }}
+      transition={{ type: "tween", duration: 0.5 }}
+      className={`medium:w-90 defaultColor absolute top-0 right-0 z-50 w-full border-l border-stone-300 shadow-2xl dark:border-slate-700 dark:shadow-slate-700`}
     >
       <div className="flex min-h-screen flex-col px-4 py-2">
         <ChatHeader />
         <ChatMain handleSubmit={handleSubmit} messagesEndRef={messagesEndRef} />
       </div>
-    </div>
+    </motion.div>
   );
 }
