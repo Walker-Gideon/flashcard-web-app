@@ -4,6 +4,7 @@ import NavButton from "../NavButton";
 import ButtonNav from "../../../ui/ButtonNav";
 import LargeHeader from "./LargeHeader";
 import UserProfile from "./UserProfile";
+import useLoaderAction from "../../../utils/LoaderAction";
 
 const buttonsData = [
   {
@@ -46,6 +47,7 @@ export default function NavigateLScreen() {
     resize,
     setNavigateTitle,
   } = useNav();
+  const navigate = useLoaderAction(1000);
 
   function handleClick(title) {
     setNavShowOverLay((show) => !show);
