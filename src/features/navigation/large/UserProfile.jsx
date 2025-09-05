@@ -1,11 +1,8 @@
-
-import { useNav } from "../../../context/NavigateContext";
 import { useAuth } from "../../../context/AuthContext";
 import ThemeCom from "../../../ui/ThemeCom";
 import User from "../../user/User";
 
 export default function UserProfile() {
-  const { resize } = useNav();
   const { userData } = useAuth();
 
   const displayName =
