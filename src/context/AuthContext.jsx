@@ -57,7 +57,6 @@ function AuthProvider({ children }) {
         });
       }
     } catch (error) {
-      console.error("Error fetching user data:", error);
       return error;
     }
   };
@@ -155,7 +154,29 @@ function AuthProvider({ children }) {
     return () => unsubscribe();
   }, []);
 
+  // logout 
+  const logout = async () => {
+    try {
+      await signOut(auth); // Firebase logout
+      setUser(null);
+      setUserData({
+        email: "",
+        username: "",
+        photoURL: null,
+        uid: "",
+        streakCount: 0,
+        lastActiveDate: null,
+      });
+      setIsAuthenticated(false);
+      return true;
+    } catch (error) {
+      console.error("Error logging out:", error);
+      return false;
+    }
+  };
+
   const value = {
+    logout,
     user,
     setUser,
     image,

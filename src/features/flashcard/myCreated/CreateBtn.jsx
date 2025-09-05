@@ -4,7 +4,7 @@ import { LuPencilLine } from "react-icons/lu";
 import { useFlash } from "../../../context/FlashcardContext";
 import useLazyLoading from "../../../ui/LazyLoading";
 
-export default function CreateBtn({ isVisible, setIsVisible }) {
+export default function CreateBtn() {
   const {
     setShowPreview,
     setShowCreateFlashcard,
@@ -13,6 +13,8 @@ export default function CreateBtn({ isVisible, setIsVisible }) {
     setEditTags,
     setEditPairs,
     editFlashcardData,
+    isVisible, 
+    setIsVisible,
   } = useFlash();
 
   const lazyLoading = useLazyLoading(setShowPreview, 1000);

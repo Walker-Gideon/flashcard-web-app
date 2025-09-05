@@ -11,9 +11,10 @@ export default function CreatedHeader() {
     currentFlashcard,
     newlyFlashcard,
     reviewComplete,
+    isVisible, 
+    setIsVisible,
   } = useFlash();
   const { setUpdateReview } = useGen()
-  const [isVisible, setIsVisible] = useState(false);
 
   const cardTitle = readAlredyFlashcard ? currentFlashcard.tags : newlyFlashcard.tags || "Untitled Flashcard"
 
@@ -52,7 +53,7 @@ export default function CreatedHeader() {
                 exit={{ opacity: 0, scale: 0 }}
                 className="absolute top-12 right-0 z-50 flex w-50 flex-col items-start gap-2 rounded-2xl border border-stone-300 bg-white/70 p-2 text-[0.8rem] text-slate-900 backdrop-blur-xl transition-all duration-300 dark:border-slate-700 dark:bg-slate-800/70 dark:text-white"
               >
-                <CreateBtn isVisible={isVisible} setIsVisible={setIsVisible} />
+                <CreateBtn />
               </motion.div>
             ) : null}
           </AnimatePresence>

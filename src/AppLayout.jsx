@@ -11,7 +11,7 @@ import { LuMessageCircle } from "react-icons/lu";
 
 
 export default function AppLayout() {
-  const { navShowOverLay } = useNav();
+  const { navShowOverLay, setShowProfile } = useNav();
   const { setIsChatShow  } = useChat();
 
   return (
@@ -20,13 +20,21 @@ export default function AppLayout() {
         <Loader />
       </div>
 
-      <div className="defaultColor z-30 h-[99.9vh] w-full overflow-hidden">
+      <div 
+        className="defaultColor z-30 h-[99.9vh] w-full overflow-hidden"
+      >
         <div
           className={`medium:grid medium:grid-cols-[auto_1fr] overflow-hidden`}
         >
           <NavigationLayout />
 
-          <div className={`h-screen w-full`}>
+          <div
+            role="button" 
+            onClick={() => {
+              setShowProfile(false)
+            }} 
+            className={`h-screen w-full`}
+          >
             <Outlet />
 
             <div className="medium:hidden block transition-all duration-500 ease-in-out">

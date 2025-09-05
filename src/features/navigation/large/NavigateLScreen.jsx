@@ -48,6 +48,7 @@ export default function NavigateLScreen() {
     resize,
     setNavigateTitle,
     showProfile,
+    setShowProfile
   } = useNav();
 
   function handleClick(title) {
@@ -76,7 +77,10 @@ export default function NavigateLScreen() {
                   text={data.text}
                   to={data.to}
                   icon={data.icon}
-                  onClick={() => handleClick(data.text)}
+                  onClick={() => {
+                    handleClick(data.text);
+                    setShowProfile(false);
+                  }}
                 />
               ))}
             </div>

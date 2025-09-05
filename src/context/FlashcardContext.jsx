@@ -8,6 +8,7 @@ function FlashcardProvider({ children }) {
   const [showPreview, setShowPreview] = useState(false);
   const [loadingCard, setLoadingCard] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
+  const [isVisible, setIsVisible] = useState(false);
   const [tags, setTags] = useState("");
   const [queryFlashcard, setQueryFlashcard] = useState("");
   const [pairs, setPairs] = useState([
@@ -54,6 +55,8 @@ function FlashcardProvider({ children }) {
   const MAX_PAIRS = 100;
 
   const value = {
+    isVisible, 
+    setIsVisible,
     editFlashcardId,
     setEditFlashcardId,
     editPairs,
