@@ -1,5 +1,4 @@
-import { LuChevronsRight } from "react-icons/lu";
-import { LuRefreshCw } from "react-icons/lu";
+import { LuChevronsRight, LuRefreshCw } from "react-icons/lu";
 import HeaderText from "../../ui/HeaderText";
 import Button from "../../ui/Button";
 import { useChat } from "../../context/ChatContext";

@@ -19,7 +19,6 @@ export default function UserWelcome({ title, subText, show, userDisplay, classna
             ) : ( 
               "Username"
             )}
-            !
           </>
         ) : (
           title
