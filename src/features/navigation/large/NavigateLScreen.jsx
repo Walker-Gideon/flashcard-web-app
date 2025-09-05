@@ -75,7 +75,7 @@ export default function NavigateLScreen() {
         <div
           className={`medium:h-[80.5dvh] flex h-[86dvh] flex-col justify-between`}
         >
-          <div className="w-full px-3">
+          <div className="w-full px-2">
             <div className={`flex flex-col`}>
               {buttonsData.map((data, index) => (
                 <NavButton

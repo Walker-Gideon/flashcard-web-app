@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
+import { useNav } from "../context/NavigateContext";
 import Button from "./Button";
+import ButtonNav from "./ButtonNav";
 import { LuSun, LuMoon } from "react-icons/lu";
 
 export default function ThemeCom() {
+  const { resize } = useNav();
+
   const [isDarkMode, setIsDarkMode] = useState(() => {
   if (typeof window !== "undefined") {
     const saved = localStorage.getItem("darkMode");
@@ -23,15 +27,17 @@ export default function ThemeCom() {
   };
 
   return (
-    // medium:hidden block
-    <div className="">
+    <ButtonNav navLarge={true} text={`${isDarkMode ? "Light" : "Dark"} Theme`}>
       <Button
         onClick={toggleDarkMode}
         variant="outline"
-        classname="p-2 rounded-sm bg-slate-500 text-sm text-white hover:bg-slate-600 transition-colors"
+        classname={`p-2 w-full flex items-center medium:justify-center rounded-sm bg-slate-500 text-sm text-white hover:bg-slate-600 space-x-2 transition-colors px-2.5`}
       >
-        {isDarkMode ? <LuSun /> : <LuMoon />}
+        <span className="medium:flex medium:flex medium:justify-center">{isDarkMode ? <LuSun /> : <LuMoon />}</span>
+        <span className={`block text-xs block medium:hidden`}>
+          {`${isDarkMode ? "Light" : "Dark"} Mode`}
+        </span>
       </Button>
-    </div>
+    </ButtonNav>
   );
 }
