@@ -31,7 +31,7 @@ export default function ThemeCom() {
       <Button
         onClick={toggleDarkMode}
         variant="outline"
-        classname={`p-2 w-full flex items-center medium:justify-center rounded-sm bg-slate-500 text-sm text-white hover:bg-slate-600 space-x-2 transition-colors px-2.5`}
+        classname={`navButton bg-slate-500 text-white hover:bg-slate-600 medium:px-3.5`}
       >
         <span className="medium:flex medium:flex medium:justify-center">{isDarkMode ? <LuSun /> : <LuMoon />}</span>
         <span className={`block text-xs block medium:hidden`}>

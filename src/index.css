@@ -88,7 +88,7 @@ truncate md:whitespace-normal md:overflow-visible md:text-ellipsis-none w-40 md:
   }
 
   .navButton {
-    @apply medium:justify-center mb-2 flex w-full cursor-pointer items-center gap-2.5 rounded-sm px-2 py-1.5 text-center text-sm font-semibold transition-colors duration-500 hover:rounded-sm;
+    @apply medium:justify-center mb-2 flex w-full cursor-pointer items-center gap-2.5 rounded-sm px-2 py-2 text-center text-sm font-semibold transition-colors duration-500 hover:rounded-sm;
   }
 
   .scroll-container {
