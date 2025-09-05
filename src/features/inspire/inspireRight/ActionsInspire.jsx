@@ -1,10 +1,9 @@
-import { LuBookOpen } from "react-icons/lu";
-import { LuChartColumnIncreasing } from "react-icons/lu";
+import { LuBookOpen, LuChartColumnIncreasing } from "react-icons/lu";
+import { useNav } from "../../../context/NavigateContext";
 import CardOverview from "../../../ui/CardOverview";
 import HeaderText from "../../../ui/HeaderText";
 import Button from "../../../ui/Button";
 import useLoaderAction from "../../../utils/LoaderAction";
-import { useNav } from "../../../context/NavigateContext";
 import UserWelcome from "../../user/UserWelcome";
 
 const actionsData = [
@@ -18,7 +17,7 @@ const actionsData = [
     icon: LuChartColumnIncreasing,
     text: "View Detailed Analytics",
     to: "/dashboard",
-    title: <UserWelcome userDisplay={true} />,
+    title: <UserWelcome userDisplay={true} trubWidth="w-20" />,
   },
 ];
 
@@ -42,9 +41,12 @@ export default function ActionsInspire() {
             classname={styling.button}
             onClick={() => {
               navigate(data.to);
-              setNavShowOverLay((show) => !show);
-              setShowSidebar((show) => !show);
-              setNavigateTitle(data.title);
+
+              setTimeout(() => {
+                setNavShowOverLay(false);
+                setShowSidebar(false);
+                setNavigateTitle(data.title);
+              }, 1000)
             }}
           >
             <data.icon className={styling.icon} />
