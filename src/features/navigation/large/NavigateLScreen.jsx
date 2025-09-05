@@ -1,6 +1,7 @@
 import { useNav } from "../../../context/NavigateContext";
 import { LuLayoutDashboard, LuBookOpen, LuFile, LuCalendar, LuLightbulb, LuSettings2 } from "react-icons/lu";
 import NavButton from "../NavButton";
+import ProfilePopup from "../ProfilePopup";
 import ButtonNav from "../../../ui/ButtonNav";
 import LargeHeader from "./LargeHeader";
 import UserProfile from "./UserProfile";
@@ -79,6 +80,7 @@ export default function NavigateLScreen() {
             </div>
           </div>
 
+          <ProfilePopup />
           <UserProfile />
         </div>
       </div>

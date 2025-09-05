@@ -9,12 +9,16 @@ export default function UserProfile() {
     userData.username &&
     userData.username.charAt(0).toUpperCase() + userData.username.slice(1);
 
+  function handleProfile() {
+    console.log("Profile")
+  }
+
   return (
     <div className="border-t border-stone-300 px-2 py-2 dark:border-slate-700">
       <div className="gap-1 flex medium:items-center flex-col">
         <ThemeCom />
 
-        <div className="flex items-center gap-4 w-full p-2 rounded-sm bg-slate-50  dark:bg-slate-700 medium:justify-center">
+        <div role="button" onClick={handleProfile} className="flex items-center gap-4 w-full p-2 rounded-sm bg-slate-50  dark:bg-slate-700 medium:justify-center">
           <User />
 
           <p
