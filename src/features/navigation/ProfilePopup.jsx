@@ -3,17 +3,23 @@ import { useNav } from "../../context/NavigateContext";
 import { LuUser } from "react-icons/lu";
 import { motion } from "motion/react";
 import Button from "../../ui/Button";
+import useLoaderAction from "../../utils/LoaderAction";
 
 export default function ProfilePopup() {
   const { userData, logout } = useAuth();
   const { setShowProfile } = useNav();
+  const navigate = useLoaderAction()
 
   const displayName =
     userData.username &&
     userData.username.charAt(0).toUpperCase() + userData.username.slice(1);
 
-  function handleLOgout() {
-    console.log("logout")
+  const handleLOgout = async () => {
+    navigate("/")
+
+    setTimeout(async () => {
+      await logout();
+    }, 500)
   }
 
   return (
@@ -40,7 +46,7 @@ export default function ProfilePopup() {
         >
           {displayName ? displayName : "Username"}
         </p>
-        <p>{userData ? userData.email : "example@gmali.com"}</p>
+        <p>{userData.email  ? userData.email : "example123@gmail.com"}</p>
       </div>
 
       <div className="border w-full border-stone-300 dark:border-slate-700" />
