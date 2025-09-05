@@ -6,7 +6,7 @@ export default function MainContentImage({ image, index }) {
       <img
         src={image}
         alt="image"
-        className="h-80 w-full rounded-2xl object-scale-down shadow-md shadow-slate-600"
+        className="w-full rounded-2xl object-scale-down shadow-md shadow-slate-600"
       />
     </div>
   );
