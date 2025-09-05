@@ -3,6 +3,10 @@ import { LuChartLine } from "react-icons/lu";
 import { LuMessageSquare } from "react-icons/lu";
 import { LuMessageSquareText } from "react-icons/lu";
 import MainContent from "./MainContent";
+import cardImage from "../../../assets/card.png";
+import dashboardImage from "../../../assets/dashboard.png";
+import inspireImage from "../../../assets/inspire.png";
+import chatImage from "../../../assets/chat&note.png";
 
 const overViewData = [
   {
@@ -14,7 +18,7 @@ const overViewData = [
       "Boost long-term memory retention with spaced intervals.",
       "Save time with focused, personalized card reviews.",
     ],
-    image: "",
+    image: cardImage,
   },
   {
     icon: LuChartLine,
@@ -25,7 +29,7 @@ const overViewData = [
       "Daily reminders help maintain a study routine.",
       "Progress tracking builds a sense of achievement and momentum.",
     ],
-    image: "",
+    image: dashboardImage,
   },
   {
     icon: LuMessageSquare,
@@ -36,7 +40,7 @@ const overViewData = [
       "Smart tips are tailored to your learning behavior.",
       "Gentle reminders keep you on track without pressure.",
     ],
-    image: "",
+    image: inspireImage,
   },
   {
     icon: LuMessageSquareText,
@@ -48,7 +52,7 @@ const overViewData = [
       "Clarify complex topics on demand.",
       "Get study suggestions based on your weak spots.",
     ],
-    image: "",
+    image: chatImage,
   },
 ];
 
