@@ -11,10 +11,10 @@ export default function UserProfile() {
 
   return (
     <div className="border-t border-stone-300 px-2 py-2 dark:border-slate-700">
-      <div className="gap-1.5 flex medium:items-center medium:justify-between flex-col">
+      <div className="gap-1.5 flex medium:items-center flex-col">
         <ThemeCom />
 
-        <div className="flex items-center gap-3 w-full px-2 py-3 rounded-sm bg-slate-50  dark:bg-slate-700">
+        <div className="flex items-center gap-3 w-full px-2 py-3 rounded-sm bg-slate-50  dark:bg-slate-700 medium:justify-center">
           <User />
 
           <p
