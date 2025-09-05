@@ -1,12 +1,16 @@
 import { Outlet } from "react-router-dom";
+import { useNav } from "./context/NavigateContext";
+import { useChat } from "./context/ChatContext";
 import NavigationLayout from "./features/navigation/NavigationLayout";
 import Overlay from "./ui/Overlay";
-import { useNav } from "./context/NavigateContext";
 import Loader from "./ui/Loader";
+import Button from "./ui/Button";
 import ChatLayout from "./features/chat/ChatLayout";
+import { LuMessageCircle } from "react-icons/lu";
 
 export default function AppLayout() {
   const { navShowOverLay } = useNav();
+  const { setIsChatShow } = useChat();
 
   return (
     <div className="defaultColor overflow-hidden">
@@ -30,6 +34,16 @@ export default function AppLayout() {
         </div>
       </div>
       <ChatLayout />
+
+      <Button
+        variant="outline"
+        onClick={() => {
+          setIsChatShow((show) => !show);
+        }}
+        classname={`absolute bottom-5 right-5 medium:right-8 rounded-full flex items-center justify-center w-10 h-10 bg-slate-500 hover:bg-slate-600 text-white  p-3`}
+      >
+        <LuMessageCircle className="w-5 h-5" />
+      </Button>
     </div>
   );
 }

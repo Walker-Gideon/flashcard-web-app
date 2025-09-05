@@ -6,7 +6,7 @@ export default function ButtonNav({ children, text, navLarge, classname }) {
   if (navLarge)
     return (
       <div
-        className={`group relative inline-flex ${resize ? `` : ``} ${classname}`}
+        className={`group relative inline-flex ${classname}`}
       >
         {children}
         <div
