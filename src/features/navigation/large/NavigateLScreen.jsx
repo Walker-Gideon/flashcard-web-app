@@ -1,5 +1,6 @@
 import { useNav } from "../../../context/NavigateContext";
 import { LuLayoutDashboard, LuBookOpen, LuFile, LuCalendar, LuLightbulb, LuSettings2 } from "react-icons/lu";
+import { AnimatePresence } from "motion/react";
 import NavButton from "../NavButton";
 import ProfilePopup from "../ProfilePopup";
 import ButtonNav from "../../../ui/ButtonNav";
@@ -81,7 +82,9 @@ export default function NavigateLScreen() {
           </div>
 
           <ProfilePopup />
-          <UserProfile />
+          <AnimatePresence initial={false}>
+            <UserProfile />
+          </AnimatePresence>
         </div>
       </div>
     </div>

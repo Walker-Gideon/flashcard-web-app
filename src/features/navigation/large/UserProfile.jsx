@@ -18,7 +18,7 @@ export default function UserProfile() {
       <div className="gap-1 flex medium:items-center flex-col">
         <ThemeCom />
 
-        <div role="button" onClick={handleProfile} className="flex items-center gap-4 w-full p-2 rounded-sm bg-slate-50  dark:bg-slate-700 medium:justify-center">
+        <div role="button" onClick={handleProfile} className="flex items-center cursor-pointer gap-4 w-full p-2 rounded-sm bg-slate-50  dark:bg-slate-700 medium:justify-center">
           <User />
 
           <p
