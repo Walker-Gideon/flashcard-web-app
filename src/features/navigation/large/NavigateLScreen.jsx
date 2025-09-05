@@ -47,6 +47,7 @@ export default function NavigateLScreen() {
     setShowSidebar,
     resize,
     setNavigateTitle,
+    showProfile,
   } = useNav();
 
   function handleClick(title) {
@@ -81,10 +82,10 @@ export default function NavigateLScreen() {
             </div>
           </div>
 
-          <ProfilePopup />
           <AnimatePresence initial={false}>
-            <UserProfile />
+            {showProfile ? <ProfilePopup /> : null}
           </AnimatePresence>
+          <UserProfile />
         </div>
       </div>
     </div>

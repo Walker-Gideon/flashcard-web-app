@@ -1,16 +1,18 @@
 import { useAuth } from "../../../context/AuthContext";
+import { useNav } from "../../../context/NavigateContext";
 import ThemeCom from "../../../ui/ThemeCom";
 import User from "../../user/User";
 
 export default function UserProfile() {
   const { userData } = useAuth();
+  const { setShowProfile } = useNav();
 
   const displayName =
     userData.username &&
     userData.username.charAt(0).toUpperCase() + userData.username.slice(1);
 
   function handleProfile() {
-    console.log("Profile")
+    setShowProfile((show) => !show);
   }
 
   return (
