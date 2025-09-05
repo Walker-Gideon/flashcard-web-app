@@ -1,16 +1,45 @@
+import { useAuth } from "../../context/AuthContext";
+import { LuUser } from "react-icons/lu";
 import Button from "../../ui/Button";
 
 export default function ProfilePopup() {
+  const { userData } = useAuth();
+
+  const displayName =
+    userData.username &&
+    userData.username.charAt(0).toUpperCase() + userData.username.slice(1);
+
+  function handleLOgout() {
+    console.log("logout")
+  }
+
   return (
-    <div>
-      <div></div>
-      <div>
-        <p>Username</p>
-        <p>example@gmali.com</p>
+    <div className="absolute bottom-20 left-10 medium:bottom-16 medium:left-8 z-50 flex w-50 flex-col items-center gap-3 rounded-2xl border border-stone-300 bg-white/70 p-6 text-slate-900 backdrop-blur-xl transition-all duration-300 dark:border-slate-700 dark:bg-slate-800/70 dark:text-white w-65">
+      <div className={`rounded-full flex items-center justify-center bg-gradient-to-r from-slate-200 to-slate-300 transition-colors duration-300 dark:from-slate-600 dark:to-slate-700 medium:h-15 medium:w-15 w-12 h-12 ${userData.photoURL ? `p-0` : `p-3`}`}>
+        {userData.photoURL ? (
+          <img
+            src={userData.photoURL}
+            alt="User profile"
+            className="rounded-full object-cover medium:h-15 medium:w-15 h-12 w-12"
+          />
+        ) : (
+          <LuUser className={`text-white w-8 h-8`} />
+        )}
       </div>
-      <div>
-        {/* <Button>Log out</Button> */}
+
+      <div className="text-center flex items-center justify-center flex-col mb-4">
+        <p className="text-sm medium:text-lg font-bold whitespace-nowrap text-slate-900 dark:text-white truncate w-30"
+        >
+          {displayName ? displayName : "Username"}
+        </p>
+        <p>{userData ? userData.email : "example@gmali.com"}</p>
       </div>
+
+      <Button 
+        variant="outline" 
+        onClick={handleLOgout} 
+        classname="primaryButton px-8"
+      >Log out</Button>
     </div>
   );
 }

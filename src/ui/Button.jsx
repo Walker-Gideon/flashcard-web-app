@@ -14,17 +14,7 @@ export default function Button({
   onClick,
   type,
 }) {
-  // const { setLoading } = useLoader();
   const navigateLoader = useLoaderAction();
-
-  // const navigate = useNavigate();
-  // const startLoadingAndNavigate = (to) => {
-  //   setLoading(true);
-  //   setTimeout(() => {
-  //     setLoading(false);
-  //     navigate(to);
-  //   }, 500);
-  // };
 
   const base = "cursor-pointer transition-colors duration-300";
 
@@ -35,7 +25,6 @@ export default function Button({
       ` button font-semibold transition-colors focus:ring-2 focus:outline-hidden ${color ? `${color}` : `bg-slate-500 py-2 text-white hover:bg-slate-600 focus:ring-slate-500`} ${btnPaddX ? `${btnPaddX}` : `medium:px-6 px-4`} ${classname}`,
   };
 
-  // variant === "outline"
   if (variant)
     return (
       <motion.button
@@ -43,27 +32,11 @@ export default function Button({
         type={type}
         whileTap={{ y: 1 }}
         onClick={onClick}
-        // className={`cursor-pointer transition-colors duration-300 ${classname}`}
         className={styling[variant]}
       >
         {children}
       </motion.button>
     );
-
-  /*
-  if (variant === "primary")
-    return (
-      <motion.button
-        disabled={disabled}
-        type={type}
-        whileTap={{ y: 1 }}
-        onClick={onClick}
-        className={`button font-semibold transition-colors focus:ring-2 focus:outline-hidden ${color ? `${color}` : `bg-slate-500 py-2 text-white hover:bg-slate-600 focus:ring-slate-500`} ${btnPaddX ? `${btnPaddX}` : `medium:px-6 px-4`} ${classname}`}
-      >
-        {children}
-      </motion.button>
-    );
-    */
 
   return (
     <motion.button
