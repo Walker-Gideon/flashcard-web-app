@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import {
   collection,
@@ -57,11 +57,11 @@ function GeneralProvider({ children }) {
   const [currentMonth, setCurrentMonth] = useState(new Date());
 
   // Dashboard recent activity
-  const [updateSchedule, setUpdateSchedule] = useState(false)
+  const [updateSchedule, setUpdateSchedule] = useState(false);
   const [updateReview, setUpdateReview] = useState({
     cardTag: "",
     completed: false,
-  })
+  });
 
   //   Fetch the quotes
   useEffect(() => {
@@ -186,6 +186,13 @@ function GeneralProvider({ children }) {
     const score = Math.round((studiedDays / 7) * 100);
     setConsistencyScore(score);
   }, [progress?.studyLogs, setConsistencyScore]);
+
+  // Cards created today
+  const todayFlashcards = useMemo(() => {
+    return flashcards
+      .filter((card) => isSameDay(card.createdAt.toDate(), new Date()))
+      .sort((a, b) => a.createdAt.toDate() - b.createdAt.toDate());
+  }, [flashcards]);
 
   // Get "YYYY-MM-DD" formatted date
   const getTodayDate = () => {
@@ -443,10 +450,10 @@ function GeneralProvider({ children }) {
     setFormData,
     sessionModel,
     currentMonth,
-    updateReview, 
+    updateReview,
     isSubmitting,
     setWeeklyData,
-    updateSchedule, 
+    updateSchedule,
     sessionComplete,
     setIsSubmitting,
     setCurrentMonth,
@@ -467,6 +474,7 @@ function GeneralProvider({ children }) {
     todaySessions,
     fetchProgress,
     updateStudyTime,
+    todayFlashcards,
     nearestSessions,
     incrementSubjecMaster,
     createInitialProgress,

@@ -1,5 +1,3 @@
-import { useMemo } from "react";
-import { isSameDay } from "date-fns";
 import { useGen } from "../../../../context/GeneralContext";
 import CardOverview from "../../../../ui/CardOverview";
 import CardHeader from "../../../../ui/CardHeader";
@@ -7,13 +5,7 @@ import CardContent from "../../../../ui/CardContent";
 import CardDiscription from "../../../../ui/CardDiscription";
 
 export default function CardsView() {
-  const { flashcards } = useGen();
-
-  const todayFlashcards = useMemo(() => {
-    return flashcards
-      .filter((card) => isSameDay(card.createdAt.toDate(), new Date()))
-      .sort((a, b) => a.createdAt.toDate() - b.createdAt.toDate());
-  }, [flashcards]);
+  const { todayFlashcards } = useGen();
 
   return (
     <CardOverview classname={"lg:col-span-2"}>
