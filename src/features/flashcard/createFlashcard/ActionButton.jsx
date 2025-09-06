@@ -2,7 +2,7 @@ import { useFlash } from "../../../context/FlashcardContext";
 import Button from "../../../ui/Button";
 import useLazyLoading from "../../../ui/LazyLoading";
 
-export default function ActionButton() {
+export default function ActionButton({ handleSaveFlashcard }) {
   const {
     setShowCreateFlashcard,
     setPairs,
@@ -17,8 +17,6 @@ export default function ActionButton() {
   } = useFlash();
   const lazyLoading = useLazyLoading(setShowCreateFlashcard, 1000);
   const lazyLoadingPreview = useLazyLoading(setShowPreview, 1000);
-
-  console.log("controlAction", controlAction)
 
   const isButtonDisabled = pairs.some(
     (pair) => pair.term.trim() === "" || pair.definition.trim() === "",
@@ -55,10 +53,11 @@ export default function ActionButton() {
     <div className="medium:pt-10 justify-end flex  gap-3 pt-7">
       <Button
         variant="outline"
-        classname="primaryButton px-12"
-        onClick={handleCancel}
+        classname="primaryButton px-12 disable: disabled:bg-gray-400 disabled:cursor-not-allowed"
+        disabled={controlAction ? editMode ? null : isButtonDisabled : null}
+        onClick={controlAction ? editMode ? handleCancel : handleSaveFlashcard  : handleCancel}
       >
-        Cancel
+        {controlAction ? editMode ? "Cancel" : "Create" : "Cancel"}
       </Button>
 
       <Button
@@ -67,7 +66,7 @@ export default function ActionButton() {
         disabled={editMode ? null : isButtonDisabled}
         classname="primaryButton sm:py-1 sm:px-3 disable: disabled:bg-gray-400 disabled:cursor-not-allowed"
       >
-        {editMode ? "Save" : "Create"} Flashcard
+        {editMode ? "Save" : "Create"} and practice
       </Button>
     </div>
   );

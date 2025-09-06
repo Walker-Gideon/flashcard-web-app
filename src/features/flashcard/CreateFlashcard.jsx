@@ -10,6 +10,7 @@ import AddFlashcard from "./createFlashcard/AddFlashcard";
 import FlashcardInput from "./createFlashcard/FlashcardInput";
 import Loader from "../../ui/Loader";
 import Button from "../../ui/Button";
+import useLazyLoading from "../../ui/LazyLoading";
 
 export default function CreateFlashcard() {
   const {
@@ -32,7 +33,10 @@ export default function CreateFlashcard() {
     editFlashcardData,
     SetEditFlashcardData,
     setCurrentFlashcard,
+    controlAction,
+    setShowCreateFlashcard,
   } = useFlash();
+  const lazyLoading = useLazyLoading(setShowCreateFlashcard, 1000);
 
   const handleSaveFlashcard = async (e) => {
     e.preventDefault();
@@ -71,7 +75,13 @@ export default function CreateFlashcard() {
       }
 
       setTimeout(() => {
-        setShowPreview(true);
+        if(controlAction) {
+          console.log("Save card to flashcards")
+          lazyLoading(true);
+          setShowPreview(false);
+        } else {
+          setShowPreview(true);
+        }
         setEditPairs([]);
         setEditTags("");
         setPairs([
@@ -126,7 +136,7 @@ export default function CreateFlashcard() {
                 placeholder="e.g. Biology, Chapter 2"
               />
             </div>
-            <ActionButton />
+            <ActionButton handleSaveFlashcard={handleSaveFlashcard} />
 
             <div className="pt-2 text-right text-xs text-slate-400">
               {pairs.length >= MAX_PAIRS && (
