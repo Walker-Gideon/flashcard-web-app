@@ -23,6 +23,7 @@ function AuthProvider({ children }) {
 
   // General uses
   const [general, setGeneral] = useState(userData);
+  const [accountCreated, setAccountCreated] = useState(false);
 
   // Check for user change
   useEffect(() => {
@@ -50,8 +51,6 @@ function AuthProvider({ children }) {
           username: data.username || "",
           photoURL: data.photoURL || null,
           uid: data.uid || uid,
-
-          // New streak fields
           streakCount: data.streakCount || 0,
           lastActiveDate: data.lastActiveDate || null,
         });
@@ -145,7 +144,7 @@ function AuthProvider({ children }) {
       setUser(currentUser);
 
       if (currentUser) {
-        await fetchUserData(currentUser.uid); // ✅ This must happen after currentUser is available
+        await fetchUserData(currentUser.uid);
       }
 
       setLoading(false);
@@ -176,6 +175,8 @@ function AuthProvider({ children }) {
   };
 
   const value = {
+    accountCreated,
+    setAccountCreated,
     logout,
     user,
     setUser,

@@ -6,15 +6,21 @@ import {
 import { getFirestore, setDoc, doc, serverTimestamp } from "firebase/firestore";
 import { app } from "../../firebase";
 import { useState } from "react";
-import { FiEyeOff } from "react-icons/fi";
-import { FiEye } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
+import { FiEyeOff, FiEye } from "react-icons/fi";
+import { LuLoader } from "react-icons/lu";
 import Input from "../../ui/Input";
 import Button from "../../ui/Button";
-import { useAuth } from "../../context/AuthContext";
-import { useNavigate } from "react-router-dom";
 
 export default function SignupForm() {
-  const { loading, setIsAuthenticated, setIsSigningUp } = useAuth();
+  const {
+    loading,
+    setIsAuthenticated,
+    setIsSigningUp,
+    setAccountCreated,
+    isSigningUp,
+  } = useAuth();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -108,14 +114,13 @@ export default function SignupForm() {
         photoURL: null,
         isGoogleSignIn: false,
         createdAt: serverTimestamp(),
-
-        // Streak Fields
         streakCount: 0,
         lastActiveDate: null,
       });
 
       setIsAuthenticated(true);
-      navigate("/verify", { replace: true });
+      navigate("/dashboard", { replace: true });
+      setAccountCreated(true);
     } catch (err) {
       let errorMessage = "Signup failed. Please try again.";
 
@@ -149,7 +154,6 @@ export default function SignupForm() {
             errorMessage = "An unexpected error occurred. Please try again.";
         }
       } else {
-        console.error("Signup Error:", err);
         if (err.message?.includes("network")) {
           errorMessage =
             "Network error. Please check your internet connection.";
@@ -255,9 +259,16 @@ export default function SignupForm() {
           type="submit"
           disabled={loading}
           variant="primary"
-          classname="w-full py-2 disabled:bg-slate-600 disabled:cursor-not-allowed"
+          classname="w-full py-2 disabled:bg-slate-600 disabled:cursor-not-allowed flex items-center justify-center gap-3"
         >
-          Sign up
+          {isSigningUp ? (
+            <>
+              <LuLoader className="for spinning h-5 w-5 animate-spin" />{" "}
+              <span>Signing Up...</span>
+            </>
+          ) : (
+            "Sign up"
+          )}
         </Button>
       </form>
     </div>
