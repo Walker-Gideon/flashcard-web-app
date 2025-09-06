@@ -10,9 +10,11 @@ import CardOverview from "../../../../ui/CardOverview";
 import CardHeader from "../../../../ui/CardHeader";
 import useLoaderAction from "../../../../utils/LoaderAction";
 import QuickActionButton from "../../../../ui/QuickActionButton";
+import { useNav } from "../../../../context/NavigateContext";
 
 export default function SchedulesQuickActions() {
   const { user } = useAuth();
+  const { setNavigateTitle } = useNav();
   const {
     setSessionModel,
     nearestSessions,
@@ -115,6 +117,9 @@ export default function SchedulesQuickActions() {
           icon={<LuChartColumnIncreasing className="h-5 w-5" />}
           onClick={() => {
             navigate("/dashboard");
+            setTimeout(() => {
+              setNavigateTitle("Dashboard");
+            }, 1000);
           }}
         />
       </div>

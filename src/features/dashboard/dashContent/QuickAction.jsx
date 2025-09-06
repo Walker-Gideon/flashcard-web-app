@@ -1,31 +1,37 @@
 import CardOverview from "../../../ui/CardOverview";
 import { LuPlus, LuPlay, LuLightbulb, LuCalendar } from "react-icons/lu";
 import useLoaderAction from "../../../utils/LoaderAction";
+import { useNav } from "../../../context/NavigateContext";
 
 const initialActionData = [
   {
     icon: LuPlus,
     text: "Add Note",
     to: "notes",
+    title: "Notes",
   },
   {
     icon: LuPlay,
     text: "Study Now",
     to: "flashcards",
+    title: "Flashcards",
   },
   {
     icon: LuCalendar,
     text: "Schedule",
     to: "schedules",
+    title: "Schedules",
   },
   {
     icon: LuLightbulb,
     text: "Inspire",
     to: "inspire",
+    title: "Inspire",
   },
 ];
 
 export default function QuickAction() {
+  const { setNavigateTitle } = useNav();
   const navigate = useLoaderAction(1000);
 
   return (
@@ -40,6 +46,9 @@ export default function QuickAction() {
             key={index}
             onClick={() => {
               navigate(data.to);
+              setTimeout(() => {
+                setNavigateTitle(data.title);
+              }, 1000);
             }}
             className="group flex cursor-pointer flex-col items-center space-y-3 rounded-xl bg-slate-50 p-6 transition-all duration-300 hover:scale-105 hover:bg-slate-100 hover:shadow-md dark:bg-slate-700/50 dark:hover:bg-slate-700"
           >

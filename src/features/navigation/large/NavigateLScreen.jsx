@@ -1,9 +1,15 @@
 import { useNav } from "../../../context/NavigateContext";
-import { LuLayoutDashboard, LuBookOpen, LuFile, LuCalendar, LuLightbulb, LuSettings2 } from "react-icons/lu";
+import {
+  LuLayoutDashboard,
+  LuBookOpen,
+  LuFile,
+  LuCalendar,
+  LuLightbulb,
+  LuSettings2,
+} from "react-icons/lu";
 import { AnimatePresence } from "motion/react";
 import NavButton from "../NavButton";
 import ProfilePopup from "../ProfilePopup";
-import ButtonNav from "../../../ui/ButtonNav";
 import LargeHeader from "./LargeHeader";
 import UserProfile from "./UserProfile";
 
@@ -48,7 +54,7 @@ export default function NavigateLScreen() {
     resize,
     setNavigateTitle,
     showProfile,
-    setShowProfile
+    setShowProfile,
   } = useNav();
 
   function handleClick(title) {
@@ -56,7 +62,7 @@ export default function NavigateLScreen() {
       setNavShowOverLay(false);
       setShowSidebar(false);
       setNavigateTitle(title);
-    }, 1000)
+    }, 1000);
   }
 
   return (
@@ -66,9 +72,7 @@ export default function NavigateLScreen() {
       <div className={`flex flex-col gap-4`}>
         <LargeHeader />
 
-        <div
-          className={`h-[86vh] flex flex-col justify-between`}
-        >
+        <div className={`flex h-[86vh] flex-col justify-between`}>
           <div className="w-full px-2">
             <div className={`flex flex-col`}>
               {buttonsData.map((data, index) => (
