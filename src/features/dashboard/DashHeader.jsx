@@ -1,17 +1,12 @@
 import { LuFlame } from "react-icons/lu";
 import UserWelcome from "../user/UserWelcome";
-import { mockData } from "../../data/mockData";
-import { useAuth } from "../../context/AuthContext";
 import DailyStreak from "../../ui/DailyStreak";
 
 export default function DashHeader() {
   return (
     <header className="medium:block sticky top-0 z-40 hidden border-b border-stone-300 bg-white/30 shadow-sm backdrop-blur-sm dark:border-slate-700 dark:bg-slate-800/80">
       <div className="flex items-center justify-between px-6 py-4">
-        <UserWelcome
-          userDisplay={true}
-          show={true}
-        />
+        <UserWelcome userDisplay={true} show={true} />
 
         <div className="flex items-center space-x-3">
           <div className="medium:flex hidden items-center space-x-2 rounded-full bg-slate-50 px-3 py-2 whitespace-nowrap dark:bg-slate-700">

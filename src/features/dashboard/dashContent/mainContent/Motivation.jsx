@@ -1,5 +1,4 @@
-import { LuLightbulb } from "react-icons/lu";
-import { LuFlame } from "react-icons/lu";
+import { LuLightbulb, LuFlame } from "react-icons/lu";
 import CardOverview from "../../../../ui/CardOverview";
 import { useGen } from "../../../../context/GeneralContext";
 import { useAuth } from "../../../../context/AuthContext";

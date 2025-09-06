@@ -30,7 +30,6 @@ function GeneralProvider({ children }) {
   const [totalCardsPerTag, setTotalCardsPerTag] = useState({});
   const [consistencyScore, setConsistencyScore] = useState(0);
   const [weeklyData, setWeeklyData] = useState([]);
-  //   NB on logout set this setProgress(null);
   const [progress, setProgress] = useState(null);
   const [loadingProgress, setLoadingProgress] = useState(true);
 
@@ -95,9 +94,9 @@ function GeneralProvider({ children }) {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         await createInitialProgress(user.uid);
-        await fetchProgress(user.uid); // Fetch into local state
+        await fetchProgress(user.uid);
       } else {
-        setProgress(null); // Clear on logout
+        setProgress(null);
       }
     });
 
@@ -222,12 +221,11 @@ function GeneralProvider({ children }) {
     let streak = userData.streakCount || 0;
 
     if (lastActive === today) {
-      // Already updated today
       return;
     } else if (lastActive === yesterday) {
       streak += 1;
     } else {
-      streak = 1;
+      streak = 0;
     }
 
     await updateDoc(userRef, {
@@ -375,13 +373,9 @@ function GeneralProvider({ children }) {
       if (progressSnap.exists()) {
         const data = progressSnap.data();
         setProgress(data);
-
-        // console.log("📥 Progress loaded:", data);
-      } else {
-        console.warn("Progress document does not exist.");
       }
     } catch (error) {
-      console.error("Error fetching progress:", error);
+      return error;
     } finally {
       setLoadingProgress(false);
     }
