@@ -1,12 +1,19 @@
 import { useAuth } from "../../context/AuthContext";
 import HeaderText from "../../ui/HeaderText";
 
-export default function UserWelcome({ title, subText, show, userDisplay, classname, trubWidth }) {
+export default function UserWelcome({
+  title,
+  subText,
+  show,
+  userDisplay,
+  classname,
+  trubWidth,
+}) {
   const { userData } = useAuth();
 
   const displayName =
-    userData.username &&
-    userData.username.charAt(0).toUpperCase() + userData.username.slice(1);
+    userData?.username &&
+    userData?.username.charAt(0).toUpperCase() + userData?.username.slice(1);
 
   return (
     <div className={`whitespace-nowrap ${classname}`}>
@@ -15,8 +22,12 @@ export default function UserWelcome({ title, subText, show, userDisplay, classna
           <>
             Welcome,&nbsp;
             {displayName ? (
-              <span className={`truncate ${trubWidth ? `${trubWidth}` : `w-40`}`}>{displayName}</span> 
-            ) : ( 
+              <span
+                className={`truncate ${trubWidth ? `${trubWidth}` : `w-40`}`}
+              >
+                {displayName}
+              </span>
+            ) : (
               "Username"
             )}
           </>

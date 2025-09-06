@@ -1,16 +1,13 @@
 import { useLoader } from "../../context/LoaderContext";
-import { useAuth } from "../../context/AuthContext";
 import Loader from "../../ui/Loader";
 import AuthClose from "./AuthClose";
 import AuthHeader from "./AuthHeader";
 import SignupForm from "./SignupForm";
 import Button from "../../ui/Button";
 import useLoaderAction from "../../utils/LoaderAction";
-import Spinner from "../../ui/Spinner";
 
 export default function Singup() {
   const { loading } = useLoader();
-  const { isSigningUp } = useAuth();
   const navigateLoader = useLoaderAction();
 
   return (
@@ -21,9 +18,6 @@ export default function Singup() {
       <AuthClose />
 
       <div className="flex min-h-[95vh] items-center justify-center">
-        {/* {isSigningUp ? (
-          <Spinner />
-        ) : ( */}
         <div className="rounded-xl border border-stone-300 p-6 shadow-lg">
           <AuthHeader />
           <SignupForm />
@@ -42,23 +36,7 @@ export default function Singup() {
               Log in
             </Button>
           </div>
-
-          {/* <div>
-              <div className="mt-2 mb-4 flex items-center justify-center">
-                <p className="text-sm text-slate-400">
-                  or you can Sign up with
-                </p>
-              </div>
-
-              <Button
-                disabled={loading}
-                classname="w-full disabled:bg-gray-400 disabled:cursor-not-allowed"
-              >
-                Continue with Google
-              </Button>
-            </div> */}
         </div>
-        {/* )} */}
       </div>
     </div>
   );
