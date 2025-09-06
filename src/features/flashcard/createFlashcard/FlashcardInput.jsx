@@ -5,7 +5,7 @@ import Input from "../../../ui/Input";
 import { RiDeleteBin5Line } from "react-icons/ri";
 
 export default function FlashcardInput() {
-  const { pairs, setPairs, editMode, editPairs, setEditPairs } = useFlash();
+  const { pairs, setPairs, editMode, editPairs, setEditPairs, setControlAction } = useFlash();
   const [index, setIndex] = useState(0);
 
   const cards = editMode ? editPairs : pairs;
@@ -21,6 +21,12 @@ export default function FlashcardInput() {
     } else {
       setPairs(updatedPairs);
     }
+
+    const hasValue = updatedPairs.some(
+      (pair) => pair.term?.trim() !== "" || pair.definition?.trim() !== ""
+    );
+
+    setControlAction(hasValue);
   };
 
   // Remove current card

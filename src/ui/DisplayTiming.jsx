@@ -29,12 +29,12 @@ export default function DisplayTiming({ createdAt, timeDisplay }) {
   const dateObj = createdAt.toDate();
 
   return (
-    <div className="text-xs text-gray-500">
+    <span className="text-xs text-gray-500">
       {timeDisplay ? (
-        <p>{createdAt ? getExactTime(dateObj) : "Loading..."}</p>
+        <>{createdAt ? getExactTime(dateObj) : "Loading..."}</>
       ) : (
-        <p>{createdAt ? getTimeAgo(createdAt.toDate()) : "Loading..."}</p>
+        <>{createdAt ? getTimeAgo(createdAt.toDate()) : "Loading..."}</>
       )}
-    </div>
+    </span>
   );
 }

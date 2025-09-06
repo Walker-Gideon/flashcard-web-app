@@ -1,14 +1,15 @@
 import { doc, setDoc, serverTimestamp } from "firebase/firestore";
 import { auth, db } from "../../firebase";
 import { v4 as uuidv4 } from "uuid";
+import { useFlash } from "../../context/FlashcardContext";
 import FlashcardHeader from "./FlashcardHeader";
 import CardOverview from "../../ui/CardOverview";
 import Input from "../../ui/Input";
 import ActionButton from "./createFlashcard/ActionButton";
 import AddFlashcard from "./createFlashcard/AddFlashcard";
 import FlashcardInput from "./createFlashcard/FlashcardInput";
-import { useFlash } from "../../context/FlashcardContext";
 import Loader from "../../ui/Loader";
+import Button from "../../ui/Button";
 
 export default function CreateFlashcard() {
   const {
@@ -127,7 +128,6 @@ export default function CreateFlashcard() {
             </div>
             <ActionButton />
 
-            {/* Max pairs info will use this as a toast for notification */}
             <div className="pt-2 text-right text-xs text-slate-400">
               {pairs.length >= MAX_PAIRS && (
                 <span>

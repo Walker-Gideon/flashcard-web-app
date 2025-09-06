@@ -52,9 +52,13 @@ function FlashcardProvider({ children }) {
   const [editPairs, setEditPairs] = useState([]);
   const [editFlashcardId, setEditFlashcardId] = useState("");
 
+  const [controlAction, setControlAction] = useState(false)
+
   const MAX_PAIRS = 100;
 
   const value = {
+    controlAction, 
+    setControlAction,
     isVisible, 
     setIsVisible,
     editFlashcardId,

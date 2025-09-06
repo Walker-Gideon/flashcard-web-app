@@ -28,7 +28,7 @@ export default function UserDisplayFC({
   };
 
   return (
-    <div className="group my-1 mb-4 flex cursor-pointer items-center justify-between rounded-lg bg-slate-50 p-2 shadow-md transition-all duration-300 ease-in-out hover:scale-105 hover:bg-slate-100 hover:shadow-xl dark:bg-slate-700/50 dark:hover:bg-slate-700">
+    <div className="group my-1 mb-4 flex cursor-pointer items-center justify-between rounded-lg bg-slate-50 p-2 shadow-md transition-all duration-300 ease-in-out hover:bg-slate-100 hover:shadow-xl dark:bg-slate-700/50 dark:hover:bg-slate-700">
       <div className="flex w-full items-center space-x-4 py-1 pl-3">
         <div
           className={`h-4 w-4 rounded-full bg-gradient-to-r from-slate-200 to-slate-300 dark:from-slate-600 dark:to-slate-700`}
@@ -39,7 +39,7 @@ export default function UserDisplayFC({
           classnameFirst="font-semibold text-slate-900 dark:text-white"
           textOne={title}
           textTwo={
-            <p className="flex items-center gap-4 text-slate-500 dark:text-slate-400">
+            <span className="flex items-center gap-4 text-slate-500 dark:text-slate-400">
               <span className="text-sm">
                 {totalCards} {totalCards === 1 ? "card" : "cards"}
               </span>
@@ -48,7 +48,7 @@ export default function UserDisplayFC({
                 <GoDotFill className="h-3 w-3 text-slate-500 dark:text-slate-400" />
                 {timing}
               </span>
-            </p>
+            </span>
           }
         />
       </div>

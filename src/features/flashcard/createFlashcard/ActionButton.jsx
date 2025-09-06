@@ -13,9 +13,12 @@ export default function ActionButton() {
     setEditPairs,
     setEditFlashcardId,
     setShowPreview,
+    controlAction
   } = useFlash();
   const lazyLoading = useLazyLoading(setShowCreateFlashcard, 1000);
   const lazyLoadingPreview = useLazyLoading(setShowPreview, 1000);
+
+  console.log("controlAction", controlAction)
 
   const isButtonDisabled = pairs.some(
     (pair) => pair.term.trim() === "" || pair.definition.trim() === "",
@@ -49,7 +52,7 @@ export default function ActionButton() {
   }
 
   return (
-    <div className="medium:pt-10 medium:justify-end flex justify-center gap-3 pt-7">
+    <div className="medium:pt-10 justify-end flex  gap-3 pt-7">
       <Button
         variant="outline"
         classname="primaryButton px-12"
