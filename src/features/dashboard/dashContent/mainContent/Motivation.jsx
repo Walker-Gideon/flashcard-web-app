@@ -20,12 +20,14 @@ export default function Motivation() {
       <blockquote className="mb-4 text-sm text-slate-500 italic dark:text-slate-400">
         "{currentQuote ? currentQuote.text : "Loading quote..."}"
       </blockquote>
-      <div className="flex items-center space-x-2">
-        <LuFlame className="h-4 w-4 text-slate-600 dark:text-slate-300" />
-        <span className={`text-sm font-medium ${styling}`}>
-          Keep your {userData.streakCount} day streak alive!
-        </span>
-      </div>
+      {userData?.streakCount !== 0 && (
+        <div className="flex items-center space-x-2">
+          <LuFlame className="h-4 w-4 text-slate-600 dark:text-slate-300" />
+          <span className={`text-sm font-medium ${styling}`}>
+            Keep your {userData.streakCount} day streak alive!
+          </span>
+        </div>
+      )}
     </CardOverview>
   );
 }
