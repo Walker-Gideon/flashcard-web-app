@@ -49,7 +49,7 @@ export default function Login() {
               </Button>
             </div>
 
-            <div>
+            {/* <div>
               <div className="flex items-center justify-center py-4">
                 <p className="text-sm text-slate-400">or you can Log In with</p>
               </div>
@@ -60,7 +60,7 @@ export default function Login() {
               >
                 Continue with Google
               </Button>
-            </div>
+            </div> */}
           </div>
         )}
       </div>

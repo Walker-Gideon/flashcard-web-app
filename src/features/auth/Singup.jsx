@@ -43,7 +43,7 @@ export default function Singup() {
               </Button>
             </div>
 
-            <div>
+            {/* <div>
               <div className="mt-2 mb-4 flex items-center justify-center">
                 <p className="text-sm text-slate-400">
                   or you can Sign up with
@@ -56,7 +56,7 @@ export default function Singup() {
               >
                 Continue with Google
               </Button>
-            </div>
+            </div> */}
           </div>
         )}
       </div>
