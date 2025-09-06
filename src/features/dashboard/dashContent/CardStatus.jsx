@@ -33,7 +33,7 @@ const initialCardData = [
 ];
 
 export default function CardStatus() {
-  const { progress, loadingProgress } = useGen();
+  const { progress, loadingProgress, todayFlashcards } = useGen();
   const [cardData, setCardData] = useState(initialCardData);
 
   useEffect(() => {
@@ -43,7 +43,7 @@ export default function CardStatus() {
 
       const updated = initialCardData.map((card) => {
         if (card.text === "Cards Today") {
-          return { ...card, data: todayCards + 1 };
+          return { ...card, data: todayFlashcards?.length };
         }
 
         if (card.text === "Day Streak") {

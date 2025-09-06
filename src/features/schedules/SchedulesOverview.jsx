@@ -38,7 +38,8 @@ const initialCardData = [
 ];
 
 export default function SchedulesOverview() {
-  const { progress, loadingProgress, consistencyScore } = useGen();
+  const { progress, loadingProgress, consistencyScore, todayFlashcards } =
+    useGen();
   const [cardData, setCardData] = useState(initialCardData);
 
   useEffect(() => {
@@ -48,7 +49,7 @@ export default function SchedulesOverview() {
 
       const updated = initialCardData.map((card) => {
         if (card.text === "Cards Today") {
-          return { ...card, data: todayCards + 1 };
+          return { ...card, data: todayFlashcards?.length };
         }
 
         if (card.text === "Day Streak") {
