@@ -3,7 +3,7 @@ import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "../../firebase";
 import { useAuth } from "../../context/AuthContext";
 import { useFlash } from "../../context/FlashcardContext";
-import { LuNotebookText } from "react-icons/lu";
+import { LuRectangleVertical } from "react-icons/lu";
 import { LuSearch } from "react-icons/lu";
 import Button from "../../ui/Button";
 import PromptDisplay from "../../ui/PromptDisplay";
@@ -93,7 +93,7 @@ export default function FlashcardInit() {
                 </span>
               }
               icon={
-                <LuNotebookText className="h-6 w-6 text-slate-600 dark:text-slate-300" />
+                <LuRectangleVertical className="h-6 w-6 text-slate-600 dark:text-slate-300" />
               }
             >
               <Button

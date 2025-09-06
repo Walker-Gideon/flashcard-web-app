@@ -2,7 +2,7 @@ import { useNav } from "../../../context/NavigateContext";
 import {
   LuLayoutDashboard,
   LuBookOpen,
-  LuFile,
+  LuRectangleVertical,
   LuCalendar,
   LuLightbulb,
   LuSettings2,
@@ -17,32 +17,32 @@ const buttonsData = [
   {
     text: "Dashboard",
     to: "/dashboard",
-    icon: <LuLayoutDashboard />,
+    icon: LuLayoutDashboard,
   },
   {
     text: "Notes",
     to: "notes",
-    icon: <LuBookOpen />,
+    icon: LuBookOpen,
   },
   {
     text: "Flashcards",
     to: "flashcards",
-    icon: <LuFile />,
+    icon: LuRectangleVertical,
   },
   {
     text: "Schedules",
     to: "schedules",
-    icon: <LuCalendar />,
+    icon: LuCalendar,
   },
   {
     text: "Inspire",
     to: "inspire",
-    icon: <LuLightbulb />,
+    icon: LuLightbulb,
   },
   {
     text: "Settings",
     to: "settings",
-    icon: <LuSettings2 />,
+    icon: LuSettings2,
   },
 ];
 
@@ -80,7 +80,7 @@ export default function NavigateLScreen() {
                   key={index}
                   text={data.text}
                   to={data.to}
-                  icon={data.icon}
+                  icon={<data.icon />}
                   onClick={() => {
                     handleClick(data.text);
                     setShowProfile(false);

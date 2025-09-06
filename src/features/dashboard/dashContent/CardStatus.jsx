@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import { useGen } from "../../../context/GeneralContext";
-import { LuTarget, LuBookOpen, LuClock, LuFlame } from "react-icons/lu";
+import {
+  LuTarget,
+  LuRectangleVertical,
+  LuClock,
+  LuFlame,
+} from "react-icons/lu";
 import CardOverview from "../../../ui/CardOverview";
 import CardContent from "../../../ui/CardContent";
 import CardBadge from "../../../ui/CardBadge";
@@ -13,7 +18,7 @@ const initialCardData = [
     text: "Mastery Cards",
   },
   {
-    icon: LuBookOpen,
+    icon: LuRectangleVertical,
     data: 0,
     text: "Cards Today",
   },

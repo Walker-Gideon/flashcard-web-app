@@ -1,4 +1,4 @@
-import { LuBookOpen, LuChartColumnIncreasing } from "react-icons/lu";
+import { LuRectangleVertical, LuChartColumnIncreasing } from "react-icons/lu";
 import { useNav } from "../../../context/NavigateContext";
 import CardOverview from "../../../ui/CardOverview";
 import HeaderText from "../../../ui/HeaderText";
@@ -7,7 +7,7 @@ import useLoaderAction from "../../../utils/LoaderAction";
 
 const actionsData = [
   {
-    icon: LuBookOpen,
+    icon: LuRectangleVertical,
     text: "Review Cards",
     to: "/dashboard/flashcards",
     title: "Flashcards",
