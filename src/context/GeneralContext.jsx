@@ -190,8 +190,8 @@ function GeneralProvider({ children }) {
   // Cards created today
   const todayFlashcards = useMemo(() => {
     return flashcards
-      .filter((card) => isSameDay(card.createdAt.toDate(), new Date()))
-      .sort((a, b) => a.createdAt.toDate() - b.createdAt.toDate());
+      .filter((card) => isSameDay(card?.createdAt?.toDate(), new Date()))
+      .sort((a, b) => a.createdAt?.toDate() - b.createdAt?.toDate());
   }, [flashcards]);
 
   // Get "YYYY-MM-DD" formatted date
