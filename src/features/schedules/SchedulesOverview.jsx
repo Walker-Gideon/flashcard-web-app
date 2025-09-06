@@ -1,10 +1,6 @@
 import { useEffect, useState } from "react";
 import { useGen } from "../../context/GeneralContext.jsx";
-import { LuTarget } from "react-icons/lu";
-import { LuClock } from "react-icons/lu";
-import { LuFlame } from "react-icons/lu";
-import { LuTrendingUp } from "react-icons/lu";
-import TargetCardStatus from "../dashboard/dashContent/TargetCardStatus.jsx";
+import { LuTarget, LuClock, LuFlame, LuTrendingUp } from "react-icons/lu";
 import CardOverview from "../../ui/CardOverview.jsx";
 import CardContent from "../../ui/CardContent.jsx";
 import CardBadge from "../../ui/CardBadge.jsx";
@@ -15,25 +11,21 @@ const initialCardData = [
     icon: LuTarget,
     data: 0,
     text: "Cards Today",
-    other: <TargetCardStatus />,
   },
   {
     icon: LuClock,
     data: 0 + "m",
     text: "Study Time",
-    styling: "mb-6",
   },
   {
     icon: LuFlame,
     data: 0,
     text: "Day Streak",
-    styling: "mb-6",
   },
   {
     icon: LuTrendingUp,
     data: 0 + "%",
     text: "Success Rate",
-    styling: "mb-6",
   },
 ];
 
@@ -76,9 +68,7 @@ export default function SchedulesOverview() {
       {cardData.map((data, index) => (
         <div key={index}>
           <CardOverview showShadow={true}>
-            <CardContent
-              classname={`flex items-center justify-between mb-4 ${data.styling}`}
-            >
+            <CardContent classname={`flex items-center justify-between mb-2`}>
               <CardBadge
                 classname={`rounded-xl p-3 bg-gradient-to-r from-slate-200 to-slate-300 dark:from-slate-600 dark:to-slate-700`}
               >
@@ -93,7 +83,6 @@ export default function SchedulesOverview() {
                 textTwo={data.text}
               />
             </CardContent>
-            {data.other}
           </CardOverview>
         </div>
       ))}

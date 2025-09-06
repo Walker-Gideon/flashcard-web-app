@@ -1,9 +1,6 @@
 import { useEffect, useState } from "react";
 import { useGen } from "../../../context/GeneralContext";
-import { LuTarget } from "react-icons/lu";
-import { LuBookOpen } from "react-icons/lu";
-import { LuClock } from "react-icons/lu";
-import { LuFlame } from "react-icons/lu";
+import { LuTarget, LuBookOpen, LuClock, LuFlame } from "react-icons/lu";
 import CardOverview from "../../../ui/CardOverview";
 import CardContent from "../../../ui/CardContent";
 import CardBadge from "../../../ui/CardBadge";
@@ -70,7 +67,7 @@ export default function CardStatus() {
       {cardData.map((data, index) => (
         <div key={index}>
           <CardOverview showShadow={true}>
-            <CardContent classname={`flex items-center justify-between mb-4 `}>
+            <CardContent classname={`flex items-center justify-between mb-2`}>
               <CardBadge
                 classname={`rounded-xl p-3 bg-gradient-to-r from-slate-200 to-slate-300 dark:from-slate-600 dark:to-slate-700`}
               >
