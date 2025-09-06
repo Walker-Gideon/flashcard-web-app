@@ -63,7 +63,7 @@ export default function CardStatus() {
 
       setCardData(updated);
     }
-  }, [loadingProgress, progress]);
+  }, [loadingProgress, progress, todayFlashcards?.length]);
 
   return (
     <div className="medium:grid-cols-2 grid grid-cols-1 gap-6 lg:grid-cols-4">

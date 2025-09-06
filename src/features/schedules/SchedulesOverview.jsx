@@ -69,7 +69,7 @@ export default function SchedulesOverview() {
 
       setCardData(updated);
     }
-  }, [loadingProgress, progress, consistencyScore]);
+  }, [loadingProgress, progress, consistencyScore, todayFlashcards?.length]);
 
   return (
     <div className="medium:grid-cols-2 grid grid-cols-1 gap-6 lg:grid-cols-4">
