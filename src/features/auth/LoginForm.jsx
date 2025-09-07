@@ -3,13 +3,14 @@ import { app } from "../../firebase";
 import { useState } from "react";
 import { FiEyeOff } from "react-icons/fi";
 import { FiEye } from "react-icons/fi";
+import { LuLoader } from "react-icons/lu";
 import Input from "../../ui/Input";
 import Button from "../../ui/Button";
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 export default function LoginForm() {
-  const { loading, setIsAuthenticated, setIsSigningUp } = useAuth();
+  const { loading, setIsAuthenticated, setIsSigningUp, isSigningUp } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -23,7 +24,6 @@ export default function LoginForm() {
     setError("");
     setIsSigningUp(true);
 
-    // Email validation - more robust regex
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (!emailRegex.test(email)) {
       setError("Please enter a valid email address");
@@ -44,7 +44,6 @@ export default function LoginForm() {
     } catch (err) {
       let errorMessage = "Login failed. Please check your credentials.";
 
-      // Handle Firebase Auth errors
       if (err.code) {
         switch (err.code) {
           case "auth/invalid-email":
@@ -78,7 +77,6 @@ export default function LoginForm() {
             errorMessage = "An unexpected error occurred. Please try again.";
         }
       } else {
-        // Handle non-Firebase errors (network, etc.)
         console.error("Login Error:", err);
         if (err.message?.includes("network")) {
           errorMessage =
@@ -145,9 +143,16 @@ export default function LoginForm() {
           type="submit"
           disabled={loading}
           variant="primary"
-          classname="w-full py-2 disabled:bg-slate-600 disabled:cursor-not-allowed"
+          classname="w-full py-2 disabled:bg-slate-600 disabled:cursor-not-allowed flex items-center justify-center gap-3"
         >
-          Log in
+          {isSigningUp ? (
+            <>
+              <LuLoader className="for spinning h-5 w-5 animate-spin" />{" "}
+              <span>Signing Up...</span>
+            </>
+          ) : (
+            "Log in"
+          )}
         </Button>
       </form>
     </div>

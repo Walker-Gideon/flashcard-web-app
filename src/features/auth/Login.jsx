@@ -23,9 +23,9 @@ export default function Login() {
       <AuthClose />
 
       <div className="flex min-h-[95vh] items-center justify-center">
-        {isSigningUp ? (
+        {/* {isSigningUp ? (
           <Spinner />
-        ) : (
+        ) : ( */}
           <div className="rounded-xl border border-stone-300 px-6 py-8 shadow-lg">
             <AuthHeader />
             <LoginForm />
@@ -62,7 +62,7 @@ export default function Login() {
               </Button>
             </div> */}
           </div>
-        )}
+        {/* )} */}
       </div>
     </div>
   );
