@@ -13,7 +13,6 @@ export default function ActionButton({ handleSaveFlashcard }) {
     setEditPairs,
     setEditFlashcardId,
     setShowPreview,
-    controlAction
   } = useFlash();
   const lazyLoading = useLazyLoading(setShowCreateFlashcard, 1000);
   const lazyLoadingPreview = useLazyLoading(setShowPreview, 1000);
@@ -53,16 +52,16 @@ export default function ActionButton({ handleSaveFlashcard }) {
     <div className="medium:pt-10 justify-end flex  gap-3 pt-7">
       <Button
         variant="outline"
-        classname="primaryButton px-12 disable: disabled:bg-gray-400 disabled:cursor-not-allowed"
-        disabled={controlAction ? editMode ? null : isButtonDisabled : null}
-        onClick={controlAction ? editMode ? handleCancel : handleSaveFlashcard  : handleCancel}
+        classname="primaryButton px-12"
+        onClick={handleCancel}
       >
-        {controlAction ? editMode ? "Cancel" : "Create" : "Cancel"}
+        Cancel
       </Button>
 
       <Button
         variant="outline"
         type="submit"
+        onClick={handleSaveFlashcard}
         disabled={editMode ? null : isButtonDisabled}
         classname="primaryButton sm:py-1 sm:px-3 disable: disabled:bg-gray-400 disabled:cursor-not-allowed"
       >

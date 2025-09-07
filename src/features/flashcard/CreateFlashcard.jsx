@@ -10,7 +10,6 @@ import AddFlashcard from "./createFlashcard/AddFlashcard";
 import FlashcardInput from "./createFlashcard/FlashcardInput";
 import Loader from "../../ui/Loader";
 import Button from "../../ui/Button";
-import useLazyLoading from "../../ui/LazyLoading";
 
 export default function CreateFlashcard() {
   const {
@@ -33,10 +32,7 @@ export default function CreateFlashcard() {
     editFlashcardData,
     SetEditFlashcardData,
     setCurrentFlashcard,
-    controlAction,
-    setShowCreateFlashcard,
   } = useFlash();
-  const lazyLoading = useLazyLoading(setShowCreateFlashcard, 1000);
 
   const handleSaveFlashcard = async (e) => {
     e.preventDefault();
@@ -74,14 +70,9 @@ export default function CreateFlashcard() {
         setReadAlredyFlashcard(false);
       }
 
+
       setTimeout(() => {
-        if(controlAction) {
-          console.log("Save card to flashcards")
-          lazyLoading(true);
-          setShowPreview(false);
-        } else {
-          setShowPreview(true);
-        }
+        setShowPreview(true);
         setEditPairs([]);
         setEditTags("");
         setPairs([
