@@ -1,8 +1,7 @@
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { app } from "../../firebase";
 import { useState } from "react";
-import { FiEyeOff } from "react-icons/fi";
-import { FiEye } from "react-icons/fi";
+import { FiEyeOff, FiEye } from "react-icons/fi";
 import { LuLoader } from "react-icons/lu";
 import Input from "../../ui/Input";
 import Button from "../../ui/Button";
