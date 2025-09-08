@@ -9,6 +9,40 @@ export default function ThemeCom() {
   const { userData } = useAuth();
   const { resize } = useNav();
 
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", isDarkMode);
+  }, [isDarkMode])
+
+  useEffect(() => {
+    if(userData?.uid) {
+      const saved = localStorage.getItem(`darkMode_${userData?.uid}`);
+      if(saved !== null) {
+        setIsDarkMode(JSON.parse(saved))
+      } else if(userData.darkMode === undefined) {
+        setIsDarkMode(userData.darkMode);
+      } else {
+        setIsDarkMode(window.matchMedia("(perfers-color-scheme: dark)").matches);
+      }
+    }
+  }, [userData?.uid])
+
+  const toggleDarkMode = async (id) => {
+    if(!id) return;
+    const newMode = !isDarkMode;
+    setIsDarkMode(newMode);
+
+    localStorage.setItem(`darkMode_${id}`, JSON.stringify(newMode));
+
+    try{
+      await updateDoc(doc(db, "users", id), { darkMode: newMode });
+    } catch(err) {
+      console.log("Failed to save theme ", err);
+    }
+  }
+
+  /*
   const [isDarkMode, setIsDarkMode] = useState(() => {
   if (typeof window !== "undefined") {
     const saved = localStorage.getItem("darkMode");
@@ -29,11 +63,12 @@ export default function ThemeCom() {
       localStorage.setItem("darkMode", JSON.stringify(newMode));
     }
   };
+  */
 
   return (
     <ButtonNav navLarge={true} text={`${isDarkMode ? "Light" : "Dark"} Theme`}>
       <Button
-        onClick={toggleDarkMode}
+        onClick={() => toggleDarkMode(userData?.uid)}
         variant="outline"
         classname={`navButton bg-slate-500 text-white hover:bg-slate-600 medium:px-3.5`}
       >

@@ -97,6 +97,8 @@ export default function SignupForm() {
       return;
     }
 
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
@@ -116,6 +118,7 @@ export default function SignupForm() {
         createdAt: serverTimestamp(),
         streakCount: 0,
         lastActiveDate: null,
+        darkMode: prefersDark,
       });
 
       setIsAuthenticated(true);

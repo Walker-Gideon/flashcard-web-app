@@ -8,10 +8,10 @@ export default function User({ classname, icon }) {
     <div
       className={`transitioningColors z-50 flex items-center justify-center rounded-full bg-slate-500 dark:text-slate-50 ${classname ? `${classname}` : `medium:h-8 medium:w-8 w-10 h-10`}`}
     >
-      {userData.photoURL ? (
+      {userData?.photoURL ? (
         <div className="medium:h-8 medium:w-8 w-10 h-10 flex items-center justify-center">
           <img
-            src={userData.photoURL}
+            src={userData?.photoURL}
             alt="User profile"
             className="rounded-full object-cover medium:h-8 medium:w-8 h-10 w-10"
           />

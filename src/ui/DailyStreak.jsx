@@ -7,7 +7,7 @@ export default function DailyStreak({ classname }) {
     <span
       className={`${classname ? `${classname}` : `medium:text-xl text-lg font-bold text-slate-900 dark:text-white`}`}
     >
-      {userData.streakCount}
+      {userData?.streakCount}
     </span>
   );
 }

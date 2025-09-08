@@ -53,6 +53,7 @@ function AuthProvider({ children }) {
           uid: data.uid || uid,
           streakCount: data.streakCount || 0,
           lastActiveDate: data.lastActiveDate || null,
+          darkMode: data.darkMode ?? false,
         });
       }
     } catch (error) {
