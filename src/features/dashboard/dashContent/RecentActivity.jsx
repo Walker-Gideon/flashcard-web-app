@@ -62,10 +62,10 @@ export default function RecentActivity() {
     setRecentActivity(prev => 
       prev.map((data) => {
         if (data.type === "achievement") {
-          const shouldShow = userData.streakCount >= 1;
+          const shouldShow = userData?.streakCount >= 1;
           return {
             ...data,
-            action: `Achieved ${userData.streakCount} day streak`,
+            action: `Achieved ${userData?.streakCount} day streak`,
             visible: shouldShow || data.visible,
             timestamp: shouldShow && !data.timestamp ? Date.now() : data.timestamp,
           };
