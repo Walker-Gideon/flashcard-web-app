@@ -7,7 +7,7 @@ export default function UserProfile() {
   const { userData } = useAuth();
   const { setShowProfile } = useNav();
 
-  console.log(userData)
+  console.log("User detail profile ", userData)
 
   const displayName =
     userData?.username &&

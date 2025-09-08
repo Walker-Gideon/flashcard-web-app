@@ -25,7 +25,7 @@ export default function ThemeCom() {
       } else if(userData.darkMode === undefined) {
         setIsDarkMode(userData.darkMode);
       } else {
-        setIsDarkMode(window.matchMedia("(perfers-color-scheme: dark)").matches);
+        setIsDarkMode(window.matchMedia("(prefers-color-scheme: dark)").matches);
       }
     }
   }, [userData?.uid])

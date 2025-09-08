@@ -19,6 +19,7 @@ function AuthProvider({ children }) {
     uid: "",
     streakCount: 0,
     lastActiveDate: null,
+    darkMode: false,
   });
 
   // General uses
@@ -30,8 +31,6 @@ function AuthProvider({ children }) {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         await fetchUserData(user.uid);
-      } else {
-        setUserData(null);
       }
     });
 
@@ -55,6 +54,8 @@ function AuthProvider({ children }) {
           lastActiveDate: data.lastActiveDate || null,
           darkMode: data.darkMode ?? false,
         });
+      } else {
+        console.warn("User document not found yet for:", uid);
       }
     } catch (error) {
       return error;

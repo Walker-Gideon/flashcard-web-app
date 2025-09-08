@@ -20,6 +20,10 @@ export default function ProfilePopup() {
     setTimeout(async () => {
       await logout();
     }, 500)
+
+    setTimeout(() => {
+      setShowProfile(false)
+    }, 1000)
   }
 
   return (

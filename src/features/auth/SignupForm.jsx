@@ -20,6 +20,7 @@ export default function SignupForm() {
     setIsSigningUp,
     setAccountCreated,
     isSigningUp,
+    fetchUserData
   } = useAuth();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
@@ -120,6 +121,8 @@ export default function SignupForm() {
         lastActiveDate: null,
         darkMode: prefersDark,
       });
+
+      await fetchUserData(user.uid);
 
       setIsAuthenticated(true);
       navigate("/dashboard", { replace: true });
