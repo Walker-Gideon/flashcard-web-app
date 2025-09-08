@@ -167,6 +167,7 @@ function AuthProvider({ children }) {
         uid: "",
         streakCount: 0,
         lastActiveDate: null,
+        darkMode: false,
       });
       setIsAuthenticated(false);
       return true;

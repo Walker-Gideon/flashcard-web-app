@@ -7,8 +7,6 @@ export default function UserProfile() {
   const { userData } = useAuth();
   const { setShowProfile } = useNav();
 
-  console.log("User detail profile ", userData)
-
   const displayName =
     userData?.username &&
     userData?.username.charAt(0).toUpperCase() + userData?.username.slice(1);

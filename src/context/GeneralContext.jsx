@@ -213,9 +213,9 @@ function GeneralProvider({ children }) {
     const yesterday = getYesterdayDate();
     const userRef = doc(db, "users", user.uid);
     const userSnap = await getDoc(userRef);
-
+    
     if (!userSnap.exists()) return;
-
+    
     const userData = userSnap.data();
     const lastActive = userData.lastActiveDate;
     let streak = userData.streakCount || 0;
@@ -227,6 +227,8 @@ function GeneralProvider({ children }) {
     } else {
       streak = 0;
     }
+
+    console.log("The user streak is ", streak)
 
     await updateDoc(userRef, {
       streakCount: streak,

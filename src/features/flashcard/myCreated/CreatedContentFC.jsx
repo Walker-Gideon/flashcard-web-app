@@ -84,7 +84,9 @@ export default function CreatedContentFC() {
 
     if (index === currentPairs.length - 1) {
       setTimeout(async () => {
-        await handleReviewComplete();
+        // await handleReviewComplete();
+        await updateStreak();
+        await fetchUserData(user.uid);
         setReviewComplete(true);
         setSessionComplete((prev) => ({
           ...prev,
