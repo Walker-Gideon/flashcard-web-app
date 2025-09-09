@@ -228,8 +228,6 @@ function GeneralProvider({ children }) {
       streak = 0;
     }
 
-    console.log("The user streak is ", streak)
-
     await updateDoc(userRef, {
       streakCount: streak,
       lastActiveDate: today,

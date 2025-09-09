@@ -13,9 +13,9 @@ function NoteProvider({ children }) {
   const [filteredNotes, setFilteredNotes] = useState([]);
   const [query, setQuery] = useState("");
   const [currentNote, setCurrentNote] = useState({
-    id: "", // Firebase doc ID
-    title: "", // Note title
-    content: "", // Note content
+    id: "", 
+    title: "", 
+    content: "", 
     noteName: "",
   });
   const [selectedNoteId, setSelectedNoteId] = useState(null);

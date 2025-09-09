@@ -77,7 +77,7 @@ export default function ReviewSummary() {
           <p className="flex items-center gap-1 text-sm text-slate-500 dark:text-slate-400">
             <LuFlame />
             <span className="mt-0.5">
-              Current Streak : {userData.streakCount}-day
+              Current Streak : {userData.streakCount} day
             </span>
           </p>
         </div>

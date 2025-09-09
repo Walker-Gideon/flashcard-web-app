@@ -41,7 +41,6 @@ export default function CreateNoteHeader() {
         originalNote.content === currentNote.content &&
         originalNote.noteName === currentNote.noteName
       ) {
-        console.log("No changes detected — not saving.");
         return;
       }
     }
@@ -56,9 +55,9 @@ export default function CreateNoteHeader() {
           content: currentNote.content,
           noteName: currentNote.noteName,
           updatedAt: new Date(),
-          ...(currentNote.id ? {} : { createdAt: new Date() }), // Keep createdAt only for new notes
+          ...(currentNote.id ? {} : { createdAt: new Date() }), 
         },
-        { merge: true }, // Ensures update instead of overwrite
+        { merge: true }, 
       );
 
       // clear form
@@ -71,7 +70,7 @@ export default function CreateNoteHeader() {
         setNoteName("");
       }, 2000);
     } catch (error) {
-      console.error("Error saving note:", error);
+      return error;
     }
   }
 

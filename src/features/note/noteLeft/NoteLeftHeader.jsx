@@ -25,7 +25,6 @@ export default function NoteLeftHeader() {
     const value = e.target.value;
     setQuery(value);
 
-    // Show notes that match the typed term
     const results = notes.filter((note) =>
       note.noteName.toLowerCase().includes(value.toLowerCase()),
     );
