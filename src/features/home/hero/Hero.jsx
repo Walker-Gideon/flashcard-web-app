@@ -1,5 +1,6 @@
 import HeroButtons from "./HeroButtons";
 import HeroText from "./HeroText";
+import HeroImages from "./HeroImages";
 
 export default function Hero() {
   return (
@@ -10,6 +11,7 @@ export default function Hero() {
       <div className="flex flex-col items-center">
         <HeroText />
         <HeroButtons />
+        <HeroImages />
       </div>
     </div>
   );
