@@ -44,9 +44,9 @@ export default function SchedulesToday({ activeView }) {
 
     if (!scheduledTime) return "Invalid";
 
-    if (sessionComplete.isComplete === true) {
-      return "Completed";
-    }
+    // if (sessionComplete.isComplete === true) {
+    //   return "Completed";
+    // }
 
     if (now < scheduledTime) {
       return "Pending";
