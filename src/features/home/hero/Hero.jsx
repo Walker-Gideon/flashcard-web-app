@@ -6,13 +6,14 @@ export default function Hero() {
   return (
     <div
       id="home"
-      className="medium:px-10 flex h-screen items-center justify-center px-8 md:px-16"
+      className="flex h-screen items-center justify-center flex-col my-20"
     >
-      <div className="flex flex-col items-center">
+      <div className="medium:px-10 flex flex-col items-center px-8 md:px-16">
         <HeroText />
         <HeroButtons />
-        <HeroImages />
       </div>
+
+      <HeroImages />
     </div>
   );
 }
